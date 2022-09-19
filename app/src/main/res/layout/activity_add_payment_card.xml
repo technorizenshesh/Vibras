@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:background="@color/lightgray"
+                android:id="@+id/RRtoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/RRback"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/back">
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Add New Card"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/card"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                >
+
+            </ImageView>
+
+            <com.braintreepayments.cardform.view.CardForm
+                android:id="@+id/card_form"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_15sdp"
+                />
+
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/RLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/border_btn">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20sp"
+                    android:text="ADD NEW CARD"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

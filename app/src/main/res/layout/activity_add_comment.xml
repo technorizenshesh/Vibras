@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:background="@color/lightgray"
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/comments"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/RRFrnd"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/back">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/RRtoolbar"
+            android:layout_above="@id/rlBottom"/>
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:background="@color/lightgray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:id="@+id/rlBottom"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_toLeftOf="@+id/img"
+                android:background="@drawable/border_dark_gray">
+
+                <EditText
+                    android:id="@+id/etComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/llRight"
+                    android:background="@android:color/transparent"
+                    android:gravity="center_vertical"
+                    android:hint="Enter Comment..."
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/llRight"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:padding="@dimen/_5sdp"
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/camera">
+
+                    </ImageView>
+
+                    <ImageView
+                        android:padding="@dimen/_5sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/stickers"></ImageView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:src="@drawable/ic_send">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RelativeLayout
+            android:id="@+id/rlParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:longClickable="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_history"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/circle_gray"
+                android:layout_marginRight="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="ritesh12"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/iv_history"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tv_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:linksClickable="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/tv_name"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tvTimeAgo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="ritesh12"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toRightOf="@id/iv_history"
+                android:layout_below="@id/tv_comment"
+                android:textSize="@dimen/_10sdp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

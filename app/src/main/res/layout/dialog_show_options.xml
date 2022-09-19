@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Select Option"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:text="Delete"
+            android:textColor="@color/black"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            />
+
+        <TextView
+            android:id="@+id/tvShare"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:text="Share"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            />
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

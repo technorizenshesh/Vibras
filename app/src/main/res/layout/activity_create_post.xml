@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_15sdp"
+            tools:context=".act.CreatePostAct">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Discard"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/_13sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Create"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_13sdp" />
+
+                <TextView
+                    android:id="@+id/tvPublish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/black_cornors_30"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_8sdp"
+                    android:paddingVertical="@dimen/_3sdp"
+                    android:text="Publish"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp">
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_toRightOf="@id/ivCircle"
+                    android:hint="What's on your mind?"
+                    android:padding="@dimen/_10sdp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivCircle"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/user" />
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/black_cornors_gray_30"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_8sdp">
+
+                <ImageView
+                    android:id="@+id/ivGalary"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:src="@drawable/ic_galary" />
+
+                <ImageView
+                    android:id="@+id/ivCamera"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:src="@drawable/ic_camera" />
+
+                <ImageView
+                    android:id="@+id/ivVideo"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/ic_video" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/black_cornors_gray_30"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:padding="@dimen/_5sdp"
+            >
+
+            <TextView
+                android:id="@+id/tvPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/black_cornors_30"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Post"
+                android:textColor="@color/white"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/tvStory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/white_cornors_30"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Story"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</layout>

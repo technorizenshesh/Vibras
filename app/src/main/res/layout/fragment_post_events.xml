@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:background="@drawable/circle_gray">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <ImageView
+                    android:id="@+id/ivCamera"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:src="@drawable/camera_img"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:padding="@dimen/_5sdp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post Cover Image"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Event Details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name of Event"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <EditText
+                    android:fontFamily="@font/roboto_light"
+                    android:id="@+id/etEventName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_event_name"
+                    android:inputType="text"
+                    android:textSize="@dimen/_12sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:imeOptions="actionNext"
+                    android:textColorHint="@color/gray">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date of Event"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <EditText
+                    android:id="@+id/etEventDate"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/select_date"
+                    android:inputType="text"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:imeOptions="actionNext"
+                    android:textColorHint="@color/gray">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="time of Event"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <EditText
+                    android:id="@+id/etTime"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/_12sdp"
+                    android:background="@null"
+                    android:hint="@string/select_time"
+                    android:inputType="text"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:imeOptions="actionNext"
+                    android:textColorHint="@color/gray">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category of EventSelect"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <Spinner
+                    android:id="@+id/spinnerCategory"
+                    android:drawableRight="@drawable/arrw_bttm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Select"
+                    android:inputType="text"
+                    android:textColorHint="@color/gray">
+
+                </Spinner>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location of event"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <EditText
+                    android:id="@+id/etLocation"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_location"
+                    android:inputType="text"
+                    android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Booking Amount"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <EditText
+                    android:id="@+id/etBookingAmount"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/enter_booking_amount"
+                    android:inputType="number"
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/_12sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray">
+
+                </EditText>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Details"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <RelativeLayout
+                android:elevation="@dimen/_5sdp"
+                android:background="@drawable/border_gray"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                >
+
+                <EditText
+                    android:id="@+id/etEventDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="left"
+                    android:imeOptions="actionDone"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/enter_event_details"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Type"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <Spinner
+                    android:id="@+id/spinnerType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    >
+
+                </Spinner>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Add Photos/ Videos"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/ivMultiple"
+                    android:src="@drawable/post_img"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    >
+
+                </ImageView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvImages"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/SitchBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:checked="true"
+                    android:padding="15dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:theme="@style/control" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/allow_users_to_comment_on_the_event_post"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlAdd"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/border_btn">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20sp"
+                    android:text="@string/add_event"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>
+

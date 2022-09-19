@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_230sdp"
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:layout_below="@+id/rvStories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/ivUser"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </ImageView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/icSmallProfile"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/circle_img"></de.hdodenhof.circleimageview.CircleImageView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Johan smiths 23"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="3 hours ago"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="2.3 kms away"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <ImageView
+                    android:id="@+id/ivOtherLike"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/like"></ImageView>
+
+                <ImageView
+                    android:id="@+id/ivLike"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/love"></ImageView>
+
+                <ImageView
+                    android:id="@+id/ivChat"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/messa"></ImageView>
+
+                <ImageView
+                    android:id="@+id/ivFire"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:src="@drawable/fire"></ImageView>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

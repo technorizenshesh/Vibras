@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <!--style="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"-->
+
+       <!-- <ir.alirezabdn.wp7progress.WP7ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.Material.ProgressBar.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/blue"
+            app:indicatorColor="@color/blue"
+            tools:ignore="NewApi"
+            />-->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:id="@+id/textView"
+            style="@android:style/Widget.Holo.Light.TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="please wait..."
+            android:textColor="@color/black"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+</RelativeLayout>

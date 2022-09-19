@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_150sdp"
+                />
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="Please enter the 4-digit code sent to your number/ mail ID."
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                />
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Verification"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="Enter the Code"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_14sdp"
+                />
+
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:weightSum="4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <EditText
+                    android:id="@+id/et1"
+                    android:gravity="center"
+                    android:digits="1"
+                    android:inputType="number"
+                    android:background="@drawable/border_gray"
+                    android:layout_weight="1"
+                    android:text="1"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    >
+
+                </EditText>
+
+                <EditText
+                    android:id="@+id/et2"
+                    android:gravity="center"
+                    android:digits="1"
+                    android:inputType="number"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/border_gray"
+                    android:layout_weight="1"
+                    android:text="2"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    >
+
+                </EditText>
+
+
+                <EditText
+                    android:id="@+id/et3"
+                    android:gravity="center"
+                    android:digits="1"
+                    android:inputType="number"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/border_gray"
+                    android:layout_weight="1"
+                    android:layout_width="@dimen/_60sdp"
+                    android:text="3"
+                    android:layout_height="@dimen/_45sdp"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/et4"
+                    android:digits="1"
+                    android:inputType="number"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@drawable/border_gray"
+                    android:layout_weight="1"
+                    android:text="4"
+                    android:gravity="center"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    >
+
+                </EditText>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+
+                android:id="@+id/RVerify"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/border_btn">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20sp"
+                    android:text="@string/verify"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:padding="@dimen/_25sdp"
+                android:background="@drawable/login_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_280sdp"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_25sdp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/login_logo">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/select_one"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Lorem Ipsium is simply a dummy "
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLoginUser"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <RelativeLayout
+                        android:padding="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_light"
+                            android:gravity="center"
+                            android:text="@string/user"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioButton
+                            android:checked="true"
+                            android:id="@+id/RadiobtnPlumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:buttonTint="@color/black"
+                            android:enabled="false">
+
+                        </RadioButton>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLoginCompany"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:padding="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_light"
+                            android:gravity="center"
+                            android:text="@string/company"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioButton
+                            android:id="@+id/RadiobtnUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:buttonTint="@color/black"
+                            android:enabled="false">
+
+                        </RadioButton>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <RelativeLayout
+                    android:layout_margin="@dimen/_10sdp"
+                    android:id="@+id/RRContinew"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/border_btn"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20sp"
+                        android:text="Continue"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

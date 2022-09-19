@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/RRtoolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/back">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/imgBack"
+                    android:text="Good Vibes, Alex."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/RRSearch"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/message_search"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            >
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:layout_below="@+id/RRtoolbar"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true" />
+
+        <!--    <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_130sdp"
+                android:background="@drawable/img_events"
+                android:padding="@dimen/_10sdp"
+                android:scaleType="fitXY"/>-->
+
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Browse Events by Categories"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/view_all"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                  />
+
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Events Near Me"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/view_all"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleNEarme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Nearest Restaurant"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/view_all"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleRestoaurent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Best Groups"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/view_all"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleBestGrp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <RelativeLayout
+                android:id="@+id/RLogin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/border_btn">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20sp"
+                    android:text="New Group"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

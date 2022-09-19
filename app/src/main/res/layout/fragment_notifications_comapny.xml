@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:id="@+id/RRtoolbaar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Notifications"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_below="@+id/RRtoolbaar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:id="@+id/llNoti"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    tools:ignore="MissingDefaultResource"
+                    >
+
+                    <RelativeLayout
+                        android:padding="@dimen/_3sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img1"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/today_not"
+                            />
+
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/img1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:id="@+id/llName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+
+                                <TextView
+                                    android:text="@string/sofia_john_and_19_others_liked_your_post"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <TextView
+                                    android:text="30m ago"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    tools:ignore="MissingDefaultResource"
+                    >
+
+                    <RelativeLayout
+                        android:padding="@dimen/_3sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img11"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/today_not"
+                            />
+
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/img11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+
+                                <TextView
+                                    android:text="@string/sofia_john_and_19_others_liked_your_post"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+                                <TextView
+                                    android:text="10m ago"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yesterday"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    tools:ignore="MissingDefaultResource"
+                    >
+
+                    <RelativeLayout
+                        android:padding="@dimen/_3sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img12"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/msg_not" />
+
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/img12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+
+                                <TextView
+                                    android:text="@string/sofia_john_and_19_others_liked_your_post"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <TextView
+                                    android:text="30m ago"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    tools:ignore="MissingDefaultResource"
+                    >
+
+                    <RelativeLayout
+                        android:padding="@dimen/_3sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/img113"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerVertical="true"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/msf" />
+
+                        <LinearLayout
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/img113"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="@dimen/_5sdp">
+
+
+                                <TextView
+                                    android:text="@string/sofia_john_and_19_others_liked_your_post"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <TextView
+                                    android:text="30m ago"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/gray"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>
+

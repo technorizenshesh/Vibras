@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <LinearLayout
+        android:background="@color/white"
+        android:padding="@dimen/_5sdp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/RRtoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/back" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_toRightOf="@+id/ivBack"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:layout_toLeftOf="@+id/RRfilter"
+                android:background="@drawable/live_text_bg">
+
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:background="@null"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:gravity="center_vertical"
+                    android:hint="Search"
+                    android:imeOptions="actionSearch"
+                    android:padding="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12sdp">
+
+                </EditText>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RRfilter"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/filter">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Search History"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#F1F1F1"
+                tools:ignore="MissingDefaultResource"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:id="@+id/txtName"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="John Smiths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#F1F1F1"
+                tools:ignore="MissingDefaultResource"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="John John"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#F1F1F1"
+                tools:ignore="MissingDefaultResource"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="John Smiths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+       <!-- <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#F1F1F1"
+                tools:ignore="MissingDefaultResource"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="John John"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:cardBackgroundColor="#F1F1F1"
+                tools:ignore="MissingDefaultResource"
+                >
+
+                <TextView
+                    android:padding="@dimen/_5sdp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:text="John Smiths"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+                </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="John Smiths"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Marcus Saris"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                 />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Kaylynn Ekstrom Bothman"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/clear"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Chance Passaquindici Arcand"
+                android:textAllCaps="true"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:padding="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/black"
+                />
+        </RelativeLayout>
+-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvUsers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+
+    </LinearLayout>
+
+</layout>

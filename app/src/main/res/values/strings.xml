@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">VIBRAS</string>
+    <string name="select_one">Select One-</string>
+    <string name="lorem_ipsum_is_simply_dummy_text_of_dummy_text_of_typesetting_industry">Lorem Ipsum is simply dummy text of dummy text of typesetting industry</string>
+    <string name="user">User</string>
+    <string name="company">Company</string>
+    <string name="email_mobile_number">Email</string>
+    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="next">Next</string>
+    <string name="password">Password</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="verify">Verify</string>
+    <string name="title_activity_home_user">HomeUserAct</string>
+    <string name="title_home">Home</string>
+    <string name="title_Chat">Chat</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="clear"><u>Clear</u></string>
+    <string name="apply_filters">Apply Filters</string>
+    <string name="view_all"><u>VIEW ALL</u></string>
+    <string name="line">Believe in yourself, take on your challenges, dig deep within yourself to conquer fears. Never let anyone bring you down. You got to keep going.</string>
+    <string name="done">Done</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="don_t_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="hey_there">Hey there,</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="settings">Settings</string>
+    <string name="textab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra gravida amet, mi nunc amet mi et. Cursus blandit lobortis curabitur sit massa lobortis pulvinar bibendum. Ultrices integer cum turpis tortor posuere tincidunt viverra eget. Etiam est varius platea vitae commodo. Venenatis, odio quis eu congue donec. Nisl vitae purus sed etiam. Molestie sed id congue tellus amet, dui nunc, tincidunt vitae. Elit suspendisse in porta lectus felis vitae lectus pretium. Non et elit eu pharetra adipiscing elit pulvinar est. Arcu ut at tincidunt fermentum. Duis aliquet ut rhoncus, odio ac ac aliquam rhoncus. Egestas eu, tincidunt gravida vitae molestie pharetra. Sapien laoreet in turpis tortor morbi egestas ligula ac. Faucibus porta molestie a phasellus at. Turpis ultrices ut vulputate vel sed bibendum sit vitae nunc. Platea platea vestibulum, sit euismod proin viverra. Sagittis sed quis gravida cras adipiscing sed faucibus. Aliquet egestas massa eu urna, mi et egestas leo adipiscing. Mi risus augue sed aenean faucibus id odio. In et arcu nunc, mauris, venenatis dignissim nisl blandit. Lectus lacus, quis amet vel nam vel feugiat. Morbi cras placerat vel turpis ipsum tellus arcu metus. Cursus purus lectus gravida quam tellus sollicitudin volutpat lectus. Lorem consequat vitae in rutrum. Nunc euismod aliquam, duis cursus enim at et phasellus.</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="payments">Payments</string>
+    <string name="save_cards">Save Cards</string>
+    <string name="subscription">Subscription</string>
+    <string name="sofia_john_and_19_others_liked_your_post"><b>Sofia, John and +19 others</b> liked your post.</string>
+    <string name="kat">To all the young designers out there- learn early to read the signs from organizations only want to instrumentalize you meet their objectives and have zero intentions to attend to your growth and development as a designer.</string>
+    <string name="first_name">First Name</string>
+    <string name="create_account">Create Account</string>
+
+    <string name="save">Save</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_pass">Enter Password</string>
+    <string name="select_dare">Please select Date of Birth</string>
+    <string name="your_phone_number">Mobile Number</string>
+    <string name="enter_first">Enter First Name</string>
+    <string name="enter_last">Enter Last Name</string>
+    <string name="on_error">On error</string>
+    <string name="msg_noInternet">Internet Connection Not Available</string>
+    <string name="enter_mobile">Enter Mobile Number</string>
+    <string name="please_wait">Please wait</string>
+    <string name="please_enter_com_otp">Please enter otp.</string>
+    <string name="logged_in_success">Logged in successfully</string>
+    <string name="permission_denied_boo">Permission Denied</string>
+    <string name="select_image_from">Select Image From</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="last_name">Last Name</string>
+    <string name="bio">Bio</string>
+    <string name="new_password">New Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password_mismatched">Wrong old password.</string>
+    <string name="please_enter_old_pass">Please enter old password.</string>
+    <string name="please_enter_confirm_password">Please enter confirm password.</string>
+    <string name="password_mismatched">Please make sure your password match.</string>
+    <string name="enter_new_password">Please enter new password.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transactions">Transactions</string>
+    <string name="notifications">Notifications</string>
+    <string name="general_notifcations">General Notifcations</string>
+    <string name="order_notifcations">Order Notifcations</string>
+    <string name="friends">Friends</string>
+    <string name="comments">Comments</string>
+
+    <string name="delete_post">Delete Post</string>
+    <string name="are_you_sure_want_to_delete_post">Are you sure you want to delete Post?</string>
+
+
+    <string name="select_what_to_edit">Select what to Edit</string>
+    <string name="create">Create</string>
+    <string name="enter_event_name">Enter Event Name</string>
+
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="enter_location">Enter location</string>
+    <string name="enter_booking_amount">Enter Booking amount</string>
+    <string name="enter_event_details">Enter Event Details</string>
+    <string name="allow_users_to_comment_on_the_event_post">Allow users to comment on the event post.</string>
+    <string name="add_event">Add Event</string>
+</resources>

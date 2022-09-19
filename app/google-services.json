@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "117323972514",
+    "project_id": "vibras-2063f",
+    "storage_bucket": "vibras-2063f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117323972514:android:2c983a5f72d4015b513cfb",
+        "android_client_info": {
+          "package_name": "com.my.vibras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117323972514-rgqpa4n188gntac94sct9euqg15p1e02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my.vibras",
+            "certificate_hash": "be053cf6e79e8a61ba7f5be6681e8978782d7b5e"
+          }
+        },
+        {
+          "client_id": "117323972514-q0m0cuorltkb3hc26t143plobgmb29kv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxeQ8jsdAWD4hHToyEGF_wTytM4fpMg4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117323972514-q0m0cuorltkb3hc26t143plobgmb29kv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

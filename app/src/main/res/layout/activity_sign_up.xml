@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <LinearLayout
+                    android:id="@+id/llone"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Hey there,"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:gravity="center"
+                        android:text="Create an Account"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        />
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_below="@+id/llone"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp">
+
+                    <LinearLayout
+                        android:id="@+id/llon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/black_circle"></ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:text="Create Account"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_marginRight="-35sp"
+                        android:layout_marginLeft="-35dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_toLeftOf="@+id/lltwo"
+                        android:layout_toRightOf="@+id/llon"
+                        android:background="@color/gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_2sdp"
+                        >
+
+                    </View>
+
+                    <LinearLayout
+                        android:id="@+id/lltwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/circle">
+
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:gravity="center"
+                            android:text="Complete Profile"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+                    <EditText
+                        android:drawablePadding="10sp"
+                        android:drawableLeft="@drawable/email"
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/email_mobile_number"
+                        android:inputType="text"
+                        android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray">
+
+                    </EditText>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+
+                    <EditText
+                        android:drawablePadding="10sp"
+                        android:drawableLeft="@drawable/password"
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray">
+
+                    </EditText>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:cardCornerRadius="@dimen/_8sdp">
+
+                    <TextView
+                        android:id="@+id/tvDOb"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center"
+                        android:drawablePadding="10sp"
+                        android:drawableLeft="@drawable/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:text="@string/date_of_birth"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:inputType="text"
+                        android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/gray"
+                        android:textColorHint="@color/gray">
+
+                    </TextView>
+
+                </androidx.cardview.widget.CardView>
+
+                <CheckBox
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="left"
+                    android:id="@+id/txtForogot"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By continuing you accept our Privacy Policy and Term of Use"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/RNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/border_btn">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="20sp"
+                        android:text="@string/next"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_16sdp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_toLeftOf="@+id/viwOne"
+                        android:background="@color/gray">
+
+                    </View>
+                    <TextView
+                        android:id="@+id/viwOne"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Or"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_14sdp"
+                        />
+
+                    <View
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:background="@color/gray"
+                        android:layout_toRightOf="@+id/viwOne"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/viTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"                        >
+
+                    </View>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:src="@drawable/google_icon"
+                    >
+
+                </ImageView>
+
+                <ImageView
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:src="@drawable/facebook_icon"
+                    >
+
+                </ImageView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llLogin"
+                android:padding="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Already have an account?"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="Login"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>
