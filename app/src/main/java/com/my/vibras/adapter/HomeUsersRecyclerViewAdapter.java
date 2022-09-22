@@ -73,21 +73,11 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
                 }
                 );
 
-
-
         ivChat.setOnClickListener(v ->
                 {
                     mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
                 }
                 );
-
-        if(modelList.get(position).getFollow().equalsIgnoreCase("Notfollow"))
-        {
-            ivOtherLike.setImageResource(R.drawable.ic_friend_like);
-        }else
-        {
-            ivOtherLike.setImageResource(R.drawable.like);
-        }
 
         Glide.with(mContext)
                 .load(modelList.get(position).getImage())

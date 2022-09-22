@@ -20,7 +20,7 @@
                 >
 
                 <ImageView
-                    android:id="@+id/ivEvent"
+                    android:id="@+id/ivRestaurant"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
                     android:background="@drawable/events_details"
@@ -52,7 +52,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/tvEventName"
+                    android:id="@+id/tvRestaurantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -107,46 +107,6 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:padding="@dimen/_10sdp"
-                android:layout_alignParentRight="true"
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/tvEventDate"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/watch"
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="November 04, 2021"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"
-                    />
-
-
-                <TextView
-                    android:id="@+id/tvEventTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:drawableRight="@drawable/likee"
-                    android:text="10:00 PM - 12:00 PM"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:paddingRight="@dimen/_10sdp"
@@ -157,7 +117,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/eventLocation"
+                    android:id="@+id/tvRestaurantLocation"
                     android:drawablePadding="@dimen/_5sdp"
                     android:drawableLeft="@drawable/location"
                     android:textStyle="bold"
@@ -252,50 +212,50 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rvImages"/>
 
-<!--
-            <LinearLayout
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                >
+            <!--
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            >
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pht"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                            <ImageView
+                                android:scaleType="fitXY"
+                                android:src="@drawable/pht"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pht"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                            <ImageView
+                                android:scaleType="fitXY"
+                                android:src="@drawable/pht"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pht"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                            <ImageView
+                                android:scaleType="fitXY"
+                                android:src="@drawable/pht"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
 
-                <ImageView
-                    android:scaleType="fitXY"
-                    android:src="@drawable/pht"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                            <ImageView
+                                android:scaleType="fitXY"
+                                android:src="@drawable/pht"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                />
 
-            </LinearLayout>
--->
+                        </LinearLayout>
+            -->
 
 
             <RelativeLayout
@@ -499,7 +459,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <RelativeLayout
+         <!--   <RelativeLayout
                 android:id="@+id/RLogin"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
@@ -517,7 +477,7 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
-
+-->
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

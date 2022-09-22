@@ -34,7 +34,7 @@ public class SettingAct extends AppCompatActivity {
         });
 
         binding.RRcSubsCription.setOnClickListener(v -> {
-            startActivity(new Intent(SettingAct.this,PaymentsAct.class));
+            startActivity(new Intent(SettingAct.this,SubsCriptionAct.class));
         });
 
         binding.RRchangePassword.setOnClickListener(v ->

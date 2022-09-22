@@ -2,6 +2,7 @@ package com.my.vibras.retrofit;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
+import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResGetBanner;
 import com.my.vibras.model.SuccessResGetCategory;
@@ -15,6 +16,7 @@ import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetProfile;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResGetStories;
+import com.my.vibras.model.SuccessResGetSubscription;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResSignup;
@@ -197,6 +199,19 @@ public interface VibrasInterface {
                                             @Part MultipartBody.Part fileEvent,
                                             @Part List<MultipartBody.Part> file);
 
+    @Multipart
+    @POST("add_Restaurant")
+    Call<SuccessResAddRestaurant> addRestaurants (@Part("user_id") RequestBody userId,
+                                                  @Part("restaurant_name") RequestBody eName,
+                                                  @Part("address") RequestBody address,
+                                                  @Part("lat") RequestBody lat,
+                                                  @Part("lon") RequestBody lon,
+                                                  @Part("description") RequestBody description,
+                                                  @Part MultipartBody.Part fileEvent,
+                                                  @Part List<MultipartBody.Part> file);
+
+
+
     @FormUrlEncoded
     @POST("get_banner")
     Call<SuccessResGetBanner> getBanner(@FieldMap Map<String, String> paramHashMap);
@@ -208,6 +223,10 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_neareast_restaurent")
     Call<SuccessResGetRestaurants> getRestaurnat(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_subscription_plan")
+    Call<SuccessResGetSubscription> getSubscription(@FieldMap Map<String, String> paramHashMap);
 
 
 }

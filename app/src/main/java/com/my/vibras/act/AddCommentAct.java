@@ -146,7 +146,6 @@ public class AddCommentAct extends AppCompatActivity {
         });
     }
 
-
     private void getComment() {
 
         DataManager.getInstance().showProgressMessage(AddCommentAct.this, getString(R.string.please_wait));

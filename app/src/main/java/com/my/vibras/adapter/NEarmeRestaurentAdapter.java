@@ -1,6 +1,7 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,10 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.RestaurantDetailAct;
+import com.my.vibras.act.EventsDetailsScreen;
 import com.my.vibras.model.SuccessResGetRestaurants.Result;
 import com.my.vibras.model.SuccessResGetRestaurants;
 
@@ -53,6 +57,12 @@ public class NEarmeRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.V
             TextView tvName = holder.itemView.findViewById(R.id.tvName);
             TextView tvDistance = holder.itemView.findViewById(R.id.tvDistance);
 
+
+            ivRestaurants.setOnClickListener(v ->
+                    {
+                        mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class).putExtra("data",new Gson().toJson(modelList.get(position))));
+                    }
+            );
 
             Glide.with(mContext)
                     .load(model.getImage())

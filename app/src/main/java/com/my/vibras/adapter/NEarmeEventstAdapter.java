@@ -1,6 +1,7 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,9 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.act.EventsDetailsScreen;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetEvents;
 
@@ -23,7 +26,6 @@ public class NEarmeEventstAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context mContext;
     private ArrayList<SuccessResGetEvents.Result> modelList;
     private OnItemClickListener mItemClickListener;
-
 
     public NEarmeEventstAdapter(Context context, ArrayList<SuccessResGetEvents.Result> modelList) {
         this.mContext = context;
@@ -62,6 +64,11 @@ public class NEarmeEventstAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvLocation.setText(model.getAddress());
             tvDate.setText(model.getDateTimeEvent());
 
+            ivEvent.setOnClickListener(v ->
+                    {
+                        mContext.startActivity(new Intent(mContext, EventsDetailsScreen.class).putExtra("data",new Gson().toJson(modelList.get(position))));
+                    }
+                    );
 
         }
     }
@@ -100,6 +107,9 @@ public class NEarmeEventstAdapter extends RecyclerView.Adapter<RecyclerView.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    int position = getAbsoluteAdapterPosition();
+
 
 
 

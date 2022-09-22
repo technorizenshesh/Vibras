@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".RestaurantDetailAct"
+            android:exported="false" />
+        <activity
             android:name=".act.StoryDetailAct"
             android:exported="false" />
         <activity

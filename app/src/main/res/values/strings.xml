@@ -86,4 +86,8 @@
     <string name="enter_event_details">Enter Event Details</string>
     <string name="allow_users_to_comment_on_the_event_post">Allow users to comment on the event post.</string>
     <string name="add_event">Add Event</string>
+    <string name="enter_restaurant_name">Enter Restaurant Name</string>
+    <string name="enter_restaurant_location">Enter Restaurant Location</string>
+    <string name="enter_details">Enter Details</string>
+    <string name="add_restaurant">Add Restaurant</string>
 </resources>

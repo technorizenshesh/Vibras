@@ -46,9 +46,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
-
         </RelativeLayout>
-
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -68,10 +66,11 @@
                     android:background="@drawable/basic_bg"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_380sdp"
+                    android:layout_height="@dimen/_350sdp"
                     >
 
                     <TextView
+                        android:id="@+id/PlanName"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -92,17 +91,17 @@
                         >
                     </View>
 
-
                     <TextView
+                        android:id="@+id/tvService"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="Basic Services"
-                        android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         />
@@ -114,51 +113,6 @@
                         android:layout_height="1sp"
                         >
                     </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#79005F67"
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#79005F67"
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
 
                     <LinearLayout
                         android:layout_marginTop="@dimen/_20sdp"
@@ -169,39 +123,18 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvMoney"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="$19"
+                            android:text="Free"
                             android:textAllCaps="true"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_25sdp"
                             />
 
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=" /Month"
-                            android:textAllCaps="true"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_14sdp"
-                            />
-
                     </LinearLayout>
-
-                     <Button
-                         android:layout_marginTop="@dimen/_20sdp"
-                         android:textColor="@color/white"
-                         android:text="BUY NOW"
-                         android:layout_gravity="center"
-                         android:background="@drawable/gradiant_btn_grn"
-                         android:layout_width="@dimen/_100sdp"
-                         android:layout_height="@dimen/_30sdp"
-                         >
-
-                     </Button>
 
                 </LinearLayout>
 
@@ -216,6 +149,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/planName2"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -238,15 +172,16 @@
 
 
                     <TextView
+                        android:id="@+id/tv2Services"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:gravity="center"
                         android:text="Basic Services"
-                        android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         />
@@ -258,51 +193,6 @@
                         android:layout_height="1sp"
                         >
                     </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#5E2947"
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#5E2947"
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
 
                     <LinearLayout
                         android:layout_marginTop="@dimen/_20sdp"
@@ -313,6 +203,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tv2Price"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -332,20 +223,17 @@
                             android:textColor="@color/white"
                             android:textSize="@dimen/_14sdp"
                             />
-
                     </LinearLayout>
-
-                    <Button
+                    <TextView
                         android:layout_marginTop="@dimen/_20sdp"
                         android:textColor="@color/white"
                         android:text="BUY NOW"
                         android:layout_gravity="center"
-                        android:background="@drawable/gradiant_btn_stnd"
                         android:layout_width="@dimen/_100sdp"
+                        android:gravity="center"
                         android:layout_height="@dimen/_30sdp"
                         >
-
-                    </Button>
+                    </TextView>
 
                 </LinearLayout>
 
@@ -360,6 +248,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/planName3"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
@@ -380,61 +269,17 @@
                         >
                     </View>
 
-
                     <TextView
+                        android:id="@+id/tv3Services"
                         android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#9E5055"
                         android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:layout_centerInParent="true"
                         android:text="Basic Services"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
-                        />
-
-                    <View
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:background="#9E5055"
-                        android:layout_width="match_parent"
-                        android:layout_height="1sp"
-                        >
-                    </View>
-
-                    <TextView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/right_check"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Basic Services"
-                        android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"
                         />
@@ -457,6 +302,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tv3Price"
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -479,24 +325,19 @@
 
                     </LinearLayout>
 
-                    <Button
+                    <TextView
                         android:layout_marginTop="@dimen/_20sdp"
                         android:textColor="@color/white"
                         android:text="BUY NOW"
                         android:layout_gravity="center"
-                        android:background="@drawable/gradiant_btn_prm"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_30sdp"
+                        android:gravity="center"
                         >
 
-                    </Button>
+                    </TextView>
 
                 </LinearLayout>
-
-
-
-
-
 
             </LinearLayout>
 

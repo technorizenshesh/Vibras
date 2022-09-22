@@ -536,7 +536,7 @@ public class PostEventsFragment extends Fragment {
             if(!imagesList.get(i).contains("https://nobu.es/tasknobu/uploads"))
             {
                 File file = DataManager.getInstance().saveBitmapToFile(new File(imagesList.get(i)));
-                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+                filePartList.add(MultipartBody.Part.createFormData("image_file[]", file.getName(), RequestBody.create(MediaType.parse("image_file[]/*"), file)));
             }
         }
 
@@ -545,7 +545,7 @@ public class PostEventsFragment extends Fragment {
             File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
             if(file!=null)
             {
-                filePart = MultipartBody.Part.createFormData("cover_image", file.getName(), RequestBody.create(MediaType.parse("cover_image/*"), file));
+                filePart = MultipartBody.Part.createFormData("image", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
             }
             else
             {

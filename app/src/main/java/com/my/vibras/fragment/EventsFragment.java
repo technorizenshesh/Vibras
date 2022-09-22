@@ -183,7 +183,6 @@ public class EventsFragment extends Fragment{
 
     }
 
-
     public void getRestaurants()
     {
 
@@ -207,11 +206,8 @@ public class EventsFragment extends Fragment{
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
 
-
-
                         modelListNearMERest.clear();
                         modelListNearMERest.addAll(data.getResult());
-
 
                         mAdapterNEarMeRest.notifyDataSetChanged();
                     } else if (data.status.equals("0")) {
@@ -229,11 +225,7 @@ public class EventsFragment extends Fragment{
         });
 
 
-
-
     }
-
-
 
     private void setAdapter()
     {
@@ -272,7 +264,7 @@ public class EventsFragment extends Fragment{
             @Override
             public void onItemClick(View view, int position, HomModel model) {
 
-                startActivity(new Intent(getActivity(), EventsDetailsScreen.class));
+
             }
         });
     }
