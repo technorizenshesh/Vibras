@@ -102,7 +102,7 @@ public class PostRestaurentFragment extends Fragment {
     private String whichSelected="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_restaurent,container, false);
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);

@@ -194,13 +194,16 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
             }
         });
     }
+
     @Override
     public void addUserProfileLike(int position) {
-        addOtherProfileLike(usersList.get(position).getId());
+        addOtherProfileLike(usersList.get(position).getId(),"Like");
     }
 
     @Override
     public void addLikeToUser(int position) {
+
+        addOtherProfileLike(usersList.get(position).getId(),"Love");
 
     }
 
@@ -212,10 +215,9 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
     @Override
     public void addCommentToUser(int position) {
 
-        addFire(usersList.get(position).getId());
+        addOtherProfileLike(usersList.get(position).getId(),"Fire");
 
     }
-
 
     private void addFire(String otherUserID)
     {
@@ -258,15 +260,16 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
     }
 
 
-    private void addOtherProfileLike(String otherUserId) {
+    private void addOtherProfileLike(String otherUserId,String type) {
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
 
         Map<String, String> map = new HashMap<>();
-        map.put("user_given_id", userId);
-        map.put("user_receive_id", otherUserId);
+        map.put("user_id", userId);
+        map.put("profile_user", otherUserId);
+        map.put("type", type);
 
-        Call<SuccessResAddOtherProfileLike> call = apiInterface.addProfileLike(map);
+        Call<SuccessResAddOtherProfileLike> call = apiInterface.addFireLikeLove(map);
 
         call.enqueue(new Callback<SuccessResAddOtherProfileLike>() {
             @Override
@@ -278,7 +281,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                     Log.e("data",data.status+"");
                     if (data.status==1) {
 
-//                        getAllUsers();
+                        showToast(getActivity(), data.message);
 
                     } else if (data.status==0) {
                         showToast(getActivity(), data.message);

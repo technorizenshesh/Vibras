@@ -67,6 +67,12 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         ivChat = holder.itemView.findViewById(R.id.ivChat);
         ivFire = holder.itemView.findViewById(R.id.ivFire);
 
+        ivProfileLike.setOnClickListener(v ->
+                {
+                    homeItemClickListener.addLikeToUser(position);
+                }
+                );
+
         ivFire.setOnClickListener(v ->
                 {
                     homeItemClickListener.addCommentToUser(position);
@@ -92,15 +98,13 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         ivOtherLike.setOnClickListener(v ->
                 {
 
-                    if(modelList.get(position).getFollow().equalsIgnoreCase("Following"))
-                    {
-                        modelList.get(position).setFollow("Notfollow");
-                    } else
-                    {
-                        modelList.get(position).setFollow("Following");
-                    }
-
-                    notifyDataSetChanged();
+//                    if(modelList.get(position).getFollow().equalsIgnoreCase("Following"))
+//                    {
+//                        modelList.get(position).setFollow("Notfollow");
+//                    } else
+//                    {
+//                        modelList.get(position).setFollow("Following");
+//                    }
 
                     homeItemClickListener.addUserProfileLike(position);
 
@@ -131,7 +135,6 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     public interface OnItemClickListener {
-
         void onItemClick(View view, int position, SuccessResGetUsers.Result model);
     }
 
@@ -140,7 +143,6 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
             super(itemView);
         }
     }
-
 
 }
 

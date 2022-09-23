@@ -3,16 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -32,10 +28,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/ivProfile"
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
-                            android:src="@drawable/circle_img"></ImageView>
+                            android:src="@drawable/circle_img"></de.hdodenhof.circleimageview.CircleImageView>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -45,29 +42,27 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tvRestaurantName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:text="Kat Williams"
-                                android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12sdp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/timeAgo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:text="1h ago"
-                                android:textAllCaps="true"
                                 android:textColor="@color/gray"
                                 android:textSize="@dimen/_8sdp" />
-
 
                         </LinearLayout>
 
                     </LinearLayout>
-
 
                     <ImageView
                         android:layout_centerVertical="true"
@@ -78,45 +73,16 @@
 
                     </ImageView>
 
-
                 </RelativeLayout>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                <ImageView
+                    android:id="@+id/imgRestaurant"
+                    android:src="@drawable/img_slid"
+                    android:layout_width="@dimen/_280sdp"
+                    android:layout_gravity="center"
+                    android:layout_height="@dimen/_150sdp">
 
-                    <LinearLayout
-                        android:layout_margin="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:src="@drawable/img_slid"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                        <ImageView
-                            android:src="@drawable/img_slid"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                        <ImageView
-                            android:src="@drawable/img_slid"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
+                </ImageView>
                 <RelativeLayout
                     android:padding="@dimen/_10sdp"
                     android:layout_width="wrap_content"
@@ -128,6 +94,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvLike"
                             android:textStyle="bold"
                             android:drawablePadding="@dimen/_10sdp"
                             android:drawableLeft="@drawable/like_icon"
@@ -141,6 +108,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/tvChat"
                             android:textStyle="bold"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:drawablePadding="@dimen/_10sdp"
@@ -171,6 +139,7 @@
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/ivSaved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -193,339 +162,11 @@
 
             </View>
 
-            <LinearLayout
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="vertical"
+           <!-- <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <RelativeLayout
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_below="@+id/rvStories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_45sdp"
-                            android:layout_height="@dimen/_45sdp"
-                            android:src="@drawable/circle_img"></ImageView>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="Kat Williams"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="1h ago"
-                                android:textAllCaps="true"
-                                android:textColor="@color/gray"
-                                android:textSize="@dimen/_8sdp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <ImageView
-                        android:layout_centerVertical="true"
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/menu_icon"
-                        >
-
-                    </ImageView>
-
-
-                </RelativeLayout>
-
-                <TextView
-                    android:padding="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="@string/kat"
-                    android:textAllCaps="true"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"
-                    />
-
-                <RelativeLayout
-                    android:padding="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/like_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/message_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/dwld_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10sp"
-                        android:src="@drawable/save_icon">
-
-                    </ImageView>
-
-                </RelativeLayout>
-
-
-
-            </LinearLayout>
-
-
-            <View
-                android:background="@color/lightgray"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_2sdp"
-                >
-
-            </View>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <RelativeLayout
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_below="@+id/rvStories"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_45sdp"
-                            android:layout_height="@dimen/_45sdp"
-                            android:src="@drawable/circle_img"></ImageView>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="Kat Williams"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:text="1h ago"
-                                android:textAllCaps="true"
-                                android:textColor="@color/gray"
-                                android:textSize="@dimen/_8sdp" />
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <ImageView
-                        android:layout_centerVertical="true"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/menu_icon">
-
-                    </ImageView>
-
-
-                </RelativeLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <LinearLayout
-                        android:layout_margin="@dimen/_10sdp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <ImageView
-                            android:src="@drawable/img_sli_two"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                        <ImageView
-                            android:src="@drawable/img_sli_two"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                        <ImageView
-                            android:src="@drawable/img_slid"
-                            android:layout_width="@dimen/_280sdp"
-                            android:layout_height="@dimen/_150sdp">
-
-                        </ImageView>
-
-                    </LinearLayout>
-
-                </HorizontalScrollView>
-
-                <RelativeLayout
-                    android:padding="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/like_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/message_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                        <TextView
-                            android:textStyle="bold"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:drawablePadding="@dimen/_10sdp"
-                            android:drawableLeft="@drawable/dwld_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="8,998"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            />
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10sp"
-                        android:src="@drawable/save_icon">
-
-                    </ImageView>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
+                android:layout_height="match_parent"
+                android:id="@+id/rvRestaurants"/>
+-->
         </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
 
 </layout>

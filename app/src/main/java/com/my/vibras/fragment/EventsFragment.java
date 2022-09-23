@@ -60,7 +60,9 @@ public class EventsFragment extends Fragment{
     private VibrasInterface apiInterface;
 
     BruseEventAdapter mAdapter;
+
     NEarmeEventstAdapter mAdapterNEarMe;
+
     NEarmeRestaurentAdapter mAdapterNEarMeRest;
 
     private SliderAdapter sliderAdapter;

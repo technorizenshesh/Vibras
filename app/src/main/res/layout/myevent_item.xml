@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <RelativeLayout
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_below="@+id/rvStories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:src="@drawable/circle_img"></de.hdodenhof.circleimageview.CircleImageView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvRestaurantName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Kat Williams"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/timeAgo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="1h ago"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_8sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/menu_icon">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgRestaurant"
+            android:src="@drawable/img_slid"
+            android:layout_width="@dimen/_280sdp"
+            android:layout_gravity="center"
+            android:layout_height="@dimen/_150sdp">
+
+        </ImageView>
+        <RelativeLayout
+            android:padding="@dimen/_10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/tvLike"
+                    android:textStyle="bold"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/like_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="8,998"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvChat"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/message_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="8,998"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableLeft="@drawable/dwld_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="8,998"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivSaved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10sp"
+                android:src="@drawable/save_icon">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:background="@color/lightgray"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2sdp"
+        >
+
+    </View>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

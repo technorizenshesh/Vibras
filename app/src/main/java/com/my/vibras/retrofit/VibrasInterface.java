@@ -19,6 +19,7 @@ import com.my.vibras.model.SuccessResGetStories;
 import com.my.vibras.model.SuccessResGetSubscription;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.model.SuccessResInsertChat;
+import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.model.SuccessResUploadCoverPhoto;
 import com.my.vibras.model.SuccessResUploadPost;
@@ -177,13 +178,12 @@ public interface VibrasInterface {
     @POST("send_fire")
     Call<SuccessResDeleteConversation> addFireToOther(@FieldMap Map<String, String> paramHashMap);
 
-
     @FormUrlEncoded
     @POST("get_category")
     Call<SuccessResGetCategory> getEventsCategory(@FieldMap Map<String, String> paramHashMap);
 
     @Multipart
-    @POST("add_even")
+    @POST("add_event")
     Call<SuccessResAddEvent> addEvent (@Part("user_id") RequestBody userId,
                                             @Part("event_name") RequestBody eName,
                                             @Part("address") RequestBody address,
@@ -210,8 +210,6 @@ public interface VibrasInterface {
                                                   @Part MultipartBody.Part fileEvent,
                                                   @Part List<MultipartBody.Part> file);
 
-
-
     @FormUrlEncoded
     @POST("get_banner")
     Call<SuccessResGetBanner> getBanner(@FieldMap Map<String, String> paramHashMap);
@@ -228,5 +226,12 @@ public interface VibrasInterface {
     @POST("get_subscription_plan")
     Call<SuccessResGetSubscription> getSubscription(@FieldMap Map<String, String> paramHashMap);
 
+    @FormUrlEncoded
+    @POST("send_fire_like_love")
+    Call<SuccessResAddOtherProfileLike> addFireLikeLove(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("getUserEvents")
+    Call<SuccessResMyEventRes> getMyEvents(@FieldMap Map<String, String> paramHashMap);
 
 }

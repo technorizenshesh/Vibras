@@ -99,9 +99,7 @@ public class ComapnyProfileFragment extends Fragment{
                 {
                     if(checkPermisssionForReadStorage())
                     {
-
                         showImageSelection();
-
                     }
                 }
         );
@@ -130,8 +128,10 @@ public class ComapnyProfileFragment extends Fragment{
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Events"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Restaurant"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Accommodation"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Tagged"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
         adapter = new ComapnyProfileFragment.Qr_DetailsAdapter(getActivity(),getChildFragmentManager(), binding.tabLayout.getTabCount());
 
         binding.viewPager.setAdapter(adapter);
@@ -269,6 +269,11 @@ public class ComapnyProfileFragment extends Fragment{
                 case 2:
                     EventsFragmentComapny recents11 = new EventsFragmentComapny();
                     return recents11;
+
+                case 3:
+                    EventsFragmentComapny recents12 = new EventsFragmentComapny();
+                    return recents12;
+
                 default:
                     return null;
             }
@@ -279,7 +284,6 @@ public class ComapnyProfileFragment extends Fragment{
         }
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -289,7 +293,6 @@ public class ComapnyProfileFragment extends Fragment{
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-//
 //                    if (isContinue) {
 //                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //                            // TODO: Consider calling

@@ -73,21 +73,27 @@ public class SuccessResGetUsers implements Serializable {
         public String password;
         @SerializedName("gender")
         @Expose
+
         public String gender;
         @SerializedName("zipcode")
         @Expose
+
         public String zipcode;
         @SerializedName("bio")
         @Expose
+
         public String bio;
         @SerializedName("post_filter")
         @Expose
+
         public String postFilter;
         @SerializedName("register_id")
         @Expose
+
         public String registerId;
         @SerializedName("social_id")
         @Expose
+
         public String socialId;
         @SerializedName("otp")
         @Expose
@@ -110,17 +116,20 @@ public class SuccessResGetUsers implements Serializable {
         @SerializedName("follow")
         @Expose
         public String follow;
+        @SerializedName("user_match")
+        @Expose
+        public String userMatch;
 
         public String getId() {
-            return id;
+        return id;
         }
 
         public void setId(String id) {
-            this.id = id;
+         this.id = id;
         }
 
         public String getFirstName() {
-            return firstName;
+         return firstName;
         }
 
         public void setFirstName(String firstName) {
@@ -168,7 +177,7 @@ public class SuccessResGetUsers implements Serializable {
         }
 
         public String getAbout() {
-            return about;
+          return about;
         }
 
         public void setAbout(String about) {
@@ -285,6 +294,14 @@ public class SuccessResGetUsers implements Serializable {
 
         public void setFollow(String follow) {
             this.follow = follow;
+        }
+
+        public String getUserMatch() {
+            return userMatch;
+        }
+
+        public void setUserMatch(String userMatch) {
+            this.userMatch = userMatch;
         }
 
     }
