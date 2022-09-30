@@ -71,9 +71,18 @@ public class EventsFragment extends Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events,container, false);
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+
+        Bundle bundle1 = this.getArguments();
+
+        if (bundle1!=null)
+        {
+            Gson gson = new Gson();
+            binding.RRtoolbar.setVisibility(View.VISIBLE);
+        }
 
         binding.imgBack.setOnClickListener(v -> {
             getActivity().onBackPressed();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -62,24 +63,33 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_centerVertical="true"
+                android:id="@+id/ivOption"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:src="@drawable/menu_icon">
 
             </ImageView>
 
         </RelativeLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/_280sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            >
         <ImageView
             android:id="@+id/imgRestaurant"
-            android:src="@drawable/img_slid"
-            android:layout_width="@dimen/_280sdp"
-            android:layout_gravity="center"
-            android:layout_height="@dimen/_150sdp">
+            android:src="@color/gray1"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="match_parent"/>
 
-        </ImageView>
+        </androidx.cardview.widget.CardView>
+
         <RelativeLayout
             android:padding="@dimen/_10sdp"
             android:layout_width="wrap_content"
@@ -90,11 +100,23 @@
                 android:layout_height="wrap_content"
                 >
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llLike"
+                    >
+                <ImageView
+                    android:id="@+id/ivLikeUnlike"
+                    android:layout_width="@dimen/_13sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    android:src="@drawable/ic_rest_unlike"
+                    />
+
                 <TextView
-                    android:id="@+id/tvLike"
+                    android:id="@+id/tvLikeCount"
                     android:textStyle="bold"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:drawableLeft="@drawable/like_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -103,6 +125,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
                     android:id="@+id/tvChat"

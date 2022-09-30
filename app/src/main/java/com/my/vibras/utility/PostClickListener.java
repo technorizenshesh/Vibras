@@ -9,4 +9,7 @@ public interface PostClickListener {
 
     public void selectLike(int position,String status);
     public void bottomSheet(View param1, String postID, boolean isUser, int position);
+
+    public void savePost(View param1, String postID, boolean isUser, int position);
+
 }

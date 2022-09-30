@@ -102,13 +102,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewH
 
     }
 
-
-    private void showDialog()
-    {
-
-    }
-
-
     @Override
     public int getItemCount() {
         return postList.size();

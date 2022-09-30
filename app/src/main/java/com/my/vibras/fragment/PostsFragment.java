@@ -112,6 +112,11 @@ public class PostsFragment extends Fragment implements PostClickListener {
 
     }
 
+    @Override
+    public void savePost(View param1, String postID, boolean isUser, int position) {
+
+    }
+
     private void addLike(String postId) {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));

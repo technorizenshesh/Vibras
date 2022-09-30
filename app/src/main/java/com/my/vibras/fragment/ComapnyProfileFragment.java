@@ -263,7 +263,7 @@ public class ComapnyProfileFragment extends Fragment{
                     return recents;
 
                 case 1:
-                    EventsFragmentComapny recents1 = new EventsFragmentComapny();
+                    RestaurantFragment recents1 = new RestaurantFragment();
                     return recents1;
 
                 case 2:

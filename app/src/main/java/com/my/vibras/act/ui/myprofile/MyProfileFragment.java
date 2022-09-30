@@ -313,6 +313,11 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     }
 
+    @Override
+    public void savePost(View param1, String postID, boolean isUser, int position) {
+
+    }
+
     public void showDialog(String postId,int position)
     {
 
@@ -432,8 +437,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
             }
         });
     }
-
-
 
     public class Qr_DetailsAdapter extends FragmentPagerAdapter {
 
@@ -581,28 +584,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     private void openCamera() {
 
-//        File dirtostoreFile = new File(Environment.getExternalStorageDirectory() + "/Micasa/Images/");
-//
-//        if (!dirtostoreFile.exists()) {
-//            dirtostoreFile.mkdirs();
-//        }
-//
-//        String timestr = DataManager.getInstance().convertDateToString(Calendar.getInstance().getTimeInMillis());
-//
-//        File tostoreFile = new File(Environment.getExternalStorageDirectory() + "/Micasa/Images/" + "IMG_" + timestr + ".jpg");
-//
-//        str_image_path = tostoreFile.getPath();
-//
-//        uriSavedImage = FileProvider.getUriForFile(getActivity(),
-//                BuildConfig.APPLICATION_ID + ".provider",
-//                tostoreFile);
-//
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
-//
-//        startActivityForResult(intent, REQUEST_CAMERA);
-
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null)
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
@@ -626,9 +607,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     Uri tempUri = getImageUri(getActivity(), bitmap);
                     String image = RealPathUtil.getRealPath(getActivity(), tempUri);
                     str_image_path = image;
-
                     updateCoverPhoto();
-
                 } catch (IOException e) {
                     Log.i("TAG", "Some exception " + e);
                 }
@@ -720,25 +699,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-//
-//                    if (isContinue) {
-//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                            // TODO: Consider calling
-//                            //    ActivityCompat#requestPermissions
-//                            // here to request the missing permissions, and then overriding
-//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                            //                                          int[] grantResults)
-//                            // to handle the case where the user grants the permission. See the documentation
-//                            // for ActivityCompat#requestPermissions for more details.
-//                            return;
-//                        }
-//                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-//                    } else {
-//                        Log.e("Latittude====", gpsTracker.getLatitude() + "");
-//
-//                        strLat = Double.toString(gpsTracker.getLatitude()) ;
-//                        strLng = Double.toString(gpsTracker.getLongitude()) ;
-//                    }
                 } else {
                     Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
                 }

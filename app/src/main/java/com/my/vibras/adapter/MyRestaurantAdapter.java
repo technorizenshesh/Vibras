@@ -1,7 +1,6 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,13 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.AddCommentAct;
 import com.my.vibras.databinding.MyeventItemBinding;
-import com.my.vibras.databinding.MyeventItemBinding;
-import com.my.vibras.model.SuccessResGetEvents;
-import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResMyEventRes;
+import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.utility.PostClickListener;
 
 import java.util.List;
@@ -30,14 +26,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Ravindra Birla on 06,July,2021
  */
 
-public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.StoriesViewHolder> {
+public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapter.StoriesViewHolder> {
 
     private Context context;
     MyeventItemBinding binding;
-    private List<SuccessResMyEventRes.Result> postList;
+    private List<SuccessResMyRestaurantRes.Result> postList;
     private PostClickListener postClickListener;
 
-    public MyEventsAdapter(Context context, List<SuccessResMyEventRes.Result> postList, PostClickListener postClickListener)
+    public MyRestaurantAdapter(Context context, List<SuccessResMyRestaurantRes.Result> postList, PostClickListener postClickListener)
     {
       this.context = context;
       this.postList = postList;
@@ -55,22 +51,27 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
     public void onBindViewHolder(@NonNull StoriesViewHolder holder, int position) {
 
         ImageView ivPOst = holder.itemView.findViewById(R.id.imgRestaurant);
+
         TextView tvUserName = holder.itemView.findViewById(R.id.tvRestaurantName);
+
         TextView tvDescription = holder.itemView.findViewById(R.id.timeAgo);
+
+        TextView tvLikeComment = holder.itemView.findViewById(R.id.timeAgo);
 
         TextView tvLikeCount = holder.itemView.findViewById(R.id.tvLikeCount);
 
-        ImageView ivLike = holder.itemView.findViewById(R.id.ivLikeUnlike);
-        ImageView ivComment = holder.itemView.findViewById(R.id.ivComment);
-        ImageView ivOption = holder.itemView.findViewById(R.id.ivOption);
-        ImageView ivSaved = holder.itemView.findViewById(R.id.ivSaved);
+        LinearLayoutCompat linearLayoutCompat = holder.itemView.findViewById(R.id.llLike);
 
-        LinearLayoutCompat llLike = holder.itemView.findViewById(R.id.llLike);
+        ImageView ivLikeUnlike = holder.itemView.findViewById(R.id.ivLikeUnlike);
+
+        ImageView ivOption = holder.itemView.findViewById(R.id.ivOption);
 
         CircleImageView circleImageView = holder.itemView.findViewById(R.id.ivProfile);
 
+        String image = postList.get(position).getImage();
+
         Glide.with(context)
-                .load(postList.get(position).getImage())
+                .load(image)
                 .into(ivPOst);
 
         Glide.with(context)
@@ -78,23 +79,23 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
 
-        tvDescription.setText(postList.get(position).getDateTime());
+        tvDescription.setText(postList.get(position).getTimeAgo());
 
-        tvUserName.setText(postList.get(position).getEventName());
+        tvUserName.setText(postList.get(position).getRestaurantName());
 
-        if(postList.get(position).getLikeStatus().equalsIgnoreCase("false"))
-        {
-            ivLike.setImageResource(R.drawable.ic_rest_unlike);
-        }else
-        {
-            ivLike.setImageResource(R.drawable.ic_rest_like);
-        }
-
-        llLike.setOnClickListener(v ->
+        linearLayoutCompat.setOnClickListener(v ->
                 {
                     postClickListener.selectLike(position,"");
                 }
                 );
+
+        if(postList.get(position).getLikeStatus().equalsIgnoreCase("false"))
+        {
+            ivLikeUnlike.setImageResource(R.drawable.ic_rest_unlike);
+        }else
+        {
+            ivLikeUnlike.setImageResource(R.drawable.ic_rest_like);
+        }
 
         ivOption.setOnClickListener(v ->
                 {
@@ -102,13 +103,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
                 }
                 );
 
-        tvLikeCount.setText(postList.get(position).getLikeCount());
-
-        ivSaved.setOnClickListener(v ->
-                {
-                    postClickListener.savePost(v,"",false,position);
-                }
-                );
+        tvLikeCount.setText(postList.get(position).getResCountLike());
 
     }
 

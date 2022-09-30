@@ -342,10 +342,6 @@ public class CreatePostAct extends AppCompatActivity {
 
     public void uploadPost() {
 
-        String strTagUsers = "";
-
-        String strTaggedUserId = "";
-
         String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
 
         DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));

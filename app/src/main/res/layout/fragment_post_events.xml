@@ -297,7 +297,7 @@
                     android:gravity="left"
                     android:imeOptions="actionDone"
                     android:padding="@dimen/_10sdp"
-                    android:text="@string/enter_event_details"
+                    android:hint="@string/enter_event_details"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12sdp" />
 
@@ -391,7 +391,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
-
 
             </LinearLayout>
 

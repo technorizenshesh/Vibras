@@ -244,6 +244,11 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
 
     }
 
+    @Override
+    public void savePost(View param1, String postID, boolean isUser, int position) {
+
+    }
+
     public class Qr_DetailsAdapter extends FragmentPagerAdapter {
 
         private Context myContext;

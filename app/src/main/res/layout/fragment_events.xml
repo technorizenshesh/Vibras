@@ -21,6 +21,7 @@
                 android:id="@+id/RRtoolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
+                android:visibility="gone"
                 >
 
                 <ImageView

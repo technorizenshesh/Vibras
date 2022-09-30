@@ -20,6 +20,7 @@ import com.my.vibras.model.SuccessResGetSubscription;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResMyEventRes;
+import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.model.SuccessResUploadCoverPhoto;
 import com.my.vibras.model.SuccessResUploadPost;
@@ -233,5 +234,32 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("getUserEvents")
     Call<SuccessResMyEventRes> getMyEvents(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("getUserRestaurent")
+    Call<SuccessResMyRestaurantRes> getMyRestaurant(@FieldMap Map<String, String> paramHashMap);
+
+
+    @FormUrlEncoded
+    @POST("addEventlike")
+    Call<SuccessResAddLike> addEventLike(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("addRestaurentlike")
+    Call<SuccessResAddLike> addRestaurantLike(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("delete_event")
+    Call<SuccessResAddLike> deleteEvent(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("delete_restaurant")
+    Call<SuccessResAddLike> deleteRestaurant(@FieldMap Map<String, String> paramHashMap);
+
+
+    @FormUrlEncoded
+    @POST("addEventSave")
+    Call<SuccessResAddLike> saveEventRestaurant(@FieldMap Map<String, String> paramHashMap);
+
 
 }

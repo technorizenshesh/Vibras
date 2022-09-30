@@ -1,10 +1,16 @@
-package com.my.vibras.Company;
+package com.my.vibras.fragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,22 +19,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.adapter.MyEventsAdapter;
-import com.my.vibras.adapter.StoriesAdapter;
-import com.my.vibras.databinding.FragmentEventsCopamnyBinding;
-import com.my.vibras.databinding.FragmentPostsBinding;
+import com.my.vibras.adapter.MyRestaurantAdapter;
+import com.my.vibras.databinding.FragmentRestaurantBinding;
 import com.my.vibras.model.SuccessResAddLike;
-import com.my.vibras.model.SuccessResMyEventRes;
-import com.my.vibras.model.SuccessResGetStories;
-import com.my.vibras.model.SuccessResMyEventRes;
+import com.my.vibras.model.SuccessResMyRestaurantRes;
+import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
@@ -46,29 +44,50 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class EventsFragmentComapny extends Fragment implements PostClickListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link RestaurantFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class RestaurantFragment extends Fragment implements PostClickListener {
 
-    private FragmentEventsCopamnyBinding binding;
+    FragmentRestaurantBinding binding;
 
-    private ArrayList<SuccessResMyEventRes.Result> eventsList = new ArrayList<>();
+    private ArrayList<SuccessResMyRestaurantRes.Result> eventsList = new ArrayList<>();
 
-    private MyEventsAdapter myEventsAdapter;
+    private MyRestaurantAdapter myEventsAdapter;
 
     private VibrasInterface apiInterface;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public RestaurantFragment() {
+        // Required empty public constructor
+    }
+    // TODO: Rename and change types and number of parameters
+    public static RestaurantFragment newInstance(String param1, String param2) {
+        RestaurantFragment fragment = new RestaurantFragment();
+        Bundle args = new Bundle();
+        return fragment;
+    }
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events_copamny,container, false);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_restaurant, container, false);
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
-        myEventsAdapter = new MyEventsAdapter(getActivity(),eventsList,this);
+        myEventsAdapter = new MyRestaurantAdapter(getActivity(),eventsList,this);
 
         binding.rvRestaurants.setHasFixedSize(true);
-
         binding.rvRestaurants.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         binding.rvRestaurants.setAdapter(myEventsAdapter);
 
         getMyRestaurantsApi();
@@ -78,18 +97,20 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
 
     public void getMyRestaurantsApi()
     {
+
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        Call<SuccessResMyEventRes> call = apiInterface.getMyEvents(map);
-        call.enqueue(new Callback<SuccessResMyEventRes>() {
+        Call<SuccessResMyRestaurantRes> call = apiInterface.getMyRestaurant(map);
+        call.enqueue(new Callback<SuccessResMyRestaurantRes>() {
             @Override
-            public void onResponse(Call<SuccessResMyEventRes> call, Response<SuccessResMyEventRes> response) {
+            public void onResponse(Call<SuccessResMyRestaurantRes> call, Response<SuccessResMyRestaurantRes> response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
-                    SuccessResMyEventRes data = response.body();
+                    SuccessResMyRestaurantRes data = response.body();
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
@@ -97,24 +118,28 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                         eventsList.clear();
                         eventsList.addAll(data.getResult());
                         myEventsAdapter.notifyDataSetChanged();
+
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
-                  e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
             @Override
-            public void onFailure(Call<SuccessResMyEventRes> call, Throwable t) {
+            public void onFailure(Call<SuccessResMyRestaurantRes> call, Throwable t) {
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
             }
         });
+
     }
 
     @Override
     public void selectLike(int position, String status) {
+
         addLike(eventsList.get(position).getId());
+
     }
 
     @Override
@@ -127,8 +152,6 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
     @Override
     public void savePost(View param1, String postID, boolean isUser, int position) {
 
-        saveRestaurant(eventsList.get(position).getId());
-
     }
 
     private void addLike(String postId) {
@@ -137,8 +160,8 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        map.put("event_id",postId);
-        Call<SuccessResAddLike> call = apiInterface.addEventLike(map);
+        map.put("restaurant_id",postId);
+        Call<SuccessResAddLike> call = apiInterface.addRestaurantLike(map);
         call.enqueue(new Callback<SuccessResAddLike>() {
             @Override
             public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
@@ -147,36 +170,6 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                     SuccessResAddLike data = response.body();
                     Log.e("data",data.status+"");
                     getMyRestaurantsApi();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
-                call.cancel();
-                DataManager.getInstance().hideProgressMessage();
-            }
-        });
-    }
-
-    private void saveRestaurant(String postId) {
-
-        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
-        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("save_post_id",postId);
-        map.put("type","event");
-        Call<SuccessResAddLike> call = apiInterface.saveEventRestaurant(map);
-        call.enqueue(new Callback<SuccessResAddLike>() {
-            @Override
-            public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
-                DataManager.getInstance().hideProgressMessage();
-                try {
-                    SuccessResAddLike data = response.body();
-                    Log.e("data",data.status+"");
-                    getMyRestaurantsApi();
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -230,8 +223,10 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                             .show();
                 }
         );
+
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+
     }
 
     public void deletePost(String postId)
@@ -241,8 +236,8 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        map.put("event_id",postId);
-        Call<SuccessResAddLike> call = apiInterface.deleteEvent(map);
+        map.put("restaurant_id",postId);
+        Call<SuccessResAddLike> call = apiInterface.deleteRestaurant(map);
         call.enqueue(new Callback<SuccessResAddLike>() {
             @Override
             public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
@@ -271,5 +266,8 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
         });
 
     }
+
+
+
 
 }

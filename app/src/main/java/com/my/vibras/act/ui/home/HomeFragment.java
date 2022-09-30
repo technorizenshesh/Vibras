@@ -72,16 +72,15 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
+
         binding.RRSearch.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SearchAct.class));
         });
 
         binding.RREvents.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_eventsFragment);
-        });
-
-        binding.RREvents.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_eventsFragment);
+            Bundle bundle = new Bundle();
+            bundle.putString("from","home");
+            Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_eventsFragment,bundle);
         });
 
         setAdapter();

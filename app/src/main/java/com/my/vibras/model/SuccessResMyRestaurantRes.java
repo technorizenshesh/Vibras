@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Ravindra Birla on 16,August,2022
  */
-public class SuccessResMyEventRes implements Serializable {
+public class SuccessResMyRestaurantRes implements Serializable {
 
     @SerializedName("result")
     @Expose
@@ -44,15 +44,14 @@ public class SuccessResMyEventRes implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    public class EventGallery implements Serializable {
+    public class RestaurantGallery {
 
         @SerializedName("id")
         @Expose
         public String id;
-        @SerializedName("event_id")
+        @SerializedName("restaurant_id")
         @Expose
-        public String eventId;
+        public String restaurantId;
         @SerializedName("image")
         @Expose
         public String image;
@@ -68,12 +67,12 @@ public class SuccessResMyEventRes implements Serializable {
             this.id = id;
         }
 
-        public String getEventId() {
-            return eventId;
+        public String getRestaurantId() {
+            return restaurantId;
         }
 
-        public void setEventId(String eventId) {
-            this.eventId = eventId;
+        public void setRestaurantId(String restaurantId) {
+            this.restaurantId = restaurantId;
         }
 
         public String getImage() {
@@ -102,57 +101,33 @@ public class SuccessResMyEventRes implements Serializable {
         @SerializedName("user_id")
         @Expose
         public String userId;
-        @SerializedName("event_cat")
+        @SerializedName("restaurant_name")
         @Expose
-        public String eventCat;
-        @SerializedName("event_name")
-        @Expose
-        public String eventName;
+        public String restaurantName;
         @SerializedName("address")
         @Expose
         public String address;
         @SerializedName("image")
         @Expose
         public String image;
-        @SerializedName("date_time_event")
-        @Expose
-        public String dateTimeEvent;
         @SerializedName("description")
         @Expose
         public String description;
-        @SerializedName("like")
-        @Expose
-        public String like;
-        @SerializedName("type")
-        @Expose
-        public String type;
-        @SerializedName("like_count")
-        @Expose
-        public String likeCount;
-        @SerializedName("booking_amount")
-        @Expose
-        public String bookingAmount;
-        @SerializedName("event_start_time")
-        @Expose
-        public String eventStartTime;
-        @SerializedName("event_end_time")
-        @Expose
-        public String eventEndTime;
-        @SerializedName("event_attend")
-        @Expose
-        public String eventAttend;
         @SerializedName("lat")
         @Expose
         public String lat;
         @SerializedName("lon")
         @Expose
         public String lon;
-        @SerializedName("status")
+        @SerializedName("res_count_like")
         @Expose
-        public String status;
+        public String resCountLike;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("status")
+        @Expose
+        public String status;
         @SerializedName("first_name")
         @Expose
         public String firstName;
@@ -165,9 +140,9 @@ public class SuccessResMyEventRes implements Serializable {
         @SerializedName("like_status")
         @Expose
         public String likeStatus;
-        @SerializedName("event_gallery")
+        @SerializedName("restaurant_gallery")
         @Expose
-        public List<EventGallery> eventGallery = null;
+        public List<RestaurantGallery> restaurantGallery = null;
 
         public String getId() {
             return id;
@@ -185,20 +160,12 @@ public class SuccessResMyEventRes implements Serializable {
             this.userId = userId;
         }
 
-        public String getEventCat() {
-            return eventCat;
+        public String getRestaurantName() {
+            return restaurantName;
         }
 
-        public void setEventCat(String eventCat) {
-            this.eventCat = eventCat;
-        }
-
-        public String getEventName() {
-            return eventName;
-        }
-
-        public void setEventName(String eventName) {
-            this.eventName = eventName;
+        public void setRestaurantName(String restaurantName) {
+            this.restaurantName = restaurantName;
         }
 
         public String getAddress() {
@@ -217,76 +184,12 @@ public class SuccessResMyEventRes implements Serializable {
             this.image = image;
         }
 
-        public String getDateTimeEvent() {
-            return dateTimeEvent;
-        }
-
-        public void setDateTimeEvent(String dateTimeEvent) {
-            this.dateTimeEvent = dateTimeEvent;
-        }
-
         public String getDescription() {
             return description;
         }
 
         public void setDescription(String description) {
             this.description = description;
-        }
-
-        public String getLike() {
-            return like;
-        }
-
-        public void setLike(String like) {
-            this.like = like;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getLikeCount() {
-            return likeCount;
-        }
-
-        public void setLikeCount(String likeCount) {
-            this.likeCount = likeCount;
-        }
-
-        public String getBookingAmount() {
-            return bookingAmount;
-        }
-
-        public void setBookingAmount(String bookingAmount) {
-            this.bookingAmount = bookingAmount;
-        }
-
-        public String getEventStartTime() {
-            return eventStartTime;
-        }
-
-        public void setEventStartTime(String eventStartTime) {
-            this.eventStartTime = eventStartTime;
-        }
-
-        public String getEventEndTime() {
-            return eventEndTime;
-        }
-
-        public void setEventEndTime(String eventEndTime) {
-            this.eventEndTime = eventEndTime;
-        }
-
-        public String getEventAttend() {
-            return eventAttend;
-        }
-
-        public void setEventAttend(String eventAttend) {
-            this.eventAttend = eventAttend;
         }
 
         public String getLat() {
@@ -305,12 +208,12 @@ public class SuccessResMyEventRes implements Serializable {
             this.lon = lon;
         }
 
-        public String getStatus() {
-            return status;
+        public String getResCountLike() {
+            return resCountLike;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setResCountLike(String resCountLike) {
+            this.resCountLike = resCountLike;
         }
 
         public String getDateTime() {
@@ -319,6 +222,14 @@ public class SuccessResMyEventRes implements Serializable {
 
         public void setDateTime(String dateTime) {
             this.dateTime = dateTime;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public String getFirstName() {
@@ -353,14 +264,14 @@ public class SuccessResMyEventRes implements Serializable {
             this.likeStatus = likeStatus;
         }
 
-        public List<EventGallery> getEventGallery() {
-            return eventGallery;
+        public List<RestaurantGallery> getRestaurantGallery() {
+            return restaurantGallery;
         }
 
-        public void setEventGallery(List<EventGallery> eventGallery) {
-            this.eventGallery = eventGallery;
+        public void setRestaurantGallery(List<RestaurantGallery> restaurantGallery) {
+            this.restaurantGallery = restaurantGallery;
         }
 
     }
-    
+
 }
