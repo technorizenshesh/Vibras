@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.SearchEventAct;
 import com.my.vibras.act.EventsDetailsScreen;
+import com.my.vibras.act.RestaurantAct;
+import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ui.home.HomeViewModel;
 import com.my.vibras.adapter.BruseEventAdapter;
 import com.my.vibras.adapter.NEarmeEventstAdapter;
@@ -26,6 +29,7 @@ import com.my.vibras.databinding.FragmentEventsBinding;
 import com.my.vibras.databinding.FragmentPostsBinding;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetBanner;
+import com.my.vibras.model.SuccessResGetCategory;
 import com.my.vibras.model.SuccessResGetEvents;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResGetStories;
@@ -61,6 +65,8 @@ public class EventsFragment extends Fragment{
 
     BruseEventAdapter mAdapter;
 
+    private ArrayList<SuccessResGetCategory.Result> categoryResult = new ArrayList<>();
+
     NEarmeEventstAdapter mAdapterNEarMe;
 
     NEarmeRestaurentAdapter mAdapterNEarMeRest;
@@ -88,10 +94,14 @@ public class EventsFragment extends Fragment{
             getActivity().onBackPressed();
         });
 
+        binding.ivSearch.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), SearchEventAct.class));
+                }
+                );
+
         setAdapter();
-
         setAdapNearMe();
-
         setAdapRestoaurent();
 
         sliderAdapter = new SliderAdapter(getContext(),bannersList);
@@ -105,17 +115,67 @@ public class EventsFragment extends Fragment{
         binding.imageSlider.setAutoCycle(true);
         binding.imageSlider.startAutoCycle();
 
+        binding.tvViewAllRest.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), RestaurantAct.class));
+                }
+                );
+
+        binding.tvViewAllEvent.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ViewAllEventAct.class));
+                }
+        );
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         getBannerList();
+        getEventCategory();
         getEvents();
         getRestaurants();
-        return binding.getRoot();
+    }
+
+    private void getEventCategory() {
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+
+        Call<SuccessResGetCategory> call = apiInterface.getEventsCategory(map);
+        call.enqueue(new Callback<SuccessResGetCategory>() {
+            @Override
+            public void onResponse(Call<SuccessResGetCategory> call, Response<SuccessResGetCategory> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetCategory data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+//                        setProfileDetails();
+                        categoryResult.clear();
+                        categoryResult.addAll(data.getResult());
+                        mAdapter.notifyDataSetChanged();
+                    } else if (data.status.equals("0")) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResGetCategory> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
     }
 
     public void getBannerList()
     {
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
@@ -134,7 +194,6 @@ public class EventsFragment extends Fragment{
                         bannersList.clear();
                         bannersList.addAll(data.getResult());
                         sliderAdapter.notifyDataSetChanged();
-                        
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
@@ -191,7 +250,6 @@ public class EventsFragment extends Fragment{
             }
         });
 
-
     }
 
     public void getRestaurants()
@@ -240,13 +298,8 @@ public class EventsFragment extends Fragment{
 
     private void setAdapter()
     {
-        modelListbrouse.add(new HomModel(""));
-        modelListbrouse.add(new HomModel(""));
-        modelListbrouse.add(new HomModel(""));
-        modelListbrouse.add(new HomModel(""));
-        modelListbrouse.add(new HomModel(""));
 
-        mAdapter = new BruseEventAdapter(getActivity(),modelListbrouse);
+        mAdapter = new BruseEventAdapter(getActivity(),categoryResult);
         binding.recycleCategory.setHasFixedSize(true);
         // use a linear layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -255,7 +308,7 @@ public class EventsFragment extends Fragment{
         binding.recycleCategory.setAdapter(mAdapter);
         mAdapter.SetOnItemClickListener(new BruseEventAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position, HomModel model) {
+            public void onItemClick(View view, int position, SuccessResGetCategory.Result model) {
 
             }
         });
@@ -274,7 +327,6 @@ public class EventsFragment extends Fragment{
         mAdapterNEarMe.SetOnItemClickListener(new NEarmeEventstAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, HomModel model) {
-
 
             }
         });

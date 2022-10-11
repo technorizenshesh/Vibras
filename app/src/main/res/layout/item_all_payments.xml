@@ -35,32 +35,32 @@
                 >
 
                 <TextView
+                    android:id="@+id/tvCardHolderName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Master Card"
-                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvCadNumber"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="XXXX XXXX XXXX 5678"
-                    android:textAllCaps="true"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10sdp" />
 
                <TextView
+                   android:id="@+id/tvExpiry"
                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Expiry : 01/22"
-                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp" />
 
@@ -69,12 +69,13 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_centerVertical="true"
+            android:id="@+id/ivDelete"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arw_btm"
-            android:layout_width="@dimen/_12sdp"
-            android:layout_height="@dimen/_12sdp"
-            >
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_delete">
 
         </ImageView>
 

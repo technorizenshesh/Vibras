@@ -1,11 +1,13 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.ChatDetailsScreen;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetConversation;
@@ -50,6 +53,7 @@ public class SingleChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
             TextView tvUserName = holder.itemView.findViewById(R.id.tvUserName);
+            RelativeLayout rlParent = holder.itemView.findViewById(R.id.rlParent);
             TextView tvLastMessage = holder.itemView.findViewById(R.id.tvLastMessage);
             ImageView ivDelete = holder.itemView.findViewById(R.id.ivDelete);
             CircleImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
@@ -62,11 +66,12 @@ public class SingleChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .load(model.getImage())
                     .into(ivProfile);
 
-            ivDelete.setOnClickListener(v ->
+            rlParent.setOnClickListener(v ->
                     {
-                        mItemClickListener.onItemClick(v,position,model);
+                       mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
                     }
                     );
+
         }
     }
 
@@ -92,10 +97,7 @@ public class SingleChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public ViewHolder(final View itemView) {
             super(itemView);
-
-        //    this.txtName=itemView.findViewById(R.id.txtName);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.findViewById(R.id.ivDelete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 

@@ -59,6 +59,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
         TextView tvDescription = holder.itemView.findViewById(R.id.timeAgo);
 
         TextView tvLikeCount = holder.itemView.findViewById(R.id.tvLikeCount);
+        TextView tvChat = holder.itemView.findViewById(R.id.tvChat);
 
         ImageView ivLike = holder.itemView.findViewById(R.id.ivLikeUnlike);
         ImageView ivComment = holder.itemView.findViewById(R.id.ivComment);
@@ -90,6 +91,14 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
             ivLike.setImageResource(R.drawable.ic_rest_like);
         }
 
+        if(postList.get(position).getSavePost().equalsIgnoreCase("No"))
+        {
+            ivSaved.setImageResource(R.drawable.save_icon);
+        }else
+        {
+            ivSaved.setImageResource(R.drawable.ic_saved_image);
+        }
+
         llLike.setOnClickListener(v ->
                 {
                     postClickListener.selectLike(position,"");
@@ -109,14 +118,11 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
                     postClickListener.savePost(v,"",false,position);
                 }
                 );
-
     }
-
     @Override
     public int getItemCount() {
         return postList.size();
     }
-
     public class StoriesViewHolder extends RecyclerView.ViewHolder {
         public StoriesViewHolder(MyeventItemBinding itemView) {
             super(itemView.getRoot());

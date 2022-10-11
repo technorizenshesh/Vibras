@@ -3,25 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
         <RelativeLayout
-            android:background="@color/lightgray"
             android:id="@+id/RRtoolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            >
+            android:background="@color/lightgray">
 
             <RelativeLayout
                 android:id="@+id/RRback"
-                android:layout_alignParentLeft="true"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="match_parent"
-                >
+                android:layout_alignParentLeft="true">
 
                 <ImageView
                     android:layout_width="@dimen/_25sdp"
@@ -47,23 +44,19 @@
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:layout_below="@+id/RRtoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_below="@+id/RRtoolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
+                android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_gravity="center"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
-                    >
+                    android:layout_gravity="center">
 
                     <ImageView
                         android:layout_width="@dimen/_100sdp"
@@ -85,25 +78,21 @@
                 </RelativeLayout>
 
 
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Olivia Austin"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-                    />
-
-
                 <RelativeLayout
-                    android:padding="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -117,6 +106,16 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRpasword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
@@ -125,16 +124,6 @@
                         android:src="@drawable/back_right">
 
                     </ImageView>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/RRpasword"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,6 +136,16 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
@@ -156,16 +155,65 @@
 
                     </ImageView>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/profile_icon"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Saved Events"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
                 </RelativeLayout>
 
-
                 <RelativeLayout
-                    android:id="@+id/RRpayment"
-                    android:padding="@dimen/_5sdp"
+                    android:id="@+id/rlRestaurant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/profile_icon"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Saved Restaurantd"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRpayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -178,24 +226,26 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRtrasaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
+                        android:drawableLeft="@drawable/profile_icon"
+                        android:drawablePadding="@dimen/_10sdp"
                         android:src="@drawable/back_right">
 
                     </ImageView>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/RRtrasaction"
-                    android:padding="@dimen/_5sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,17 +259,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
-                    <ImageView
-                        android:drawablePadding="@dimen/_10sdp"
-                        android:drawableLeft="@drawable/profile_icon"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
-
-                    </ImageView>
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -229,6 +268,15 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -241,24 +289,15 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
-
-                    </ImageView>
-
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/RRSignOut"
-                    android:padding="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -271,16 +310,23 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
-
-
                 </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Olivia Austin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
-
     </RelativeLayout>
-
 
 </layout>

@@ -62,6 +62,7 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
     public RestaurantFragment() {
         // Required empty public constructor
     }
+
     // TODO: Rename and change types and number of parameters
     public static RestaurantFragment newInstance(String param1, String param2) {
         RestaurantFragment fragment = new RestaurantFragment();
@@ -72,7 +73,6 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -97,14 +97,12 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
 
     public void getMyRestaurantsApi()
     {
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        Call<SuccessResMyRestaurantRes> call = apiInterface.getMyRestaurant(map);
+        Call<SuccessResMyRestaurantRes> call = apiInterface.getSavedRestaurant(map);
         call.enqueue(new Callback<SuccessResMyRestaurantRes>() {
             @Override
             public void onResponse(Call<SuccessResMyRestaurantRes> call, Response<SuccessResMyRestaurantRes> response) {
@@ -118,7 +116,6 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
                         eventsList.clear();
                         eventsList.addAll(data.getResult());
                         myEventsAdapter.notifyDataSetChanged();
-
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
@@ -132,26 +129,21 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-
     }
 
     @Override
     public void selectLike(int position, String status) {
-
         addLike(eventsList.get(position).getId());
-
     }
 
     @Override
     public void bottomSheet(View param1, String postID, boolean isUser, int position) {
-
         showDialog(eventsList.get(position).getId(),position);
-
     }
 
     @Override
     public void savePost(View param1, String postID, boolean isUser, int position) {
-
+        saveRestaurant(eventsList.get(position).getId());
     }
 
     private void addLike(String postId) {
@@ -223,15 +215,40 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
                             .show();
                 }
         );
-
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+    }
 
+    private void saveRestaurant(String postId) {
+        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("save_post_id",postId);
+        map.put("type","restaurent");
+        Call<SuccessResAddLike> call = apiInterface.saveEventRestaurant(map);
+        call.enqueue(new Callback<SuccessResAddLike>() {
+            @Override
+            public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResAddLike data = response.body();
+                    Log.e("data",data.status+"");
+                    getMyRestaurantsApi();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
     }
 
     public void deletePost(String postId)
     {
-
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
@@ -248,9 +265,7 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
                     if (data.status==1) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-
                         getMyRestaurantsApi();
-
                     } else if (data.status==0) {
                         showToast(getActivity(), data.message);
                     }
@@ -264,10 +279,5 @@ public class RestaurantFragment extends Fragment implements PostClickListener {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-
     }
-
-
-
-
 }

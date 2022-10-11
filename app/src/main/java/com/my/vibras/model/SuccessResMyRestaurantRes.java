@@ -44,6 +44,7 @@ public class SuccessResMyRestaurantRes implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
     public class RestaurantGallery {
 
         @SerializedName("id")
@@ -137,6 +138,11 @@ public class SuccessResMyRestaurantRes implements Serializable {
         @SerializedName("time_ago")
         @Expose
         public String timeAgo;
+
+        @SerializedName("save_post")
+        @Expose
+        private String savePost;
+
         @SerializedName("like_status")
         @Expose
         public String likeStatus;
@@ -270,6 +276,14 @@ public class SuccessResMyRestaurantRes implements Serializable {
 
         public void setRestaurantGallery(List<RestaurantGallery> restaurantGallery) {
             this.restaurantGallery = restaurantGallery;
+        }
+
+        public String getSavePost() {
+            return savePost;
+        }
+
+        public void setSavePost(String savePost) {
+            this.savePost = savePost;
         }
 
     }

@@ -72,7 +72,6 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
-
         binding.RRSearch.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SearchAct.class));
         });
@@ -255,9 +254,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
             }
         });
 
-
     }
-
 
     private void addOtherProfileLike(String otherUserId,String type) {
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
@@ -280,10 +277,10 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                     Log.e("data",data.status+"");
                     if (data.status==1) {
 
-                        showToast(getActivity(), data.message);
+                     showToast(getActivity(), data.result);
 
                     } else if (data.status==0) {
-                        showToast(getActivity(), data.message);
+                        showToast(getActivity(), data.result);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -125,14 +125,17 @@ public class PostRestaurentFragment extends Fragment {
 
         binding.rlAdd.setOnClickListener(v ->
                 {
-                    restrantName = binding.etRestaurantName.getText().toString().trim();
-                    strDetails = binding.etDetails.getText().toString().trim();
-                    strLocation = binding.etLocation.getText().toString().trim();
-                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-                        isValid();
-                    } else {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-                    }
+
+                    Toast.makeText(getActivity(), "Please purchase plan.", Toast.LENGTH_SHORT).show();
+
+//                    restrantName = binding.etRestaurantName.getText().toString().trim();
+//                    strDetails = binding.etDetails.getText().toString().trim();
+//                    strLocation = binding.etLocation.getText().toString().trim();
+//                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+//                        isValid();
+//                    } else {
+//                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+//                    }
                 }
         );
 
@@ -146,7 +149,6 @@ public class PostRestaurentFragment extends Fragment {
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
         binding.rvImages.setAdapter(multipleImagesAdapter);
-
 
         return binding.getRoot();
     }

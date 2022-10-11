@@ -84,6 +84,7 @@ public class ChatDetailsScreen extends AppCompatActivity {
                 }
             }
         });
+
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -183,8 +184,4 @@ public class ChatDetailsScreen extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 }

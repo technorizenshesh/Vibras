@@ -19,7 +19,9 @@ public class SuccessResAddLike implements Serializable {
     @SerializedName("message")
     @Expose
     public String message;
-
+    @SerializedName("total_likes")
+    @Expose
+    public String totalLikes;
     public String getResult() {
         return result;
     }
@@ -43,5 +45,14 @@ public class SuccessResAddLike implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public String getTotalLikes() {
+        return totalLikes;
+    }
+
+    public void setTotalLikes(String totalLikes) {
+        this.totalLikes = totalLikes;
+    }
+
 
 }

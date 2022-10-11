@@ -179,7 +179,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Category of EventSelect"
+                android:text="@string/category_of_event"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />

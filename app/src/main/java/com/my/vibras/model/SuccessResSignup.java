@@ -100,6 +100,15 @@ public class SuccessResSignup implements Serializable {
         @SerializedName("lon")
         @Expose
         public String lon;
+        @SerializedName("notification")
+        @Expose
+        public String notification;
+        @SerializedName("push_notification")
+        @Expose
+        public String pushNotification;
+        @SerializedName("email_notification")
+        @Expose
+        public String emailNotification;
         @SerializedName("type")
         @Expose
         public String type;
@@ -112,6 +121,12 @@ public class SuccessResSignup implements Serializable {
         @SerializedName("cover_image")
         @Expose
         public String coverImage;
+        @SerializedName("recevied_likes")
+        @Expose
+        public Integer receviedLikes;
+        @SerializedName("given_likes")
+        @Expose
+        public Integer givenLikes;
 
         public String getId() {
             return id;
@@ -257,6 +272,30 @@ public class SuccessResSignup implements Serializable {
             this.lon = lon;
         }
 
+        public String getNotification() {
+            return notification;
+        }
+
+        public void setNotification(String notification) {
+            this.notification = notification;
+        }
+
+        public String getPushNotification() {
+            return pushNotification;
+        }
+
+        public void setPushNotification(String pushNotification) {
+            this.pushNotification = pushNotification;
+        }
+
+        public String getEmailNotification() {
+            return emailNotification;
+        }
+
+        public void setEmailNotification(String emailNotification) {
+            this.emailNotification = emailNotification;
+        }
+
         public String getType() {
             return type;
         }
@@ -288,5 +327,22 @@ public class SuccessResSignup implements Serializable {
         public void setCoverImage(String coverImage) {
             this.coverImage = coverImage;
         }
+
+        public Integer getReceviedLikes() {
+            return receviedLikes;
+        }
+
+        public void setReceviedLikes(Integer receviedLikes) {
+            this.receviedLikes = receviedLikes;
+        }
+
+        public Integer getGivenLikes() {
+            return givenLikes;
+        }
+
+        public void setGivenLikes(Integer givenLikes) {
+            this.givenLikes = givenLikes;
+        }
+
     }
 }

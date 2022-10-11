@@ -29,12 +29,12 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="ritesh12"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_toRightOf="@+id/iv_history"
-                android:textSize="@dimen/_12sdp" />
+                android:text="ritesh12"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_comment"

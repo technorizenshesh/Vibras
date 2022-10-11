@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_margin="@dimen/_8sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/ivEvent"
+            android:layout_marginRight="-20dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginLeft="-20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_near_me"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            >
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:paddingLeft="5sp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shelija Concert"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sdp"
+          />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableLeft="@drawable/icon_pin"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vijay Nagar"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:textSize="@dimen/_8sdp"
+          />
+
+        <RelativeLayout
+            android:padding="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIEW ON MAP"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="21-2-2020"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -46,10 +46,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.StoriesV
 
     CommentItemBinding binding;
 
-
-
-
-
     private List<SuccessResGetComment.Result> commentList;
 
     public CommentAdapter(Context context, List<SuccessResGetComment.Result> commentList)
@@ -87,11 +83,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.StoriesV
         tvName.setText(commentList.get(position).getUserDetial().getFirstName());
 //        tvComment.setText(decodeEmoji(commentList.get(position).getComment()));
         tvTimeAgo.setText(commentList.get(position).getTimeAgo());
-
-
-
-
-
 
     }
 

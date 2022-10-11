@@ -73,12 +73,9 @@
 
     <string name="delete_post">Delete Post</string>
     <string name="are_you_sure_want_to_delete_post">Are you sure you want to delete Post?</string>
-
-
     <string name="select_what_to_edit">Select what to Edit</string>
     <string name="create">Create</string>
     <string name="enter_event_name">Enter Event Name</string>
-
     <string name="select_date">Select Date</string>
     <string name="select_time">Select Time</string>
     <string name="enter_location">Enter location</string>
@@ -90,4 +87,19 @@
     <string name="enter_restaurant_location">Enter Restaurant Location</string>
     <string name="enter_details">Enter Details</string>
     <string name="add_restaurant">Add Restaurant</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="events">Events</string>
+    <string name="add_card">Add Card</string>
+    <string name="search">Search</string>
+    <string name="search_event">Search Event</string>
+    <string name="online_courses">Online Courses</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="logout">Logout</string>
+    <string name="like_count">Like Count</string>
+    <string name="followers_count">Followers Count</string>
+    <string name="private_account">Private Account</string>
+    <string name="category_of_event">Category of Event</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="push_notifications">Push Notifications</string>
+
 </resources>

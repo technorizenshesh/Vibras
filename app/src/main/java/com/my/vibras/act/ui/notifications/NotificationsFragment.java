@@ -39,23 +39,18 @@ import static com.my.vibras.retrofit.Constant.showToast;
 public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
-
     private ArrayList<SuccessResGetNotification.Result> notificationList = new ArrayList<>();
-
     private VibrasInterface apiInterface;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container, false);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
             getNotification();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
-
         return binding.getRoot();
     }
 
@@ -81,11 +76,8 @@ public class NotificationsFragment extends Fragment {
                         binding.rvNotification.setHasFixedSize(true);
                         binding.rvNotification.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvNotification.setAdapter(new NotificationAdapter(getActivity(),notificationList));
-
                     } else if (data.status.equals("0")) {
-
                         showToast(getActivity(),""+data.message);
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -98,5 +90,4 @@ public class NotificationsFragment extends Fragment {
             }
         });
     }
-
 }

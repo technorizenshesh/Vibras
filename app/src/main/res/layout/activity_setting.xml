@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -97,6 +96,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Account Type"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -107,6 +107,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Personal Account"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold">
 
@@ -118,6 +119,7 @@
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="Business Account"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp">
 
@@ -148,7 +150,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Like Count"
+                        android:text="@string/like_count"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
@@ -177,7 +179,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Followers Count"
+                        android:text="@string/followers_count"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
@@ -205,7 +207,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Private Account"
+                        android:text="@string/private_account"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
@@ -235,7 +237,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Transactions"
+                        android:text="@string/transactions"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
@@ -306,7 +308,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="SubsCription"
+                        android:text="@string/subscription"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
@@ -370,15 +372,16 @@
                     android:layout_marginLeft="@dimen/_10sdp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvNotification"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
-                        android:gravity="center"
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_10sdp"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -389,6 +392,7 @@
                         android:padding="15dp"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
+                        android:visibility="gone"
                         android:theme="@style/control" />
 
                 </RelativeLayout>
@@ -492,6 +496,7 @@
                     android:textAllCaps="true"
                     android:textColor="#8FB61C"
                     android:textSize="@dimen/_12sdp"
+                    android:visibility="gone"
                     android:textStyle="bold" />
 
                 <TextView
@@ -503,13 +508,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Logout"
+                    android:text="@string/logout"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvDeleteAccount"
                     android:padding="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_width="wrap_content"
@@ -518,7 +524,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Delete Account"
+                    android:text="@string/delete_account"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"

@@ -1,19 +1,26 @@
 package com.my.vibras.retrofit;
+import com.my.vibras.model.SuccessResAddCard;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResAddRestaurant;
+import com.my.vibras.model.SuccessResAddRestaurantComment;
+import com.my.vibras.model.SuccessResCompanyNotification;
+import com.my.vibras.model.SuccessResDeleteCard;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResGetBanner;
+import com.my.vibras.model.SuccessResGetCard;
 import com.my.vibras.model.SuccessResGetCategory;
 import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetComment;
 import com.my.vibras.model.SuccessResGetConversation;
+import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.model.SuccessResGetEvents;
 import com.my.vibras.model.SuccessResGetInterest;
 import com.my.vibras.model.SuccessResGetNotification;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetProfile;
+import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResGetStories;
 import com.my.vibras.model.SuccessResGetSubscription;
@@ -22,6 +29,7 @@ import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.model.SuccessResSignup;
+import com.my.vibras.model.SuccessResUpdateRate;
 import com.my.vibras.model.SuccessResUploadCoverPhoto;
 import com.my.vibras.model.SuccessResUploadPost;
 import com.my.vibras.model.SuccessResUploadSelfie;
@@ -69,6 +77,10 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_ProfilePic")
     Call<SuccessResSignup> getProfile(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_profile")
+    Call<SuccessResUpdateRate> getNotificationStatus(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_Selfy")
@@ -224,6 +236,10 @@ public interface VibrasInterface {
     Call<SuccessResGetRestaurants> getRestaurnat(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
+    @POST("get_neareast_restaurent")
+    Call<SuccessResMyRestaurantRes> getNearbyRestaurnat(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
     @POST("get_subscription_plan")
     Call<SuccessResGetSubscription> getSubscription(@FieldMap Map<String, String> paramHashMap);
 
@@ -238,7 +254,6 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("getUserRestaurent")
     Call<SuccessResMyRestaurantRes> getMyRestaurant(@FieldMap Map<String, String> paramHashMap);
-
 
     @FormUrlEncoded
     @POST("addEventlike")
@@ -256,10 +271,60 @@ public interface VibrasInterface {
     @POST("delete_restaurant")
     Call<SuccessResAddLike> deleteRestaurant(@FieldMap Map<String, String> paramHashMap);
 
-
     @FormUrlEncoded
     @POST("addEventSave")
     Call<SuccessResAddLike> saveEventRestaurant(@FieldMap Map<String, String> paramHashMap);
 
+    @FormUrlEncoded
+    @POST("addRestaurentcomment")
+    Call<ResponseBody> addRestaurantComment(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_restaurent_comment")
+    Call<SuccessResGetRestaurantComment> getRestaurantComments(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("ge_saved_restaurent")
+    Call<SuccessResMyRestaurantRes> getSavedRestaurant(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("ge_saved_event")
+    Call<SuccessResMyEventRes> getSavedEvents(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("add_card")
+    Call<SuccessResAddCard> addCard(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_card")
+    Call<SuccessResGetCard> getCards(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("delete_user_card")
+    Call<SuccessResDeleteCard> deleteCard(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("search_event")
+    Call<SuccessResMyEventRes> searchEvent(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("addeventcomment")
+    Call<ResponseBody> addEventComment(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_event_comment")
+    Call<SuccessResGetEventComment> getEventComments(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("delete_account")
+    Call<ResponseBody> deleteAccount(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("search_restaurant")
+    Call<SuccessResMyRestaurantRes> searchRest(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("update_notification_status")
+    Call<SuccessResUpdateRate> updateWorkerNoti(@FieldMap Map<String, String> paramHashMap);
 
 }

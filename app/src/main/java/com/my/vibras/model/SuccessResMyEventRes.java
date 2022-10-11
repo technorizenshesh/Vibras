@@ -169,6 +169,11 @@ public class SuccessResMyEventRes implements Serializable {
         @Expose
         public List<EventGallery> eventGallery = null;
 
+        @SerializedName("save_post")
+        @Expose
+        private String savePost;
+
+
         public String getId() {
             return id;
         }
@@ -272,6 +277,15 @@ public class SuccessResMyEventRes implements Serializable {
         public void setEventStartTime(String eventStartTime) {
             this.eventStartTime = eventStartTime;
         }
+
+        public String getSavePost() {
+            return savePost;
+        }
+
+        public void setSavePost(String savePost) {
+            this.savePost = savePost;
+        }
+
 
         public String getEventEndTime() {
             return eventEndTime;

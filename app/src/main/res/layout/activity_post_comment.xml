@@ -40,8 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="POST COMMENT"
-                android:textAllCaps="true"
+                android:text="Post comment"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -68,7 +67,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="What do you think ?"
-                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -80,12 +78,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Please give your rating by clicking on the stars below"
-                    android:textAllCaps="true"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
@@ -141,7 +138,16 @@
                         >
                     </ImageView>
 
-                </LinearLayout>
+                </LinearLayout>-->
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:theme="@style/ratingBarStyle"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    />
 
             </LinearLayout>
 
@@ -155,20 +161,22 @@
             >
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="@dimen/_10sdp"
                 android:background="@color/lightgray"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
 
-                <TextView
+                <EditText
+                    android:id="@+id/etComment"
                     android:drawablePadding="@dimen/_10sdp"
                     android:drawableLeft="@drawable/pencil"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tell us about your experience"
-                    android:textAllCaps="true"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="top"
+                    android:hint="Tell us about your experience"
+                    android:background="@android:color/transparent"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10sdp"
                     />
@@ -178,7 +186,7 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
-            android:id="@+id/RLogin"
+            android:id="@+id/btnPost"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_margin="@dimen/_10sdp"

@@ -92,11 +92,13 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                     SuccessResMyEventRes data = response.body();
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
+
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         eventsList.clear();
                         eventsList.addAll(data.getResult());
                         myEventsAdapter.notifyDataSetChanged();
+
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
@@ -222,7 +224,7 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                             .setMessage(getString(R.string.are_you_sure_want_to_delete_post))
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    deletePost(postId);
+                                   deletePost(postId);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null)

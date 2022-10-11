@@ -75,13 +75,16 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         ivFire.setOnClickListener(v ->
                 {
-                    homeItemClickListener.addCommentToUser(position);
+                  homeItemClickListener.addCommentToUser(position);
                 }
                 );
 
         ivChat.setOnClickListener(v ->
                 {
-                    mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
+                    if(modelList.get(position).getUserMatch().equalsIgnoreCase("Matched"))
+                    {
+                        mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
+                    }
                 }
                 );
 
@@ -97,17 +100,7 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         ivOtherLike.setOnClickListener(v ->
                 {
-
-//                    if(modelList.get(position).getFollow().equalsIgnoreCase("Following"))
-//                    {
-//                        modelList.get(position).setFollow("Notfollow");
-//                    } else
-//                    {
-//                        modelList.get(position).setFollow("Following");
-//                    }
-
                     homeItemClickListener.addUserProfileLike(position);
-
                 }
                 );
 

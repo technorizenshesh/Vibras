@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="@dimen/_10sdp"
+    android:layout_margin="@dimen/_5sdp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/_10sdp"
@@ -38,7 +38,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Haylie Aminoff"
-                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -48,7 +47,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="32 minutes ago"
-                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_8sdp" />
 
@@ -78,13 +76,13 @@
                 android:text="4.5"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
                 />
 
             <ImageView
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
                 android:src="@drawable/star"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
@@ -141,7 +139,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textAllCaps="true"
             android:textColor="@color/gray"
             android:textSize="@dimen/_10sdp"
             />

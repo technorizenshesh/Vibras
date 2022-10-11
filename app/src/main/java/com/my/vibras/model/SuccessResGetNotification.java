@@ -45,7 +45,7 @@ public class SuccessResGetNotification implements Serializable {
         this.status = status;
     }
 
-    public class Result {
+    public class Result implements Serializable {
 
         @SerializedName("id")
         @Expose

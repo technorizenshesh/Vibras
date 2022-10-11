@@ -1,6 +1,7 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.AddCommentAct;
+import com.my.vibras.act.AddRestaurantCommentAct;
 import com.my.vibras.databinding.MyeventItemBinding;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResMyEventRes;
@@ -54,9 +57,11 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
 
         TextView tvUserName = holder.itemView.findViewById(R.id.tvRestaurantName);
 
+        TextView tvChat = holder.itemView.findViewById(R.id.tvChat);
+
         TextView tvDescription = holder.itemView.findViewById(R.id.timeAgo);
 
-        TextView tvLikeComment = holder.itemView.findViewById(R.id.timeAgo);
+        ImageView ivSaved = holder.itemView.findViewById(R.id.ivSaved);
 
         TextView tvLikeCount = holder.itemView.findViewById(R.id.tvLikeCount);
 
@@ -97,11 +102,31 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
             ivLikeUnlike.setImageResource(R.drawable.ic_rest_like);
         }
 
+        if(postList.get(position).getSavePost().equalsIgnoreCase("No"))
+        {
+            ivSaved.setImageResource(R.drawable.save_icon);
+        }else
+        {
+            ivSaved.setImageResource(R.drawable.ic_saved_image);
+        }
+
         ivOption.setOnClickListener(v ->
                 {
                     postClickListener.bottomSheet(v,"",false,position);
                 }
                 );
+
+        ivSaved.setOnClickListener(v ->
+                {
+                    postClickListener.savePost(v,"",false,position);
+                }
+                );
+
+        tvChat.setOnClickListener(v ->
+                {
+                    context.startActivity(new Intent(context, AddRestaurantCommentAct.class).putExtra("postId",postList.get(position).getId()));
+                }
+        );
 
         tvLikeCount.setText(postList.get(position).getResCountLike());
 

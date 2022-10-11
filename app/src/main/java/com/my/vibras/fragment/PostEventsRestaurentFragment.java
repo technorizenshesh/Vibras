@@ -29,16 +29,13 @@ public class PostEventsRestaurentFragment extends Fragment {
         binding.txtEvents.setOnClickListener(v -> {
             binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
             binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
-
             fragment = new PostEventsFragment();
             loadFragment(fragment);
         });
 
         binding.txtRestaurant.setOnClickListener(v -> {
-
             binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
             binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-
             fragment = new PostRestaurentFragment();
             loadFragment(fragment);
         });
@@ -48,7 +45,6 @@ public class PostEventsRestaurentFragment extends Fragment {
         return binding.getRoot();
     }
 
-
     public void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -56,7 +52,5 @@ public class PostEventsRestaurentFragment extends Fragment {
         transaction.addToBackStack("home");
         transaction.commit();
     }
-
-
 
 }

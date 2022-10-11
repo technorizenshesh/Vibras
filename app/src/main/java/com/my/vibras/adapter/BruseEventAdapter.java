@@ -5,29 +5,33 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.ui.home.HomeViewModel;
 import com.my.vibras.model.HomModel;
+import com.my.vibras.model.SuccessResGetCategory;
 
 import java.util.ArrayList;
 
 public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<HomModel> modelList;
+    private ArrayList<SuccessResGetCategory.Result> modelList;
     private OnItemClickListener mItemClickListener;
 
 
-    public BruseEventAdapter(Context context, ArrayList<HomModel> modelList) {
+    public BruseEventAdapter(Context context, ArrayList<SuccessResGetCategory.Result> modelList) {
         this.mContext = context;
         this.modelList = modelList;
     }
 
-    public void updateList(ArrayList<HomModel> modelList) {
+    public void updateList(ArrayList<SuccessResGetCategory.Result> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
@@ -44,8 +48,18 @@ public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final HomModel model = getItem(position);
+            final SuccessResGetCategory.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
+
+            ImageView ivCategory = holder.itemView.findViewById(R.id.ivCategory);
+
+            TextView tvCategory = holder.itemView.findViewById(R.id.tvEventName);
+
+            Glide.with(mContext)
+                    .load(model.getIcon())
+                    .into(ivCategory);
+
+            tvCategory.setText(model.getName());
 
         }
     }
@@ -60,14 +74,14 @@ public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mItemClickListener = mItemClickListener;
     }
 
-    private HomModel getItem(int position) {
+    private SuccessResGetCategory.Result getItem(int position) {
         return modelList.get(position);
     }
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, int position, HomModel model);
+        void onItemClick(View view, int position, SuccessResGetCategory.Result model);
 
     }
 

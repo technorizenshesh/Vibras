@@ -56,8 +56,6 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final SuccessResGetStories.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-
-
             genericViewHolder.txtName.setText(model.getFirstName());
 
             Glide.with(mContext)

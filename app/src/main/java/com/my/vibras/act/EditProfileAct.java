@@ -439,8 +439,6 @@ public class EditProfileAct extends AppCompatActivity {
         }
     }
 
-
-
     public void updateProfile()
     {
         String strUserId = SharedPreferenceUtility.getInstance(EditProfileAct.this).getString(USER_ID);

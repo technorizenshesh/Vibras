@@ -11,6 +11,8 @@ import com.my.vibras.SelectViberLoginAct;
 import com.my.vibras.act.ChangePassAct;
 import com.my.vibras.act.NotificationScreenAct;
 import com.my.vibras.act.PaymentsAct;
+import com.my.vibras.act.SavedEventsAct;
+import com.my.vibras.act.SavedRestaurantAct;
 import com.my.vibras.act.SettingAct;
 import com.my.vibras.act.TransactionAct;
 import com.my.vibras.databinding.ActivityComapmnySettingBinding;
@@ -23,6 +25,10 @@ public class ComapmnySettingAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_comapmny_setting);
+
+        binding.RRback.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
         binding.RRpayment.setOnClickListener(v -> {
             startActivity(new Intent(ComapmnySettingAct.this, PaymentsAct.class));
@@ -40,9 +46,18 @@ public class ComapmnySettingAct extends AppCompatActivity {
             startActivity(new Intent(ComapmnySettingAct.this, ChangePassAct.class));
         });
 
+        binding.rlRestaurant.setOnClickListener(v -> {
+            startActivity(new Intent(ComapmnySettingAct.this, SavedRestaurantAct.class));
+        });
+
+        binding.rlEvents.setOnClickListener(v -> {
+            startActivity(new Intent(ComapmnySettingAct.this, SavedEventsAct.class));
+        });
+
         binding.RRSignOut.setOnClickListener(v -> {
             startActivity(new Intent(ComapmnySettingAct.this, SelectViberLoginAct.class));
             finish();
         });
     }
+
 }

@@ -77,6 +77,7 @@ public class ComapnyProfileFragment extends Fragment{
     private ComapnyProfileFragment.Qr_DetailsAdapter adapter;
 
     private VibrasInterface apiInterface;
+
     String str_image_path="";
 
     private static final int REQUEST_CAMERA = 1;

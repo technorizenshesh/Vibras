@@ -63,47 +63,36 @@ public class SuccessResGetRestaurants implements Serializable {
         @SerializedName("image_file")
         @Expose
         public String imageFile;
-
         public String getId() {
             return id;
         }
-
         public void setId(String id) {
             this.id = id;
         }
-
         public String getRestaurantId() {
             return restaurantId;
         }
-
         public void setRestaurantId(String restaurantId) {
             this.restaurantId = restaurantId;
         }
-
         public String getImage() {
             return image;
         }
-
         public void setImage(String image) {
             this.image = image;
         }
-
         public String getDateTime() {
             return dateTime;
         }
-
         public void setDateTime(String dateTime) {
             this.dateTime = dateTime;
         }
-
         public String getImageFile() {
             return imageFile;
         }
-
         public void setImageFile(String imageFile) {
             this.imageFile = imageFile;
         }
-
     }
 
     public class Result {
@@ -147,6 +136,15 @@ public class SuccessResGetRestaurants implements Serializable {
         @SerializedName("estimate_time")
         @Expose
         public Integer estimateTime;
+        @SerializedName("total_comments")
+        @Expose
+        public Integer totalComments;
+        @SerializedName("like_status")
+        @Expose
+        public String likeStatus;
+        @SerializedName("save_post")
+        @Expose
+        public String savePost;
         @SerializedName("restaurant_gallery")
         @Expose
         public List<RestaurantGallery> restaurantGallery = null;
@@ -253,6 +251,30 @@ public class SuccessResGetRestaurants implements Serializable {
 
         public void setEstimateTime(Integer estimateTime) {
             this.estimateTime = estimateTime;
+        }
+
+        public Integer getTotalComments() {
+            return totalComments;
+        }
+
+        public void setTotalComments(Integer totalComments) {
+            this.totalComments = totalComments;
+        }
+
+        public String getLikeStatus() {
+            return likeStatus;
+        }
+
+        public void setLikeStatus(String likeStatus) {
+            this.likeStatus = likeStatus;
+        }
+
+        public String getSavePost() {
+            return savePost;
+        }
+
+        public void setSavePost(String savePost) {
+            this.savePost = savePost;
         }
 
         public List<RestaurantGallery> getRestaurantGallery() {

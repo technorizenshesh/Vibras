@@ -45,7 +45,6 @@
 
         </RelativeLayout>
 
-
      <LinearLayout
          android:padding="10sp"
          android:orientation="vertical"
@@ -59,45 +58,17 @@
              android:layout_centerInParent="true"
              android:text="Allow Notifcations"
              android:textColor="@color/black"
+             android:layout_marginTop="@dimen/_10sdp"
              android:textSize="@dimen/_12sdp"
              android:textStyle="bold" />
 
          <Switch
+             android:id="@+id/switchNotification"
              android:checked="true"
              android:layout_gravity="right"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              >
-
-         </Switch>
-
-         <TextView
-             android:layout_marginTop="@dimen/_10sdp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_centerInParent="true"
-             android:text="Lorem ipsum dolor sit amet, consetetur sadi pscing elitr, sed diam nonumym"
-             android:textAllCaps="true"
-             android:textColor="@color/gray"
-             android:textSize="@dimen/_10sdp"
-              />
-
-
-         <TextView
-             android:layout_marginTop="@dimen/_40sdp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Email Notifcations"
-             android:textColor="@color/black"
-             android:textSize="@dimen/_12sdp"
-             android:textStyle="bold" />
-
-         <Switch
-             android:layout_gravity="right"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             >
-
          </Switch>
 
          <TextView
@@ -111,17 +82,45 @@
              android:textSize="@dimen/_10sdp"
              />
 
-
          <TextView
              android:layout_marginTop="@dimen/_40sdp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:text="@string/order_notifcations"
+             android:text="Email Notifcations"
              android:textColor="@color/black"
              android:textSize="@dimen/_12sdp"
              android:textStyle="bold" />
 
          <Switch
+             android:id="@+id/switchEmailNotification"
+             android:layout_gravity="right"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             >
+         </Switch>
+
+         <TextView
+             android:layout_marginTop="@dimen/_10sdp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:text="Lorem ipsum dolor sit amet, consetetur sadi pscing elitr, sed diam nonumym"
+             android:textAllCaps="true"
+             android:textColor="@color/gray"
+             android:textSize="@dimen/_10sdp"
+             />
+
+         <TextView
+             android:layout_marginTop="@dimen/_40sdp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="@string/push_notifications"
+             android:textColor="@color/black"
+             android:textSize="@dimen/_12sdp"
+             android:textStyle="bold" />
+
+         <Switch
+             android:id="@+id/switchPushNotification"
              android:checked="true"
              android:layout_gravity="right"
              android:layout_width="wrap_content"
@@ -147,12 +146,14 @@
              android:text="@string/general_notifcations"
              android:textColor="@color/black"
              android:textSize="@dimen/_12sdp"
+             android:visibility="gone"
              android:textStyle="bold" />
 
          <Switch
              android:layout_gravity="right"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:visibility="gone"
              >
          </Switch>
 
@@ -160,12 +161,34 @@
              android:layout_marginTop="@dimen/_10sdp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
+             android:visibility="gone"
              android:layout_centerInParent="true"
              android:text="Lorem ipsum dolor sit amet, consetetur sadi pscing elitr, sed diam nonumym"
              android:textAllCaps="true"
              android:textColor="@color/gray"
              android:textSize="@dimen/_10sdp"
              />
+
+         <RelativeLayout
+             android:id="@+id/btnSave"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:padding="@dimen/_12sdp"
+             android:layout_marginHorizontal="@dimen/_15sdp"
+             android:layout_marginTop="@dimen/_40sdp"
+             android:background="@drawable/border_btn">
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerInParent="true"
+                 android:layout_marginLeft="20sp"
+                 android:text="@string/save"
+                 android:textColor="@color/white"
+                 android:textSize="@dimen/_13sdp"
+                 android:textStyle="bold" />
+
+         </RelativeLayout>
 
 
      </LinearLayout>

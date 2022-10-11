@@ -57,6 +57,7 @@
                         >
 
                         <ImageView
+                            android:id="@+id/ivSearch"
                             android:layout_centerInParent="true"
                             android:src="@drawable/message_search"
                             android:layout_width="@dimen/_20sdp"
@@ -152,16 +153,16 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/tvViewAllEvent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="@string/view_all"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
-                    />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
@@ -189,16 +190,16 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/tvViewAllRest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="@string/view_all"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
-                    />
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 

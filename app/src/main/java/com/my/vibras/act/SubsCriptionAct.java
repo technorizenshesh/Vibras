@@ -52,13 +52,13 @@ public class SubsCriptionAct extends AppCompatActivity {
             startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
         });
 
-//        binding.llSTANDARD.setOnClickListener(v -> {
-//            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
-//        });
-//
-//        binding.llSPREMIUM.setOnClickListener(v -> {
-//            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
-//        });
+        binding.btnStandard.setOnClickListener(v -> {
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
+        });
+
+        binding.btnPremium.setOnClickListener(v -> {
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
+        });
         getSubscription();
     }
 

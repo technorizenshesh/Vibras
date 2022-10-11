@@ -118,6 +118,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                    startActivity(new Intent(getActivity(), CreatePostAct.class));
                }
                );
+
         setUpUi();
         binding.ivEditConverPhoto.setOnClickListener(v ->
                 {
@@ -276,6 +277,10 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 .load(userDetail.getImage())
                 .placeholder(R.drawable.ic_user)
                 .into(binding.ivProfile);
+
+        binding.tvLikeGiven.setText(userDetail.getGivenLikes()+"");
+        binding.tvLikeReceived.setText(userDetail.getReceviedLikes()+"");
+
     }
 
     private void setUpUi() {
@@ -532,7 +537,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     {
                         dialog.dismiss();
                         showImageSelection();
-
                     }
                 }
                 );

@@ -25,6 +25,7 @@ import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.databinding.FragmentOtherUserProfileBinding;
 import com.my.vibras.databinding.FragmentProfileBinding;
 import com.my.vibras.fragment.PostsFragment;
+import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetProfile;
@@ -237,6 +238,8 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
     @Override
     public void selectLike(int position, String status) {
 
+        addLike(postList.get(position).getId());
+
     }
 
     @Override
@@ -247,6 +250,41 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
     @Override
     public void savePost(View param1, String postID, boolean isUser, int position) {
 
+    }
+
+    private void addLike(String postId) {
+        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("post_id",postId);
+        Call<SuccessResAddLike> call = apiInterface.addLike(map);
+        call.enqueue(new Callback<SuccessResAddLike>() {
+            @Override
+            public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResAddLike data = response.body();
+                    Log.e("data",data.status+"");
+                    if (data.status==1) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        getPosts();
+
+                    } else if (data.status==0) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
     }
 
     public class Qr_DetailsAdapter extends FragmentPagerAdapter {
@@ -325,6 +363,5 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
             }
         });
     }
-
 
 }

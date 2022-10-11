@@ -15,6 +15,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".act.ViewAllEventAct"
+            android:exported="false" />
+        <activity
+            android:name=".SearchRestAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.RestaurantAct"
+            android:exported="false" />
+        <activity
+            android:name=".SearchEventAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SavedEventsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SavedRestaurantAct"
+            android:exported="false" />
+        <activity
             android:name=".RestaurantDetailAct"
             android:exported="false" />
         <activity
@@ -25,6 +43,12 @@
             android:exported="false" />
         <activity
             android:name=".act.CreatePostAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddRestaurantCommentAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.AddEventCommentAct"
             android:exported="false" />
         <activity
             android:name=".act.ChangePassAct"

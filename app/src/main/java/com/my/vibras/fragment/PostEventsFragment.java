@@ -123,7 +123,6 @@ public class PostEventsFragment extends Fragment {
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         binding.spinnerType.setAdapter(spinnerArrayAdapter);
 
-
         DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -141,14 +140,11 @@ public class PostEventsFragment extends Fragment {
         });
         binding.ivCamera.setOnClickListener(v ->
                 {
-
                     whichSelected = "event";
-
                     if(checkPermisssionForReadStorage())
                         showImageSelection();
                 }
                 );
-
 
         binding.etTime.setOnClickListener(new View.OnClickListener() {
 
@@ -173,30 +169,30 @@ public class PostEventsFragment extends Fragment {
 
         binding.ivMultiple.setOnClickListener(v ->
                 {
-
                     whichSelected = "multiple";
-
                     if(checkPermisssionForReadStorage())
                         showImageSelection();
-                            }
+                 }
         );
 
         binding.rlAdd.setOnClickListener(v ->
                 {
-                    eventName = binding.etEventName.getText().toString().trim();
-                    eventDate = binding.etEventDate.getText().toString().trim();
-                    eventTime = binding.etTime.getText().toString().trim();
-                    eventCategory = binding.spinnerCategory.getSelectedItem().toString();
-                    eventLocation = binding.etLocation.getText().toString().trim();
-                    etAmount = binding.etBookingAmount.getText().toString().trim();
-                    eventDetails = binding.etEventDetails.getText().toString().trim();
-                    eventType = binding.spinnerType.getSelectedItem().toString();
 
-                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-                        isValid();
-                    } else {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getActivity(), "Please purchase plan.", Toast.LENGTH_SHORT).show();
+
+//                    eventName = binding.etEventName.getText().toString().trim();
+//                    eventDate = binding.etEventDate.getText().toString().trim();
+//                    eventTime = binding.etTime.getText().toString().trim();
+//                    eventCategory = binding.spinnerCategory.getSelectedItem().toString();
+//                    eventLocation = binding.etLocation.getText().toString().trim();
+//                    etAmount = binding.etBookingAmount.getText().toString().trim();
+//                    eventDetails = binding.etEventDetails.getText().toString().trim();
+//                    eventType = binding.spinnerType.getSelectedItem().toString();
+//                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+//                        isValid();
+//                    } else {
+//                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+//                    }
                 }
                 );
 
@@ -209,10 +205,10 @@ public class PostEventsFragment extends Fragment {
                 multipleImagesAdapter.notifyDataSetChanged();
             }
         });
+
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
         binding.rvImages.setAdapter(multipleImagesAdapter);
-
         return binding.getRoot();
     }
 
@@ -352,7 +348,6 @@ public class PostEventsFragment extends Fragment {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null)
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
-
     }
 
     @Override
@@ -398,7 +393,6 @@ public class PostEventsFragment extends Fragment {
 
                 try {
                     if (data != null) {
-
 
                         if(whichSelected.equalsIgnoreCase("event"))
                         {

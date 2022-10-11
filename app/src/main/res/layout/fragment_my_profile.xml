@@ -137,6 +137,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvLikeReceived"
                             android:textStyle="bold"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
@@ -168,6 +169,7 @@
                         >
 
                         <TextView
+                            android:id="@+id/tvLikeGiven"
                             android:textStyle="bold"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
