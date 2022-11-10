@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_120sdp"
                 android:background="@color/mediumgray"
-                android:scaleType="fitXY">
+                android:scaleType="centerCrop">
 
             </ImageView>
 
@@ -36,17 +36,19 @@
 
                 <ImageView
                     android:id="@+id/ivEditConverPhoto"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/settings"
+                    android:padding="@dimen/_5sdp"
                     android:scaleType="fitXY">
                 </ImageView>
 
                 <ImageView
                     android:id="@+id/imgSetting"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:background="@drawable/settings_new"
                     android:scaleType="fitXY">
                 </ImageView>
@@ -201,7 +203,7 @@
                     >
 
                     <LinearLayout
-                        android:id="@+id/llEditProfile"
+                        android:id="@+id/llViewEvents"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/border_btn"
@@ -223,6 +225,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llGroup"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:gravity="center"
                         android:orientation="vertical"

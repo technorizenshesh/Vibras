@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:background="@color/white"
@@ -52,6 +51,7 @@
                 >
 
                 <ImageView
+                    android:id="@+id/ivReset"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_centerInParent="true"
@@ -80,7 +80,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Manage and set your preferences to find the best matches for you, keep enjoying!"
+                    android:text="@string/manage_and_set_your_preferences_to_find_the_best_matches_for_you_keep_enjoying"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -91,25 +91,61 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="Should not"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <EditText
-                    android:textColorHint="@color/gray"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"
-                    android:hint="Woman"
-                    android:drawableRight="@drawable/drpdwn_icon"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/border_black"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:singleLine="true">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@drawable/border_black"
+                    >
 
-                </EditText>
+                    <Spinner
+                        android:id="@+id/spinnerShouldNot"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Should"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@drawable/border_black"
+                    >
+
+                    <Spinner
+                        android:id="@+id/spinnerShould"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_marginTop="@dimen/_10sdp"
@@ -121,21 +157,24 @@
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <EditText
-                    android:textColorHint="@color/gray"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"
-                    android:hint="Woman"
-                    android:drawableRight="@drawable/drpdwn_icon"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/border_black"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:singleLine="true">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_black"
+                    >
 
-                </EditText>
+                    <Spinner
+                        android:id="@+id/spinnerWantToUse"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_marginTop="@dimen/_10sdp"
@@ -147,21 +186,55 @@
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <EditText
-                    android:textColorHint="@color/gray"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"
-                    android:hint="Woman"
-                    android:drawableRight="@drawable/drpdwn_icon"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/border_black"
+                <com.google.android.material.slider.RangeSlider
+                android:id="@+id/ageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="18"
+                android:valueTo="100"
+                android:theme="@style/MyMaterialTheme"
+               />
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:singleLine="true">
+                    android:layout_height="wrap_content"
+                    >
 
-                </EditText>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semi_bold"
+                        android:text="18"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100"
+                        android:layout_alignParentRight="true"
+                        />
+
+                </RelativeLayout>
+
+              <!--  <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+
+                    <Spinner
+                        android:id="@+id/spinnerAgeRange"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>-->
 
                 <TextView
                     android:layout_marginTop="@dimen/_10sdp"
@@ -170,24 +243,29 @@
                     android:layout_centerInParent="true"
                     android:text="Preferred Language(s)"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <EditText
-                    android:textColorHint="@color/gray"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:textSize="@dimen/_12sdp"
-                    android:hint="English, French, Bengali"
-                    android:drawableRight="@drawable/drpdwn_icon"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/border_black"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:singleLine="true">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@drawable/border_black"
+                    >
 
-                </EditText>
+                    <Spinner
+                        android:id="@+id/spinnerLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/gray"
+                        android:textSize="@dimen/_12sdp" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_marginTop="@dimen/_10sdp"
@@ -200,20 +278,20 @@
                     />
 
                 <EditText
+                    android:id="@+id/etLocation"
                     android:textColorHint="@color/gray"
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingLeft="@dimen/_10sdp"
                     android:drawablePadding="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp"
-                    android:drawableRight="@drawable/drpdwn_icon"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:drawableRight="@drawable/ic_map"
                     android:background="@drawable/border_black"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:singleLine="true">
 
                 </EditText>
-
 
                 <TextView
                     android:layout_marginLeft="5sp"
@@ -223,10 +301,11 @@
                     android:layout_centerInParent="true"
                     android:text="Distance Range"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
                     />
 
-                <TextView
+               <!-- <TextView
                     android:layout_marginLeft="5sp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="wrap_content"
@@ -246,17 +325,51 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
+                </SeekBar>-->
 
-                </SeekBar>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    >
+                    <com.google.android.material.slider.Slider
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="0"
+                        android:valueTo="100"
+                        android:theme="@style/MyMaterialTheme"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_semi_bold"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="0 mile"/>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100 miles"
+                            android:layout_alignParentRight="true"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
 
                 <RelativeLayout
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:id="@+id/RLogin"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:background="@drawable/border_btn">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -266,13 +379,8 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp"
                         />
-
                 </RelativeLayout>
-
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-
     </LinearLayout>
-
 </layout>

@@ -71,7 +71,6 @@
             android:layout_below="@+id/RRtoolbar">
         </androidx.recyclerview.widget.RecyclerView>
 
-<!--
         <RelativeLayout
             android:layout_alignParentBottom="true"
             android:id="@+id/RLogin"
@@ -81,17 +80,17 @@
             android:background="@drawable/border_btn">
 
             <TextView
+                android:id="@+id/tvPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="20sp"
-                android:text="@string/save_cards"
+                android:text="@string/pay"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
--->
 
     </RelativeLayout>
 

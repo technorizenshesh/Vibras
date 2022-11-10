@@ -43,6 +43,8 @@ import com.my.vibras.R;
 import com.my.vibras.act.CreatePostAct;
 import com.my.vibras.act.EditProfileAct;
 import com.my.vibras.act.SettingAct;
+import com.my.vibras.act.ViewAllEventAct;
+import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.databinding.FragmentMyProfileBinding;
 import com.my.vibras.databinding.FragmentProfileBinding;
@@ -106,12 +108,10 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         binding.scrool.setNestedScrollingEnabled(false);
-        binding.llEditProfile.setOnClickListener(v -> {
-        });
 
        binding.imgSetting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingAct.class));
-        });
+       });
 
        binding.ivAddPost.setOnClickListener(v ->
                {
@@ -119,7 +119,22 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                }
                );
 
+       binding.llGroup.setOnClickListener(v ->
+               {
+                   startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from","my"));
+               }
+               );
+
+
+       binding.llViewEvents.setOnClickListener(v ->
+               {
+                   startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from","my"));
+               }
+               );
+
+
         setUpUi();
+
         binding.ivEditConverPhoto.setOnClickListener(v ->
                 {
                     chooseToEdit();
@@ -127,7 +142,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         );
         return binding.getRoot();
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -339,7 +353,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         TextView tvDelete = dialog.findViewById(R.id.tvDelete);
         TextView tvShare = dialog.findViewById(R.id.tvShare);
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
-
         if(userId.equalsIgnoreCase(postList.get(position).getUserId()))
         {
             tvDelete.setVisibility(View.VISIBLE);
@@ -389,9 +402,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     if (data.status==1) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-
                         getPosts();
-
                     } else if (data.status==0) {
                         showToast(getActivity(), data.message);
                     }
@@ -405,7 +416,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-
     }
 
     private void addLike(String postId) {
@@ -425,9 +435,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     if (data.status==1) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-
                         getPosts();
-
                     } else if (data.status==0) {
                         showToast(getActivity(), data.message);
                     }
@@ -523,6 +531,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
+        TextView tvCancel = dialog.findViewById(R.id.tvCancel);
+
         RelativeLayout rlchangeCoverPhoto =dialog.findViewById(R.id.rrChangeCover);
         RelativeLayout rlEditProfile =dialog.findViewById(R.id.rrEditProfile);
 
@@ -538,6 +548,12 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                         dialog.dismiss();
                         showImageSelection();
                     }
+                }
+                );
+
+        tvCancel.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
                 }
                 );
 

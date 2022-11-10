@@ -9,6 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 
 import com.my.vibras.act.AllCommentsAct;
@@ -39,8 +46,9 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class RestaurantDetailAct extends AppCompatActivity {
-    
+public class RestaurantDetailAct extends AppCompatActivity implements OnMapReadyCallback {
+
+    GoogleMap gMap;
     ActivityRestaurantDetailBinding binding;
     private VibrasInterface apiInterface;
     private SuccessResGetRestaurants.Result requestModel;
@@ -48,6 +56,7 @@ public class RestaurantDetailAct extends AppCompatActivity {
     private RestaurantCommentAdapter commentAdapter;
     private ArrayList<String> imagesList = new ArrayList<>();
     private ArrayList<SuccessResGetRestaurantComment.Result> commentList = new ArrayList<>();
+    String strLat = "",strLng = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +102,10 @@ public class RestaurantDetailAct extends AppCompatActivity {
         binding.tvDetails.setText(requestModel.getDescription());
         imagesList.clear();
 
+        strLat = requestModel.getLat();
+        strLng = requestModel.getLat();
+
+
         for(SuccessResGetRestaurants.RestaurantGallery eventGallery:requestModel.getRestaurantGallery())
         {
            imagesList.add(eventGallery.getImageFile());
@@ -112,6 +125,9 @@ public class RestaurantDetailAct extends AppCompatActivity {
                     addLike(requestModel.getId());
                 }
                 );
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(RestaurantDetailAct.this);
 
     }
 
@@ -184,4 +200,36 @@ public class RestaurantDetailAct extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        try {
+            gMap = googleMap;
+            double  lat = Double.parseDouble(strLat);
+            double  lng = Double.parseDouble(strLng);
+            LatLng sydney = new LatLng(lat, lng);
+            gMap.addMarker(new MarkerOptions()
+                    .position(sydney)
+                    .title("Marker"));
+            //   gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(sydney)      // Sets the center of the map to location user
+                    .zoom(17)                   // Sets the zoom
+                    .bearing(90)                // Sets the orientation of the camera to east
+                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                    .build();
+
+            gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+        }catch (Exception e)
+        {
+            Log.d("TAG", "onMapReady: "+e);
+        }
+
+
+    }
+
+
 }

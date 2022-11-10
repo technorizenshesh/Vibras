@@ -71,6 +71,24 @@ public class SettingAct extends AppCompatActivity {
                 }
                 );
 
+        binding.RRHelp.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(SettingAct.this,HelpAct.class));
+                }
+        );
+
+        binding.RRprivacyPolicy.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(SettingAct.this,PrivacyPolicyAct.class));
+                }
+        );
+
+        binding.RRAbout.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(SettingAct.this,AboutUsActivity.class));
+                }
+        );
+
         binding.tvLogout.setOnClickListener(v ->
                 {
                     SharedPreferenceUtility.getInstance(getApplicationContext()).putBoolean(Constant.IS_USER_LOGGED_IN, false);
@@ -89,9 +107,7 @@ public class SettingAct extends AppCompatActivity {
                             .setMessage("Are you sure you want to delete this account?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-
                                     deleteAccount();
-
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null)

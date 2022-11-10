@@ -49,42 +49,36 @@ public class SuccessResGetStories {
         @SerializedName("user_id")
         @Expose
         public String userId;
-        @SerializedName("image")
+        @SerializedName("story_id")
         @Expose
-        public String image;
-        @SerializedName("description")
+        public String storyId;
+        @SerializedName("story_data")
         @Expose
-        public String description;
-        @SerializedName("giftImage")
+        public String storyData;
+        @SerializedName("story_type")
         @Expose
-        public String giftImage;
-        @SerializedName("video")
-        @Expose
-        public String video;
-        @SerializedName("file")
-        @Expose
-        public String file;
-        @SerializedName("type")
-        @Expose
-        public String type;
-        @SerializedName("type_status")
-        @Expose
-        public String typeStatus;
-        @SerializedName("status")
-        @Expose
-        public String status;
-        @SerializedName("like_count")
-        @Expose
-        public String likeCount;
+        public String storyType;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
-        @SerializedName("first_name")
+        @SerializedName("description")
         @Expose
-        public String firstName;
-        @SerializedName("imageuser")
+        public String description;
+        @SerializedName("status")
         @Expose
-        public String imageuser;
+        public String status;
+        @SerializedName("sid")
+        @Expose
+        public String sid;
+        @SerializedName("user_image")
+        @Expose
+        public String userImage;
+        @SerializedName("user_name")
+        @Expose
+        public String userName;
+        @SerializedName("user_story")
+        @Expose
+        public List<UserStory> userStory = null;
 
         public String getId() {
             return id;
@@ -102,76 +96,28 @@ public class SuccessResGetStories {
             this.userId = userId;
         }
 
-        public String getImage() {
-            return image;
+        public String getStoryId() {
+            return storyId;
         }
 
-        public void setImage(String image) {
-            this.image = image;
+        public void setStoryId(String storyId) {
+            this.storyId = storyId;
         }
 
-        public String getDescription() {
-            return description;
+        public String getStoryData() {
+            return storyData;
         }
 
-        public void setDescription(String description) {
-            this.description = description;
+        public void setStoryData(String storyData) {
+            this.storyData = storyData;
         }
 
-        public String getGiftImage() {
-            return giftImage;
+        public String getStoryType() {
+            return storyType;
         }
 
-        public void setGiftImage(String giftImage) {
-            this.giftImage = giftImage;
-        }
-
-        public String getVideo() {
-            return video;
-        }
-
-        public void setVideo(String video) {
-            this.video = video;
-        }
-
-        public String getFile() {
-            return file;
-        }
-
-        public void setFile(String file) {
-            this.file = file;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getTypeStatus() {
-            return typeStatus;
-        }
-
-        public void setTypeStatus(String typeStatus) {
-            this.typeStatus = typeStatus;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public void setStatus(String status) {
-            this.status = status;
-        }
-
-        public String getLikeCount() {
-            return likeCount;
-        }
-
-        public void setLikeCount(String likeCount) {
-            this.likeCount = likeCount;
+        public void setStoryType(String storyType) {
+            this.storyType = storyType;
         }
 
         public String getDateTime() {
@@ -182,23 +128,137 @@ public class SuccessResGetStories {
             this.dateTime = dateTime;
         }
 
-        public String getFirstName() {
-            return firstName;
+        public String getDescription() {
+            return description;
         }
 
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+        public void setDescription(String description) {
+            this.description = description;
         }
 
-        public String getImageuser() {
-            return imageuser;
+        public String getStatus() {
+            return status;
         }
 
-        public void setImageuser(String imageuser) {
-            this.imageuser = imageuser;
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getSid() {
+            return sid;
+        }
+
+        public void setSid(String sid) {
+            this.sid = sid;
+        }
+
+        public String getUserImage() {
+            return userImage;
+        }
+
+        public void setUserImage(String userImage) {
+            this.userImage = userImage;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public List<UserStory> getUserStory() {
+            return userStory;
+        }
+
+        public void setUserStory(List<UserStory> userStory) {
+            this.userStory = userStory;
         }
 
     }
-    
+
+    public class UserStory {
+
+        @SerializedName("id")
+        @Expose
+        public String id;
+        @SerializedName("user_id")
+        @Expose
+        public String userId;
+        @SerializedName("story_id")
+        @Expose
+        public String storyId;
+        @SerializedName("story_data")
+        @Expose
+        public String storyData;
+        @SerializedName("story_type")
+        @Expose
+        public String storyType;
+        @SerializedName("date_time")
+        @Expose
+        public String dateTime;
+        @SerializedName("time_ago")
+        @Expose
+        public String timeAgo;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getStoryId() {
+            return storyId;
+        }
+
+        public void setStoryId(String storyId) {
+            this.storyId = storyId;
+        }
+
+        public String getStoryData() {
+            return storyData;
+        }
+
+        public void setStoryData(String storyData) {
+            this.storyData = storyData;
+        }
+
+        public String getStoryType() {
+            return storyType;
+        }
+
+        public void setStoryType(String storyType) {
+            this.storyType = storyType;
+        }
+
+        public String getDateTime() {
+            return dateTime;
+        }
+
+        public void setDateTime(String dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public String getTimeAgo() {
+            return timeAgo;
+        }
+
+        public void setTimeAgo(String timeAgo) {
+            this.timeAgo = timeAgo;
+        }
+
+    }
+
 }
 

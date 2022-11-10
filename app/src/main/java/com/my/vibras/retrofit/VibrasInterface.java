@@ -8,6 +8,7 @@ import com.my.vibras.model.SuccessResAddRestaurantComment;
 import com.my.vibras.model.SuccessResCompanyNotification;
 import com.my.vibras.model.SuccessResDeleteCard;
 import com.my.vibras.model.SuccessResDeleteConversation;
+import com.my.vibras.model.SuccessResFilterData;
 import com.my.vibras.model.SuccessResGetBanner;
 import com.my.vibras.model.SuccessResGetCard;
 import com.my.vibras.model.SuccessResGetCategory;
@@ -16,16 +17,28 @@ import com.my.vibras.model.SuccessResGetComment;
 import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.model.SuccessResGetEvents;
+import com.my.vibras.model.SuccessResGetGroup;
+import com.my.vibras.model.SuccessResGetGroupChat;
+import com.my.vibras.model.SuccessResGetGroupData;
+import com.my.vibras.model.SuccessResGetGroupDetails;
+import com.my.vibras.model.SuccessResGetGroupRestaurantEventAmount;
+import com.my.vibras.model.SuccessResGetHelp;
 import com.my.vibras.model.SuccessResGetInterest;
+import com.my.vibras.model.SuccessResGetMyStories;
 import com.my.vibras.model.SuccessResGetNotification;
+import com.my.vibras.model.SuccessResGetPP;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetProfile;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResGetStories;
 import com.my.vibras.model.SuccessResGetSubscription;
+import com.my.vibras.model.SuccessResGetToken;
+import com.my.vibras.model.SuccessResGetTransaction;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.model.SuccessResInsertChat;
+import com.my.vibras.model.SuccessResInsertGroupChat;
+import com.my.vibras.model.SuccessResMakePayment;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.model.SuccessResSignup;
@@ -33,6 +46,7 @@ import com.my.vibras.model.SuccessResUpdateRate;
 import com.my.vibras.model.SuccessResUploadCoverPhoto;
 import com.my.vibras.model.SuccessResUploadPost;
 import com.my.vibras.model.SuccessResUploadSelfie;
+import com.my.vibras.model.SuccessResUploadStory;
 
 import java.util.List;
 import java.util.Map;
@@ -73,6 +87,10 @@ public interface VibrasInterface {
 
     @GET("getUserStory")
     Call<SuccessResGetStories> getStories();
+
+    @FormUrlEncoded
+    @POST("get_all_story")
+    Call<SuccessResGetStories> getAllStories(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_ProfilePic")
@@ -166,6 +184,10 @@ public interface VibrasInterface {
     @POST("delete_post")
     Call<SuccessResAddLike> deletePost(@FieldMap Map<String, String> paramHashMap);
 
+    @FormUrlEncoded
+    @POST("delete_group")
+    Call<SuccessResAddLike> deleteGroup(@FieldMap Map<String, String> paramHashMap);
+
     @Multipart
     @POST("insert_chat")
     Call<SuccessResInsertChat> insertImageVideoChat (
@@ -174,6 +196,16 @@ public interface VibrasInterface {
             @Part("chat_message") RequestBody chatMessage,
             @Part("type") RequestBody type
             );
+
+    @Multipart
+    @POST("insert_group_chat")
+    Call<SuccessResInsertGroupChat> insertGroupImageVideoChat (
+            @Part("sender_id") RequestBody senderId,
+            @Part("group_id") RequestBody receiverId,
+            @Part("chat_message") RequestBody chatMessage,
+            @Part("type") RequestBody type
+    );
+
 
     @FormUrlEncoded
     @POST("get_chat")
@@ -190,6 +222,10 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("send_fire")
     Call<SuccessResDeleteConversation> addFireToOther(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("update_lat_lon")
+    Call<SuccessResDeleteConversation> updateLocation(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_category")
@@ -326,5 +362,105 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("update_notification_status")
     Call<SuccessResUpdateRate> updateWorkerNoti(@FieldMap Map<String, String> paramHashMap);
+
+    @Multipart
+    @POST("add_story")
+    Call<SuccessResUploadStory> uploadStory (
+            @Part("user_id") RequestBody userId,
+            @Part("description") RequestBody description,
+            @Part("story_type") RequestBody type,
+            @Part List<MultipartBody.Part> file);
+
+    @Multipart
+    @POST("update_story")
+    Call<SuccessResUploadStory> updateStory (
+            @Part("user_id") RequestBody userID,
+            @Part("story_id") RequestBody storyID,
+            @Part("story_type") RequestBody type,
+            @Part List<MultipartBody.Part> file);
+
+    @FormUrlEncoded
+    @POST("get_my_story")
+    Call<SuccessResGetMyStories> getMyStory(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("apply_filter")
+    Call<SuccessResFilterData> filter(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("create_group")
+    Call<ResponseBody> createGroup(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_all_group")
+    Call<SuccessResGetGroup> getAllGroupApi(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_user_group")
+    Call<SuccessResGetGroup> getMygroupApi(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_group_chat")
+    Call<SuccessResGetGroupChat> getGroupChat(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_token")
+    Call<SuccessResGetToken> getToken(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_user_purchase_subscription")
+    Call<SuccessResGetGroupData> getGroup(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("stripe_payment")
+    Call<SuccessResMakePayment> makePayment(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_payment_history")
+    Call<SuccessResGetTransaction> getTransaction(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_group_amount")
+    Call<SuccessResGetGroupRestaurantEventAmount> getGroupPurchasePrice(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("getGroup")
+    Call<SuccessResGetGroupDetails> getGroupDetails(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("join_group_request")
+    Call<ResponseBody> joinGroup(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("update_online_status")
+    Call<SuccessResSignup> updateOnLIneStatus(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_event_by_category")
+    Call<SuccessResGetEvents> getEventsByCategory(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_help_faq")
+    Call<SuccessResGetHelp> getHelp(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_privacy_policy")
+    Call<SuccessResGetPP> getPrivacyPolicy(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_about")
+    Call<SuccessResGetPP> getAboutUs(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("accepte_reject_group_request")
+    Call<ResponseBody> acceptRejectGroup(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("join_event")
+    Call<ResponseBody> joinEvent(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_my_join_event")
+    Call<SuccessResGetEvents> getMyJoinedEvents(@FieldMap Map<String, String> paramHashMap);
 
 }

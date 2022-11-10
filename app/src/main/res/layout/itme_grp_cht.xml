@@ -4,6 +4,7 @@
     android:layout_width="@dimen/_80sdp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/llParent"
     >
 
     <LinearLayout
@@ -13,26 +14,39 @@
         android:layout_height="match_parent"
         >
 
-        <ImageView
+        <RelativeLayout
+            android:layout_width="@dimen/_50sdp"
             android:layout_gravity="center"
-            android:src="@drawable/grpicon"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_height="@dimen/_50sdp"
             >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivGroup"
+                android:layout_width="@dimen/_55sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:background="@drawable/circle_gray" />
 
-        </ImageView>
+            <ImageView
+                android:id="@+id/ivCancel"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentRight="true"
+                android:visibility="gone"
+                android:src="@drawable/ic_cancel" />
+
+        </RelativeLayout>
+
 
         <TextView
+            android:id="@+id/tvGroupName"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kim"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
+            android:gravity="center"
           />
 
     </LinearLayout>
-
 
 </LinearLayout>

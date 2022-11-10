@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -23,9 +24,12 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ArrayList<SuccessResGetCard.Result> modelList;
     private OnItemClickListener mItemClickListener;
 
-    public PaymentAdapter(Context context, ArrayList<SuccessResGetCard.Result> modelList) {
+    private int selectedPosition = -1;
+
+    public PaymentAdapter(Context context, ArrayList<SuccessResGetCard.Result> modelList,OnItemClickListener mItemClickListener) {
         this.mContext = context;
         this.modelList = modelList;
+        this.mItemClickListener = mItemClickListener;
     }
 
     public void updateList(ArrayList<SuccessResGetCard.Result> modelList) {
@@ -42,16 +46,39 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
         //Here you can fill your row view
+
         if (holder instanceof ViewHolder) {
             final SuccessResGetCard.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
             TextView tvCardHolderName = holder.itemView.findViewById(R.id.tvCardHolderName);
+
+            RelativeLayout rlParent = holder.itemView.findViewById(R.id.rlParent);
+
             TextView tvCadNumber = holder.itemView.findViewById(R.id.tvCadNumber);
+
             TextView tvExpiry = holder.itemView.findViewById(R.id.tvExpiry);
 
             ImageView ivDelete = holder.itemView.findViewById(R.id.ivDelete);
+
+            if(position == selectedPosition)
+            {
+                rlParent.setBackgroundResource(R.drawable.light_blue_fill);
+            }
+            else
+            {
+                rlParent.setBackgroundResource(R.drawable.light_gray_fill);
+            }
+
+            rlParent.setOnClickListener(v ->
+                    {
+                        selectedPosition = position;
+                        mItemClickListener.onItemClick(v,position,model);
+                        notifyDataSetChanged();
+                    }
+                    );
 
             ivDelete.setOnClickListener(v ->
                     {
@@ -80,19 +107,14 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface OnItemClickListener {
-
         void onItemClick(View view, int position, SuccessResGetCard.Result model);
         void deleteCard(View view, int position);
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView txtName;
-
         public ViewHolder(final View itemView) {
           super(itemView);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -101,5 +123,4 @@ public class PaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
         }
     }
-
 }

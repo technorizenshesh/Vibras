@@ -12,22 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.vibras.R;
 import com.my.vibras.model.HomModel;
+import com.my.vibras.model.SuccessResGetTransaction;
 
 import java.util.ArrayList;
 
 public class TrasactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<HomModel> modelList;
+    private ArrayList<SuccessResGetTransaction.Result> modelList;
     private OnItemClickListener mItemClickListener;
 
-
-    public TrasactionAdapter(Context context, ArrayList<HomModel> modelList) {
+    public TrasactionAdapter(Context context, ArrayList<SuccessResGetTransaction.Result> modelList) {
         this.mContext = context;
         this.modelList = modelList;
     }
 
-    public void updateList(ArrayList<HomModel> modelList) {
+    public void updateList(ArrayList<SuccessResGetTransaction.Result> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
@@ -44,8 +44,18 @@ public class TrasactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final HomModel model = getItem(position);
+            final SuccessResGetTransaction.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
+
+            TextView tvHistory = holder.itemView.findViewById(R.id.tvHistory);
+            TextView tvAmount = holder.itemView.findViewById(R.id.tvAmount);
+            TextView tvTimeAgo = holder.itemView.findViewById(R.id.tvTimeAgo);
+
+            tvAmount.setText(model.getAmount());
+
+            tvHistory.setText(model.getPlanMeesgae());
+
+            tvTimeAgo.setText(model.getTimeAgo());
 
         }
     }
@@ -60,15 +70,12 @@ public class TrasactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mItemClickListener = mItemClickListener;
     }
 
-    private HomModel getItem(int position) {
+    private SuccessResGetTransaction.Result getItem(int position) {
         return modelList.get(position);
     }
 
-
     public interface OnItemClickListener {
-
-        void onItemClick(View view, int position, HomModel model);
-
+        void onItemClick(View view, int position, SuccessResGetTransaction.Result model);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -77,7 +84,6 @@ public class TrasactionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public ViewHolder(final View itemView) {
             super(itemView);
-
 
         //    this.txtName=itemView.findViewById(R.id.txtName);
 

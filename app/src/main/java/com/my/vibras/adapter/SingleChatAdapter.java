@@ -68,10 +68,11 @@ public class SingleChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             rlParent.setOnClickListener(v ->
                     {
-                       mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
+                       mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId())
+                               .putExtra("name",modelList.get(position).getFirstName()+" "+modelList.get(position).getLastName())
+                       );
                     }
                     );
-
         }
     }
 

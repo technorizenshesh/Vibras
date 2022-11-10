@@ -45,38 +45,44 @@ public class SuccessResGetNotification implements Serializable {
         this.status = status;
     }
 
-    public class Result implements Serializable {
+    public class Result {
 
         @SerializedName("id")
         @Expose
-        public String id;
+        private String id;
         @SerializedName("user_id")
         @Expose
-        public String userId;
+        private String userId;
         @SerializedName("owner_id")
         @Expose
-        public String ownerId;
+        private String ownerId;
+        @SerializedName("product_id")
+        @Expose
+        private String productId;
         @SerializedName("type")
         @Expose
-        public String type;
+        private String type;
+        @SerializedName("p_type")
+        @Expose
+        private String pType;
+        @SerializedName("status")
+        @Expose
+        private String status;
         @SerializedName("message")
         @Expose
-        public String message;
+        private String message;
         @SerializedName("date_time")
         @Expose
-        public String dateTime;
-        @SerializedName("post_image")
-        @Expose
-        public String postImage;
+        private String dateTime;
         @SerializedName("user_image")
         @Expose
-        public String userImage;
-        @SerializedName("icon")
-        @Expose
-        public String icon;
+        private String userImage;
         @SerializedName("user_name")
         @Expose
-        public String userName;
+        private String userName;
+        @SerializedName("post_image")
+        @Expose
+        private String postImage;
 
         public String getId() {
             return id;
@@ -102,12 +108,36 @@ public class SuccessResGetNotification implements Serializable {
             this.ownerId = ownerId;
         }
 
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+
         public String getType() {
             return type;
         }
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public String getpType() {
+            return pType;
+        }
+
+        public void setpType(String pType) {
+            this.pType = pType;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
 
         public String getMessage() {
@@ -126,28 +156,12 @@ public class SuccessResGetNotification implements Serializable {
             this.dateTime = dateTime;
         }
 
-        public String getPostImage() {
-            return postImage;
-        }
-
-        public void setPostImage(String postImage) {
-            this.postImage = postImage;
-        }
-
         public String getUserImage() {
             return userImage;
         }
 
         public void setUserImage(String userImage) {
             this.userImage = userImage;
-        }
-
-        public String getIcon() {
-            return icon;
-        }
-
-        public void setIcon(String icon) {
-            this.icon = icon;
         }
 
         public String getUserName() {
@@ -158,6 +172,13 @@ public class SuccessResGetNotification implements Serializable {
             this.userName = userName;
         }
 
+        public String getPostImage() {
+            return postImage;
+        }
+
+        public void setPostImage(String postImage) {
+            this.postImage = postImage;
+        }
+
     }
-    
 }

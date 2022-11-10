@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_above="@+id/btnCreate"
+    tools:context=".CreateGroupAct">
+
+    <RelativeLayout
+        android:background="@color/lightgray"
+        android:id="@+id/RRtoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        >
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Create Group"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/RRFrnd"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/back">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:visibility="gone"
+        >
+             <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:layout_toLeftOf="@+id/ivReferesh"
+            android:background="@drawable/live_text_bg">
+
+                 <EditText
+                     android:id="@+id/etSearch"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_marginLeft="@dimen/_10sdp"
+                     android:background="@null"
+                     android:drawablePadding="@dimen/_5sdp"
+                     android:gravity="center_vertical"
+                     android:hint="Search"
+                     android:imeOptions="actionSearch"
+                     android:padding="@dimen/_10sdp"
+                     android:singleLine="true"
+                     android:textSize="@dimen/_12sdp"></EditText>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ivReferesh"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/refresh">
+
+            </ImageView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rvSelectedUser"
+        android:layout_marginVertical="@dimen/_10sdp"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/friends"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/rvFrnd"/>
+
+</LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnCreate"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/border_btn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20sp"
+                android:text="@string/create_group"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+</layout>

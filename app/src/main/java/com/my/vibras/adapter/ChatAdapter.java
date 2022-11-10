@@ -41,6 +41,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
      this.myId = myId;
  }
 
+    public static String decodeEmoji (String message) {
+        String myString= null;
+        try {
+            return URLDecoder.decode(
+                    message, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return message;
+        }
+    }
+
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -169,21 +179,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 //                }
 //        );
 
-
-
     }
-
-
-    public static String decodeEmoji (String message) {
-        String myString= null;
-        try {
-            return URLDecoder.decode(
-                    message, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return message;
-        }
-    }
-
 
     @Override
     public int getItemViewType(int position) {

@@ -30,6 +30,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -39,9 +41,19 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.R;
+import com.my.vibras.act.PaymentsAct;
+import com.my.vibras.act.SubsCriptionAct;
 import com.my.vibras.act.ui.myprofile.MyProfileFragment;
 import com.my.vibras.adapter.MultipleImagesAdapter;
 import com.my.vibras.databinding.FragmentPostEventsBinding;
@@ -61,6 +73,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -75,6 +88,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
@@ -86,7 +100,11 @@ public class PostEventsFragment extends Fragment {
 
     private FragmentPostEventsBinding binding;
 
+    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+
     private String eventName="",eventDate="",eventTime="",eventCategory="",eventLocation="",etAmount="",eventDetails="",eventType="";
+
+    private String myLatitude = "",myLongitude="";
 
     private VibrasInterface apiInterface;
 
@@ -97,6 +115,7 @@ public class PostEventsFragment extends Fragment {
     private ArrayList<String> eventsType = new ArrayList<>();
 
     String str_image_path="";
+
     final Calendar myCalendar= Calendar.getInstance();
 
     private ArrayList<String> imagesList = new ArrayList<>();
@@ -115,9 +134,24 @@ public class PostEventsFragment extends Fragment {
         ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_events,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
+
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(getActivity());
 
         eventsType.add("Public");
         eventsType.add("Private");
+
+        binding.etLocation.setOnClickListener(v ->
+                {
+//                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
+
+                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                    Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                            .build(getActivity());
+                    startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+                }
+        );
 
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   android.R.layout.simple_spinner_item, eventsType);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
@@ -178,21 +212,19 @@ public class PostEventsFragment extends Fragment {
         binding.rlAdd.setOnClickListener(v ->
                 {
 
-                    Toast.makeText(getActivity(), "Please purchase plan.", Toast.LENGTH_SHORT).show();
-
-//                    eventName = binding.etEventName.getText().toString().trim();
-//                    eventDate = binding.etEventDate.getText().toString().trim();
-//                    eventTime = binding.etTime.getText().toString().trim();
-//                    eventCategory = binding.spinnerCategory.getSelectedItem().toString();
-//                    eventLocation = binding.etLocation.getText().toString().trim();
-//                    etAmount = binding.etBookingAmount.getText().toString().trim();
-//                    eventDetails = binding.etEventDetails.getText().toString().trim();
-//                    eventType = binding.spinnerType.getSelectedItem().toString();
-//                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-//                        isValid();
-//                    } else {
-//                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-//                    }
+                    eventName = binding.etEventName.getText().toString().trim();
+                    eventDate = binding.etEventDate.getText().toString().trim();
+                    eventTime = binding.etTime.getText().toString().trim();
+                    eventCategory = binding.spinnerCategory.getSelectedItem().toString();
+                    eventLocation = binding.etLocation.getText().toString().trim();
+                    etAmount = binding.etBookingAmount.getText().toString().trim();
+                    eventDetails = binding.etEventDetails.getText().toString().trim();
+                    eventType = binding.spinnerType.getSelectedItem().toString();
+                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+                        isValid();
+                    } else {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+                    }
                 }
                 );
 
@@ -231,7 +263,7 @@ public class PostEventsFragment extends Fragment {
         }else if (eventCategory.equalsIgnoreCase("")) {
             showToast(getActivity(),"Please select Event Category");
         }else if (eventLocation.equalsIgnoreCase("")) {
-            binding.etEventName.setError("Please Enter Event Location");
+            binding.etLocation.setError("Please Enter Event Location");
         }else if (etAmount.equalsIgnoreCase("")) {
             binding.etBookingAmount.setError("Please Enter Event Amount");
         }else if (eventDetails.equalsIgnoreCase("")) {
@@ -243,7 +275,24 @@ public class PostEventsFragment extends Fragment {
         }else
         {
 
-            addEvent();
+//            addEvent();
+
+            startActivity(new Intent(getActivity(), PaymentsAct.class)
+                    .putExtra("from","event")
+                    .putExtra("eventName",eventName)
+                    .putExtra("str_image_path",str_image_path)
+                    .putExtra("eventDate",eventDate)
+                    .putExtra("eventTime",eventTime)
+                    .putExtra("eventCategory",eventCategory)
+                    .putExtra("eventLocation",eventLocation)
+                    .putExtra("etAmount",etAmount)
+                    .putExtra("eventDetails",eventDetails)
+                    .putExtra("eventType",eventType)
+                    .putExtra("lat",myLatitude)
+                    .putExtra("lon",myLongitude)
+                    .putExtra("imagesList",imagesList)
+
+            );
 
         }
 
@@ -291,13 +340,11 @@ public class PostEventsFragment extends Fragment {
 
         for(SuccessResGetCategory.Result result:categoryResult)
         {
-
-            eventsCategories.add(result.getName());
-
+        eventsCategories.add(result.getName());
         }
 
-// Application of the Array to the Spinner
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   android.R.layout.simple_spinner_item, eventsCategories);
+//      Application of the Array to the Spinner
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   R.layout.simple_spinner, eventsCategories);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
         binding.spinnerCategory.setAdapter(spinnerArrayAdapter);
     }
@@ -353,6 +400,44 @@ public class PostEventsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+
+                eventLocation = place.getAddress();
+                LatLng latLng = place.getLatLng();
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                myLatitude = Double.toString(latitude);
+                myLongitude = Double.toString(longitude);
+
+                String address = place.getAddress();
+
+                eventLocation = address;
+
+                binding.etLocation.setText(address);
+
+                binding.etLocation.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        binding.etLocation.setText(address);
+                    }
+                });
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == SELECT_FILE) {

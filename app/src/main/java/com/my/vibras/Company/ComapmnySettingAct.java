@@ -31,7 +31,7 @@ public class ComapmnySettingAct extends AppCompatActivity {
         });
 
         binding.RRpayment.setOnClickListener(v -> {
-            startActivity(new Intent(ComapmnySettingAct.this, PaymentsAct.class));
+//            startActivity(new Intent(ComapmnySettingAct.this, PaymentsAct.class));
         });
 
         binding.RRtrasaction.setOnClickListener(v -> {

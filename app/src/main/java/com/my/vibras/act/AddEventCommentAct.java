@@ -82,7 +82,6 @@ public class AddEventCommentAct extends AppCompatActivity {
         } else {
             Toast.makeText(AddEventCommentAct.this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private void addComment() {

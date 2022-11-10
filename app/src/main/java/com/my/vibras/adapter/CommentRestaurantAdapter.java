@@ -52,34 +52,17 @@ public class CommentRestaurantAdapter extends RecyclerView.Adapter<CommentRestau
 
         CircleImageView imageView;
         TextView tvName,tvComment,tvTimeAgo;
-
         RelativeLayout rlParent = holder.itemView.findViewById(R.id.rlParent);
-
         imageView = holder.itemView.findViewById(R.id.iv_history);
         tvName = holder.itemView.findViewById(R.id.tv_name);
-
         tvComment = holder.itemView.findViewById(R.id.tv_comment);
         tvTimeAgo = holder.itemView.findViewById(R.id.tvTimeAgo);
-
         Glide.with(context)
                 .load(commentList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(imageView);
-
         tvName.setText(commentList.get(position).getFirstName());
-
         tvComment.setText(commentList.get(position).getComment());
-
-    }
-
-    public static String decodeEmoji (String message) {
-        String myString= null;
-        try {
-            return URLDecoder.decode(
-                    message, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return message;
-        }
     }
 
     @Override

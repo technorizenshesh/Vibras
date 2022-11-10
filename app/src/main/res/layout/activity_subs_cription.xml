@@ -62,10 +62,10 @@
                     android:id="@+id/llBasic"
                     android:padding="@dimen/_10sdp"
                     android:orientation="vertical"
-                    android:background="@drawable/basic_bg"
+                    android:background="@drawable/green_gradient"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_350sdp"
+                    android:layout_height="wrap_content"
                     >
 
                     <TextView
@@ -141,10 +141,11 @@
                     android:id="@+id/llSTANDARD"
                     android:padding="@dimen/_10sdp"
                     android:orientation="vertical"
-                    android:background="@drawable/stanrd"
+                    android:background="@drawable/pink_gradient"
                     android:layout_margin="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_560sdp"
+                    android:layout_height="wrap_content"
                     >
 
                     <TextView
@@ -240,10 +241,10 @@
                     android:id="@+id/llSPREMIUM"
                     android:padding="@dimen/_10sdp"
                     android:orientation="vertical"
-                    android:background="@drawable/premium"
+                    android:background="@drawable/orange_gradient"
                     android:layout_margin="@dimen/_10sdp"
                     android:layout_width="match_parent"
-                    android:layout_height="850dp"
+                    android:layout_height="wrap_content"
                     >
 
                     <TextView
@@ -341,10 +342,6 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
-
-
-
-
 
     </LinearLayout>
 

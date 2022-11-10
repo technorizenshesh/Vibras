@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         >
 
+
+
         <ImageView
             android:id="@+id/ivUser"
             android:scaleType="centerCrop"
@@ -54,10 +56,10 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvOnlineStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="3 hours ago"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_8sdp" />
 
@@ -65,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="2.3 kms away"
+                        android:id="@+id/tvDistance"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_8sdp" />
 
@@ -79,17 +81,11 @@
                 android:layout_alignParentBottom="true">
 
                 <ImageView
-                    android:id="@+id/ivOtherLike"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_weight="1"
-                    android:src="@drawable/like"></ImageView>
-
-                <ImageView
                     android:id="@+id/ivLike"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:src="@drawable/love"></ImageView>
 
                 <ImageView
@@ -97,6 +93,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:src="@drawable/messa"></ImageView>
 
                 <ImageView
@@ -104,9 +101,17 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:src="@drawable/fire"></ImageView>
 
             </LinearLayout>
+            <ImageView
+                android:id="@+id/ivOtherLike"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/like"></ImageView>
 
         </RelativeLayout>
 

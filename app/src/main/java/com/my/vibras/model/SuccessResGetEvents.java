@@ -175,6 +175,18 @@ public class SuccessResGetEvents implements Serializable {
         @Expose
         private Integer totalLike;
 
+        public String getIammember() {
+            return iammember;
+        }
+
+        public void setIammember(String iammember) {
+            this.iammember = iammember;
+        }
+
+        @SerializedName("Iammember")
+        @Expose
+        private String iammember;
+
         public Integer getTotalLike() {
             return totalLike;
         }

@@ -22,6 +22,8 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -49,7 +51,7 @@ public class ChatDetailsScreen extends AppCompatActivity {
 
     private String strChatMessage="";
 
-    private String id;
+    private String id="",strUserName="";
 
     List<SuccessResGetChat.Result> chatList = new LinkedList<>();
 
@@ -63,6 +65,9 @@ public class ChatDetailsScreen extends AppCompatActivity {
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
         id = getIntent().getExtras().getString("id");
+        strUserName = getIntent().getExtras().getString("name");
+
+        binding.txtName.setText(strUserName);
 
         binding.RRFrnd.setOnClickListener(v -> {
             onBackPressed();
@@ -78,6 +83,9 @@ public class ChatDetailsScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 strChatMessage = binding.etText.getText().toString();
+
+                strChatMessage = encodeEmoji(strChatMessage);
+
                 if(!strChatMessage.equals(""))
                 {
                     uploadImageVideoPost("","Text");
@@ -99,6 +107,15 @@ public class ChatDetailsScreen extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         timer.cancel();
+    }
+
+    public static String encodeEmoji (String message) {
+        try {
+            return URLEncoder.encode(message,
+                    "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return message;
+        }
     }
 
     private boolean isLastVisible() {

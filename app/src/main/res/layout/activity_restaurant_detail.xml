@@ -158,14 +158,16 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:scaleType="fitXY"
-                android:src="@drawable/map"
-                android:layout_margin="@dimen/_10sdp"
+            <fragment
+                android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_120sdp"
-                >
-            </ImageView>
+                android:layout_height="@dimen/_130sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_gravity="center"
+                />
 
 
             <TextView

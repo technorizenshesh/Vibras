@@ -81,7 +81,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.StoriesV
                 .into(imageView);
 
         tvName.setText(commentList.get(position).getUserDetial().getFirstName());
-//        tvComment.setText(decodeEmoji(commentList.get(position).getComment()));
+        tvComment.setText(decodeEmoji(commentList.get(position).getComment()));
         tvTimeAgo.setText(commentList.get(position).getTimeAgo());
 
     }

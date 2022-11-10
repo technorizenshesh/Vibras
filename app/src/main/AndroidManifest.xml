@@ -4,6 +4,7 @@
     package="com.my.vibras">
 
     <application
+        android:name=".act.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,6 +15,42 @@
         android:theme="@style/Theme.VIBRAS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".act.AboutUsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.AboutUsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.PrivacyPolicyAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ViewAllGroupsAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.HelpAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ViewAllCategoryAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GetEventsByCategoryIdAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.ui.GroupDetailAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GroupChatAct"
+            android:exported="false" />
+        <activity
+            android:name=".CreateGroupAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.GoodVibesAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.SearchConversationUserAct"
+            android:exported="false" />
         <activity
             android:name=".act.ViewAllEventAct"
             android:exported="false" />
@@ -147,6 +184,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="@string/api_key" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <service
+            android:name=".utility.VibrasNotification"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
     <queries>

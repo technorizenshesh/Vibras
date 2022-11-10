@@ -65,7 +65,7 @@
                 android:layout_centerInParent="true"
                 android:text="Event Details"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name of Event"
+                android:text="@string/name_of_event"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -107,7 +107,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date of Event"
+                android:text="@string/date_of_event"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -143,7 +143,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="time of Event"
+                android:text="@string/time_of_event"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -195,8 +195,6 @@
                     android:drawableRight="@drawable/arrw_bttm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Select"
-                    android:inputType="text"
                     android:textColorHint="@color/gray">
 
                 </Spinner>
@@ -208,7 +206,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location of event"
+                android:text="@string/location_of_event"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -227,7 +225,9 @@
                     android:background="@null"
                     android:hint="@string/enter_location"
                     android:inputType="text"
+                    android:editable="false"
                     android:padding="@dimen/_10sdp"
+                    android:focusable="false"
                     android:textSize="@dimen/_12sdp"
                     android:imeOptions="actionNext"
                     android:textColor="@color/black"
@@ -294,10 +294,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="@android:color/transparent"
+                    android:fontFamily="@font/roboto_light"
                     android:gravity="left"
+                    android:hint="@string/enter_event_details"
                     android:imeOptions="actionDone"
                     android:padding="@dimen/_10sdp"
-                    android:hint="@string/enter_event_details"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12sdp" />
 
@@ -325,19 +326,16 @@
                     android:layout_height="match_parent"
                     android:inputType="text"
                     >
-
                 </Spinner>
-
             </androidx.cardview.widget.CardView>
-
             <TextView
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Add Photos/ Videos"
+                android:text="@string/add_photos_videos"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <LinearLayout

@@ -33,7 +33,7 @@
                 android:layout_toRightOf="@+id/iv_history"
                 android:text="ritesh12"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_toRightOf="@+id/tv_name"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/tvTimeAgo"

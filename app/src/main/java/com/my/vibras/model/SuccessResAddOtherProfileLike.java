@@ -14,6 +14,9 @@ public class SuccessResAddOtherProfileLike implements Serializable {
     @SerializedName("result")
     @Expose
     public String result;
+    @SerializedName("user_match")
+    @Expose
+    public String userMatch;
     @SerializedName("status")
     @Expose
     public Integer status;
@@ -27,6 +30,14 @@ public class SuccessResAddOtherProfileLike implements Serializable {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getUserMatch() {
+        return userMatch;
+    }
+
+    public void setUserMatch(String userMatch) {
+        this.userMatch = userMatch;
     }
 
     public Integer getStatus() {

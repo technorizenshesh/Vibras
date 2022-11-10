@@ -186,6 +186,20 @@
 
                         </Button>
 
+                        <Button
+                            android:id="@+id/btnAddLike"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="@string/add_like"
+                            android:background="@drawable/border_btn"
+                            android:layout_width="match_parent"
+                            android:textAllCaps="false"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            >
+
+                        </Button>
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -218,6 +232,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/llGroup"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:gravity="center"
                         android:orientation="vertical"

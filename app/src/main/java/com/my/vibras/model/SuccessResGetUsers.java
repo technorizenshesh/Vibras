@@ -83,6 +83,36 @@ public class SuccessResGetUsers implements Serializable {
         @SerializedName("post_filter")
         @Expose
         public String postFilter;
+        @SerializedName("should_not")
+        @Expose
+        public String shouldNot;
+        @SerializedName("want_to")
+        @Expose
+        public String wantTo;
+        @SerializedName("age_range_from")
+        @Expose
+        public String ageRangeFrom;
+        @SerializedName("age_range_to")
+        @Expose
+        public String ageRangeTo;
+        @SerializedName("should")
+        @Expose
+        public String should;
+        @SerializedName("p_language")
+        @Expose
+        public String pLanguage;
+        @SerializedName("f_location")
+        @Expose
+        public String fLocation;
+        @SerializedName("f_lat")
+        @Expose
+        public String fLat;
+        @SerializedName("f_lon")
+        @Expose
+        public String fLon;
+        @SerializedName("distance")
+        @Expose
+        public String distance;
         @SerializedName("register_id")
         @Expose
         public String registerId;
@@ -98,12 +128,24 @@ public class SuccessResGetUsers implements Serializable {
         @SerializedName("lon")
         @Expose
         public String lon;
+        @SerializedName("notification")
+        @Expose
+        public String notification;
+        @SerializedName("push_notification")
+        @Expose
+        public String pushNotification;
+        @SerializedName("email_notification")
+        @Expose
+        public String emailNotification;
         @SerializedName("type")
         @Expose
         public String type;
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("online_status")
+        @Expose
+        public String onlineStatus;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
@@ -218,6 +260,86 @@ public class SuccessResGetUsers implements Serializable {
             this.postFilter = postFilter;
         }
 
+        public String getShouldNot() {
+            return shouldNot;
+        }
+
+        public void setShouldNot(String shouldNot) {
+            this.shouldNot = shouldNot;
+        }
+
+        public String getWantTo() {
+            return wantTo;
+        }
+
+        public void setWantTo(String wantTo) {
+            this.wantTo = wantTo;
+        }
+
+        public String getAgeRangeFrom() {
+            return ageRangeFrom;
+        }
+
+        public void setAgeRangeFrom(String ageRangeFrom) {
+            this.ageRangeFrom = ageRangeFrom;
+        }
+
+        public String getAgeRangeTo() {
+            return ageRangeTo;
+        }
+
+        public void setAgeRangeTo(String ageRangeTo) {
+            this.ageRangeTo = ageRangeTo;
+        }
+
+        public String getShould() {
+            return should;
+        }
+
+        public void setShould(String should) {
+            this.should = should;
+        }
+
+        public String getpLanguage() {
+            return pLanguage;
+        }
+
+        public void setpLanguage(String pLanguage) {
+            this.pLanguage = pLanguage;
+        }
+
+        public String getfLocation() {
+            return fLocation;
+        }
+
+        public void setfLocation(String fLocation) {
+            this.fLocation = fLocation;
+        }
+
+        public String getfLat() {
+            return fLat;
+        }
+
+        public void setfLat(String fLat) {
+            this.fLat = fLat;
+        }
+
+        public String getfLon() {
+            return fLon;
+        }
+
+        public void setfLon(String fLon) {
+            this.fLon = fLon;
+        }
+
+        public String getDistance() {
+            return distance;
+        }
+
+        public void setDistance(String distance) {
+            this.distance = distance;
+        }
+
         public String getRegisterId() {
             return registerId;
         }
@@ -258,6 +380,30 @@ public class SuccessResGetUsers implements Serializable {
             this.lon = lon;
         }
 
+        public String getNotification() {
+            return notification;
+        }
+
+        public void setNotification(String notification) {
+            this.notification = notification;
+        }
+
+        public String getPushNotification() {
+            return pushNotification;
+        }
+
+        public void setPushNotification(String pushNotification) {
+            this.pushNotification = pushNotification;
+        }
+
+        public String getEmailNotification() {
+            return emailNotification;
+        }
+
+        public void setEmailNotification(String emailNotification) {
+            this.emailNotification = emailNotification;
+        }
+
         public String getType() {
             return type;
         }
@@ -272,6 +418,14 @@ public class SuccessResGetUsers implements Serializable {
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getOnlineStatus() {
+            return onlineStatus;
+        }
+
+        public void setOnlineStatus(String onlineStatus) {
+            this.onlineStatus = onlineStatus;
         }
 
         public String getDateTime() {

@@ -1,9 +1,9 @@
 package com.my.vibras.adapter;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.StoryDetailAct;
+import com.my.vibras.act.ui.home.HomeFragment;
 import com.my.vibras.model.SuccessResGetStories;
 
 import java.util.ArrayList;
-
 
 /**
  * Created by Ravindra Birla on 06,July,2021
@@ -56,12 +56,11 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             final SuccessResGetStories.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-            genericViewHolder.txtName.setText(model.getFirstName());
+            genericViewHolder.txtName.setText(model.getUserName());
 
             Glide.with(mContext)
-                    .load(model.getImage())
+                    .load(model.getUserImage())
                     .into(genericViewHolder.image);
-
         }
     }
 
@@ -78,7 +77,6 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return modelList.get(position);
     }
 
-
     public interface OnItemClickListener {
 
         void onItemClick(View view, int position, SuccessResGetStories.Result model);
@@ -89,7 +87,6 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         TextView txtName;
         ImageView image;
-
         CardView cvParent;
 
         public ViewHolder(final View itemView) {
@@ -102,9 +99,13 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View view) {
 
-                    mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
-                    mContext.startActivity(new Intent(mContext, StoryDetailAct.class));
+                    HomeFragment.story = modelList.get(getAdapterPosition());
 
+                    mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+                    Intent intent = new Intent(mContext, StoryDetailAct.class);
+                    Bundle bundle = new Bundle();
+                    intent.putExtras(bundle);
+                    mContext.startActivity(intent);
                 }
             });
         }

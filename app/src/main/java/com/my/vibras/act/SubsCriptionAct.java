@@ -41,9 +41,7 @@ public class SubsCriptionAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_subs_cription);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         binding.RRback.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -53,11 +51,19 @@ public class SubsCriptionAct extends AppCompatActivity {
         });
 
         binding.btnStandard.setOnClickListener(v -> {
-            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class).putExtra("type",subscriptionList.get(1).getPlanType())
+                    .putExtra("planId",subscriptionList.get(1).getId())
+                    .putExtra("planPrice",subscriptionList.get(1).getMonthlyPrice())
+                    .putExtra("from","user")
+            );
         });
 
         binding.btnPremium.setOnClickListener(v -> {
-            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class).putExtra("type",subscriptionList.get(2).getPlanType())
+                    .putExtra("planId",subscriptionList.get(2).getId())
+                    .putExtra("planPrice",subscriptionList.get(2).getMonthlyPrice())
+                    .putExtra("from","user")
+            );
         });
         getSubscription();
     }

@@ -1,6 +1,7 @@
 package com.my.vibras.act.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.act.ui.myprofile.MyProfileFragment;
 import com.my.vibras.act.ui.profile.ProfileFragment;
 import com.my.vibras.adapter.PostsAdapter;
@@ -129,6 +131,18 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
             otherUserId = bundle.getString("id");
         }
 
+        binding.llGroup.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from","other").putExtra("id",otherUserId));
+                }
+        );
+
+        binding.btnAddLike.setOnClickListener(v ->
+                {
+                    addOtherProfileLike(otherUserId,"Like");
+                }
+                );
+
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
 
             getProfile();
@@ -141,6 +155,42 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
         setUpUi();
         return binding.getRoot();
     }
+
+    private void addOtherProfileLike(String otherUserId,String type) {
+        String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("profile_user", otherUserId);
+        map.put("type", type);
+        Call<SuccessResAddOtherProfileLike> call = apiInterface.addFireLikeLove(map);
+        call.enqueue(new Callback<SuccessResAddOtherProfileLike>() {
+            @Override
+            public void onResponse(Call<SuccessResAddOtherProfileLike> call, Response<SuccessResAddOtherProfileLike> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResAddOtherProfileLike data = response.body();
+                    Log.e("data",data.status+"");
+                    if (data.status==1) {
+                        showToast(getActivity(), data.result);
+                        binding.btnIlike.setVisibility(View.VISIBLE);
+                        binding.btnAddLike.setVisibility(View.GONE);
+                    } else if (data.status==0) {
+                        showToast(getActivity(), data.result);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResAddOtherProfileLike> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
 
     private void getProfile() {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
@@ -185,24 +235,29 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
 
     private void setProfileDetails()
     {
+
         binding.tvName.setText(userDetail.getFirstName()+" "+userDetail.getLastName());
 
         Glide
                 .with(getActivity())
                 .load(userDetail.getCoverImage())
                 .into(binding.ivCoverPhoto);
+
         Glide
                 .with(getActivity())
                 .load(userDetail.getImage())
                 .placeholder(R.drawable.ic_user)
                 .into(binding.ivProfile);
+
         if(userDetail.getLikeStatus().equalsIgnoreCase("False"))
         {
             binding.btnIlike.setVisibility(View.GONE);
+            binding.btnAddLike.setVisibility(View.VISIBLE);
         }
         else
         {
             binding.btnIlike.setVisibility(View.VISIBLE);
+            binding.btnAddLike.setVisibility(View.GONE);
         }
         binding.tvGivenLike.setText(userDetail.getGivenLike());
 
@@ -328,8 +383,8 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
-        map.put("user_id",otherUserId);
-        map.put("other_id",userId);
+        map.put("user_id",userId);
+        map.put("other_id",otherUserId);
         map.put("type_status","IMAGE");
         Call<SuccessResGetPosts> call = apiInterface.getOtherUserPost(map);
         call.enqueue(new Callback<SuccessResGetPosts>() {
@@ -344,11 +399,9 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         postList.clear();
                         postList.addAll(data.getResult());
-
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList, OtherUserProfileFragment.this));
-
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }

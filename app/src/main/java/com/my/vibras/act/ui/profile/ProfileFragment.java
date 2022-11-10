@@ -29,14 +29,13 @@ import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment{
 
-   private FragmentProfileBinding binding;
+    private FragmentProfileBinding binding;
 
     private ProfileFragment.Qr_DetailsAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container, false);
-
         binding.imgBAck.setOnClickListener(v -> {
             getActivity().onBackPressed();
         });

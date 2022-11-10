@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -32,15 +33,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.R;
+import com.my.vibras.act.PaymentsAct;
+import com.my.vibras.act.SubsCriptionAct;
 import com.my.vibras.adapter.MultipleImagesAdapter;
 import com.my.vibras.databinding.FragmentPostEventsBinding;
 import com.my.vibras.databinding.FragmentPostRestaurentBinding;
 import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResGetCategory;
+import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -53,9 +65,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -64,6 +79,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
@@ -76,8 +92,11 @@ public class PostRestaurentFragment extends Fragment {
     private FragmentPostRestaurentBinding binding;
 
     private String restrantName="",strLocation="",strDetails="";
+    private String myLatitude = "",myLongitude="";
 
     private VibrasInterface apiInterface;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+    private String status;
 
     private ArrayList<SuccessResGetCategory.Result> categoryResult = new ArrayList<>();
 
@@ -88,6 +107,8 @@ public class PostRestaurentFragment extends Fragment {
     private static final int MY_PERMISSION_CONSTANT = 5;
 
     String str_image_path="";
+
+    private SuccessResSignup.Result userDetail;
 
     final Calendar myCalendar= Calendar.getInstance();
 
@@ -106,6 +127,22 @@ public class PostRestaurentFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_restaurent,container, false);
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
+
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(getActivity());
+
+        binding.etLocation.setOnClickListener(v ->
+                {
+//                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
+
+                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                    Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                            .build(getActivity());
+                    startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+                }
+        );
 
         binding.ivMultiple.setOnClickListener(v ->
                 {
@@ -126,16 +163,30 @@ public class PostRestaurentFragment extends Fragment {
         binding.rlAdd.setOnClickListener(v ->
                 {
 
-                    Toast.makeText(getActivity(), "Please purchase plan.", Toast.LENGTH_SHORT).show();
+                    if(status.equalsIgnoreCase("Deactive"))
+                    {
 
-//                    restrantName = binding.etRestaurantName.getText().toString().trim();
-//                    strDetails = binding.etDetails.getText().toString().trim();
-//                    strLocation = binding.etLocation.getText().toString().trim();
-//                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-//                        isValid();
-//                    } else {
-//                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-//                    }
+                        restrantName = binding.etRestaurantName.getText().toString().trim();
+                        strDetails = binding.etDetails.getText().toString().trim();
+                        strLocation = binding.etLocation.getText().toString().trim();
+                        if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+                            isValidate();
+                        } else {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+                        }
+                    } else
+                    {
+
+                    restrantName = binding.etRestaurantName.getText().toString().trim();
+                    strDetails = binding.etDetails.getText().toString().trim();
+                    strLocation = binding.etLocation.getText().toString().trim();
+                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+                        isValid();
+                    } else {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+                    }
+
+                    }
                 }
         );
 
@@ -146,15 +197,55 @@ public class PostRestaurentFragment extends Fragment {
                 multipleImagesAdapter.notifyDataSetChanged();
             }
         });
+
         binding.rvImages.setHasFixedSize(true);
         binding.rvImages.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
         binding.rvImages.setAdapter(multipleImagesAdapter);
-
+        getProfile();
         return binding.getRoot();
     }
 
-    private void isValid() {
+    @Override
+    public void onResume() {
 
+        super.onResume();
+    }
+
+    private void getProfile() {
+        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        Call<SuccessResSignup> call = apiInterface.getProfile(map);
+        call.enqueue(new Callback<SuccessResSignup>() {
+            @Override
+            public void onResponse(Call<SuccessResSignup> call, Response<SuccessResSignup> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResSignup data = response.body();
+                    userDetail = data.getResult();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        status = userDetail.getRestaurantsPlan();
+                    } else if (data.status.equals("0")) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResSignup> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+
+    private void isValidate() {
         if (restrantName.equalsIgnoreCase("")) {
             binding.etRestaurantName.setError(getString(R.string.enter_restaurant_name));
         }else if (str_image_path.equalsIgnoreCase("")) {
@@ -167,11 +258,26 @@ public class PostRestaurentFragment extends Fragment {
             showToast(getActivity(),"Please select Event Images.");
         }else
         {
-
-            addRestaurant();
-
+            purchasePlan();
         }
+    }
 
+
+    private void isValid() {
+        if (restrantName.equalsIgnoreCase("")) {
+            binding.etRestaurantName.setError(getString(R.string.enter_restaurant_name));
+        }else if (str_image_path.equalsIgnoreCase("")) {
+            showToast(getActivity(),"Please select Event Image");
+        }else if (strLocation.equalsIgnoreCase("")) {
+            binding.etLocation.setError(getString(R.string.enter_restaurant_location));
+        }else if (strDetails.equalsIgnoreCase("")) {
+            binding.etDetails.setError(getString(R.string.enter_details));
+        }else if (imagesList.size()==0) {
+            showToast(getActivity(),"Please select Event Images.");
+        }else
+        {
+            addRestaurant();
+        }
     }
 
     public void showImageSelection() {
@@ -226,6 +332,46 @@ public class PostRestaurentFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+
+                strLocation = place.getAddress();
+                LatLng latLng = place.getLatLng();
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                myLatitude = Double.toString(latitude);
+                myLongitude = Double.toString(longitude);
+
+                String address = place.getAddress();
+
+                strLocation = address;
+
+                binding.etLocation.setText(address);
+
+                binding.etLocation.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        binding.etLocation.setText(address);
+                    }
+                });
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+
+
+
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == SELECT_FILE) {
@@ -266,7 +412,6 @@ public class PostRestaurentFragment extends Fragment {
 
                 try {
                     if (data != null) {
-
 
                         if(whichSelected.equalsIgnoreCase("event"))
                         {
@@ -348,7 +493,6 @@ public class PostRestaurentFragment extends Fragment {
             }
             return false;
         } else {
-
             //  explain("Please Allow Location Permission");
             return true;
         }
@@ -428,8 +572,8 @@ public class PostRestaurentFragment extends Fragment {
         RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
         RequestBody eventName = RequestBody.create(MediaType.parse("text/plain"), restrantName);
         RequestBody address = RequestBody.create(MediaType.parse("text/plain"), strLocation);
-        RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), "");
-        RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
+        RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
 
         Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId,eventName,address,lat,lon,description,filePart,filePartList);
@@ -442,7 +586,6 @@ public class PostRestaurentFragment extends Fragment {
                     SuccessResAddRestaurant data = response.body();
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG,"Test Response :"+responseString);
-
                     startActivity(new Intent(getActivity(), HomeComapnyAct.class));
 
                 } catch (Exception e) {
@@ -457,7 +600,6 @@ public class PostRestaurentFragment extends Fragment {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-
     }
 
     public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
@@ -486,6 +628,49 @@ public class PostRestaurentFragment extends Fragment {
         return Uri.parse(path);
     }
 
+    public void purchasePlan() {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
+        dialog.setContentView(R.layout.dialog_purchase_subscription);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+        dialog.setCanceledOnTouchOutside(false);
+
+        AppCompatButton purchaseBtn = dialog.findViewById(R.id.btnPurchase);
+        AppCompatButton cancelBtn = dialog.findViewById(R.id.btnCancel);
+
+        purchaseBtn.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), PaymentsAct.class)
+                            .putExtra("from","rest")
+                            .putExtra("restrantName",restrantName)
+                            .putExtra("str_image_path",str_image_path)
+                            .putExtra("strLocation",strLocation)
+                            .putExtra("lat",myLatitude)
+                            .putExtra("lon",myLongitude)
+                            .putExtra("strDetails",strDetails)
+                            .putExtra("imagesList",imagesList)
+                    );
+                }
+                );
+
+        cancelBtn.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+        );
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
 
 
 }

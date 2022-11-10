@@ -1,11 +1,13 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.GetEventsByCategoryIdAct;
 import com.my.vibras.act.ui.home.HomeViewModel;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetCategory;
@@ -53,6 +56,8 @@ public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             ImageView ivCategory = holder.itemView.findViewById(R.id.ivCategory);
 
+            LinearLayout llParent = holder.itemView.findViewById(R.id.llParent);
+
             TextView tvCategory = holder.itemView.findViewById(R.id.tvEventName);
 
             Glide.with(mContext)
@@ -60,6 +65,14 @@ public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .into(ivCategory);
 
             tvCategory.setText(model.getName());
+
+            llParent.setOnClickListener(v ->
+                    {
+                        mContext.startActivity(new Intent(mContext, GetEventsByCategoryIdAct.class).putExtra("id",model.getId())
+                                .putExtra("name",model.getName())
+                        );
+                    }
+                    );
 
         }
     }

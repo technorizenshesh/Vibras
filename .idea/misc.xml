@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.18055555555555555" />
+        <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.1453125" />
         <entry key="app/src/main/res/drawable-v24/border_black_small.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/bottom_nav_icon_color_selector.xml" value="0.149" />
         <entry key="app/src/main/res/drawable-v24/left_message_background.xml" value="0.1635" />
@@ -14,16 +15,26 @@
         <entry key="app/src/main/res/drawable/black_cornors_gray_30.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border_dark_gray.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/border_stroke_color_gray.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/chat_et_bg.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/chats.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/circle_gray.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/gradiant_btn_prm.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/gray_cornors_5.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/green_gradient.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_user_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/left_message_background.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/light_blue_fill.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/light_gray_fill.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/megenta_gradient.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/pink_gradient.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/rec_corons_white.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/right_message_background.xml" value="0.2375" />
+        <entry key="app/src/main/res/drawable/topleft_bottomleft_cornor30.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/topright_bottomright_cornor30.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/white_cornors_30.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_about_us2.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_add_comment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_add_payment_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_all_comments.xml" value="0.10416666666666667" />
@@ -31,11 +42,17 @@
         <entry key="app/src/main/res/layout/activity_chat_details_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_comapmny_setting.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_complete_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_get_events_by_category_id.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/activity_good_vibes.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_group_chat.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_group_detail.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_help.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_home_company.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_like_interests.xml" value="0.15" />
@@ -44,11 +61,13 @@
         <entry key="app/src/main/res/layout/activity_notification_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_payments.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_post_comment.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_privacy_policy.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_restaurant.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_saved_events.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_saved_restaurant.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_search_conversation_user.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_event.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_rest.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/activity_select_viber_login.xml" value="0.25" />
@@ -60,27 +79,34 @@
         <entry key="app/src/main/res/layout/activity_terms_condition.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_transaction.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_verification.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_view_all_category.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_view_all_event.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/adapter_chat.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/activity_view_all_groups.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/adapter_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/adapter_group_chat.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/comment_item.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialog_add_card.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_add_cvv.xml" value="0.18" />
         <entry key="app/src/main/res/layout/dialog_choose_edit.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/dialog_group_name.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/dialog_purchase_subscription.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_select_date.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialog_show_image_selection.xml" value="0.11322463768115942" />
         <entry key="app/src/main/res/layout/dialog_show_options.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/faqs_item.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_comapny_my_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_events.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_events_copamny.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21" />
-        <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.4904534606205251" />
+        <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_notifications_comapny.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_other_user_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_post_events.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_post_events.xml" value="0.2617845117845118" />
         <entry key="app/src/main/res/layout/fragment_post_events_restaurent.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/fragment_post_restaurent.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_post_restaurent.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_restaurant.xml" value="0.2140625" />
@@ -88,10 +114,17 @@
         <entry key="app/src/main/res/layout/images_item.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/item_all_coment.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_all_payments.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_all_trasaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_frndlist.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_group.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_group_member.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_like_intrested.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_selected_user.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_view_all_group.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/itme_add_group.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/itme_brouse_events.xml" value="0.5" />
         <entry key="app/src/main/res/layout/itme_cht.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/itme_grp_cht.xml" value="0.2" />
         <entry key="app/src/main/res/layout/itme_near_me.xml" value="0.33" />
         <entry key="app/src/main/res/layout/itme_near_me_rest.xml" value="0.25" />
         <entry key="app/src/main/res/layout/itme_view_all_event.xml" value="0.1984375" />
@@ -101,10 +134,12 @@
         <entry key="app/src/main/res/layout/post_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/restraunt_comment_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/search_item.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/simple_spinner_item.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/story_item.xml" value="0.75" />
-        <entry key="app/src/main/res/layout/user_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/user_item.xml" value="0.22" />
         <entry key="app/src/main/res/menu/bottom_nav_company_menu.xml" value="0.2140625" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2140625" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1135" />
       </map>
     </option>
   </component>

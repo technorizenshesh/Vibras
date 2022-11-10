@@ -18,16 +18,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.act.ChatDetailsScreen;
+import com.my.vibras.act.FilterAct;
 import com.my.vibras.act.FriendListAct;
+import com.my.vibras.act.SearchConversationUserAct;
 import com.my.vibras.adapter.ChatAdapter;
 import com.my.vibras.adapter.GroupChatAdapter;
 import com.my.vibras.adapter.SingleChatAdapter;
 import com.my.vibras.databinding.FragmentChatBinding;
 import com.my.vibras.model.HomModel;
+import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetConversation;
+import com.my.vibras.model.SuccessResGetGroup;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -52,6 +56,8 @@ public class ChatFragment extends Fragment implements SingleChatAdapter.OnItemCl
 
     GroupChatAdapter mAdapter;
 
+    private ArrayList<SuccessResGetGroup.Result> groupList = new ArrayList<>();
+
     SingleChatAdapter mAdapterNew;
 
     private ArrayList<SuccessResGetConversation.Result> modelList = new ArrayList<>();
@@ -69,55 +75,26 @@ public class ChatFragment extends Fragment implements SingleChatAdapter.OnItemCl
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
+        binding.etSearch.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), SearchConversationUserAct.class));
+                }
+                );
+
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
             getConversation();
+            getMyGroupList();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
-
         binding.RRFrnd.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), FriendListAct.class));
         });
-
         return binding.getRoot();
     }
 
-    private void setAdapter()
-    {
-
-//        mAdapter = new GroupChatAdapter(getActivity(),modelList);
-//        binding.rvGrp.setHasFixedSize(true);
-//        // use a linear layout manager
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        binding.rvGrp.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-//        //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
-//        binding.rvGrp.setAdapter(mAdapter);
-//        mAdapter.SetOnItemClickListener(new GroupChatAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position, HomModel model) {
-//            }
-//        });
-    }
-
-    private void setAdapterSingle()
-    {
-
-//        modelListNew.add(new HomModel(""));
-//        modelListNew.add(new HomModel(""));
-//        modelListNew.add(new HomModel(""));
-//        modelListNew.add(new HomModel(""));
-//        modelListNew.add(new HomModel(""));
-//        mAdapterNew = new SingleChatAdapter(getActivity(),modelList);
-
-//        binding.rvSingle.setHasFixedSize(true);
-//        // use a linear layout manager
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-//        binding.rvSingle.setLayoutManager(linearLayoutManager);
-//        //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
-//        binding.rvSingle.setAdapter(mAdapterNew);
-    }
-
     private void getConversation() {
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         Map<String,String> map = new HashMap<>();
         map.put("receiver_id",userId);
@@ -140,7 +117,6 @@ public class ChatFragment extends Fragment implements SingleChatAdapter.OnItemCl
                         conversation.clear();
                         binding.rvSingle.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvSingle.setAdapter(new SingleChatAdapter(getActivity(),conversation,ChatFragment.this::onItemClick));
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -152,6 +128,95 @@ public class ChatFragment extends Fragment implements SingleChatAdapter.OnItemCl
                 DataManager.getInstance().hideProgressMessage();
             }
         });
+    }
+
+    private void getMyGroupList() {
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        Call<SuccessResGetGroup> call = apiInterface.getMygroupApi(map);
+        call.enqueue(new Callback<SuccessResGetGroup>() {
+            @Override
+            public void onResponse(Call<SuccessResGetGroup> call, Response<SuccessResGetGroup> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetGroup data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+
+                        groupList.clear();
+
+                        groupList.addAll(data.getResult());
+
+                        mAdapter = new GroupChatAdapter(getActivity(), groupList, new GroupChatAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position, SuccessResGetGroup.Result model) {
+
+                                deleteGroup(groupList.get(position).getId());
+
+                            }
+                        });
+                        binding.rvGrp.setHasFixedSize(true);
+                        // use a linear layout manager
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        binding.rvGrp.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+                        //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
+                        binding.rvGrp.setAdapter(mAdapter);
+
+                    } else if (data.status.equals("0")) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResGetGroup> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+
+    public void deleteGroup(String postId)
+    {
+
+        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("group_id",postId);
+        Call<SuccessResAddLike> call = apiInterface.deleteGroup(map);
+        call.enqueue(new Callback<SuccessResAddLike>() {
+            @Override
+            public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResAddLike data = response.body();
+                    Log.e("data",data.status+"");
+                    if (data.status==1) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        getMyGroupList();
+
+                    } else if (data.status==0) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+
     }
 
     @Override

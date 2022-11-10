@@ -27,15 +27,12 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<SuccessResGetUsers.Result> modelList;
     private OnItemClickListener mItemClickListener;
-
     private HomeItemClickListener homeItemClickListener;
-
     boolean isClick=false;
 
     public HomeUsersRecyclerViewAdapter(Context context,ArrayList<SuccessResGetUsers.Result> modelList,HomeItemClickListener homeItemClickListener) {
@@ -50,60 +47,71 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
-        TextView txtName;
-
+        TextView txtName,tvDistance,tvOnlineStatus;
         ImageView ivFull,ivOtherLike,ivProfileLike,ivChat,ivFire;
         CircleImageView smallImage;
-
         txtName = holder.itemView.findViewById(R.id.tvUserName);
+        tvOnlineStatus = holder.itemView.findViewById(R.id.tvOnlineStatus);
+        tvDistance = holder.itemView.findViewById(R.id.tvDistance);
         smallImage = holder.itemView.findViewById(R.id.icSmallProfile);
         ivFull = holder.itemView.findViewById(R.id.ivUser);
         ivOtherLike = holder.itemView.findViewById(R.id.ivOtherLike);
-
         ivProfileLike = holder.itemView.findViewById(R.id.ivLike);
         ivChat = holder.itemView.findViewById(R.id.ivChat);
         ivFire = holder.itemView.findViewById(R.id.ivFire);
-
         ivProfileLike.setOnClickListener(v ->
                 {
-                    homeItemClickListener.addLikeToUser(position);
+                  homeItemClickListener.addLikeToUser(position);
                 }
                 );
 
+        if(modelList.get(position).getOnlineStatus().equalsIgnoreCase("1"))
+        {
+            tvOnlineStatus.setText("online");
+        } else
+        {
+            tvOnlineStatus.setText("offline");
+        }
+
+        tvDistance.setText(modelList.get(position).getDistance()+" kms away");
         ivFire.setOnClickListener(v ->
                 {
                   homeItemClickListener.addCommentToUser(position);
                 }
                 );
 
+        if(modelList.get(position).getUserMatch().equalsIgnoreCase("Matched"))
+        {
+            ivChat.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            ivChat.setVisibility(View.GONE);
+        }
+
         ivChat.setOnClickListener(v ->
                 {
-                    if(modelList.get(position).getUserMatch().equalsIgnoreCase("Matched"))
-                    {
-                        mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId()));
-                    }
+                    mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId())
+                            .putExtra("name",modelList.get(position).getFirstName()+" "+modelList.get(position).getLastName())
+                    );
                 }
                 );
-
         Glide.with(mContext)
                 .load(modelList.get(position).getImage())
                 .into(ivFull);
-
         Glide.with(mContext)
                 .load(modelList.get(position).getImage())
                 .into(smallImage);
-
         txtName.setText(modelList.get(position).getFirstName()+" "+modelList.get(position).getLastName());
-
         ivOtherLike.setOnClickListener(v ->
                 {
                     homeItemClickListener.addUserProfileLike(position);
                 }
                 );
-
         smallImage.setOnClickListener(v ->
                 {
                     Bundle bundle1 = new Bundle();

@@ -1,12 +1,23 @@
 <resources>
+    <array name="initial_slider_values">
+        <item>20.0</item>
+        <item>70.0</item>
+    </array>
+
+    <!--    <string name="api_key">AIzaSyBduv61ywGy3e9mU6NJ_a7GHCf5oSbxT2w</string>-->
+
+    <string name="api_key">AIzaSyCKqIVsOkMowy5Ur9mY-K2QN2Lax4F9O-c</string>
+
     <string name="app_name">VIBRAS</string>
     <string name="select_one">Select One-</string>
+    <string name="default_notification_channel_id">1</string>
     <string name="lorem_ipsum_is_simply_dummy_text_of_dummy_text_of_typesetting_industry">Lorem Ipsum is simply dummy text of dummy text of typesetting industry</string>
     <string name="user">User</string>
     <string name="company">Company</string>
     <string name="email_mobile_number">Email</string>
     <string name="forgot_your_password"><u>Forgot your password?</u></string>
     <string name="next">Next</string>
+    <string name="fetching_fcm_token_failed">Fetching FCM registration token failed</string>
     <string name="password">Password</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="verify">Verify</string>
@@ -35,7 +46,6 @@
     <string name="kat">To all the young designers out there- learn early to read the signs from organizations only want to instrumentalize you meet their objectives and have zero intentions to attend to your growth and development as a designer.</string>
     <string name="first_name">First Name</string>
     <string name="create_account">Create Account</string>
-
     <string name="save">Save</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_pass">Enter Password</string>
@@ -61,8 +71,8 @@
     <string name="please_enter_old_pass">Please enter old password.</string>
     <string name="please_enter_confirm_password">Please enter confirm password.</string>
     <string name="password_mismatched">Please make sure your password match.</string>
-    <string name="enter_new_password">Please enter new password.</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="enter_new_password">Please enter new password.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="transactions">Transactions</string>
     <string name="notifications">Notifications</string>
@@ -70,7 +80,6 @@
     <string name="order_notifcations">Order Notifcations</string>
     <string name="friends">Friends</string>
     <string name="comments">Comments</string>
-
     <string name="delete_post">Delete Post</string>
     <string name="are_you_sure_want_to_delete_post">Are you sure you want to delete Post?</string>
     <string name="select_what_to_edit">Select what to Edit</string>
@@ -101,5 +110,27 @@
     <string name="category_of_event">Category of Event</string>
     <string name="restaurants">Restaurants</string>
     <string name="push_notifications">Push Notifications</string>
-
+    <string name="permisson_denied">Permission Denies</string>
+    <string name="enter_group_name">Enter Group Name</string>
+    <string name="view"><u>View</u></string>
+    <string name="create_group">Create Group</string>
+    <string name="pay">Pay</string>
+    <string name="manage_and_set_your_preferences_to_find_the_best_matches_for_you_keep_enjoying">Manage and set your preferences to find the best matches for you, keep enjoying!</string>
+    <string name="date_of_event">Date of Event</string>
+    <string name="name_of_event">Name of Event</string>
+    <string name="time_of_event">Time of Event</string>
+    <string name="location_of_event">Location of event</string>
+    <string name="add_photos_videos">Add Photos/ Videos</string>
+    <string name="group_detail">Group Detail</string>
+    <string name="join">Join</string>
+    <string name="participants">Participants</string>
+    <string name="event_categories">Event Categories</string>
+    <string name="help">Help</string>
+    <string name="groups">Groups</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="about_us">About Us</string>
+    <string name="add_like">Add Like</string>
+    <string name="signup">Signup</string>
 </resources>

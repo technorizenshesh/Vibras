@@ -82,8 +82,9 @@
             android:layout_gravity="bottom"
             android:layout_toRightOf="@+id/image_arrow_left"
             android:background="@drawable/left_message_background"
-            android:paddingVertical="10dp"
             android:paddingHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_10sdp"
+            android:paddingVertical="10dp"
             android:text="hi" />
 
         <TextView
@@ -92,9 +93,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/chat_left_msg_text_view"
             android:maxLines="1"
+            android:textSize="@dimen/_10sdp"
             android:text="5 min ago" />
     </RelativeLayout>
-
 
     <RelativeLayout
         android:id="@+id/chat_right_msg_layout"
@@ -114,6 +115,7 @@
             android:background="@drawable/right_message_background"
             android:paddingVertical="10dp"
             android:paddingHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_10sdp"
             android:text="Hello"
             android:textColor="@color/white" />
 
@@ -126,6 +128,7 @@
             android:visibility="gone"
             android:layout_alignParentRight="true"
             android:backgroundTint="#e1ffc7"
+            android:textSize="@dimen/_10sdp"
             android:rotation="270" />
 
         <RelativeLayout

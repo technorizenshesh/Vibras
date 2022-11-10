@@ -52,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Post Cover Image"
-                android:textAllCaps="true"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/black"
                 />
@@ -125,6 +124,9 @@
                     android:hint="@string/enter_restaurant_location"
                     android:inputType="text"
                     android:padding="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:editable="false"
+                    android:focusable="false"
                     android:textColor="@color/black"
                     android:textColorHint="@color/gray">
 
@@ -155,9 +157,9 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:background="@android:color/transparent"
+                    android:gravity="top"
                     android:hint="@string/enter_details"
                     android:padding="@dimen/_10sdp"
-                    android:gravity="top"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12sdp" />
 

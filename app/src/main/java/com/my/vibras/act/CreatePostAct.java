@@ -24,8 +24,11 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.databinding.ActivityCreatePostBinding;
+import com.my.vibras.model.SuccessResGetMyStories;
 import com.my.vibras.model.SuccessResUploadPost;
+import com.my.vibras.model.SuccessResUploadStory;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
@@ -35,8 +38,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,13 +66,13 @@ public class CreatePostAct extends AppCompatActivity {
     private static final int MY_PERMISSION_CONSTANT = 5;
     boolean cameraClicked = true;
     private String type = "POST";
-
+    private boolean haveStory = false;
+    private String strSuperLikes;
+    private String storyID = "";
     private VibrasInterface apiInterface;
-
     private String description="";
-
     private String postType = "";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +95,31 @@ public class CreatePostAct extends AppCompatActivity {
                     if(!str_image_path.equalsIgnoreCase(""))
                     {
                         description = binding.etDescription.getText().toString().trim();
-                        uploadPost();
+                        if(type.equalsIgnoreCase("STORY"))
+                        {
+                            ArrayList<String> imagesVideosPathList = new ArrayList<>();
+                            imagesVideosPathList.add(str_image_path);
+                            boolean image = false;
+                            if(postType.equalsIgnoreCase("image"))
+                            {
+                                image = true;
+                            }else
+                            {
+                                image = false;
+                            }
+                            if(haveStory)
+                            {
+                                updateStory(imagesVideosPathList,image,postType);
+                            }
+                            else
+                            {
+                                uploadStory(imagesVideosPathList,image,postType);
+                            }
+                        }
+                        else
+                        {
+                            uploadPost();
+                        }
                     }else
                     {
                         Toast.makeText(CreatePostAct.this,"Please select a media file.",Toast.LENGTH_SHORT).show();
@@ -110,9 +139,7 @@ public class CreatePostAct extends AppCompatActivity {
 
         binding.ivCamera.setOnClickListener(v ->
                 {
-
                     postType = "image";
-                    
                     cameraClicked = true;
                     if(checkPermisssionForReadStorage())
                     {
@@ -129,16 +156,77 @@ public class CreatePostAct extends AppCompatActivity {
                     {
                         getPhotoFromGallary();
                     }
-
                 }
                 );
 
+        if (NetworkAvailablity.checkNetworkStatus(CreatePostAct.this)) {
+
+            getStories();
+
+        } else {
+            Toast.makeText(CreatePostAct.this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
-    public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
-        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+    public void uploadStory(ArrayList<String> imagesVideosPathList, boolean image, String type1) {
 
+        String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
+
+        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+
+        List<MultipartBody.Part> filePartList = new LinkedList<>();
+
+        if (image) {
+            for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+            }
+        } else {
+            for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                File file = new File(imagesVideosPathList.get(i));
+                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+            }
+        }
+
+        RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+        RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
+        Call<SuccessResUploadStory> loginCall = apiInterface.uploadStory(userId, caption, type, filePartList);
+
+        loginCall.enqueue(new Callback<SuccessResUploadStory>() {
+            @Override
+            public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResUploadStory data = response.body();
+                    Log.e("data", data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        showToast(CreatePostAct.this, data.message);
+                        finish();
+                    } else if (data.status.equals("0")) {
+                        showToast(CreatePostAct.this, data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Test Response :" + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
+
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
         float ratioX = newWidth / (float) bitmap.getWidth();
         float ratioY = newHeight / (float) bitmap.getHeight();
         float middleX = newWidth / 2.0f;
@@ -150,7 +238,6 @@ public class CreatePostAct extends AppCompatActivity {
         canvas.setMatrix(scaleMatrix);
         canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
         return scaledBitmap;
-
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -196,9 +283,7 @@ public class CreatePostAct extends AppCompatActivity {
                                 .load(imageBitmap)
                                 .centerCrop()
                                 .into(binding.ivProfile);
-
 //                        updateCoverPhoto();
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -207,7 +292,6 @@ public class CreatePostAct extends AppCompatActivity {
             }
         }
     }
-
 
     //CHECKING FOR Camera STATUS
     public boolean checkPermisssionForReadStorage() {
@@ -268,15 +352,12 @@ public class CreatePostAct extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-/*
 
+                    /*
                     Log.e("Latittude====", gpsTracker.getLatitude() + "");
-
                     strLat = Double.toString(gpsTracker.getLatitude()) ;
                     strLng = Double.toString(gpsTracker.getLongitude()) ;
 */
-
-//
 //                    if (isContinue) {
 //                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreatePostAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //                            // TODO: Consider calling
@@ -291,7 +372,6 @@ public class CreatePostAct extends AppCompatActivity {
 //                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 //                    } else {
 //                        Log.e("Latittude====", gpsTracker.getLatitude() + "");
-//
 //                        strLat = Double.toString(gpsTracker.getLatitude()) ;
 //                        strLng = Double.toString(gpsTracker.getLongitude()) ;
 //                    }
@@ -304,7 +384,6 @@ public class CreatePostAct extends AppCompatActivity {
             case MY_PERMISSION_CONSTANT: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0) {
-
                     boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean read_external_storage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     boolean write_external_storage = grantResults[2] == PackageManager.PERMISSION_GRANTED;
@@ -341,9 +420,7 @@ public class CreatePostAct extends AppCompatActivity {
     }
 
     public void uploadPost() {
-
         String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
         MultipartBody.Part filePart;
         if (!str_image_path.equalsIgnoreCase("")) {
@@ -381,9 +458,7 @@ public class CreatePostAct extends AppCompatActivity {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         showToast(CreatePostAct.this, data.message);
-
                         finish();
-
                     } else if (data.status.equals("0")) {
                         showToast(CreatePostAct.this, data.message);
                     }
@@ -402,6 +477,89 @@ public class CreatePostAct extends AppCompatActivity {
         });
     }
 
+    private void getStories() {
+        String userId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        Call<SuccessResGetMyStories> call = apiInterface.getMyStory(map);
+        call.enqueue(new Callback<SuccessResGetMyStories>() {
+            @Override
+            public void onResponse(Call<SuccessResGetMyStories> call, Response<SuccessResGetMyStories> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetMyStories data = response.body();
+                    Log.e("data", data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        haveStory = true;
+                        storyID = data.getResult().get(0).getId();
+                    } else if (data.status.equals("0")) {
+                        //    showToast(getActivity(), data.message);
+                        haveStory = false;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResGetMyStories> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    public void updateStory(ArrayList<String> imagesVideosPathList, boolean image, String type1) {
+        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+        List<MultipartBody.Part> filePartList = new LinkedList<>();
+        if (image) {
+            for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+            }
+        } else {
+            for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                File file = new File(imagesVideosPathList.get(i));
+                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+            }
+        }
+        String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
+        RequestBody userID = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+        RequestBody storyId = RequestBody.create(MediaType.parse("text/plain"), storyID);
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
+        Call<SuccessResUploadStory> loginCall = apiInterface.updateStory(userID,storyId, type, filePartList);
+        loginCall.enqueue(new Callback<SuccessResUploadStory>() {
+            @Override
+            public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResUploadStory data = response.body();
+                    Log.e("data", data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        showToast(CreatePostAct.this, data.message);
+                        finish();
+
+                    } else if (data.status.equals("0")) {
+                        showToast(CreatePostAct.this, data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Test Response :" + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
 
 
 
