@@ -47,7 +47,12 @@ public class SubsCriptionAct extends AppCompatActivity {
         });
 
         binding.llBasic.setOnClickListener(v -> {
-            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class));
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class)
+                    .putExtra("type",subscriptionList.get(0).getPlanType())
+                    .putExtra("planId",subscriptionList.get(0).getId())
+                    .putExtra("planPrice",subscriptionList.get(0).getMonthlyPrice())
+                    .putExtra("from","user")
+            );
         });
 
         binding.btnStandard.setOnClickListener(v -> {
@@ -59,9 +64,9 @@ public class SubsCriptionAct extends AppCompatActivity {
         });
 
         binding.btnPremium.setOnClickListener(v -> {
-            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class).putExtra("type",subscriptionList.get(2).getPlanType())
-                    .putExtra("planId",subscriptionList.get(2).getId())
-                    .putExtra("planPrice",subscriptionList.get(2).getMonthlyPrice())
+            startActivity(new Intent(SubsCriptionAct.this,PaymentsAct.class).putExtra("type",subscriptionList.get(1).getPlanType())
+                    .putExtra("planId",subscriptionList.get(1).getId())
+                    .putExtra("planPrice",subscriptionList.get(1).getMonthlyPrice())
                     .putExtra("from","user")
             );
         });
@@ -110,14 +115,13 @@ public class SubsCriptionAct extends AppCompatActivity {
         binding.tvService.setText(Html.fromHtml(subscriptionList.get(0).getDescription()));
 
         binding.PlanName.setText(subscriptionList.get(0).getName());
-
         binding.tv2Services.setText(Html.fromHtml(subscriptionList.get(1).getDescription()));
         binding.planName2.setText(subscriptionList.get(1).getName());
         binding.tv2Price.setText("19");
 
-        binding.tv3Services.setText(Html.fromHtml(subscriptionList.get(2).getDescription()));
-        binding.planName3.setText(subscriptionList.get(2).getName());
-        binding.tv3Price.setText("40");
+       // binding.tv3Services.setText(Html.fromHtml(subscriptionList.get(2).getDescription()));
+      //  binding.planName3.setText(subscriptionList.get(1).getName());
+      //  binding.tv3Price.setText("40");
 
     }
 

@@ -40,6 +40,7 @@ import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResInsertGroupChat;
 import com.my.vibras.model.SuccessResMakePayment;
 import com.my.vibras.model.SuccessResMyEventRes;
+import com.my.vibras.model.SuccessResMyJoinedEvents;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.model.SuccessResUpdateRate;
@@ -205,7 +206,6 @@ public interface VibrasInterface {
             @Part("chat_message") RequestBody chatMessage,
             @Part("type") RequestBody type
     );
-
 
     @FormUrlEncoded
     @POST("get_chat")
@@ -461,6 +461,10 @@ public interface VibrasInterface {
 
     @FormUrlEncoded
     @POST("get_my_join_event")
-    Call<SuccessResGetEvents> getMyJoinedEvents(@FieldMap Map<String, String> paramHashMap);
+    Call<SuccessResMyJoinedEvents> getMyJoinedEvents(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("storylikeunlike")
+    Call<ResponseBody> addStoryLike(@FieldMap Map<String, String> paramHashMap);
 
 }

@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.act.ui.myprofile.MyProfileFragment;
 import com.my.vibras.act.ui.profile.ProfileFragment;
@@ -143,10 +144,17 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
                 }
                 );
 
+        binding.llViewEvents.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from","other")
+                            .putExtra("id",otherUserId)
+                    );
+                }
+        );
+
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
 
             getProfile();
-
             getPosts();
 
         } else {

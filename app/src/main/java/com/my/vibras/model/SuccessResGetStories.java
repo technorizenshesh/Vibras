@@ -201,6 +201,9 @@ public class SuccessResGetStories {
         @SerializedName("time_ago")
         @Expose
         public String timeAgo;
+        @SerializedName("iliked")
+        @Expose
+        public String iliked;
 
         public String getId() {
             return id;
@@ -256,6 +259,14 @@ public class SuccessResGetStories {
 
         public void setTimeAgo(String timeAgo) {
             this.timeAgo = timeAgo;
+        }
+
+        public String getIliked() {
+            return iliked;
+        }
+
+        public void setIliked(String iliked) {
+            this.iliked = iliked;
         }
 
     }

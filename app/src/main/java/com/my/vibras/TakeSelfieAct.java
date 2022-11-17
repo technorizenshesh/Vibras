@@ -318,6 +318,7 @@ public class TakeSelfieAct extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title_" + System.currentTimeMillis(), null);
         return Uri.parse(path);
     }
+
     public void updateCoverPhoto()
     {
 

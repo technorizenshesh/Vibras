@@ -107,6 +107,7 @@ public class SuccessResSignup implements Serializable {
         public String fLocation;
         @SerializedName("f_lat")
         @Expose
+
         public String fLat;
         @SerializedName("f_lon")
         @Expose

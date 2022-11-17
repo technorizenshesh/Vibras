@@ -1,9 +1,11 @@
 package com.my.vibras.act;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,9 +42,7 @@ import static com.my.vibras.retrofit.Constant.showToast;
 public class FilterAct extends AppCompatActivity {
 
     private VibrasInterface apiInterface;
-
     ActivityFilterBinding binding;
-
     private SuccessResSignup.Result userDetail;
 
     String[] arrrayShouldNot = new String[] {
@@ -57,7 +57,7 @@ public class FilterAct extends AppCompatActivity {
     };
 
     String[] arrayMeet = new String[] {
-            "Man", "Women"
+            "Man", "Women","Both"
     };
 
     String[] arrayAgeRange = new String[] {
@@ -75,13 +75,36 @@ public class FilterAct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+         super.onCreate(savedInstanceState);
          binding= DataBindingUtil.setContentView(this,R.layout.activity_filter);
+
          binding.RRback.setOnClickListener(v -> {
             onBackPressed();
          });
 
-        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+
+         binding.ivReset.setOnClickListener(v ->
+                {
+                    new AlertDialog.Builder(FilterAct.this)
+                            .setTitle("Reset Filter")
+                            .setMessage("Are you sure you want to reset this filter?")
+
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Continue with delete operation
+
+                                }
+                            })
+
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                );
 
         binding.ageSlider.setLabelFormatter(new LabelFormatter() {
             @NonNull
@@ -92,6 +115,14 @@ public class FilterAct extends AppCompatActivity {
             }
         });
 
+        binding.distanceSlider.setLabelFormatter(new LabelFormatter() {
+            @NonNull
+            @Override
+            public String getFormattedValue(float value) {
+                //It is just an example
+                return String.format(Locale.US, "%.0f", value);
+            }
+        });
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrrayShouldNot);
         binding.spinnerShouldNot.setAdapter(adapter);
@@ -101,6 +132,7 @@ public class FilterAct extends AppCompatActivity {
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayMeet);
         binding.spinnerWantToUse.setAdapter(adapter);
+
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayLanaguage);
         binding.spinnerLanguage.setAdapter(adapter);
 
@@ -109,18 +141,16 @@ public class FilterAct extends AppCompatActivity {
                     shouldNot = binding.spinnerShouldNot.getSelectedItem().toString();
                     should = binding.spinnerShould.getSelectedItem().toString();
                     wantToMeet = binding.spinnerWantToUse.getSelectedItem().toString();
-
                     List<Float> val = binding.ageSlider.getValues();
-
                     float f11 = val.get(0);
                     ageRangeFrom = String.valueOf(f11);
-
                     f11 = val.get(1);
                     ageRangeTo = String.valueOf(f11);
                     preferedLang = binding.spinnerLanguage.getSelectedItem().toString();
                     location = binding.etLocation.getText().toString();
-                    float f = binding.slider.getValue();
-                    distance = String.valueOf(f);
+                    List<Float> values = binding.distanceSlider.getValues();
+                    float f12 = values.get(0);
+                    distance = String.valueOf(f12);
                     if(location.equalsIgnoreCase(""))
                     {
                         Toast.makeText(FilterAct.this, "Please enter location.", Toast.LENGTH_SHORT).show();
@@ -277,6 +307,11 @@ public class FilterAct extends AppCompatActivity {
         f1.add(ageFrom);
         f1.add(ageTo);
         binding.ageSlider.setValues(f1);
+
+        float f12 = Float.parseFloat(userDetail.getDistance());
+
+        binding.distanceSlider.setValues(f12);
+
 
     }
 

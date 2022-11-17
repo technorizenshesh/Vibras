@@ -100,11 +100,8 @@ public class NotificationsFragment extends Fragment implements DeletePost {
 
     @Override
     public void bottomSheet(View param1, String postID, boolean isUser, int position) {
-
         acceptRejectGroup(notificationList.get(position).getProductId(),postID);
-
     }
-
 
     public void acceptRejectGroup(String requestId,String status)
     {

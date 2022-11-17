@@ -63,7 +63,6 @@ public class MyApplication extends Application implements LifecycleObserver {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResSignup data = response.body();
-
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());

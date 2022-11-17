@@ -9,8 +9,10 @@ import android.os.Bundle;
 import com.my.vibras.R;
 import com.my.vibras.SelectViberLoginAct;
 import com.my.vibras.act.ChangePassAct;
+import com.my.vibras.act.HelpAct;
 import com.my.vibras.act.NotificationScreenAct;
 import com.my.vibras.act.PaymentsAct;
+import com.my.vibras.act.PrivacyPolicyAct;
 import com.my.vibras.act.SavedEventsAct;
 import com.my.vibras.act.SavedRestaurantAct;
 import com.my.vibras.act.SettingAct;
@@ -41,6 +43,20 @@ public class ComapmnySettingAct extends AppCompatActivity {
         binding.RRNotification.setOnClickListener(v -> {
             startActivity(new Intent(ComapmnySettingAct.this, NotificationScreenAct.class));
         });
+
+        binding.RRpasword.setOnClickListener(v -> {
+            startActivity(new Intent(ComapmnySettingAct.this, ChangePassAct.class));
+        });
+
+        binding.RRPP.setOnClickListener(v -> {
+            startActivity(new Intent(ComapmnySettingAct.this, PrivacyPolicyAct.class));
+        });
+
+        binding.RRFAQ.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(ComapmnySettingAct.this, HelpAct.class));
+                }
+        );
 
         binding.RRpasword.setOnClickListener(v -> {
             startActivity(new Intent(ComapmnySettingAct.this, ChangePassAct.class));

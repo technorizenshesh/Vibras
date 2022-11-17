@@ -212,6 +212,7 @@
                     >
 
                     <LinearLayout
+                        android:id="@+id/llViewEvents"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/border_black_cir"

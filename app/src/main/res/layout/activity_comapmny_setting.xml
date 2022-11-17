@@ -54,13 +54,13 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center">
 
                     <ImageView
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_100sdp"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
                         android:src="@drawable/profile_im">
 
                     </ImageView>
@@ -137,6 +137,9 @@
                         android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
+
+
+
 
                 <RelativeLayout
                     android:id="@+id/rlEvents"
@@ -291,6 +294,68 @@
 
                 </RelativeLayout>
 
+
+                <RelativeLayout
+                    android:id="@+id/RRPP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/profile_icon"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Privacy Policy"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/RRFAQ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/profile_icon"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Help"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
+
+
                 <RelativeLayout
                     android:id="@+id/RRSignOut"
                     android:layout_width="match_parent"
@@ -321,6 +386,7 @@
                     android:text="Olivia Austin"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
+                    android:visibility="gone"
                     android:textStyle="bold" />
 
             </LinearLayout>

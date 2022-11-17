@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.ChatDetailsScreen;
+import com.my.vibras.chat.AllChatUserModel;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetConversation;
@@ -89,6 +90,10 @@ public class SingleChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public interface OnItemClickListener {
 
         void onItemClick(View view, int position, SuccessResGetConversation.Result model);
+
+    }  public interface OnItemDeleteClickListener {
+
+        void onItemDeleteClick(View view, int position, AllChatUserModel model);
 
     }
 

@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/User"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:visibility="gone"
+                    android:id="@+id/usercard"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"
+
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_15sdp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:cardMaxElevation="@dimen/_5sdp">
+
+                    <ImageView
+                        android:id="@+id/usersendimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:scaleType="fitXY"
+                        android:visibility="gone" />
+
+                </androidx.cardview.widget.CardView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userimage"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="@dimen/_20sdp"
+
+                    android:layout_marginLeft="@dimen/_5sdp"
+
+                    android:layout_marginTop="@dimen/_10sdp"
+
+
+                    />
+
+                <LinearLayout
+                    android:id="@+id/usermessagelayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_100sdp"
+
+                    android:layout_toLeftOf="@+id/userimage"
+                    android:background="@drawable/right_message_background"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:weightSum="2">
+
+
+                    <TextView
+                        android:id="@+id/userTextSHow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+                        android:text="Hi  "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp" />
+
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_below="@+id/usermessagelayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentRight="true"
+
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="1"
+                    android:gravity="left">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:layout_marginRight="@dimen/_25sdp"
+                        android:id="@+id/usertime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="2pm"
+                        android:textSize="8dp"
+                        />
+                </RelativeLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/usersenderimage"
+                    android:layout_width="@dimen/_20sdp"
+
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginRight="@dimen/_5sdp"
+
+
+                    />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="right">
+
+            <LinearLayout
+
+                android:id="@+id/friendmessagelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="@dimen/_100sdp"
+                android:layout_toRightOf="@+id/friendsenderimage"
+                android:background="@drawable/left_message_background"
+                android:orientation="vertical">
+
+
+                <TextView
+
+                    android:id="@+id/friendTextShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp"
+
+                    android:text="Hi, What's up? Can you dcome today by 09:00 AM"
+                    android:textColor="@color/black"
+
+                    android:textSize="@dimen/_14sdp" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/friendmessagelayout"
+                android:layout_alignStart="@+id/friendmessagelayout"
+                android:layout_gravity="left"
+
+                android:gravity="right">
+
+                <TextView
+                    android:id="@+id/friendtime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="2pm"
+                    android:textColor="@color/gray"
+                    android:textSize="8dp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/friendcard"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:visibility="gone"
+
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_15sdp"
+                app:cardElevation="@dimen/_5sdp"
+                app:cardMaxElevation="@dimen/_5sdp">
+
+                <ImageView
+                    android:id="@+id/recievesendimage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friendsenderimage"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+
+                android:layout_marginLeft="@dimen/_5sdp"
+
+                android:layout_marginTop="@dimen/_10sdp"
+
+
+                />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -45,9 +45,7 @@ public class SavedRestaurantAct extends AppCompatActivity implements PostClickLi
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_saved_restaurant);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         binding.RRback.setOnClickListener(v -> finish());
-
         myEventsAdapter = new MyRestaurantAdapter(SavedRestaurantAct.this,eventsList,this);
         binding.rvRestaurants.setHasFixedSize(true);
         binding.rvRestaurants.setLayoutManager(new LinearLayoutManager(SavedRestaurantAct.this));

@@ -78,9 +78,7 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_events_details_screen);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         Intent in = getIntent();
         if (in!=null)
         {
@@ -156,9 +154,7 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 
         binding.cvSignup.setOnClickListener(v ->
                 {
-
                     joinEvent();
-
                 }
                 );
 
@@ -168,9 +164,7 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 
         if(requestModel.getIammember().equalsIgnoreCase("No"))
         {
-
             binding.cvSignup.setVisibility(View.VISIBLE);
-
         }
         else
         {

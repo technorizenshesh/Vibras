@@ -133,4 +133,6 @@
     <string name="about_us">About Us</string>
     <string name="add_like">Add Like</string>
     <string name="signup">Signup</string>
+    <string name="delete_group">Delete Group</string>
+    <string name="share_using">Share Using</string>
 </resources>

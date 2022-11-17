@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.ChatDetailsScreen;
+import com.my.vibras.chat.ChatInnerMessagesActivity;
 import com.my.vibras.model.SuccessResGetInterest;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.utility.HomeItemClickListener;
@@ -95,9 +96,29 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         ivChat.setOnClickListener(v ->
                 {
-                    mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class).putExtra("id",modelList.get(position).getId())
-                            .putExtra("name",modelList.get(position).getFirstName()+" "+modelList.get(position).getLastName())
-                    );
+               /*     mContext.startActivity(new Intent(mContext, ChatDetailsScreen.class)
+                            .putExtra("id",modelList.get(position).getId())
+                            .putExtra("name",modelList.get(position).getFirstName()+
+                                    " "+modelList.get(position).getLastName()));*/
+
+                    Intent intent = new Intent(mContext, ChatInnerMessagesActivity.class);
+                    intent.putExtra("friend_id", modelList.get(position).getId());
+                    intent.putExtra("friendimage", modelList.get(position).getImage());
+                    intent.putExtra("friend_name", modelList.get(position).getFirstName()+
+                            " "+modelList.get(position).getLastName());
+                    intent.putExtra("last_message", "hii");
+                    intent.putExtra("messagetime", "1");
+                    intent.putExtra("status_check", modelList.get(position).getId());
+                    intent.putExtra("id", modelList.get(position).getId());
+                    intent.putExtra("onlinestatus", modelList.get(position).getImage());
+                    intent.putExtra("unique_id", modelList.get(position).getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+
+
+
+
+
                 }
                 );
         Glide.with(mContext)

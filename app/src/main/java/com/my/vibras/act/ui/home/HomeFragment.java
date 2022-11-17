@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.braintreepayments.cardform.OnCardFormSubmitListener;
 import com.braintreepayments.cardform.view.CardForm;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.mig35.carousellayoutmanager.CarouselLayoutManager;
 import com.mig35.carousellayoutmanager.CarouselZoomPostLayoutListener;
@@ -45,6 +47,7 @@ import com.my.vibras.act.PaymentsAct;
 import com.my.vibras.act.SearchAct;
 import com.my.vibras.adapter.HomeUsersRecyclerViewAdapter;
 import com.my.vibras.adapter.StoriesAdapter;
+import com.my.vibras.chat.ChatMessage;
 import com.my.vibras.databinding.FragmentHomeBinding;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResDeleteConversation;
@@ -61,9 +64,11 @@ import com.my.vibras.utility.CenterZoomLayoutManager;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.HomeItemClickListener;
+import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -95,12 +100,14 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
     private String strLat="",strLng="";
 
     private GPSTracker gpsTracker;
-
+Session session;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         gpsTracker = new GPSTracker(getActivity());
+        session= new Session(getActivity());
+        session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
         binding.RRSearch.setOnClickListener(v -> {
            startActivity(new Intent(getActivity(), SearchAct.class));
         });
@@ -188,16 +195,19 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
             public void onResponse(Call<SuccessResSignup> call, Response<SuccessResSignup> response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
-                    SuccessResSignup data = response.body();
-                    userDetail = data.getResult();
-                    Log.e("data",data.status);
-                    if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
-                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                        binding.txtName.setText("Good Vibes, "+data.getResult().getFirstName());
-                    } else if (data.status.equals("0")) {
-                        showToast(getActivity(), data.message);
-                    }
+                     if(response.body()!=null) {
+                         SuccessResSignup data = response.body();
+
+                         userDetail = data.getResult();
+                         Log.e("data", data.status);
+                         if (data.status.equals("1")) {
+                             String dataResponse = new Gson().toJson(response.body());
+                             Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                             binding.txtName.setText("Good Vibes, " + data.getResult().getFirstName());
+                         } else if (data.status.equals("0")) {
+                             showToast(getActivity(), data.message);
+                         }
+                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -364,6 +374,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
         RequestBody messageText = RequestBody.create(MediaType.parse("text/plain"), strChatMessage);
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "Text");
         RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
+
         Call<SuccessResInsertChat> loginCall = apiInterface.insertImageVideoChat(senderId,receiverId,messageText,type);
         loginCall.enqueue(new Callback<SuccessResInsertChat>() {
             @Override
@@ -376,7 +387,13 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         showToast(getActivity(), data.message);
-
+                        FirebaseDatabase.getInstance()
+                                .getReference()
+                                .child("chat")
+                                .push()
+                                .setValue(new ChatMessage(strUserId, selectedUser.getId(), strChatMessage,
+                                        selectedUser.getLastName(), "", "",
+                                        "" , "", selectedUser.getImage(),session.getChatImage()));
                         dialog.dismiss();
 
                     } else if (data.status.equals("0")) {
@@ -424,13 +441,26 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                     if(!editText.getText().toString().equalsIgnoreCase(""))
                     {
                         uploadImageVideoPost(editText.getText().toString());
+
+                        //TODO ----here
                     }else
                     {
                         Toast.makeText(getActivity(), "Please enter message.", Toast.LENGTH_SHORT).show();
                     }
                 }
         );
-
+/*   Intent intent = new Intent(context, ChatInnerMessagesActivity.class);
+        intent.putExtra("friend_id", alluserchatlist.get(position).getSender_id());
+        intent.putExtra("friendimage", holder.username.getText().toString());
+        intent.putExtra("friend_name", holder.username.getText().toString());
+        intent.putExtra("last_message", holder.lastmessage.getText().toString());
+        intent.putExtra("messagetime", "1");
+        intent.putExtra("status_check", alluserchatlist.get(position).getName());
+        intent.putExtra("id", alluserchatlist.get(position).getId());
+        intent.putExtra("onlinestatus", alluserchatlist.get(position).getImage());
+        intent.putExtra("unique_id", alluserchatlist.get(position).getName());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);*/
         dialog.show();
     }
 

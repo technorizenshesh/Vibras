@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.adapter.GroupMemberAdapter;
 import com.my.vibras.databinding.ActivityGroupDetailBinding;
+import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetGroupDetails;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -61,18 +62,14 @@ public class GroupDetailAct extends AppCompatActivity {
                     new AlertDialog.Builder(GroupDetailAct.this)
                             .setTitle("Join Group")
                             .setMessage("Are you sure you want to join this group?")
-
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // Continue with delete operation
-
                                      joinGroup();
-                                    
                                 }
                             })
-
                             // A null listener allows the button to dismiss the dialog and take no further action.
                             .setNegativeButton(android.R.string.no, null)
                             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -80,6 +77,25 @@ public class GroupDetailAct extends AppCompatActivity {
                 }
                 );
 
+        binding.rlDeleteGroup.setOnClickListener(v ->
+                {
+                    new AlertDialog.Builder(GroupDetailAct.this)
+                            .setTitle("Remove Group")
+                            .setMessage("Are you sure you want to remove this group?")
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Continue with delete operation
+                                    deleteGroup();
+                                }
+                            })
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+        );
         getGroup();
     }
 
@@ -100,21 +116,13 @@ public class GroupDetailAct extends AppCompatActivity {
 
                 try {
 //                    SuccessResAddComment data = response.body();
-
                     JSONObject jsonObject = new JSONObject(response.body().string());
-
                     String data = jsonObject.getString("status");
-
                     String message = jsonObject.getString("message");
-
                     if (data.equalsIgnoreCase("1")) {
-
                         String dataResponse = new Gson().toJson(response.body());
-
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-
                         finish();
-
                     } else if (data.equalsIgnoreCase("0")) {
                         showToast(GroupDetailAct.this,message);
                     }
@@ -126,6 +134,40 @@ public class GroupDetailAct extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    public void deleteGroup()
+    {
+        String userId = SharedPreferenceUtility.getInstance(GroupDetailAct.this).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(GroupDetailAct.this, getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("group_id",groupId);
+        Call<SuccessResAddLike> call = apiInterface.deleteGroup(map);
+        call.enqueue(new Callback<SuccessResAddLike>() {
+            @Override
+            public void onResponse(Call<SuccessResAddLike> call, Response<SuccessResAddLike> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResAddLike data = response.body();
+                    Log.e("data",data.status+"");
+                    if (data.status==1) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        finish();
+                    } else if (data.status==0) {
+                        showToast(GroupDetailAct.this, data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
             }
@@ -161,6 +203,14 @@ public class GroupDetailAct extends AppCompatActivity {
                         } else
                         {
                             binding.rlJoin.setVisibility(View.VISIBLE);
+                        }
+
+                        if(data.getResult().getUserId().equalsIgnoreCase(userId))
+                        {
+                            binding.rlDeleteGroup.setVisibility(View.VISIBLE);
+                        } else
+                        {
+                            binding.rlDeleteGroup.setVisibility(View.GONE);
                         }
 
                         memberIds = data.getResult().getMembersId();

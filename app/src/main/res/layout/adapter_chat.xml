@@ -83,9 +83,9 @@
             android:layout_toRightOf="@+id/image_arrow_left"
             android:background="@drawable/left_message_background"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:textSize="@dimen/_10sdp"
             android:paddingVertical="10dp"
-            android:text="hi" />
+            android:text="hi"
+            android:textSize="@dimen/_10sdp" />
 
         <TextView
             android:id="@+id/tv_time_left"
@@ -113,11 +113,11 @@
             android:layout_toStartOf="@+id/image_arrow_right"
             android:layout_toLeftOf="@+id/image_arrow_right"
             android:background="@drawable/right_message_background"
-            android:paddingVertical="10dp"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:textSize="@dimen/_10sdp"
+            android:paddingVertical="10dp"
             android:text="Hello"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp" />
 
         <ImageView
             android:id="@+id/image_arrow_right"

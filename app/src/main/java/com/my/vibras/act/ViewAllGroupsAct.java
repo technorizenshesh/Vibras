@@ -46,6 +46,11 @@ public class ViewAllGroupsAct extends AppCompatActivity {
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         binding.RRback.setOnClickListener(v -> finish());
         fromWhere = getIntent().getStringExtra("from");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if(fromWhere.equalsIgnoreCase("all"))
         {
             getAllGroups();
@@ -58,6 +63,7 @@ public class ViewAllGroupsAct extends AppCompatActivity {
             getOtherGroupList(otherUserId);
         }
     }
+
     private ArrayList<SuccessResGetGroup.Result> groupList = new ArrayList<>();
     AllGroupChatAdapter groupChatAdapter;
     private void getAllGroups() {
@@ -119,7 +125,6 @@ public class ViewAllGroupsAct extends AppCompatActivity {
                         binding.rvGrp.setLayoutManager(new GridLayoutManager(ViewAllGroupsAct.this,2));
                         //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
                         binding.rvGrp.setAdapter(new ViewAllGroupChatAdapter(ViewAllGroupsAct.this,groupList));
-
                     } else if (data.status.equals("0")) {
                         showToast(ViewAllGroupsAct.this, data.message);
                     }
@@ -134,7 +139,6 @@ public class ViewAllGroupsAct extends AppCompatActivity {
             }
         });
     }
-
 
     private void getMyGroupList() {
         DataManager.getInstance().showProgressMessage(ViewAllGroupsAct.this, getString(R.string.please_wait));
@@ -151,7 +155,6 @@ public class ViewAllGroupsAct extends AppCompatActivity {
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
-
                         groupList.clear();
                         groupList.addAll(data.getResult());
                         groupChatAdapter = new AllGroupChatAdapter(ViewAllGroupsAct.this,groupList);

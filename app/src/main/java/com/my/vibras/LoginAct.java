@@ -181,7 +181,7 @@ public class LoginAct extends AppCompatActivity {
                         {
                             SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE,"company");
                             SharedPreferenceUtility.getInstance(getApplication()).putBoolean(Constant.IS_USER_LOGGED_IN, true);
-                            startActivity(new Intent(LoginAct.this, HomeComapnyAct.class).putExtra("loginType",LoginType));
+                            startActivity(new Intent(LoginAct.this, HomeComapnyAct.class).putExtra("loginType",LoginType).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
                         }
 

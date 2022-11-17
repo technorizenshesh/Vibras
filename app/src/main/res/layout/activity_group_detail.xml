@@ -12,7 +12,7 @@
     android:layout_height="match_parent"
     tools:context=".act.ui.GroupDetailAct"
     android:orientation="vertical"
-    android:layout_above="@+id/rlJoin"
+    android:layout_above="@+id/llBottom"
     >
 
     <RelativeLayout
@@ -100,15 +100,21 @@
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/llBottom"
+            >
         <RelativeLayout
-                android:id="@+id/rlJoin"
+            android:id="@+id/rlJoin"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_44sdp"
-            android:layout_alignParentBottom="true"
             android:visibility="gone"
+            android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/_10sdp"
             android:background="@drawable/border_btn">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,8 +124,30 @@
                 android:fontFamily="@font/inter_medium"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
-
         </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlDeleteGroup"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_44sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:visibility="gone"
+                android:background="@drawable/border_btn">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/delete_group"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </RelativeLayout>
 

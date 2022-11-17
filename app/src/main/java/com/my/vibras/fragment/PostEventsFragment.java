@@ -180,8 +180,7 @@ public class PostEventsFragment extends Fragment {
                 }
                 );
 
-        binding.etTime.setOnClickListener(new View.OnClickListener() {
-
+            binding.etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -291,17 +290,13 @@ public class PostEventsFragment extends Fragment {
                     .putExtra("lat",myLatitude)
                     .putExtra("lon",myLongitude)
                     .putExtra("imagesList",imagesList)
-
             );
-
         }
-
     }
 
     private void getEventCategory() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
-        
         Call<SuccessResGetCategory> call = apiInterface.getEventsCategory(map);
         call.enqueue(new Callback<SuccessResGetCategory>() {
             @Override
@@ -391,7 +386,6 @@ public class PostEventsFragment extends Fragment {
     }
 
     private void openCamera() {
-
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null)
             startActivityForResult(cameraIntent, REQUEST_CAMERA);

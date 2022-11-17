@@ -105,9 +105,9 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile,container, false);
-        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-        binding.scrool.setNestedScrollingEnabled(false);
+       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile,container, false);
+       apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+       binding.scrool.setNestedScrollingEnabled(false);
 
        binding.imgSetting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingAct.class));
@@ -125,13 +125,11 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                }
                );
 
-
        binding.llViewEvents.setOnClickListener(v ->
                {
                    startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from","my"));
                }
                );
-
 
         setUpUi();
 
@@ -327,11 +325,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     @Override
     public void bottomSheet(View param1, String postID, boolean isUser, int position) {
-
         showDialog(postID,position);
-
     }
-
     @Override
     public void savePost(View param1, String postID, boolean isUser, int position) {
 
@@ -360,6 +355,18 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         {
             tvDelete.setVisibility(View.GONE);
         }
+
+        tvShare.setOnClickListener(v1 ->
+                {
+                    dialog.dismiss();
+                    String shareBody = "User :"+postList.get(position).getFirstName()+" "+postList.get(position).getLastName() +"\n\nPosted :"+postList.get(position).getImage();
+                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                    sharingIntent.setType("text/plain");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
+                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                    getActivity().startActivity(Intent.createChooser(sharingIntent,getActivity().getResources().getString(R.string.share_using)));
+                }
+        );
 
         tvDelete.setOnClickListener(v1 ->
                 {

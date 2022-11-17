@@ -91,7 +91,9 @@ public class ComapnyProfileFragment extends Fragment{
     private SuccessResSignup.Result userDetail;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+
     {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_comapny_my_profile,container, false);
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
@@ -121,7 +123,6 @@ public class ComapnyProfileFragment extends Fragment{
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
-
         return binding.getRoot();
     }
 
@@ -149,7 +150,6 @@ public class ComapnyProfileFragment extends Fragment{
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
-
     }
 
     private void getProfile() {

@@ -28,25 +28,30 @@
         <entry key="app/src/main/res/drawable/light_blue_fill.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/light_gray_fill.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/megenta_gradient.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/online_circle.xml" value="0.1195" />
         <entry key="app/src/main/res/drawable/pink_gradient.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/rec_corons_white.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/red_circel.xml" value="0.1195" />
         <entry key="app/src/main/res/drawable/right_message_background.xml" value="0.2375" />
         <entry key="app/src/main/res/drawable/topleft_bottomleft_cornor30.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/topright_bottomright_cornor30.xml" value="0.113" />
+        <entry key="app/src/main/res/drawable/unseen_circle.xml" value="0.1335" />
         <entry key="app/src/main/res/drawable/white_cornors_30.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_about_us2.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_add_comment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_add_payment_card.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_all_comments.xml" value="0.10416666666666667" />
         <entry key="app/src/main/res/layout/activity_change_pass.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/activity_chat_details_screen.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_chat_details_screen.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_chat_inner_messages.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_comapmny_setting.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_complete_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_get_events_by_category_id.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_good_vibes.xml" value="0.22" />
@@ -82,9 +87,12 @@
         <entry key="app/src/main/res/layout/activity_view_all_category.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_view_all_event.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_view_all_groups.xml" value="0.1984375" />
-        <entry key="app/src/main/res/layout/adapter_chat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/adapter_chat.xml" value="0.2" />
         <entry key="app/src/main/res/layout/adapter_group_chat.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/allmessagesholayout.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/chatuser_layout.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/comment_item.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/customview.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialog_add_card.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_add_cvv.xml" value="0.18" />
         <entry key="app/src/main/res/layout/dialog_choose_edit.xml" value="0.22" />
@@ -120,6 +128,7 @@
         <entry key="app/src/main/res/layout/item_group_member.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_like_intrested.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_selected_user.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_subscribe.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_view_all_group.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/itme_add_group.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/itme_brouse_events.xml" value="0.5" />
