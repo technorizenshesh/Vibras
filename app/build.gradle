@@ -31,6 +31,7 @@ android {
     }
 }
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar']) // DO NOT CHANGE, CI may needs it when packaging
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -123,6 +124,8 @@ dependencies {
     //Google Map
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.jackandphantom.android:blurimage:1.2.0'
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'
+    //implementation 'io.agora.rtc:full-sdk:4.0.1'
 
 }
 apply plugin: 'com.android.application'

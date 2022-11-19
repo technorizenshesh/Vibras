@@ -18,6 +18,9 @@ public class Session extends Object {
     private static final String HOME_LONG = "home_long";
     private static final String ChatName = "chat_name";
     private static final String ChatImage = "chat_image";
+    private static final String PublishTxt    = "publish_txt";
+    private static final String PublishType  = "publish_type";
+    private static final String Publishfile   = "publish_file";
     private Context _context;
     private SharedPreferences Rapidine_pref;
     private SharedPreferences.Editor editor;
@@ -50,6 +53,40 @@ public class Session extends Object {
 
 
 
+
+
+    public String getPublishfile() {
+        return Rapidine_pref.getString(Publishfile, "");
+
+    }
+
+    public void setPublishfile(String user_name) {
+        editor.putString(Publishfile, user_name);
+        this.editor.apply();
+    }
+
+    public String getPublishType() {
+        return Rapidine_pref.getString(PublishType, "");
+
+    }
+
+    public void setPublishType(String user_name) {
+        editor.putString(PublishType, user_name);
+        this.editor.apply();
+    }
+
+
+
+
+    public String getPublishTxt() {
+        return Rapidine_pref.getString(PublishTxt, "");
+
+    }
+
+    public void setPublishTxt(String user_name) {
+        editor.putString(PublishTxt, user_name);
+        this.editor.apply();
+    }
     public String getChatName() {
         return Rapidine_pref.getString(ChatName, "");
 

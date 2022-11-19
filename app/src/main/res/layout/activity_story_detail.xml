@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:id="@+id/myLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -13,8 +15,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/rlBottom"
         android:background="@color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTimeAgo"

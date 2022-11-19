@@ -26,4 +26,6 @@
     <color name="red">#FA4141</color>
     <color name="green_new">#005F67</color>
     <color name="colorTransparentBlack">#75000000</color>
+    <color name="remoteBackground">#484258</color>
+
 </resources>

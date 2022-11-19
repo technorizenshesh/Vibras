@@ -38,6 +38,7 @@ import com.my.vibras.model.SuccessResGetTransaction;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResInsertGroupChat;
+import com.my.vibras.model.SuccessResMakeCall;
 import com.my.vibras.model.SuccessResMakePayment;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResMyJoinedEvents;
@@ -466,5 +467,9 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("storylikeunlike")
     Call<ResponseBody> addStoryLike(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("video_call_invitation")
+    Call<SuccessResMakeCall> addNotification(@FieldMap Map<String, String> paramHashMap);
+
 
 }

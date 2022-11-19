@@ -135,4 +135,6 @@
     <string name="signup">Signup</string>
     <string name="delete_group">Delete Group</string>
     <string name="share_using">Share Using</string>
+    <string name="reject_call">Reject Call</string>
+    <string name="answer_call">Answer Call</string>
 </resources>

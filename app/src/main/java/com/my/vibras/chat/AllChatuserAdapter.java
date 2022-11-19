@@ -246,7 +246,7 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                     } else {*/
                         intent.putExtra("friend_id", alluserchatlist.get(position).getSender_id());
                   //  }
-                    intent.putExtra("friendimage", holder.username.getText().toString());
+                    intent.putExtra("friendimage", alluserchatlist.get(position).getImage());
                     intent.putExtra("friend_name", holder.username.getText().toString());
                     intent.putExtra("last_message", holder.lastmessage.getText().toString());
                     intent.putExtra("messagetime", "1");

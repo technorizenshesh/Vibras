@@ -12,6 +12,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -232,6 +233,13 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
 
     public void playVideo(VideoView videoView,int index,Momentz momentz)
     {
+       /* DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        android.widget.LinearLayout.LayoutParams params = (android.widget.LinearLayout.LayoutParams) videoView.getLayoutParams();
+        params.width = metrics.widthPixels;
+        params.height = metrics.heightPixels;
+        params.leftMargin = 0;
+        videoView.setLayoutParams(params);*/
 
         String str = stories.get(index).getStoryData();
         Uri uri = Uri.parse(str);

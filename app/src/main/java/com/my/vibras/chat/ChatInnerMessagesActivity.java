@@ -42,8 +42,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.VideoCalling.VideoCallingAct;
+import com.my.vibras.media.RtcTokenBuilder;
 import com.my.vibras.model.SuccessResInsertChat;
+import com.my.vibras.model.SuccessResMakeCall;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.Session;
@@ -71,6 +75,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
+import static com.my.vibras.utility.RandomString.getAlphaNumericString;
 
 public class ChatInnerMessagesActivity extends AppCompatActivity {
     static final int OPEN_MEDIA_PICKER = 1;
@@ -101,23 +106,33 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     RelativeLayout backbutton;
     String unique_id;
     private DatabaseReference mReference;
-    RelativeLayout progresslay;
+    RelativeLayout call_relat;
     EditText chatmessage_edit;
     String friendimage;
     TextView username;
     private VibrasInterface apiInterface;
+
+    static String appId = "1362d5af232340c39f521565d01ca1e9";
+    static String appCertificate = "0333ebf80dac40e2a2a657fa9b7ea5f8";
+    static String channelName = "Vibras";
+    static String userAccount = "833504";
+    static int uid = 0;
+    static int expirationTimeInSeconds = 43200;
+    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_inner_messages);
-        chat_messages_list=findViewById(R.id.chat_messages_list);
-        sendbutton=findViewById(R.id.img);
-        camerabutton=findViewById(R.id.camerabutton);
-        backbutton=findViewById(R.id.backbutton);
-        chatmessage_edit=findViewById(R.id.etText);
-        username=findViewById(R.id.username);
-        session=new Session(ChatInnerMessagesActivity.this);
-        useriddeivce=session.getUserId();
+        chat_messages_list = findViewById(R.id.chat_messages_list);
+        call_relat = findViewById(R.id.call_relat);
+        sendbutton = findViewById(R.id.img);
+        camerabutton = findViewById(R.id.camerabutton);
+        backbutton = findViewById(R.id.backbutton);
+        chatmessage_edit = findViewById(R.id.etText);
+        username = findViewById(R.id.username);
+        session = new Session(ChatInnerMessagesActivity.this);
+        useriddeivce = session.getUserId();
         mReference = FirebaseDatabase.getInstance().getReference();
         if (getIntent() != null) {
 
@@ -149,18 +164,29 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-
-
         });
 
+        channelName = getAlphaNumericString(10);
+        token = getToken();
+        call_relat.setOnClickListener(v -> {
+            Log.e(TAG, "onCreate: channelName ----" + channelName);
+            Log.e(TAG, "onCreate: token----------" + token);
+            if (NetworkAvailablity.checkNetworkStatus(ChatInnerMessagesActivity.this)) {
+                addNotification();
+              /*  startActivity(new Intent(ChatInnerMessagesActivity.this, VideoCallingAct.class).putExtra(session.getUserId(),friend_idlast)
+                        .putExtra("channel_name",channelName) .putExtra("token",token)
+                        .putExtra("from","user"));*/
+            } else {
+                Toast.makeText(ChatInnerMessagesActivity.this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+            }
 
-
+        });
 
         if (unique_id != null) {
             mReference.child("chat").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.getValue()!=null) {
+                    if (snapshot.getValue() != null) {
                         allmessagelist.clear();
                         for (DataSnapshot chatt : snapshot.getChildren()) {
                             if (status.equalsIgnoreCase("1")) {
@@ -189,7 +215,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                                     friend_idlast.equalsIgnoreCase(receiveerID)) {
                                 ChatMessage chatMessage = new ChatMessage(senderID,
                                         receiveerID, message, username, image, video, time,
-                                        "",friendimage,session.getChatImage());
+                                        "", friendimage, session.getChatImage());
                                 Log.e("insertID", "onDataChange: " + message);
 
                                 allmessagelist.add(chatMessage);
@@ -199,7 +225,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                             } else if (useriddeivce.equals(receiveerID) && friend_idlast.equals(senderID)) {
                                 ChatMessage chatMessage = new ChatMessage(senderID,
                                         receiveerID, message, username, image, video, time,
-                                        "",friendimage,session.getChatImage());
+                                        "", friendimage, session.getChatImage());
                                 allmessagelist.add(chatMessage);
                                 System.out.println("conditiionelseif");
                             } else {
@@ -254,9 +280,9 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                                 .getReference()
                                 .child("chat")
                                 .push()
-                                .setValue(new ChatMessage(useriddeivce, friend_idlast, messagesend, friendnamelast, "", "", time, "",friendimage,session.getChatImage()));
+                                .setValue(new ChatMessage(useriddeivce, friend_idlast, messagesend, friendnamelast, "", "", time, "", friendimage, session.getChatImage()));
                         chatmessage_edit.setText("");
-                        sendmessage(useriddeivce,messagesend, friend_idlast);
+                        sendmessage(useriddeivce, messagesend, friend_idlast);
 
 
                         SETUNSEENCOUNTSTATUS();
@@ -304,7 +330,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
 
 
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                int nh = (int) ( bitmap.getHeight() * (512.0 / bitmap.getWidth()) );
+                int nh = (int) (bitmap.getHeight() * (512.0 / bitmap.getWidth()));
                 Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512, nh, true);
 
                 Log.e("BITMAAP", "onActivityResult: " + scaled);
@@ -316,15 +342,16 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                         .getReference()
                         .child("chat")
                         .push()
-                        .setValue(new ChatMessage(useriddeivce, friend_idlast, "", friendnamelast, base64String, "", "", "",friendimage,session.getChatImage()));
+                        .setValue(new ChatMessage(useriddeivce, friend_idlast, "", session.getChatName()
+                                , base64String, "", "", "", friendimage, session.getChatImage()));
                 chatmessage_edit.setText("");
 
-            }else   if (requestCode == 1000) {
+            } else if (requestCode == 1000) {
 
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(ChatInnerMessagesActivity.this.getContentResolver(), data.getData());
-                    int nh = (int) ( bitmap.getHeight() * (512.0 / bitmap.getWidth()) );
+                    int nh = (int) (bitmap.getHeight() * (512.0 / bitmap.getWidth()));
                     Bitmap scaled = Bitmap.createScaledBitmap(bitmap, 512, nh, true);
                     Log.e("BITMAAP", "onActivityResult: " + bitmap);
 
@@ -335,17 +362,14 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                             .getReference()
                             .child("chat")
                             .push()
-                            .setValue(new ChatMessage(useriddeivce, friend_idlast, "", friendnamelast, base64String, "", "", "",friendimage,session.getChatImage()));
+                            .setValue(new ChatMessage(useriddeivce, friend_idlast, "", friendnamelast, base64String, "", "", "", friendimage, session.getChatImage()));
                     chatmessage_edit.setText("");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
 
-
-
             }
-
 
 
         } catch (Exception exception) {
@@ -422,46 +446,44 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     }
 
     private void sendmessage(String UserId, String message, String FriednId) {
-               //  DataManager.getInstance().showProgressMessage(ChatInnerMessagesActivity.this,getString(R.string.please_wait));
-            RequestBody senderId = RequestBody.create(MediaType.parse("text/plain"), UserId);
-            RequestBody receiverId = RequestBody.create(MediaType.parse("text/plain"), FriednId);
-            RequestBody messageText = RequestBody.create(MediaType.parse("text/plain"), message);
-            RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "Text");
-            RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
-            Call<SuccessResInsertChat> loginCall = apiInterface.insertImageVideoChat(senderId,receiverId,messageText,type);
-            loginCall.enqueue(new Callback<SuccessResInsertChat>() {
-                @Override
-                public void onResponse(Call<SuccessResInsertChat> call, Response<SuccessResInsertChat> response) {
-                 //   DataManager.getInstance().hideProgressMessage();
-                    try {
-                        SuccessResInsertChat data = response.body();
-                        Log.e("data",data.status);
-                        if (data.status.equals("1")) {
-                            String dataResponse = new Gson().toJson(response.body());
-                            Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                            showToast(ChatInnerMessagesActivity.this, data.message);
+        //  DataManager.getInstance().showProgressMessage(ChatInnerMessagesActivity.this,getString(R.string.please_wait));
+        RequestBody senderId = RequestBody.create(MediaType.parse("text/plain"), UserId);
+        RequestBody receiverId = RequestBody.create(MediaType.parse("text/plain"), FriednId);
+        RequestBody messageText = RequestBody.create(MediaType.parse("text/plain"), message);
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "Text");
+        RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
+        Call<SuccessResInsertChat> loginCall = apiInterface.insertImageVideoChat(senderId, receiverId, messageText, type);
+        loginCall.enqueue(new Callback<SuccessResInsertChat>() {
+            @Override
+            public void onResponse(Call<SuccessResInsertChat> call, Response<SuccessResInsertChat> response) {
+                //   DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResInsertChat data = response.body();
+                    Log.e("data", data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        // showToast(ChatInnerMessagesActivity.this, data.message);
 
-                           // dialog.dismiss();
+                        // dialog.dismiss();
 
-                        } else if (data.status.equals("0")) {
-                            showToast(ChatInnerMessagesActivity.this, data.message);
-                          //  dialog.dismiss();
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } else if (data.status.equals("0")) {
+                        //   showToast(ChatInnerMessagesActivity.this, data.message);
+                        //  dialog.dismiss();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                @Override
-                public void onFailure(Call<SuccessResInsertChat> call, Throwable t) {
-                    call.cancel();
-                   // DataManager.getInstance().hideProgressMessage();
-                   // dialog.dismiss();
-                }
-            });
-        }
+            }
 
-
-
+            @Override
+            public void onFailure(Call<SuccessResInsertChat> call, Throwable t) {
+                call.cancel();
+                // DataManager.getInstance().hideProgressMessage();
+                // dialog.dismiss();
+            }
+        });
+    }
 
 
     @Override
@@ -469,5 +491,71 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         status = "2";
 
         super.onBackPressed();
+    }
+
+    public String getToken() {
+        RtcTokenBuilder token = new RtcTokenBuilder();
+        int timestamp = (int) (System.currentTimeMillis() / 1000 + expirationTimeInSeconds);
+        String result = token.buildTokenWithUserAccount(appId, appCertificate,
+                channelName, userAccount, RtcTokenBuilder.Role.Role_Publisher, timestamp);
+        System.out.println(result);
+
+        Log.d("TAG", "onCreate: My Token1" + result);
+
+        result = token.buildTokenWithUid(appId, appCertificate,
+                channelName, uid, RtcTokenBuilder.Role.Role_Publisher, timestamp);
+        System.out.println(result);
+
+        Log.d("TAG", "onCreate: My Token2" + result);
+
+        return result;
+    }
+
+    public void addNotification() {
+        String userId = SharedPreferenceUtility.getInstance(ChatInnerMessagesActivity.this).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(ChatInnerMessagesActivity.this, getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("sender_id", userId);
+        map.put("receiver_id", friend_idlast);
+        map.put("username", "userName");
+        map.put("token", token);
+        map.put("channel", channelName);
+
+        //  sender_id=1&receiver_id=3&username=testuser&token=this123ve&channel=testchannel
+        Call<SuccessResMakeCall> call = apiInterface.addNotification(map);
+        call.enqueue(new Callback<SuccessResMakeCall>() {
+            @Override
+            public void onResponse(Call<SuccessResMakeCall> call, Response<SuccessResMakeCall> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResMakeCall data = response.body();
+                    if (data.getStatus().equalsIgnoreCase("1")) {
+
+                        startActivity(new Intent(ChatInnerMessagesActivity.this, VideoCallingAct.class).putExtra("id"
+                                , friend_idlast)
+                                .putExtra("channel_name", channelName).putExtra("token", token)
+                                .putExtra("from", "user")
+                        );
+                        finish();
+
+                    } else {
+                        showToast(ChatInnerMessagesActivity.this, data.getMessage());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResMakeCall> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
     }
 }

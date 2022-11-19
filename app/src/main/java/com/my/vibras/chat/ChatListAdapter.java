@@ -125,7 +125,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 holder. friendtime.setVisibility(View.VISIBLE);
                 holder. usertime.setVisibility(View.GONE);
                 holder. friendtime.setText(chat.getTime());
-
+                Log.e("TAG", "GlideGlideGlideGlideGlide: " + chat.getFriendImage());
                 Glide.with(mContext)
                         .load(   chat.getFriendImage())
                         .into(holder.friendsenderimage);

@@ -1,5 +1,6 @@
 package com.my.vibras.act;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -7,17 +8,23 @@ import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -32,12 +39,14 @@ import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
+import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,10 +66,12 @@ import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class CreatePostAct extends AppCompatActivity {
-
+    private static final int LOAD_TESTING_VIDEO = 108;
+    private static final int ACTION_TAKE_VIDEO = 109;
     ActivityCreatePostBinding binding;
     private static final int SELECT_FILE = 2;
-    String str_image_path="";
+    String str_image_path = "";
+    String str_video_path = "";
     private static final int REQUEST_CAMERA = 1;
     private Uri uriSavedImage;
     private static final int MY_PERMISSION_CONSTANT = 5;
@@ -70,66 +81,71 @@ public class CreatePostAct extends AppCompatActivity {
     private String strSuperLikes;
     private String storyID = "";
     private VibrasInterface apiInterface;
-    private String description="";
+    private String description = "";
     private String postType = "";
+    Session session;
+    Integer integer = 0;
+
+    File videoone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_create_post);
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_post);
+        session = new Session(this);
+        session.setPublishfile("");
+        session.setPublishTxt("");
+        session.setPublishType("POST");
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
         binding.tvPost.setOnClickListener(v ->
                 {
                     type = "POST";
+                    session.setPublishType("POST");
                     binding.tvPost.setBackground(ContextCompat.getDrawable(CreatePostAct.this, R.drawable.black_cornors_30));
                     binding.tvPost.setTextColor(getResources().getColor(R.color.white));
                     binding.tvStory.setBackground(ContextCompat.getDrawable(CreatePostAct.this, R.drawable.white_cornors_30));
                     binding.tvStory.setTextColor(getResources().getColor(R.color.black));
                 }
-                );
+        );
 
         binding.tvPublish.setOnClickListener(v ->
                 {
-                    if(!str_image_path.equalsIgnoreCase(""))
-                    {
+                    if (!str_image_path.equalsIgnoreCase("")) {
                         description = binding.etDescription.getText().toString().trim();
-                        if(type.equalsIgnoreCase("STORY"))
-                        {
+                        if (session.getPublishType().equalsIgnoreCase("STORY")) {
                             ArrayList<String> imagesVideosPathList = new ArrayList<>();
                             imagesVideosPathList.add(str_image_path);
+                            Log.e(TAG, "tvPublish: " + str_image_path);
+                            Log.e(TAG, "tvPublish: " + imagesVideosPathList.size());
+                            Log.e(TAG, "tvPublish: " + postType);
+                            Log.e(TAG, "tvPublish: " + type);
+
                             boolean image = false;
-                            if(postType.equalsIgnoreCase("image"))
-                            {
+                            if (session.getPublishfile().equalsIgnoreCase("image")) {
                                 image = true;
-                            }else
-                            {
+                            } else {
                                 image = false;
                             }
-                            if(haveStory)
-                            {
-                                updateStory(imagesVideosPathList,image,postType);
+                            if (haveStory) {
+
+                                updateStory(imagesVideosPathList, image, session.getPublishfile());
+                            } else {
+                                uploadStory(imagesVideosPathList, image, session.getPublishfile());
                             }
-                            else
-                            {
-                                uploadStory(imagesVideosPathList,image,postType);
-                            }
-                        }
-                        else
-                        {
+                        } else {
                             uploadPost();
                         }
-                    }else
-                    {
-                        Toast.makeText(CreatePostAct.this,"Please select a media file.",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(CreatePostAct.this, "Please select a media file.", Toast.LENGTH_SHORT).show();
                     }
                 }
-                );
+        );
 
         binding.tvStory.setOnClickListener(v ->
                 {
                     type = "STORY";
+                    session.setPublishType("STORY");
                     binding.tvPost.setBackground(ContextCompat.getDrawable(CreatePostAct.this, R.drawable.white_cornors_30));
                     binding.tvPost.setTextColor(getResources().getColor(R.color.black));
                     binding.tvStory.setBackground(ContextCompat.getDrawable(CreatePostAct.this, R.drawable.black_cornors_30));
@@ -140,25 +156,54 @@ public class CreatePostAct extends AppCompatActivity {
         binding.ivCamera.setOnClickListener(v ->
                 {
                     postType = "image";
+                    session.setPublishfile("image");
                     cameraClicked = true;
-                    if(checkPermisssionForReadStorage())
-                    {
+                    if (checkPermisssionForReadStorage()) {
                         openCamera();
                     }
                 }
-                );
+        );
 
         binding.ivGalary.setOnClickListener(v ->
                 {
                     postType = "image";
+                    session.setPublishfile("image");
                     cameraClicked = false;
-                    if(checkPermisssionForReadStorage())
-                    {
+                    if (checkPermisssionForReadStorage()) {
                         getPhotoFromGallary();
                     }
                 }
-                );
-
+        );
+        binding.ivVideo.setOnClickListener(v -> {
+            postType = "video";
+            session.setPublishfile("video");
+            final CharSequence[] options = {"Take Video", "Choose from Gallery", "Cancel"};
+            AlertDialog.Builder builder = new AlertDialog.Builder(CreatePostAct.this);
+            builder.setTitle("Add Video!");
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    if (options[item].equals("Take Video")) {
+                        integer = 1;
+                        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                        takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30);
+                   //     takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Environment.getExternalStorageDirectory().getPath() + Calendar.getInstance().getTimeInMillis() + "story.mp4");
+                        startActivityForResult(takeVideoIntent, ACTION_TAKE_VIDEO);
+                    } else if (options[item].equals("Choose from Gallery")) {
+                        if (checkPermisssionForReadStorage()) {
+                            Intent intent = new Intent();
+                            intent.setType("video/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Select Video"), LOAD_TESTING_VIDEO);
+                            integer = 1;
+                        }
+                    } else if (options[item].equals("Cancel")) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            builder.show();
+        });
         if (NetworkAvailablity.checkNetworkStatus(CreatePostAct.this)) {
 
             getStories();
@@ -176,7 +221,6 @@ public class CreatePostAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
 
         List<MultipartBody.Part> filePartList = new LinkedList<>();
-
         if (image) {
             for (int i = 0; i < imagesVideosPathList.size(); i++) {
                 File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
@@ -186,6 +230,9 @@ public class CreatePostAct extends AppCompatActivity {
             for (int i = 0; i < imagesVideosPathList.size(); i++) {
                 //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
                 File file = new File(imagesVideosPathList.get(i));
+               /* File getPathFile = new File(RealPathUtil.getVideoPath2(CreatePostAct.this,selectedVideo));
+                videoone = getPathFile;
+                System.out.println("getPathFile------   " + getPathFile);*/
                 filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
             }
         }
@@ -246,14 +293,42 @@ public class CreatePostAct extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title_" + System.currentTimeMillis(), null);
         return Uri.parse(path);
     }
-
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
-            if (requestCode == SELECT_FILE) {
-                try {
+            if (requestCode == LOAD_TESTING_VIDEO) {
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Uri selectedVideo = data.getData();
+                        MediaPlayer mp = MediaPlayer.create(CreatePostAct.this,
+                                Uri.parse(String.valueOf(selectedVideo)));
+                        int duration = mp.getDuration() / 1000;
+                        mp.release();
+                        if (duration <= 30) {
+                            Glide.with(CreatePostAct.this)
+                                    .load(selectedVideo.toString())
+                                    .centerCrop()
+                                    .into(binding.ivProfile);
+                            str_image_path = RealPathUtil.getVideoPath2(CreatePostAct.this, selectedVideo);
+                        } else {
+                            Toast.makeText(CreatePostAct.this, "Please Select Video Duration 30  Sec Only", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            } else if (requestCode == SELECT_FILE) { try {
                     Uri selectedImage = data.getData();
                     Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
                     Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
@@ -286,6 +361,19 @@ public class CreatePostAct extends AppCompatActivity {
 //                        updateCoverPhoto();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }else if (requestCode==ACTION_TAKE_VIDEO){
+
+                try {
+                    Uri vid = data.getData();
+                    Glide.with(CreatePostAct.this)
+                            .load(vid.toString())
+                            .centerCrop()
+                            .into(binding.ivProfile);
+                    str_image_path = getRealPathFromURI(vid);
+                }catch (Exception e){
                     e.printStackTrace();
                 }
 
@@ -388,12 +476,9 @@ public class CreatePostAct extends AppCompatActivity {
                     boolean read_external_storage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     boolean write_external_storage = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                     if (camera && read_external_storage && write_external_storage) {
-                        if(cameraClicked)
-                        {
+                        if (cameraClicked) {
                             openCamera();
-                        }
-                        else
-                        {
+                        } else {
                             getPhotoFromGallary();
                         }
                     } else {
@@ -425,12 +510,9 @@ public class CreatePostAct extends AppCompatActivity {
         MultipartBody.Part filePart;
         if (!str_image_path.equalsIgnoreCase("")) {
             File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-            if(file!=null)
-            {
+            if (file != null) {
                 filePart = MultipartBody.Part.createFormData("image", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
-            }
-            else
-            {
+            } else {
                 filePart = null;
             }
 
@@ -444,7 +526,7 @@ public class CreatePostAct extends AppCompatActivity {
         RequestBody myType = RequestBody.create(MediaType.parse("text/plain"), type);
         RequestBody pType = RequestBody.create(MediaType.parse("text/plain"), postType);
 
-        Call<SuccessResUploadPost> loginCall = apiInterface.uploadPost(userId, myDescription, myType, pType,filePart);
+        Call<SuccessResUploadPost> loginCall = apiInterface.uploadPost(userId, myDescription, myType, pType, filePart);
         loginCall.enqueue(new Callback<SuccessResUploadPost>() {
             @Override
             public void onResponse(Call<SuccessResUploadPost> call, Response<SuccessResUploadPost> response) {
@@ -503,6 +585,7 @@ public class CreatePostAct extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResGetMyStories> call, Throwable t) {
                 call.cancel();
@@ -530,7 +613,7 @@ public class CreatePostAct extends AppCompatActivity {
         RequestBody userID = RequestBody.create(MediaType.parse("text/plain"), strUserId);
         RequestBody storyId = RequestBody.create(MediaType.parse("text/plain"), storyID);
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
-        Call<SuccessResUploadStory> loginCall = apiInterface.updateStory(userID,storyId, type, filePartList);
+        Call<SuccessResUploadStory> loginCall = apiInterface.updateStory(userID, storyId, type, filePartList);
         loginCall.enqueue(new Callback<SuccessResUploadStory>() {
             @Override
             public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
@@ -560,7 +643,6 @@ public class CreatePostAct extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

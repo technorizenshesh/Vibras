@@ -20,6 +20,54 @@ android:padding="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
+            <LinearLayout
+                android:id="@+id/unseen_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:gravity="right"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/unseenmessagecount"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:background="@drawable/unseen_circle"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10sdp"
+
+                >
+
+                <ImageView
+                    android:id="@+id/status_image"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_marginLeft="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="2dp"
+                    android:src="@drawable/online_circle" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_image_show"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,53 +95,6 @@ android:padding="@dimen/_5sdp"
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/unseen_lay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:gravity="right"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/unseenmessagecount"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:background="@drawable/unseen_circle"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="5"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_11sdp"
-                    android:visibility="gone" />
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_10sdp"
-
-                >
-
-                <ImageView
-                    android:id="@+id/status_image"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:layout_marginLeft="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:padding="2dp"
-                    android:src="@drawable/online_circle" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_image_show"
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp" />
-            </RelativeLayout>
 
         </LinearLayout>
 

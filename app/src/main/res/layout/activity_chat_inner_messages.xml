@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
             <RelativeLayout
-                android:id="@+id/RRSearch"
+                android:id="@+id/call_relat"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="match_parent">
 
