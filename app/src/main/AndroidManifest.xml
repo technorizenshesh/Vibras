@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AudioCalling.CallWaitingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AudioCalling.VoiceChatViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".VideoCalling.VideoCallingAct"
             android:exported="false" />
         <activity
@@ -202,19 +208,22 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <service
-            android:enabled="true"
-            android:exported="true"
-            android:name=".VideoCalling.HeadsUpNotificationService"/>
+
         <receiver
             android:name=".VideoCalling.CallNotificationActionReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="999">
                 <action android:name="ConstantApp.CALL_RECEIVE_ACTION" />
-                <action android:name="ConstantApp.CALL_CANCEL_ACTION"/>
+                <action android:name="ConstantApp.CALL_CANCEL_ACTION" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".VideoCalling.HeadsUpNotificationService"
+            android:enabled="true"
+            android:exported="true" />
+
         <service
             android:name=".utility.VibrasNotification"
             android:exported="false">
@@ -222,7 +231,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".VideoCalling.IncomingCallService"
             android:enabled="true"
@@ -256,6 +264,8 @@
     <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
 </manifest>

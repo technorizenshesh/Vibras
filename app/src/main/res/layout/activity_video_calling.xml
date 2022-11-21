@@ -11,6 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/green_new">
+        <RelativeLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            >
+
+
+            <RelativeLayout
+                android:id="@+id/backbutton"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/back">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -79,6 +104,18 @@
             android:onClick="onSwitchCameraClicked"
             android:scaleType="centerCrop"
             android:src="@drawable/btn_switch_camera" />
+
+        <ImageView
+            android:id="@+id/btn_switch_speaker"
+            android:layout_width="@dimen/other_button_size"
+            android:layout_height="@dimen/other_button_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toEndOf="@id/btn_call"
+            android:layout_toRightOf="@id/btn_call"
+            android:onClick="onSwitchCameraClicked"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_speaker" />
 
         <ImageView
             android:id="@+id/btn_mute"

@@ -41,6 +41,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
+import com.my.vibras.AudioCalling.VoiceChatViewActivity;
 import com.my.vibras.R;
 import com.my.vibras.VideoCalling.VideoCallingAct;
 import com.my.vibras.media.RtcTokenBuilder;
@@ -106,7 +107,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     RelativeLayout backbutton;
     String unique_id;
     private DatabaseReference mReference;
-    RelativeLayout call_relat;
+    RelativeLayout audio_call_rela, call_relat;
     EditText chatmessage_edit;
     String friendimage;
     TextView username;
@@ -125,6 +126,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_inner_messages);
         chat_messages_list = findViewById(R.id.chat_messages_list);
+        audio_call_rela = findViewById(R.id.audio_call_rela);
         call_relat = findViewById(R.id.call_relat);
         sendbutton = findViewById(R.id.img);
         camerabutton = findViewById(R.id.camerabutton);
@@ -172,7 +174,20 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             Log.e(TAG, "onCreate: channelName ----" + channelName);
             Log.e(TAG, "onCreate: token----------" + token);
             if (NetworkAvailablity.checkNetworkStatus(ChatInnerMessagesActivity.this)) {
-                addNotification();
+                addNotification("Video");
+              /*  startActivity(new Intent(ChatInnerMessagesActivity.this, VideoCallingAct.class).putExtra(session.getUserId(),friend_idlast)
+                        .putExtra("channel_name",channelName) .putExtra("token",token)
+                        .putExtra("from","user"));*/
+            } else {
+                Toast.makeText(ChatInnerMessagesActivity.this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        audio_call_rela.setOnClickListener(v -> {
+            Log.e(TAG, "onCreate: channelName ----" + channelName);
+            Log.e(TAG, "onCreate: token----------" + token);
+            if (NetworkAvailablity.checkNetworkStatus(ChatInnerMessagesActivity.this)) {
+                addNotification("Audio");
               /*  startActivity(new Intent(ChatInnerMessagesActivity.this, VideoCallingAct.class).putExtra(session.getUserId(),friend_idlast)
                         .putExtra("channel_name",channelName) .putExtra("token",token)
                         .putExtra("from","user"));*/
@@ -511,15 +526,16 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         return result;
     }
 
-    public void addNotification() {
+    public void addNotification(String type) {
         String userId = SharedPreferenceUtility.getInstance(ChatInnerMessagesActivity.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(ChatInnerMessagesActivity.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("sender_id", userId);
         map.put("receiver_id", friend_idlast);
-        map.put("username", "userName");
+        map.put("username", session.getChatName());
         map.put("token", token);
         map.put("channel", channelName);
+        map.put("call_type", type);
 
         //  sender_id=1&receiver_id=3&username=testuser&token=this123ve&channel=testchannel
         Call<SuccessResMakeCall> call = apiInterface.addNotification(map);
@@ -533,29 +549,49 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
 
                     SuccessResMakeCall data = response.body();
                     if (data.getStatus().equalsIgnoreCase("1")) {
-
-                        startActivity(new Intent(ChatInnerMessagesActivity.this, VideoCallingAct.class).putExtra("id"
-                                , friend_idlast)
-                                .putExtra("channel_name", channelName).putExtra("token", token)
-                                .putExtra("from", "user")
-                        );
-                        finish();
-
-                    } else {
-                        showToast(ChatInnerMessagesActivity.this, data.getMessage());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SuccessResMakeCall> call, Throwable t) {
-
-                call.cancel();
-                DataManager.getInstance().hideProgressMessage();
-
-            }
-        });
-    }
+                        if (type.equalsIgnoreCase("Video")) {
+                            startActivity(new Intent(ChatInnerMessagesActivity.this,
+                                    VideoCallingAct.class).putExtra("id"
+                                    , friend_idlast)
+                                    .putExtra("channel_name", channelName)
+                                    .putExtra("token", token)
+                                    .putExtra("id", friend_idlast)
+                                    .putExtra("from", "user")
+                                    .putExtra("name", friendnamelast)
+                                    .putExtra("userimage", friendimage)
+                                    .putExtra("call_type",type )
+                                    .putExtra("Profile", 0));
+                            finish();
+                        } else {
+                            startActivity(new Intent(ChatInnerMessagesActivity.this,
+                                   VoiceChatViewActivity.class).putExtra("id"
+                                    , friend_idlast)
+                                    .putExtra("channel_name", channelName)
+                                    .putExtra("token", token)
+                                    .putExtra("call_type", type)
+                                    .putExtra("Profile",0)
+                                    .putExtra("name", friendnamelast)
+                                    .putExtra("userimage", friendimage)
+                                    .putExtra("from", "user"));
+                            finish();
 }
+
+
+                        } else{
+                            showToast(ChatInnerMessagesActivity.this, data.getMessage());
+                        }
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure (Call < SuccessResMakeCall > call, Throwable t){
+
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
+
+                }
+            });
+        }
+    }

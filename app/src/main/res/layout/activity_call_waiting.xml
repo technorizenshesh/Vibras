@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_backg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circularimage"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_bg" />
+
+
+                    <TextView
+                        android:id="@+id/txtexpname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/circularimage"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight=".8"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18sdp"
+                        android:textStyle="normal" />
+
+
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+
+
+                    <TextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/circularimage"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/poppinsregular"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:text="In Coming Call"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        android:textStyle="normal" />
+
+
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:layout_width="@dimen/_160sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/connected2" />
+
+                </LinearLayout>
+
+
+                <!-- smilley start -->
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/pricebackground"
+                    android:layout_below="@+id/relativelayout"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:paddingRight="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_18sdp"
+                        android:textColor="@color/black"
+                        android:text="How are you Feeling"
+                        android:layout_height="wrap_content"/>
+
+
+
+                   <!-- <com.hsalf.smileyrating.SmileyRating
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:id="@+id/smile_rating"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />-->
+
+
+
+
+                </LinearLayout>
+
+
+
+                <!-- smilley end -->
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:onClick="onLocalAudioMuteClicked"
+                        android:scaleType="centerInside"
+
+                        android:src="@drawable/btn_mute" />
+
+                    <ImageView
+                        android:id="@+id/end"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/btn_endcall" />
+
+                    <ImageView
+                        android:id="@+id/pickup"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="20"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/btn_startcall_normal" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

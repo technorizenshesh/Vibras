@@ -32,7 +32,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/RREvents"
+                android:id="@+id/audio_call_rela"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="match_parent">
 

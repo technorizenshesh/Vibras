@@ -6,8 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
+
+import com.my.vibras.AudioCalling.CallWaitingActivity;
+import com.my.vibras.AudioCalling.VoiceChatViewActivity;
 
 /**
  * Created by Ravindra Birla on 04,July,2022
@@ -16,7 +20,7 @@ public class CallNotificationActionReceiver extends BroadcastReceiver {
 
     Context mContext;
 
-    String channelName="",token="",plumberId="";
+    String channelName="",token="",plumberId="",call_type="",name="",userimage="";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -33,6 +37,19 @@ public class CallNotificationActionReceiver extends BroadcastReceiver {
                     channelName=intent.getStringExtra("channel");
                     token=intent.getStringExtra("token");
                     plumberId=intent.getStringExtra("plumberId");
+                    call_type=intent.getStringExtra("call_type");
+                    name=intent.getStringExtra("name");
+                    userimage=intent.getStringExtra("userimage");
+
+                }else
+                if(action.equalsIgnoreCase("DIALOG_CALL")){
+
+                    channelName=intent.getStringExtra("channel");
+                    token=intent.getStringExtra("token");
+                    plumberId=intent.getStringExtra("plumberId");
+                    call_type=intent.getStringExtra("call_type");
+                    name=intent.getStringExtra("name");
+                    userimage=intent.getStringExtra("userimage");
                 }
 
                 performClickAction(context, action);
@@ -71,14 +88,39 @@ public class CallNotificationActionReceiver extends BroadcastReceiver {
     private void performClickAction(Context context, String action) {
         if(action.equalsIgnoreCase("RECEIVE_CALL")) {
 
+            Log.e("TAG", "call_typecall_typecall_typecall_typecall_typecall_type------: "+call_type );
+if (call_type.equalsIgnoreCase("Video"))
+{
             boolean checkPer = checkAppPermissions();
 
-            Intent intentCallReceive = new Intent(mContext, VideoCallingAct.class).putExtra("id",plumberId)
-                    .putExtra("channel_name",channelName) .putExtra("token",token)
-                    .putExtra("from","plumber");
+            Intent intentCallReceive = new Intent(mContext, VideoCallingAct.class).putExtra
+                    ("id",plumberId)
+                    .putExtra("channel_name",channelName)
+                    .putExtra("token",token)
+                    .putExtra("from","plumber")
+                    .putExtra("call_type",call_type)
+                    .putExtra("name",name)
+                    .putExtra("userimage",userimage);
             intentCallReceive.putExtra("Call", "incoming");
             intentCallReceive.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intentCallReceive);
+}else {
+if (call_type.equalsIgnoreCase("Audio")) {
+    Intent intentCallReceive = new Intent(mContext, VoiceChatViewActivity.class)
+            .putExtra("id", plumberId)
+            .putExtra("channel_name", channelName)
+            .putExtra("token", token)
+            .putExtra("Profile", 1)
+            .putExtra("call_type", call_type)
+            .putExtra("name", name)
+            .putExtra("userimage", userimage)
+            .putExtra("from", "plumber");
+    intentCallReceive.putExtra("Call", "incoming");
+    intentCallReceive.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    mContext.startActivity(intentCallReceive);
+}
+
+}
 
 //            if (checkPer) {
 //                Intent intentCallReceive = new Intent(mContext, VideoCallingAct.class);
@@ -98,9 +140,51 @@ public class CallNotificationActionReceiver extends BroadcastReceiver {
         else if(action.equalsIgnoreCase("DIALOG_CALL")){
 
             // show ringing activity when phone is locked
-            Intent intent = new Intent(AppController.getContext(), VideoCallingAct.class);
+            Intent intent = new Intent(AppController.getContext(), CallWaitingActivity.class)
+                    .putExtra("id"            ,plumberId)
+                    .putExtra("channel_name"  ,channelName)
+                    .putExtra("token"        ,token)
+                    .putExtra("Profile"        ,1)
+                    .putExtra("call_type"     ,call_type)
+                    .putExtra("name",name   )
+                    .putExtra("userimage"      ,userimage)
+                    .putExtra("from"      ,"plumber");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intent);
+
+
+          /*  if (call_type.equalsIgnoreCase("Video"))
+            {
+                boolean checkPer = checkAppPermissions();
+
+                Intent intentCallReceive = new Intent(mContext, VideoCallingAct.class).putExtra
+                        ("id",plumberId)
+                        .putExtra("channel_name",channelName)
+                        .putExtra("token",token)
+                        .putExtra("from","plumber")
+                        .putExtra("call_type",call_type)
+                        .putExtra("name",name)
+                        .putExtra("userimage",userimage);
+                intentCallReceive.putExtra("Call", "incoming");
+                intentCallReceive.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intentCallReceive);
+            }else {
+
+                Intent intentCallReceive = new Intent(mContext, VoiceChatViewActivity.class)
+                        .putExtra("id",plumberId)
+                        .putExtra("channel_name",channelName)
+                        .putExtra("token",token)
+                        .putExtra("Profile",0)
+                        .putExtra("call_type",call_type)
+                        .putExtra("name",name)
+                        .putExtra("userimage",userimage)
+                        .putExtra("from","plumber");
+                intentCallReceive.putExtra("Call", "incoming");
+                intentCallReceive.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intentCallReceive);
+
+            }*/
+
         }
 
         else {

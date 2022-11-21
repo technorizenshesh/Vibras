@@ -55,7 +55,7 @@ public class HeadsUpNotificationService extends Service implements MediaPlayer.O
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Bundle data = null;
-        String name="",callType="";
+        String name="",callType="Video",userimage="";
         int NOTIFICATION_ID=120;
         try {
             audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
@@ -178,18 +178,24 @@ try {
     if (intent != null && intent.getExtras() != null) {
 
         data = intent.getExtras();
-        name = data.getString("inititator");
+        name     = data.getString("inititator");
+        userimage = data.getString("userimage");
         channelName = data.getString("channelName");
         token = data.getString("token");
-        plumberId = data.getString("plumberId");
-        callType = "Video";
-
-//            if(AppController.getCall_type().equalsIgnoreCase(ApplicationRef.Constants.AUDIO_CALL)){
-//                callType ="Audio";
-//            }
-//            else {
-//                callType ="Video";
-//            }
+        plumberId = data.getString("inititator");
+        callType = data.getString("call_type");
+     /*   "username");
+        g("user_name"
+        ("userimage")
+        ng("channel")
+        ng("token");
+        ("call_type")*/
+       /*     if(AppController.getCall_type().equalsIgnoreCase(ApplicationRef.Constants.AUDIO_CALL)){
+                callType ="Audio";
+            }
+            else {
+                callType ="Video";
+            }*/
 
     }
 }catch (Exception e){
@@ -200,10 +206,12 @@ try {
 
             receiveCallAction.putExtra("ConstantApp.CALL_RESPONSE_ACTION_KEY", "ConstantApp.CALL_RECEIVE_ACTION");
             receiveCallAction.putExtra("ACTION_TYPE", "RECEIVE_CALL");
-
             receiveCallAction.putExtra("channel",channelName);
             receiveCallAction.putExtra("token",token);
             receiveCallAction.putExtra("plumberId",plumberId);
+            receiveCallAction.putExtra("call_type",callType);
+            receiveCallAction.putExtra("name",      name     );
+            receiveCallAction.putExtra("userimage", userimage);
 
             receiveCallAction.putExtra("NOTIFICATION_ID",NOTIFICATION_ID);
             receiveCallAction.setAction("RECEIVE_CALL");
@@ -211,12 +219,24 @@ try {
             Intent cancelCallAction = new Intent(AppController.getContext(), CallNotificationActionReceiver.class);
             cancelCallAction.putExtra("ConstantApp.CALL_RESPONSE_ACTION_KEY", "ConstantApp.CALL_CANCEL_ACTION");
             cancelCallAction.putExtra("ACTION_TYPE", "CANCEL_CALL");
+           cancelCallAction.putExtra("channel",channelName);
+           cancelCallAction.putExtra("token",token);
+           cancelCallAction.putExtra("plumberId",plumberId);
+           cancelCallAction.putExtra("call_type",callType);
+           cancelCallAction.putExtra("name",      name     );
+           cancelCallAction.putExtra("userimage", userimage);
             cancelCallAction.putExtra("NOTIFICATION_ID",NOTIFICATION_ID);
             cancelCallAction.setAction("CANCEL_CALL");
 
             Intent callDialogAction = new Intent(AppController.getContext(), CallNotificationActionReceiver.class);
             callDialogAction.putExtra("ACTION_TYPE", "DIALOG_CALL");
             callDialogAction.putExtra("NOTIFICATION_ID",NOTIFICATION_ID);
+            callDialogAction.putExtra("channel",channelName);
+            callDialogAction.putExtra("token",token);
+            callDialogAction.putExtra("plumberId",plumberId);
+            callDialogAction.putExtra("call_type",callType);
+            callDialogAction.putExtra("name",      name     );
+            callDialogAction.putExtra("userimage", userimage);
             callDialogAction.setAction("DIALOG_CALL");
 
             PendingIntent receiveCallPendingIntent;
@@ -226,9 +246,9 @@ try {
                 receiveCallPendingIntent = PendingIntent.getBroadcast(AppController.getContext(),
                         1200, receiveCallAction, PendingIntent.FLAG_MUTABLE);
                 cancelCallPendingIntent = PendingIntent.getBroadcast(AppController.getContext(),
-                        1201, cancelCallAction, PendingIntent.FLAG_IMMUTABLE);
+                        1201, cancelCallAction, PendingIntent.FLAG_MUTABLE);
                 callDialogPendingIntent = PendingIntent.getBroadcast(AppController.getContext(),
-                        1202, callDialogAction, PendingIntent.FLAG_IMMUTABLE);
+                        1202, callDialogAction, PendingIntent.FLAG_MUTABLE);
 
 
             }else {

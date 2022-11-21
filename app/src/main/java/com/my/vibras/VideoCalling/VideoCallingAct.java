@@ -45,7 +45,7 @@ public class VideoCallingAct extends AppCompatActivity {
     private ImageView mCallBtn;
     private ImageView mMuteBtn;
     private ImageView mSwitchCameraBtn;
-    private String token = "", channelName = "", fromWhere = "";
+    private String token = "", channelName = "", fromWhere = "", call_type = "";
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
 
         @Override
@@ -118,6 +118,7 @@ public class VideoCallingAct extends AppCompatActivity {
             removeFromParent(mRemoteVideo);
             // Destroys remote view
             mRemoteVideo = null;
+            onBackPressed();
 
         }
     }
@@ -131,6 +132,7 @@ public class VideoCallingAct extends AppCompatActivity {
         channelName = getIntent().getStringExtra("channel_name");
         token = getIntent().getStringExtra("token");
         fromWhere = getIntent().getStringExtra("from");
+      call_type = getIntent().getStringExtra("call_type");
         Log.e(TAG, "onCreate: Video_callVideo_callVideo_call =====  Token  =="+token );
         Log.e(TAG, "onCreate:Video_callVideo_callVideo_call ====== Channel-==="+channelName );
         MusicManager.getInstance().initalizeMediaPlayer(this, Uri.parse
@@ -141,8 +143,14 @@ public class VideoCallingAct extends AppCompatActivity {
             MusicManager.getInstance().startPlaying();
         }
 
-        initUI();
 
+        initUI();
+        if (call_type.equalsIgnoreCase("Audio")){
+            mLocalContainer.setVisibility(View.GONE);
+            mRemoteContainer.setVisibility(View.GONE);
+
+
+        }
        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
                 checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID)) {
             initEngineAndJoinChannel();
@@ -313,6 +321,7 @@ public class VideoCallingAct extends AppCompatActivity {
         removeFromParent(mRemoteVideo);
         mRemoteVideo = null;
         leaveChannel();
+        onBackPressed();
         if (fromWhere.equalsIgnoreCase("user")) {
             MusicManager.getInstance().stopPlaying();
         }

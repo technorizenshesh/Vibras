@@ -113,18 +113,13 @@ public class VibrasNotification extends FirebaseMessagingService {
             }
         }else  if(key.equalsIgnoreCase("New Video Call Invitation"))
         {
-            /*{result=successful, username=userName, user_id=6,
-                    key=New Video Call Invitation, type=Plumber,
-                    token=0061362d5af232340c39f521565d01ca1e9IAAlueXYG
-            C/pYtWR5MdwPRptdLMTDK5oCfDSRhAJ59AHcJeqiy4AAAAAIgDnjxy9a9l5YwQA
-            AQCrMHljAgCrMHljAwCrMHljBACrMHlj,
-                    user_name=Aitana Rubio, userimage=https:*/
-                //myasp-app.com/vibras/uploads/images/USER_IMG60834.png, channel=iocssWRMkH,
-                // message=Aitana Rubio invite to you for video call!}
             showText = false;
             String userName = jsonObject.getString("username");
+            String inititator = jsonObject.getString("user_name");
+            String userimage = jsonObject.getString("userimage");
             String channelName = jsonObject.getString("channel");
-            String token = jsonObject.getString("token");
+                  String token = jsonObject.getString("token");
+            String call_type = "Video";
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 
@@ -149,8 +144,9 @@ public class VibrasNotification extends FirebaseMessagingService {
                 Intent serviceIntent = new Intent(getApplicationContext(),
                         HeadsUpNotificationService.class);
                 Bundle mBundle = new Bundle();
-                mBundle.putString("inititator", userName);
-                mBundle.putString("call_type","Video");
+                mBundle.putString("inititator", inititator);
+                mBundle.putString("call_type",call_type);
+                mBundle.putString("userimage",userimage);
                 mBundle.putString("channelName",channelName);
                 mBundle.putString("token",token);
                 serviceIntent.putExtras(mBundle);
@@ -186,9 +182,95 @@ public class VibrasNotification extends FirebaseMessagingService {
                         HeadsUpNotificationService.class);
                 Bundle mBundle = new Bundle();
                 mBundle.putString("inititator", userName);
-                mBundle.putString("call_type","Video");
+                mBundle.putString("call_type",userName);
                 mBundle.putString("channelName",channelName);
                 mBundle.putString("token",token);
+                mBundle.putString("userimage",userimage);
+                serviceIntent.putExtras(mBundle);
+                ContextCompat.startForegroundService(getApplicationContext()
+                        , serviceIntent);
+            }
+        }else  if(key.equalsIgnoreCase("New Audio Call Invitation"))
+        {
+/*payload:{result=successful, username=Ritesh, user_id=29, key=New Audio Call Invitation,
+type=Plumber, token=0061362d5af232340c39f521565d01ca1e9IACHUya7iY5ryUhls12C0/sOrJeRMDuAc6j
+FWEBcjtZxWnv9M9MAAAAAIgBJ4xK19Hp8YwQAAQA00ntjAgA00ntjAwA00ntjBAA00ntj, user_name=Ritesh
+Patel, userimage=https://myasp-app.com/vibras/uploads/images/User_image20221017071533.jpg
+, channel=0ApEfelv5q, message=Ritesh Patel invite to you for video call!}*/
+            showText = false;
+            String userName = jsonObject.getString("username");
+            String inititator = jsonObject.getString("user_name");
+            String userimage = jsonObject.getString("userimage");
+            String channelName = jsonObject.getString("channel");
+                  String token = jsonObject.getString("token");
+            String call_type = "Audio";
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+
+                PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                boolean result= Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT_WATCH&&powerManager.isInteractive()|| Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT_WATCH&&powerManager.isScreenOn();
+
+                if (!result){
+                  PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK |
+                            PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE,"MH24_SCREENLOCK");
+                    wl.acquire(10000);
+                   PowerManager.WakeLock wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"MH24_SCREENLOCK");
+                    wl_cpu.acquire(10000);
+                }
+
+                PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                boolean isScreenOn = Build.VERSION.SDK_INT >= 20 ? pm.isInteractive() : pm.isScreenOn(); // check if screen is on
+                if (!isScreenOn) {
+                    PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "myApp:notificationLock");
+                    wl.acquire(3000); //set your time in milliseconds
+                }
+
+                Intent serviceIntent = new Intent(getApplicationContext(),
+                        HeadsUpNotificationService.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("inititator", inititator);
+                mBundle.putString("call_type","Audio");
+                mBundle.putString("userimage",userimage);
+                mBundle.putString("channelName",channelName);
+                mBundle.putString("token",token);
+                mBundle.putString("call_type","Audio");
+                serviceIntent.putExtras(mBundle);
+                ContextCompat.startForegroundService(getApplicationContext(),
+                        serviceIntent);
+
+            }
+            else {
+
+                PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+                boolean result= Build.VERSION.SDK_INT>= Build.VERSION_CODES.KITKAT_WATCH && powerManager.isInteractive()|| Build.VERSION.SDK_INT< Build.VERSION_CODES.KITKAT_WATCH&&powerManager.isScreenOn();
+
+                if (!result){
+                   PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK |PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE,"MH24_SCREENLOCK");
+                    wl.acquire(10000);
+                   PowerManager.WakeLock wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"MH24_SCREENLOCK");
+                    wl_cpu.acquire(10000);
+                }
+
+//                PowerManager.WakeLock wl = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK |PowerManager.ACQUIRE_CAUSES_WAKEUP |PowerManager.ON_AFTER_RELEASE,"MH24_SCREENLOCK");
+//                wl.acquire(10000);
+//                PowerManager.WakeLock wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,"MH24_SCREENLOCK");
+//                wl_cpu.acquire(10000);
+
+//                PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+//                boolean isScreenOn = Build.VERSION.SDK_INT >= 20 ? pm.isInteractive() : pm.isScreenOn(); // check if screen is on
+//                if (!isScreenOn) {
+//                    PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "myApp:notificationLock");
+//                    wl.acquire(3000); //set your time in milliseconds
+//                }
+
+                Intent serviceIntent = new Intent(getApplicationContext(),
+                        HeadsUpNotificationService.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putString("inititator", userName);
+                mBundle.putString("call_type","Audio");
+                mBundle.putString("channelName",channelName);
+                mBundle.putString("token",token);
+                mBundle.putString("userimage",userimage);
                 serviceIntent.putExtras(mBundle);
                 ContextCompat.startForegroundService(getApplicationContext()
                         , serviceIntent);
