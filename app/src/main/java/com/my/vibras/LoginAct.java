@@ -148,9 +148,7 @@ public class LoginAct extends AppCompatActivity {
 
     private void login() {
         TimeZone tz = TimeZone.getDefault();
-
         String id = tz.getID();
-
         DataManager.getInstance().showProgressMessage(LoginAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("email", strEmail);
@@ -161,7 +159,6 @@ public class LoginAct extends AppCompatActivity {
         call.enqueue(new Callback<SuccessResSignup>() {
             @Override
             public void onResponse(Call<SuccessResSignup> call, Response<SuccessResSignup> response) {
-
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResSignup data = response.body();
@@ -169,7 +166,6 @@ public class LoginAct extends AppCompatActivity {
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-
                         SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_ID, data.getResult().getId());
                         Toast.makeText(LoginAct.this,""+getResources().getString(R.string.logged_in_success), Toast.LENGTH_SHORT).show();
                         if(LoginType.equalsIgnoreCase("user"))

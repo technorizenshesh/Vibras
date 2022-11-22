@@ -23,7 +23,6 @@
 
 
             <RelativeLayout
-                android:id="@+id/User"
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -117,7 +116,6 @@
                 </RelativeLayout>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/usersenderimage"
                     android:layout_width="@dimen/_20sdp"
 
                     android:layout_height="@dimen/_20sdp"
@@ -134,7 +132,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/friend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

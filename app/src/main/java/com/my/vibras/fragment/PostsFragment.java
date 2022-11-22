@@ -18,7 +18,6 @@ import com.my.vibras.R;
 import com.my.vibras.act.SearchAct;
 import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.adapter.StoriesAdapter;
-import com.my.vibras.databinding.FragmentHomeBinding;
 import com.my.vibras.databinding.FragmentPostsBinding;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetStories;
@@ -57,7 +56,7 @@ public class PostsFragment extends Fragment implements PostClickListener {
     {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-        postsAdapter = new PostsAdapter(getActivity(),postList,PostsFragment.this);
+        postsAdapter = new PostsAdapter(getActivity(),postList,PostsFragment.this,"Mine");
         binding.rvPosts.setHasFixedSize(true);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvPosts.setAdapter(postsAdapter);
@@ -70,6 +69,7 @@ public class PostsFragment extends Fragment implements PostClickListener {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
+        map.put("viewer_id",userId);
         map.put("type_status","IMAGE");
         Call<SuccessResGetPosts> call = apiInterface.getPost(map);
         call.enqueue(new Callback<SuccessResGetPosts>() {
@@ -84,7 +84,6 @@ public class PostsFragment extends Fragment implements PostClickListener {
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         postList.clear();
                         postList.addAll(data.getResult());
-
                         postsAdapter.notifyDataSetChanged();
 
                     } else if (data.status.equals("0")) {

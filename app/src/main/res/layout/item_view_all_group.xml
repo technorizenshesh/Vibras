@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_105sdp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_10sdp"
     android:layout_margin="@dimen/_8sdp"
@@ -41,18 +41,22 @@
         <TextView
             android:id="@+id/tvGroupName"
             android:paddingLeft="5sp"
-            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Shelija Concert"
-            android:gravity="center"
+            android:gravity="start"
             android:scrollbarStyle="insideInset"
             android:layout_marginTop="@dimen/_10sdp"
             android:singleLine="true"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
           />
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="@dimen/_2sdp"
+            android:id="@+id/recyc_members"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

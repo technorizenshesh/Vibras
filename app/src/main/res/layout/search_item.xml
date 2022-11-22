@@ -10,15 +10,15 @@
             android:id="@+id/rlParent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
             >
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:background="@drawable/ic_user_icon"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                />
+                android:background="@drawable/ic_user_icon" />
 
             <TextView
                 android:id="@+id/tvUserName"
@@ -28,7 +28,7 @@
                 android:layout_toRightOf="@+id/ivProfile"
                 android:text="Shona"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_toRightOf="@+id/ivProfile"
                 android:text="hello"
                 android:visibility="gone"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_10sdp" />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"

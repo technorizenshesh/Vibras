@@ -172,12 +172,12 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                         postList.addAll(data.getResult());
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this));
+                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this,"Mine"));
                     } else if (data.status.equals("0")) {
                         postList.clear();
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this));
+                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this,"Mine"));
                         showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
@@ -266,34 +266,34 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         });
     }
 
-    private void setProfileDetails()
-    {
-
-        binding.tvName.setText(userDetail.getFirstName()+" "+userDetail.getLastName());
-
-        if(!userDetail.getBio().equalsIgnoreCase(""))
+        private void setProfileDetails()
         {
-            binding.tvBio.setVisibility(View.VISIBLE);
-            binding.tvBio.setText(userDetail.getBio());
-        }else
-        {
-            binding.tvBio.setVisibility(View.GONE);
+
+            binding.tvName.setText(userDetail.getFirstName()+" "+userDetail.getLastName());
+
+            if(!userDetail.getBio().equalsIgnoreCase(""))
+            {
+                binding.tvBio.setVisibility(View.VISIBLE);
+                binding.tvBio.setText(userDetail.getBio());
+            }else
+            {
+                binding.tvBio.setVisibility(View.GONE);
+            }
+
+            Glide
+                    .with(getActivity())
+                    .load(userDetail.getCoverImage())
+                    .into(binding.ivCoverPhoto);
+            Glide
+                    .with(getActivity())
+                    .load(userDetail.getImage())
+                    .placeholder(R.drawable.ic_user)
+                    .into(binding.ivProfile);
+
+            binding.tvLikeGiven.setText(userDetail.getGivenLikes()+"");
+            binding.tvLikeReceived.setText(userDetail.getReceviedLikes()+"");
+
         }
-
-        Glide
-                .with(getActivity())
-                .load(userDetail.getCoverImage())
-                .into(binding.ivCoverPhoto);
-        Glide
-                .with(getActivity())
-                .load(userDetail.getImage())
-                .placeholder(R.drawable.ic_user)
-                .into(binding.ivProfile);
-
-        binding.tvLikeGiven.setText(userDetail.getGivenLikes()+"");
-        binding.tvLikeReceived.setText(userDetail.getReceviedLikes()+"");
-
-    }
 
     private void setUpUi() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));

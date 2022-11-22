@@ -90,7 +90,8 @@ public class CompleteSignUpAct extends AppCompatActivity {
     {
 
         String userTYpe="";
-
+        TimeZone tz = TimeZone.getDefault();
+        String id = tz.getID();
         if(LoginType.equalsIgnoreCase("user"))
         {
             userTYpe = "USER";
@@ -110,7 +111,7 @@ public class CompleteSignUpAct extends AppCompatActivity {
         map.put("dob",strDob);
         map.put("type",userTYpe);
         map.put("gender",strGender);
-
+        map.put("time_zone",id);
         Call<SuccessResSignup> signupCall = apiInterface.signup(map);
         signupCall.enqueue(new Callback<SuccessResSignup>() {
             @Override

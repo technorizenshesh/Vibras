@@ -60,14 +60,10 @@ public class GroupChatAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_group_chat);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         id = getIntent().getExtras().getString("id");
         name = getIntent().getExtras().getString("name");
-
         binding.RRFrnd.setOnClickListener(v -> finish());
-
         binding.txtName.setText(name);
-
         binding.img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

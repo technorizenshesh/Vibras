@@ -2,15 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home_company">
 
     <fragment
         android:id="@+id/navigation_home_company"
         android:name="com.my.vibras.fragment.EventsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_events" >
-    </fragment>
+        tools:layout="@layout/fragment_events"></fragment>
 
     <fragment
         android:id="@+id/navigation_post"
@@ -30,8 +28,7 @@
         android:id="@+id/navigation_Profile"
         android:name="com.my.vibras.fragment.ComapnyProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_comapny_my_profile"
-        />
+        tools:layout="@layout/fragment_comapny_my_profile" />
 
 
 </navigation>

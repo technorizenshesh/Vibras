@@ -409,7 +409,7 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
                         postList.addAll(data.getResult());
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList, OtherUserProfileFragment.this));
+                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList, OtherUserProfileFragment.this,"Mine"));
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }

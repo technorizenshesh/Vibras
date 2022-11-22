@@ -152,9 +152,10 @@ public class ViewAllGroupsAct extends AppCompatActivity {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetGroup data = response.body();
-                    Log.e("data",data.status);
+                    String dataResponse = new Gson().toJson(response.body());
+
+                    Log.e("data--------------------------------------",dataResponse);
                     if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
                         groupList.clear();
                         groupList.addAll(data.getResult());
                         groupChatAdapter = new AllGroupChatAdapter(ViewAllGroupsAct.this,groupList);

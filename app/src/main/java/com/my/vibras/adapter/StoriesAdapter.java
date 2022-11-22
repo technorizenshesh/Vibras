@@ -55,9 +55,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ViewHolder) {
             final SuccessResGetStories.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
-
             genericViewHolder.txtName.setText(model.getUserName());
-
             Glide.with(mContext)
                     .load(model.getUserImage())
                     .into(genericViewHolder.image);

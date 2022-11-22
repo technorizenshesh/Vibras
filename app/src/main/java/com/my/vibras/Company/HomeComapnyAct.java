@@ -17,10 +17,10 @@ public class HomeComapnyAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_company);
-       BottomNavigationView navView = findViewById(R.id.nav_view_comapny);
+        BottomNavigationView navView = findViewById(R.id.nav_view_comapny);
 
-            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home_company,R.id.navigation_post,R.id.navigation_notification, R.id.navigation_Profile)
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home_company, R.id.navigation_post, R.id.navigation_notification, R.id.navigation_Profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_home_company);
         // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

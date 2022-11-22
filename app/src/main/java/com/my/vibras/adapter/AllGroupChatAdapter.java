@@ -10,17 +10,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.ui.GroupDetailAct;
+import com.my.vibras.model.SuccessResGetGroup;
 import com.my.vibras.model.SuccessResGetGroup.Result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<Result> modelList;
@@ -49,25 +53,34 @@ public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof ViewHolder) {
             final Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
-
             TextView tvView = holder.itemView.findViewById(R.id.tvView);
-
-            CircleImageView ivProfile  = holder.itemView.findViewById(R.id.ivGroup);
-            TextView tvGroupName  = holder.itemView.findViewById(R.id.tvGroupName);
+            CircleImageView ivProfile = holder.itemView.findViewById(R.id.ivGroup);
+            TextView tvGroupName = holder.itemView.findViewById(R.id.tvGroupName);
+            RecyclerView recyc_members = holder.itemView.findViewById(R.id.recyc_members);
+            List<SuccessResGetGroup.GroupMembersDetail> modelList = new ArrayList<>();
+            modelList = model.getGroupMembersDetail();
+            LinearLayoutManager linearLayoutManager= new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
+            GroupHintedMembersAdapter groupHintedMembersAdapter= new
+                    GroupHintedMembersAdapter(mContext,modelList);
+            recyc_members.setAdapter(groupHintedMembersAdapter);
+            recyc_members.setLayoutManager(linearLayoutManager);
+            recyc_members.hasFixedSize();
+            recyc_members.hasNestedScrollingParent();
             tvGroupName.setText(model.getGroupName());
 
+            Glide.with(mContext).load(model.getGroupImage()).into(ivProfile);
             tvView.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, GroupDetailAct.class).putExtra("id",model.getId()));
+                        mContext.startActivity(new Intent(mContext, GroupDetailAct.class).putExtra("id", model.getId()));
                     }
-                    );
+            );
+
 
         }
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return modelList.size();
     }
 
@@ -87,6 +100,7 @@ public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtName;
+
         public ViewHolder(final View itemView) {
             super(itemView);
         }

@@ -388,10 +388,16 @@ public interface VibrasInterface {
     @POST("apply_filter")
     Call<SuccessResFilterData> filter(@FieldMap Map<String, String> paramHashMap);
 
-    @FormUrlEncoded
+/*    @FormUrlEncoded
     @POST("create_group")
-    Call<ResponseBody> createGroup(@FieldMap Map<String, String> paramHashMap);
-
+    Call<ResponseBody> createGroup(@FieldMap Map<String, String> paramHashMap);*/
+    @Multipart
+    @POST("create_group")
+    Call<ResponseBody> createGroup(
+            @Part("user_id") RequestBody userId,
+            @Part("group_name") RequestBody group_name,
+            @Part("members_id") RequestBody members_id,
+            @Part MultipartBody.Part file);
     @FormUrlEncoded
     @POST("get_all_group")
     Call<SuccessResGetGroup> getAllGroupApi(@FieldMap Map<String, String> paramHashMap);

@@ -1,5 +1,6 @@
 package com.my.vibras.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,8 +16,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.GroupChatAct;
+import com.my.vibras.chat.GroupChat.GroupChatInnerActivity;
 import com.my.vibras.model.SuccessResGetGroup.Result;
 import com.my.vibras.model.SuccessResGetGroup;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -52,7 +55,7 @@ public class GroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             final SuccessResGetGroup.Result model = getItem(position);
@@ -75,7 +78,8 @@ public class GroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             llParent.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, GroupChatAct.class).putExtra("id",modelList.get(position).getId())
+                        mContext.startActivity(new Intent(mContext, GroupChatInnerActivity.class).
+                                putExtra("id",modelList.get(position).getId())
                                 .putExtra("name",modelList.get(position).getGroupName())
                         );
                     }
@@ -106,6 +110,7 @@ public class GroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     );
 
             ImageView ivProfile  = holder.itemView.findViewById(R.id.ivGroup);
+            Glide.with(mContext).load(model.getGroupImage()).into(ivProfile);
             TextView tvGroupName  = holder.itemView.findViewById(R.id.tvGroupName);
             tvGroupName.setText(model.getGroupName());
         }

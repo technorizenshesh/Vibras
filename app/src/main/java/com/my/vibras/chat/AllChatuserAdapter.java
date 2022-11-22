@@ -144,49 +144,46 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
 
             }
         });
+        holder.unseenmessagecount.setVisibility(View.VISIBLE);
+        mReference.child("From" + alluserchatlist.get(position).getSender_id() + "To"
+                    + user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
+                    Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
+                    if (snapshot.getValue() != null) {
+                        String[] parts = snapshot.getValue().toString().split("=");
 
-        if (session.getUserId().equalsIgnoreCase(alluserchatlist.get(position).getSender_id())) {
+                        String part2 = parts[1];
+
+
+                        String unreadstatus = part2.replace("}", "");
+                        Log.e("statusget", "UnReadCount: " + unreadstatus);
+
+                        if (unreadstatus.equalsIgnoreCase("0")) {
+                            holder.unseenmessagecount.setVisibility(View.GONE);
+                            //   holder.unssencard.setVisibility(View.GONE);
+                            //holder.  unseenmessagecount.setText(unreadstatus);
+                        } else {
+                            holder.unseenmessagecount.setVisibility(View.VISIBLE);
+                            holder.unseenmessagecount.setText(unreadstatus);
+                            notifyItemChanged(position);
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
             mReference.child("From" + alluserchatlist.get(position).getReceiver_id() + "To"
                     + user_id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-                    Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
-                    Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
-                    if (snapshot.getValue() != null) {
-                        String[] parts = snapshot.getValue().toString().split("=");
-
-                        String part2 = parts[1];
-
-
-                        String unreadstatus = part2.replace("}", "");
-                        Log.e("statusget", "UnReadCount: " + unreadstatus);
-
-                        if (unreadstatus.equalsIgnoreCase("0")) {
-                            holder.unseenmessagecount.setVisibility(View.GONE);
-                            //   holder.unssencard.setVisibility(View.GONE);
-                            //holder.  unseenmessagecount.setText(unreadstatus);
-                        } else {
-                            holder.unseenmessagecount.setVisibility(View.VISIBLE);
-                            holder.unseenmessagecount.setText(unreadstatus);
-                            // notifyItemChanged(position);
-                        }
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        } else {
-            mReference.child("From" + alluserchatlist.get(position).getSender_id() + "To"
-                    + user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
                     Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
                     if (snapshot.getValue() != null) {
@@ -215,7 +212,7 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                 }
             });
 
-        }
+
         Log.e("statusgot-->.", "onBindViewHolder: " + alluserchatlist.get(position).getId());
 
 

@@ -13,35 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="WD_Slider" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
-    </style>
 
-    <style name="Myslider" parent="@style/Widget.MaterialComponents.Slider">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
-    </style>
     <style name="MyMaterialTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Add attributes here -->
         <item name="colorPrimary">@color/green</item>
     </style>
-    <style name="My_Tooltip" parent="Widget.MaterialComponents.Tooltip">
-        <!-- background color of the Tooltip -->
-        <item name="backgroundTint">@color/blue</item>
-    </style>
 
-    <style name="ThemeOverlay.Slider" parent="">
-        <!-- color used by the text in the Tooltip -->
-        <item name="colorPrimary">@color/green</item>
-        <item name="colorOnPrimary">@color/green</item>
-        <item name="colorOnSurface">@color/green</item>
-    </style>
-
-
-    <style name="RatingBar"
-         parent="android:style/Widget.Material.RatingBar.Small">
-        <item name="colorControlNormal">@color/gray</item>
-        <item name="colorControlActivated">#FFC107</item>
-    </style>
 
     <style name="ratingBarStyle" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/gray</item>

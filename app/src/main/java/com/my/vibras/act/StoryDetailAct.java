@@ -68,7 +68,7 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
     private String userName = "";
     private String userImage = "";
     private Momentz momentz;
-    private ConstraintLayout container;
+    private RelativeLayout container;
     private TextView tvDateTime;
     private EditText editText;
     private LinearLayout llContainer;
@@ -98,7 +98,8 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
         {
             for (SuccessResGetStories.UserStory story:stories)
             {
-                if(story.getStoryType().equalsIgnoreCase("image") || story.getStoryType().equalsIgnoreCase("Image"))
+                if(story.getStoryType().equalsIgnoreCase("image") ||
+                        story.getStoryType().equalsIgnoreCase("Image"))
                 {
                     ImageView internetLoadedImageView = new ImageView(this);
                     storyView.add(new MomentzView(internetLoadedImageView,10));
@@ -106,11 +107,13 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
                 else
                 {
                     VideoView videoView = new VideoView(this);
+            //        videoView.setBackground(getResources().getDrawable(R.color.black));
                     storyView.add(new MomentzView(videoView,60));
                 }
             }
         }
-        momentz = new Momentz(this,storyView,container,this,R.drawable.green_lightgrey_drawable);
+        momentz = new Momentz(this,storyView,container,
+                this,R.drawable.green_lightgrey_drawable);
         momentz.start();
         SoftKeyboardLsnedRelativeLayout layout = (SoftKeyboardLsnedRelativeLayout) findViewById(R.id.myLayout);
         layout.addSoftKeyboardLsner(new SoftKeyboardLsnedRelativeLayout.SoftKeyboardLsner() {

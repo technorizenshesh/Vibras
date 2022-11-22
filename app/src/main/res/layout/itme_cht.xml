@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_5sdp"
-    >
+    android:padding="@dimen/_5sdp">
+
     <RelativeLayout
         android:id="@+id/rlParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        >
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_margin="@dimen/_5sdp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="@dimen/_45sdp"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:background="@drawable/circle_gray" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_toRightOf="@id/ivProfile"
+                android:id="@+id/middle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pria"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvLastMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hey..."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/circle_gray" />
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
-            <TextView
-                android:id="@+id/tvUserName"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pria"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                />
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:src="@drawable/ic_delete" />
 
             <TextView
-                android:id="@+id/tvLastMessage"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hey..."
+                android:layout_marginRight="@dimen/_5sdp"
+                android:text="23 min"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                />
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone" />
 
         </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:layout_alignParentRight="true"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
-        <TextView
-            android:layout_marginRight="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="23 min"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
-            android:visibility="gone"
-            />
-
-        <ImageView
-            android:id="@+id/ivDelete"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_delete"
-            android:layout_marginRight="@dimen/_5sdp"
-            />
-
-    </LinearLayout>
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rlParent" />
 </RelativeLayout>

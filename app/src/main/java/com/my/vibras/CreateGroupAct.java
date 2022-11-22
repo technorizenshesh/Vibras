@@ -1,16 +1,32 @@
 package com.my.vibras;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +37,12 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.abedelazizshe.lightcompressorlibrary.CompressionListener;
+import com.abedelazizshe.lightcompressorlibrary.VideoCompressor;
+import com.abedelazizshe.lightcompressorlibrary.VideoQuality;
+import com.abedelazizshe.lightcompressorlibrary.config.Configuration;
+import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import com.my.vibras.act.EditProfileAct;
@@ -38,23 +60,32 @@ import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapter.OnItemClickListener {
-
+    private static final int SELECT_FILE = 2;
+    String str_image_path = "";
+    private static final int REQUEST_CAMERA = 1;
     ActivityCreateGroupBinding binding;
     private VibrasInterface apiInterface;
     private ArrayList<SuccessResGetUsers.Result> usersList = new ArrayList<>();
@@ -62,6 +93,9 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
     private AddFriendAdapter mAdapter;
     private SelectedUserAdapter selectedUserAdapter;
     String usersIds="";
+    private static final int MY_PERMISSION_CONSTANT = 5;
+    boolean cameraClicked = true;
+    CircleImageView ivProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,17 +150,51 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         AppCompatButton btnCreate = dialog.findViewById(R.id.btnCreate);
         EditText edtEmail = dialog.findViewById(R.id.edtEmail);
+         ivProfile = dialog.findViewById(R.id.ivProfile);
+        ivProfile.setOnClickListener(v ->
+            {
+                final CharSequence[] options = {"Take Video", "Choose from Gallery", "Cancel"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(CreateGroupAct.this);
+                builder.setTitle("Add Video!");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        if (options[item].equals("Take Photo")) {
+                            cameraClicked = true;
+                            if (checkPermisssionForReadStorage()) {
+                                
+                                openCamera();
+                            }
+                        } else if (options[item].equals("Choose from Gallery")) {
+                            cameraClicked = false;
+                            if (checkPermisssionForReadStorage()) {
+                               
+                                    getPhotoFromGallary();
+                                
+                            }
+                        } else if (options[item].equals("Cancel")) {
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                builder.show();
+            }
+        );
         btnCreate.setOnClickListener(v ->
                 {
                     if(edtEmail.getText().toString().equalsIgnoreCase(""))
                     {
                         Toast.makeText(CreateGroupAct.this, "Please enter group name.", Toast.LENGTH_SHORT).show();
+                    }else if(str_image_path.equalsIgnoreCase(""))
+                    {
+                        Toast.makeText(CreateGroupAct.this, "Please Pick group Image.", Toast.LENGTH_SHORT).show();
                     }else
                     {
                         dialog.dismiss();
                         startActivity(new Intent(CreateGroupAct.this,PaymentsAct.class)
                                 .putExtra("memberIds",usersIds)
                                 .putExtra("groupName",edtEmail.getText().toString())
+                                .putExtra("str_image_path",str_image_path)
                                 .putExtra("from","group")
                         );
 //                        createGroupApi(usersIds,edtEmail.getText().toString());
@@ -137,7 +205,7 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
         dialog.show();
     }
 
-    private void createGroupApi(String userIds,String groupName)
+   /* private void createGroupApi(String userIds,String groupName)
     {
         String userId = SharedPreferenceUtility.getInstance(CreateGroupAct.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(CreateGroupAct.this, getString(R.string.please_wait));
@@ -187,7 +255,7 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-    }
+    }*/
 
     private void getAllUsers() {
         String userId = SharedPreferenceUtility.getInstance(CreateGroupAct.this).getString(USER_ID);
@@ -255,5 +323,201 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                 Toast.makeText(CreateGroupAct.this, "User already added.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void getPhotoFromGallary() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), SELECT_FILE);
+    }
+
+    private void openCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(CreateGroupAct.this.getPackageManager()) != null)
+            startActivityForResult(cameraIntent, REQUEST_CAMERA);
+    }
+    //CHECKING FOR Camera STATUS
+    public boolean checkPermisssionForReadStorage() {
+        if (ContextCompat.checkSelfPermission(CreateGroupAct.this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED
+
+                ||
+
+                ContextCompat.checkSelfPermission(CreateGroupAct.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED
+                ||
+
+                ContextCompat.checkSelfPermission(CreateGroupAct.this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED
+        ) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(CreateGroupAct.this,
+                    Manifest.permission.CAMERA)
+
+                    ||
+
+                    ActivityCompat.shouldShowRequestPermissionRationale(CreateGroupAct.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                    ||
+                    ActivityCompat.shouldShowRequestPermissionRationale(CreateGroupAct.this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+            ) {
+
+                requestPermissions(
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.
+                                READ_EXTERNAL_STORAGE, Manifest.permission
+                                .WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSION_CONSTANT);
+
+            } else {
+
+                requestPermissions(
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission
+                                .READ_EXTERNAL_STORAGE, 
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSION_CONSTANT);
+            }
+            return false;
+        } else {
+
+            //  explain("Please Allow Location Permission");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case 1000: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    /*
+                    Log.e("Latittude====", gpsTracker.getLatitude() + "");
+                    strLat = Double.toString(gpsTracker.getLatitude()) ;
+                    strLng = Double.toString(gpsTracker.getLongitude()) ;
+*/
+//                    if (isContinue) {
+//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(CreateGroupAct.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                            // TODO: Consider calling
+//                            //    ActivityCompat#requestPermissions
+//                            // here to request the missing permissions, and then overriding
+//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                            //                                          int[] grantResults)
+//                            // to handle the case where the user grants the permission. See the documentation
+//                            // for ActivityCompat#requestPermissions for more details.
+//                            return;
+//                        }
+//                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+//                    } else {
+//                        Log.e("Latittude====", gpsTracker.getLatitude() + "");
+//                        strLat = Double.toString(gpsTracker.getLatitude()) ;
+//                        strLng = Double.toString(gpsTracker.getLongitude()) ;
+//                    }
+                } else {
+                    Toast.makeText(CreateGroupAct.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+
+            case MY_PERMISSION_CONSTANT: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0) {
+                    boolean camera = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean read_external_storage = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean write_external_storage = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+                    if (camera && read_external_storage && write_external_storage) {
+                        if (cameraClicked) {
+                            openCamera();
+                        } else {
+                            getPhotoFromGallary();
+                        }
+                    } else {
+                        Toast.makeText(CreateGroupAct.this, getResources().getString(R.string.permission_denied_boo), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(CreateGroupAct.this, getResources().getString(R.string.permission_denied_boo), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Log.e("Result_code", requestCode + "");
+
+             if (requestCode == SELECT_FILE) {
+                try {
+                    Uri selectedImage = data.getData();
+                    Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                    Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                    Glide.with(CreateGroupAct.this)
+                            .load(selectedImage)
+                            .centerCrop()
+                            .into(ivProfile);
+                    Uri tempUri = getImageUri(CreateGroupAct.this, bitmap);
+                    String image = RealPathUtil.getRealPath(CreateGroupAct.this, tempUri);
+                    str_image_path = image;
+
+                } catch (IOException e) {
+                    Log.i("TAG", "Some exception " + e);
+                }
+
+            } else if (requestCode == REQUEST_CAMERA) {
+
+                try {
+                    if (data != null) {
+                        // TODO
+                        Bundle extras = data.getExtras();
+                        Bitmap bitmapNew = (Bitmap) extras.get("data");
+                        Bitmap imageBitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                        Uri tempUri = getImageUri(CreateGroupAct.this, imageBitmap);
+                        String image = RealPathUtil.getRealPath(CreateGroupAct.this, tempUri);
+                        str_image_path = image;
+                        Glide.with(CreateGroupAct.this)
+                                .load(imageBitmap)
+                                .centerCrop()
+                                .into(ivProfile);
+//                        updateCoverPhoto();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+    public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
+
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+        return scaledBitmap;
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title_" + System.currentTimeMillis(), null);
+        return Uri.parse(path);
     }
 }

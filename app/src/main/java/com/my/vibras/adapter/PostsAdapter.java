@@ -3,6 +3,7 @@ package com.my.vibras.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,17 +35,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewH
     PostItemBinding binding;
     private List<SuccessResGetPosts.Result> postList;
     private PostClickListener postClickListener;
-    public PostsAdapter(Context context, List<SuccessResGetPosts.Result> postList, PostClickListener postClickListener)
-    {
-      this.context = context;
-      this.postList = postList;
-      this.postClickListener = postClickListener;
+    String From = "";
+
+    public PostsAdapter(Context context, List<SuccessResGetPosts.Result> postList,
+                        PostClickListener postClickListener, String from) {
+        this.From = from;
+        this.context = context;
+        this.postList = postList;
+        this.postClickListener = postClickListener;
     }
-    
+
     @NonNull
     @Override
     public StoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding= PostItemBinding.inflate(LayoutInflater.from(context));
+        binding = PostItemBinding.inflate(LayoutInflater.from(context));
         return new StoriesViewHolder(binding);
     }
 
@@ -52,53 +56,53 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewH
     public void onBindViewHolder(@NonNull StoriesViewHolder holder, int position) {
 
         ImageView ivPOst = holder.itemView.findViewById(R.id.ivPost);
+        ImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
         TextView tvUserName = holder.itemView.findViewById(R.id.tvUserName);
         TextView tvDescription = holder.itemView.findViewById(R.id.tvDescription);
+        TextView tvDistance = holder.itemView.findViewById(R.id.tvDistance);
 
         ImageView ivLike = holder.itemView.findViewById(R.id.ivLike);
         ImageView ivComment = holder.itemView.findViewById(R.id.ivComment);
         ImageView ivMore = holder.itemView.findViewById(R.id.ivMore);
+        if (From.equalsIgnoreCase("Mine")) {
+            ivMore.setVisibility(View.VISIBLE);
+        } else {
+            ivMore.setVisibility(View.GONE);
 
+        }
         CircleImageView circleImageView = holder.itemView.findViewById(R.id.ivProfile);
-
-        if(postList.get(position).getLikeStatus().equalsIgnoreCase("1"))
-        {
+        if (postList.get(position).getLikeStatus().equalsIgnoreCase("1")) {
             ivLike.setImageResource(R.drawable.ic_like_filled);
-        }else
-        {
+        } else {
             ivLike.setImageResource(R.drawable.like_new);
         }
-
-        ivMore.setOnClickListener(v ->
-                {
-                    postClickListener.bottomSheet(v,postList.get(position).getId(),false,position);
+        ivMore.setOnClickListener(v -> {
+                    postClickListener.bottomSheet(v, postList.get(position).getId(), false, position);
                 }
-                );
+        );
 
         ivComment.setOnClickListener(v ->
                 {
-                    context.startActivity(new Intent(context, AddCommentAct.class).putExtra("postId",postList.get(position).getId()));
+                    context.startActivity(new Intent(context, AddCommentAct.class).putExtra("postId", postList.get(position).getId()));
                 }
-                );
-
+        );
         ivLike.setOnClickListener(v ->
                 {
-                    postClickListener.selectLike(position,"");
+                    postClickListener.selectLike(position, "");
                 }
-                );
+        );
 
         Glide.with(context)
                 .load(postList.get(position).getImage())
                 .into(ivPOst);
-
         Glide.with(context)
-                .load(postList.get(position).getUserId())
+                .load(postList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
-
         tvDescription.setText(postList.get(position).getDescription());
-
-        tvUserName.setText(postList.get(position).getFirstName()+" "+postList.get(position).getLastName());
+    //    tvDistance.setText(postList.get(position).get());
+        tvUserName.setText(postList.get(position).getFirstName() + " "
+                + postList.get(position).getLastName());
 
     }
 
