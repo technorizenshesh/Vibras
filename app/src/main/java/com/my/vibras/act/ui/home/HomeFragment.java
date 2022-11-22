@@ -85,6 +85,7 @@ import static com.my.vibras.retrofit.Constant.showToast;
 
 public class HomeFragment extends Fragment implements HomeItemClickListener {
 
+    private static final String TAG = "HomeFragmentHomeFragment";
     public static SuccessResGetStories.Result story;
     private FragmentHomeBinding binding;
     private ArrayList<SuccessResGetUsers.Result> usersList = new ArrayList<>();
@@ -146,6 +147,7 @@ Session session;
     private void getInterest() {
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
+        Log.e(TAG, "userIduserIduserIduserId: "+userId );
         map.put("user_id", userId);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Call<SuccessResGetStories> call = apiInterface.getAllStories(map);
@@ -156,8 +158,11 @@ Session session;
                 try {
                     SuccessResGetStories data = response.body();
                     Log.e("data",data.status);
+                    Log.e(TAG,new Gson().toJson(response.body()));
+
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
+                        Log.e(TAG, "getAllStoriesgetAllStoriesgetAllStories: "+dataResponse );
                         storyList.clear();
                         storyList.addAll(data.getResult());
                         mAdapter.notifyDataSetChanged();
@@ -171,6 +176,9 @@ Session session;
             @Override
             public void onFailure(Call<SuccessResGetStories> call, Throwable t) {
                 call.cancel();
+                Log.e(TAG,t.getLocalizedMessage());
+                Log.e(TAG,t.getMessage());
+
                 DataManager.getInstance().hideProgressMessage();
             }
         });

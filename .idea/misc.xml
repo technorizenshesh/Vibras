@@ -17,11 +17,13 @@
         <entry key="app/src/main/res/drawable/border_black.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/border_dark_gray.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/border_stroke_color_gray.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/btn_endcall.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_endcall_normal.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_mute.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/btn_mute_fig.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/btn_speaker.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/card_svg_home.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/chat_et_bg.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/chats.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/circle_gray.xml" value="0.1" />
@@ -29,6 +31,7 @@
         <entry key="app/src/main/res/drawable/gray_cornors_5.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/green_gradient.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/ic_background.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1135" />
@@ -47,6 +50,7 @@
         <entry key="app/src/main/res/drawable/topleft_bottomleft_cornor30.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/topright_bottomright_cornor30.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/unseen_circle.xml" value="0.1335" />
+        <entry key="app/src/main/res/drawable/user.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/white_cornors_30.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_about_us2.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_add_comment.xml" value="0.22" />
@@ -65,6 +69,7 @@
         <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_filter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_friend_profile.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_get_events_by_category_id.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_good_vibes.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_group_chat.xml" value="0.2140625" />
@@ -121,6 +126,7 @@
         <entry key="app/src/main/res/layout/fragment_comapny_my_profile.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_events.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_events_copamny.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_friend_posts.xml" value="0.10572916666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_my_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2140625" />
@@ -130,7 +136,7 @@
         <entry key="app/src/main/res/layout/fragment_post_events_restaurent.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_post_restaurent.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.28753541076487255" />
         <entry key="app/src/main/res/layout/fragment_restaurant.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/image_slider_layout_item.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/images_item.xml" value="0.3765625" />

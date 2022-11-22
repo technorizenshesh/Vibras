@@ -1,28 +1,25 @@
 package com.my.vibras.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.SearchAct;
 import com.my.vibras.adapter.PostsAdapter;
-import com.my.vibras.adapter.StoriesAdapter;
+import com.my.vibras.databinding.FragmentFriendPostsBinding;
 import com.my.vibras.databinding.FragmentPostsBinding;
+import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetStories;
-import com.my.vibras.model.SuccessResGetPosts;
-import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
@@ -40,9 +37,10 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class PostsFragment extends Fragment implements PostClickListener {
 
-    private FragmentPostsBinding binding;
+public class FriendPostsFragment extends Fragment implements PostClickListener {
+
+    private FragmentFriendPostsBinding binding;
 
     private ArrayList<SuccessResGetStories> storyList = new ArrayList<>();
 
@@ -51,12 +49,13 @@ public class PostsFragment extends Fragment implements PostClickListener {
     private VibrasInterface apiInterface;
 
     private PostsAdapter postsAdapter;
-
+String Userid ="";
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts,container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_friend_posts,container, false);
+         Userid = getArguments().getString("user_id");
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-        postsAdapter = new PostsAdapter(getActivity(),postList,PostsFragment.this,"Mine");
+        postsAdapter = new PostsAdapter(getActivity(),postList,FriendPostsFragment.this,"Other");
         binding.rvPosts.setHasFixedSize(true);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvPosts.setAdapter(postsAdapter);
@@ -65,10 +64,9 @@ public class PostsFragment extends Fragment implements PostClickListener {
     }
 
     private void getPosts() {
-        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
+        map.put("user_id",Userid);
         map.put("type_status","IMAGE");
         Call<SuccessResGetPosts> call = apiInterface.getPost(map);
         call.enqueue(new Callback<SuccessResGetPosts>() {
@@ -83,9 +81,7 @@ public class PostsFragment extends Fragment implements PostClickListener {
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         postList.clear();
                         postList.addAll(data.getResult());
-
                         postsAdapter.notifyDataSetChanged();
-
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }

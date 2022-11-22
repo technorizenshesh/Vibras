@@ -313,8 +313,9 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         String str = null;
 
         try {
+             if (time.equalsIgnoreCase("")){
             date = inputFormat.parse(time);
-            str = outputFormat.format(date);
+            str = outputFormat.format(date);}
         } catch (ParseException e) {
             e.printStackTrace();
         }

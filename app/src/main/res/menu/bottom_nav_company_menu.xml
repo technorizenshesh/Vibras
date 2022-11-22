@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/navigation_home_company"
-        android:icon="@drawable/home_comapny"
+        android:icon="@drawable/card_svg_home"
         android:title="@string/title_home"
         />
 
     <item
         android:id="@+id/navigation_post"
-        android:icon="@drawable/pls"
+        android:icon="@drawable/ic_baseline_add_circle_24"
         android:title="Post"
         />
 

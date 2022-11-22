@@ -1,5 +1,6 @@
 package com.my.vibras.act;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -7,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,10 +25,16 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.SpannableStringBuilder;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.abedelazizshe.lightcompressorlibrary.CompressionListener;
+import com.abedelazizshe.lightcompressorlibrary.VideoCompressor;
+import com.abedelazizshe.lightcompressorlibrary.VideoQuality;
+import com.abedelazizshe.lightcompressorlibrary.config.Configuration;
+import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
@@ -61,6 +69,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
@@ -69,6 +78,7 @@ public class CreatePostAct extends AppCompatActivity {
     private static final int LOAD_TESTING_VIDEO = 108;
     private static final int ACTION_TAKE_VIDEO = 109;
     ActivityCreatePostBinding binding;
+    VideoCompressor videoCompressor;
     private static final int SELECT_FILE = 2;
     String str_image_path = "";
     String str_video_path = "";
@@ -85,9 +95,8 @@ public class CreatePostAct extends AppCompatActivity {
     private String postType = "";
     Session session;
     Integer integer = 0;
-
     File videoone;
-
+    File file101;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,7 +196,7 @@ public class CreatePostAct extends AppCompatActivity {
                         integer = 1;
                         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                         takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30);
-                   //     takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Environment.getExternalStorageDirectory().getPath() + Calendar.getInstance().getTimeInMillis() + "story.mp4");
+                        //     takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Environment.getExternalStorageDirectory().getPath() + Calendar.getInstance().getTimeInMillis() + "story.mp4");
                         startActivityForResult(takeVideoIntent, ACTION_TAKE_VIDEO);
                     } else if (options[item].equals("Choose from Gallery")) {
                         if (checkPermisssionForReadStorage()) {
@@ -215,60 +224,71 @@ public class CreatePostAct extends AppCompatActivity {
     }
 
     public void uploadStory(ArrayList<String> imagesVideosPathList, boolean image, String type1) {
+        try {
 
-        String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
 
-        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+            String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
 
-        List<MultipartBody.Part> filePartList = new LinkedList<>();
-        if (image) {
-            for (int i = 0; i < imagesVideosPathList.size(); i++) {
-                File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
-                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
-            }
-        } else {
-            for (int i = 0; i < imagesVideosPathList.size(); i++) {
-                //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
-                File file = new File(imagesVideosPathList.get(i));
+            DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+
+            List<MultipartBody.Part> filePartList = new LinkedList<>();
+            if (image) {
+                for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                    File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+                }
+            } else {
+                for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                    //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                    File file = new File(imagesVideosPathList.get(i));
                /* File getPathFile = new File(RealPathUtil.getVideoPath2(CreatePostAct.this,selectedVideo));
                 videoone = getPathFile;
                 System.out.println("getPathFile------   " + getPathFile);*/
-                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
-            }
-        }
-
-        RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
-        RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
-        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
-        Call<SuccessResUploadStory> loginCall = apiInterface.uploadStory(userId, caption, type, filePartList);
-
-        loginCall.enqueue(new Callback<SuccessResUploadStory>() {
-            @Override
-            public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
-                DataManager.getInstance().hideProgressMessage();
-                try {
-                    SuccessResUploadStory data = response.body();
-                    Log.e("data", data.status);
-                    if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
-                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                        showToast(CreatePostAct.this, data.message);
-                        finish();
-                    } else if (data.status.equals("0")) {
-                        showToast(CreatePostAct.this, data.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "Test Response :" + response.body());
+                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
                 }
             }
 
-            @Override
-            public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
-                call.cancel();
-                DataManager.getInstance().hideProgressMessage();
-            }
-        });
+            RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+            RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
+            RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
+            Call<SuccessResUploadStory> loginCall = apiInterface.uploadStory(userId, caption, type, filePartList);
+
+            loginCall.enqueue(new Callback<SuccessResUploadStory>() {
+                @Override
+                public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
+                    DataManager.getInstance().hideProgressMessage();
+                    try {
+                        if (response.body() != null) {
+                            SuccessResUploadStory data = response.body();
+                            Log.e("MapMap", "EDIT PROFILE RESPONSE" + new Gson().toJson(response.body()));
+                            Log.e("data", data.status);
+                            if (data.status.equals("1")) {
+                                String dataResponse = new Gson().toJson(response.body());
+                                Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                                showToast(CreatePostAct.this, data.message);
+                                finish();
+                            } else if (data.status.equals("0")) {
+                                showToast(CreatePostAct.this, data.message);
+                            }
+                        } else {
+                            showToast(CreatePostAct.this, "Something Went Wrong ");
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "Test Response :" + response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "uploadStory" + e.getLocalizedMessage());
+        }
     }
 
     public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
@@ -293,13 +313,15 @@ public class CreatePostAct extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title_" + System.currentTimeMillis(), null);
         return Uri.parse(path);
     }
+
     public String getRealPathFromURI(Uri contentUri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = managedQuery(contentUri, proj, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -309,6 +331,10 @@ public class CreatePostAct extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     try {
                         Uri selectedVideo = data.getData();
+                        ProgressDialog progressDialog = new ProgressDialog(this);
+                        progressDialog.setTitle("Compressing Video");
+                        progressDialog.create();
+                        progressDialog.show();
                         MediaPlayer mp = MediaPlayer.create(CreatePostAct.this,
                                 Uri.parse(String.valueOf(selectedVideo)));
                         int duration = mp.getDuration() / 1000;
@@ -319,6 +345,60 @@ public class CreatePostAct extends AppCompatActivity {
                                     .centerCrop()
                                     .into(binding.ivProfile);
                             str_image_path = RealPathUtil.getVideoPath2(CreatePostAct.this, selectedVideo);
+                             file101 = new File(str_image_path);
+                         //   compressvidee();
+                            ArrayList<Uri> listss  =   new ArrayList<Uri>();
+                            listss.add(selectedVideo);
+                            videoCompressor.start(
+                                    getApplicationContext(), // => This is required
+                                    listss, // => Source can be provided as content uris
+                                    false, // => isStreamable
+                                    new StorageConfiguration(
+                                            file101.getName() ,
+                                            file101.getAbsolutePath(),  // => the directory to save the compressed video(s). Will be ignored if isExternal = false.
+                                            true // => false means save at app-specific file directory. Default is true.
+                                    ),
+                                    new Configuration(
+                                            VideoQuality.MEDIUM,
+                                            false, /*isMinBitrateCheckEnabled*/
+                                            null, /*videoBitrate: int, or null*/
+                                            false, /*disableAudio: Boolean, or null*/
+                                            false, /*keepOriginalResolution: Boolean, or null*/
+                                            360.0, /*videoWidth: Double, or null*/
+                                            480.0 /*videoHeight: Double, or null*/
+                                    ),
+                                    new CompressionListener() {
+                                        @Override
+                                        public void onSuccess(int i, long l, @Nullable String s) {
+                                            progressDialog.dismiss();
+                                        }
+
+
+                                        @Override
+                                        public void onStart(int i) {
+                                        }
+                                        @Override
+                                        public void onFailure(int index, String failureMessage) {
+                                            // On Failure
+                                            progressDialog.dismiss();
+                                        }
+
+                                        @Override
+                                        public void onProgress(int index, float progressPercent) {
+                                            // Update UI with progress value
+                                            runOnUiThread(new Runnable() {
+                                                public void run() {
+                                                    progressDialog.setTitle("progress--"+progressPercent);
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onCancelled(int index) {
+                                            // On Cancelled
+                                        }
+                                    }
+                            );
                         } else {
                             Toast.makeText(CreatePostAct.this, "Please Select Video Duration 30  Sec Only", Toast.LENGTH_SHORT).show();
                         }
@@ -328,7 +408,8 @@ public class CreatePostAct extends AppCompatActivity {
                 }
 
 
-            } else if (requestCode == SELECT_FILE) { try {
+            } else if (requestCode == SELECT_FILE) {
+                try {
                     Uri selectedImage = data.getData();
                     Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
                     Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
@@ -348,6 +429,7 @@ public class CreatePostAct extends AppCompatActivity {
 
                 try {
                     if (data != null) {
+                       // TODO
                         Bundle extras = data.getExtras();
                         Bitmap bitmapNew = (Bitmap) extras.get("data");
                         Bitmap imageBitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
@@ -364,16 +446,78 @@ public class CreatePostAct extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-            }else if (requestCode==ACTION_TAKE_VIDEO){
+            } else if (requestCode == ACTION_TAKE_VIDEO) {
 
                 try {
+
+                    ProgressDialog progressDialog = new ProgressDialog(this);
+                    progressDialog.setTitle("Compressing Video");
+                    progressDialog.create();
+                    progressDialog.show();
                     Uri vid = data.getData();
                     Glide.with(CreatePostAct.this)
                             .load(vid.toString())
-                            .centerCrop()
+                            .fitCenter()
                             .into(binding.ivProfile);
                     str_image_path = getRealPathFromURI(vid);
-                }catch (Exception e){
+                 //   File f= new File(str_image_path);
+                    file101 = new File(str_image_path);
+                    //   compressvidee();
+                    ArrayList<Uri> listss  =   new ArrayList<Uri>();
+                    listss.add(vid);
+                VideoCompressor.start(
+                            getApplicationContext(), // => This is required
+                            listss, // => Source can be provided as content uris
+                            false, // => isStreamable
+                            new StorageConfiguration(
+                                    file101.getName() ,
+                                    file101.getAbsolutePath(),  // => the directory to save the compressed video(s). Will be ignored if isExternal = false.
+                                    true // => false means save at app-specific file directory. Default is true.
+                            ),
+                            new Configuration(
+                                    VideoQuality.MEDIUM,
+                                    false, /*isMinBitrateCheckEnabled*/
+                                    null, /*videoBitrate: int, or null*/
+                                    false, /*disableAudio: Boolean, or null*/
+                                    false, /*keepOriginalResolution: Boolean, or null*/
+                                    360.0, /*videoWidth: Double, or null*/
+                                    480.0 /*videoHeight: Double, or null*/
+                            ),
+                            new CompressionListener() {
+                                @Override
+                                public void onSuccess(int i, long l, @Nullable String s) {
+                                    progressDialog.dismiss();
+                                    Log.e(TAG, "onSuccess: "+s );
+
+                                }
+
+
+                                @Override
+                                public void onStart(int i) {
+                                }
+                                @Override
+                                public void onFailure(int index, String failureMessage) {
+                                    // On Failure
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onProgress(int index, float progressPercent) {
+                                    // Update UI with progress value
+                                    runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            progressDialog.setTitle("progress--"+progressPercent);
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(int index) {
+                                    // On Cancelled
+                                }
+                            }
+                    );
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -531,22 +675,29 @@ public class CreatePostAct extends AppCompatActivity {
             @Override
             public void onResponse(Call<SuccessResUploadPost> call, Response<SuccessResUploadPost> response) {
                 DataManager.getInstance().hideProgressMessage();
-                try {
-
-                    SuccessResUploadPost data = response.body();
-
-                    Log.e("data", data.status);
-                    if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
-                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                        showToast(CreatePostAct.this, data.message);
-                        finish();
-                    } else if (data.status.equals("0")) {
-                        showToast(CreatePostAct.this, data.message);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (response.body() != null) {
                     Log.e(TAG, "Test Response :" + response.body());
+
+                    try {
+
+                        SuccessResUploadPost data = response.body();
+
+                        Log.e("data", data.status);
+                        if (data.status.equals("1")) {
+                            String dataResponse = new Gson().toJson(response.body());
+                            Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                            showToast(CreatePostAct.this, data.message);
+                            finish();
+                        } else if (data.status.equals("0")) {
+                            showToast(CreatePostAct.this, data.message);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "Test Response :" + response.body());
+
+                    }
+                } else {
+                    showToast(CreatePostAct.this, "Something Went Wrong");
 
                 }
             }
@@ -554,6 +705,10 @@ public class CreatePostAct extends AppCompatActivity {
             @Override
             public void onFailure(Call<SuccessResUploadPost> call, Throwable t) {
                 call.cancel();
+                Log.e(TAG, "Test Response :" + t.getCause());
+                Log.e(TAG, "Test Response :" + t.getLocalizedMessage());
+                Log.e(TAG, "Test Response :" + t.getMessage());
+
                 DataManager.getInstance().hideProgressMessage();
             }
         });
@@ -606,7 +761,11 @@ public class CreatePostAct extends AppCompatActivity {
             for (int i = 0; i < imagesVideosPathList.size(); i++) {
                 //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
                 File file = new File(imagesVideosPathList.get(i));
-                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+              //   File r = compressvidee(file);
+                Log.e(TAG, "updateStory: "+file.length() );
+               // Log.e(TAG, "updateStory: "+r.length() );
+                filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(),
+                        RequestBody.create(MediaType.parse("image[]/*"), file)));
             }
         }
         String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
@@ -639,10 +798,53 @@ public class CreatePostAct extends AppCompatActivity {
             @Override
             public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
                 call.cancel();
+                Log.e(TAG, "Test Response :" + t.getCause());
+                Log.e(TAG, "Test Response :" + t.getLocalizedMessage());
+                Log.e(TAG, "Test Response :" + t.getMessage());
                 DataManager.getInstance().hideProgressMessage();
             }
         });
+
     }
+
+/*    private File compressvidee( File f) {
+        File ex=null;
+        GiraffeCompressor.create() //two implementations: mediacodec and ffmpeg,default is mediacodec
+            .input(f) //set video to be compressed
+            .output(ex) //set compressed video output
+            .bitRate(120000)//set bitrate 码率
+            .resizeFactor(1.0F)//set video resize factor 分辨率缩放,默认保持原分辨率
+          //  .watermark("/sdcard/videoCompressor/watermarker.png")//add watermark(take a long time) 水印图片(需要长时间处理)
+            .ready()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(new Subscriber<GiraffeCompressor.Result>() {
+                @Override
+                public void onCompleted() {
+                    //$.id(R.id.btn_start).enabled(true).text("start compress");
+//ex.getAbsolutePath();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    e.printStackTrace();
+                  //  $.id(R.id.btn_start).enabled(true).text("start compress");
+                 //   $.id(R.id.tv_console).text("error:"+e.getMessage());
+
+                }
+
+                @Override
+                public void onNext(GiraffeCompressor.Result s) {
+                    String msg = String.format("compress completed \ntake time:%s \nout put file:%s", s.getCostTime(), s.getOutput());
+                    msg = msg + "\ninput file size:"+ Formatter.
+                            formatFileSize(getApplication(),f.length());
+                    msg = msg + "\nout file size:"+ Formatter.formatFileSize(getApplication(),new File(s.getOutput()).length());
+                    System.out.println(msg);
+                   // $.id(R.id.tv_console).text(msg);
+                }
+            });
+        return ex;
+    }*/
+
 
 
 }

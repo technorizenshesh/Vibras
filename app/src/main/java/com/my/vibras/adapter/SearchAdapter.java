@@ -1,6 +1,8 @@
 package com.my.vibras.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.databinding.SearchItemBinding;
 import com.my.vibras.model.SuccessResGetUsers;
+import com.my.vibras.utility.Util;
 
 import java.util.List;
 
@@ -27,24 +31,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesViewHolder> {
 
     private Context context;
-    
+
     SearchItemBinding binding;
 
     private List<SuccessResGetUsers.Result> usersList;
 
     private boolean from;
 
-    public SearchAdapter(Context context, List<SuccessResGetUsers.Result> usersList, boolean from)
-    {
-      this.context = context;
-      this.usersList = usersList;
-      this.from = from;
+    public SearchAdapter(Context context, List<SuccessResGetUsers.Result> usersList, boolean from) {
+        this.context = context;
+        this.usersList = usersList;
+        this.from = from;
     }
-    
+
     @NonNull
     @Override
     public StoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding= SearchItemBinding.inflate(LayoutInflater.from(context));
+        binding = SearchItemBinding.inflate(LayoutInflater.from(context));
         return new StoriesViewHolder(binding);
     }
 
@@ -58,7 +61,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesVie
         tvUserName = holder.itemView.findViewById(R.id.tvUserName);
 
 
-        tvUserName.setText(usersList.get(position).getFirstName()+" "+usersList.get(position).getLastName());
+        tvUserName.setText(usersList.get(position).getFirstName() + " " + usersList.get(position).getLastName());
 
         Glide
                 .with(context)
@@ -66,11 +69,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesVie
                 .centerCrop()
                 .into(circleImageView);
 
-        circleImageView.setOnClickListener(v ->
+        holder.itemView.setOnClickListener(v ->
                 {
-
+                    Util.hideKeyboard((Activity)context );
+                    context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("id", usersList.get(position).getId()));
                 }
-                );
+        );
 
 
     }
