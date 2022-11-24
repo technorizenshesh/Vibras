@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VIBRAS"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
+        <activity android:name=".act.FriendProfileActivity"
+            android:exported="false"
+            />
         <activity
             android:name=".chat.GroupChat.GroupChatInnerActivity"
             android:exported="false" />
