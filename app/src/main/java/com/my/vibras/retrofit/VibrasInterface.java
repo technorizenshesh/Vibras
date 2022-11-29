@@ -1,11 +1,12 @@
 package com.my.vibras.retrofit;
+
+import com.my.vibras.model.SocilaLoginResponse;
+import com.my.vibras.model.SuccessAddSearchHistory;
 import com.my.vibras.model.SuccessResAddCard;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResAddRestaurant;
-import com.my.vibras.model.SuccessResAddRestaurantComment;
-import com.my.vibras.model.SuccessResCompanyNotification;
 import com.my.vibras.model.SuccessResDeleteCard;
 import com.my.vibras.model.SuccessResDeleteConversation;
 import com.my.vibras.model.SuccessResFilterData;
@@ -49,6 +50,7 @@ import com.my.vibras.model.SuccessResUploadCoverPhoto;
 import com.my.vibras.model.SuccessResUploadPost;
 import com.my.vibras.model.SuccessResUploadSelfie;
 import com.my.vibras.model.SuccessResUploadStory;
+import com.my.vibras.model.SuccessSearchHistoryRes;
 
 import java.util.List;
 import java.util.Map;
@@ -63,6 +65,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface VibrasInterface {
 
@@ -74,13 +77,33 @@ public interface VibrasInterface {
     @POST("check_otp")
     Call<SuccessResSignup> verifyOtp(@FieldMap Map<String, String> paramHashMap);
 
+    @GET("social_login?")
+    Call<SocilaLoginResponse> socialLogin(@Query("first_name") String first_name,
+                                          @Query("last_name") String last_name,
+                                          @Query("email") String email,
+                                          @Query("dob") String dob,
+                                          @Query("mobile") String mobile,
+                                          @Query("type") String type,
+                                          @Query("gender") String gender,
+                                          @Query("time_zone") String time_zone
+            , @Query("social_id") String social_id,
+                                          @Query("social_type") String social_type,
+                                          @Query("register_id") String register_id
+    );
+
+    /*    first_name=TestU&last_name=User&email=testsb@gmail.com&dob=02-04-1991&
+        mobile789456123&type=User&gender=Male&time_zone=Asia/Kolkata&social_id=100654645&*/
     @FormUrlEncoded
     @POST("login")
     Call<SuccessResSignup> login(@FieldMap Map<String, String> paramHashMap);
 
+    @FormUrlEncoded
+    @POST("forgot_password")
+    Call<ResponseBody> resetPassword(@FieldMap Map<String, String> paramHashMap);
+
     @Multipart
     @POST("addSelfy")
-    Call<SuccessResUploadSelfie> uploadSelfie (
+    Call<SuccessResUploadSelfie> uploadSelfie(
             @Part("user_id") RequestBody userId,
             @Part MultipartBody.Part file);
 
@@ -112,16 +135,16 @@ public interface VibrasInterface {
 
     @Multipart
     @POST("updateUserProfile")
-    Call<SuccessResSignup> updateProfile (@Part("user_id") RequestBody userId,
-                                                 @Part("first_name") RequestBody cc,
-                                                 @Part("last_name") RequestBody mobile,
-                                                 @Part("email") RequestBody fullname,
-                                                 @Part("bio") RequestBody lat,
-                                                 @Part MultipartBody.Part file);
+    Call<SuccessResSignup> updateProfile(@Part("user_id") RequestBody userId,
+                                         @Part("first_name") RequestBody cc,
+                                         @Part("last_name") RequestBody mobile,
+                                         @Part("email") RequestBody fullname,
+                                         @Part("bio") RequestBody lat,
+                                         @Part MultipartBody.Part file);
 
     @Multipart
     @POST("addUserCoverPic")
-    Call<SuccessResUploadCoverPhoto> uploadCoverPhoto (
+    Call<SuccessResUploadCoverPhoto> uploadCoverPhoto(
             @Part("user_id") RequestBody userId,
             @Part MultipartBody.Part file);
 
@@ -144,10 +167,22 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("search")
     Call<SuccessResGetUsers> searchUser(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("add_search_history")
+    Call<SuccessAddSearchHistory> add_search_history(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("get_search_history")
+    Call<SuccessSearchHistoryRes> search_history(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("delete_search_history")
+    Call<ResponseBody> delete_search_history(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("clear_search_history")
+    Call<ResponseBody> clear_search_history(@FieldMap Map<String, String> paramHashMap);
 
     @Multipart
     @POST("addUserPost")
-    Call<SuccessResUploadPost> uploadPost (
+    Call<SuccessResUploadPost> uploadPost(
             @Part("user_id") RequestBody userId,
             @Part("description") RequestBody description,
             @Part("type") RequestBody comment,
@@ -192,16 +227,16 @@ public interface VibrasInterface {
 
     @Multipart
     @POST("insert_chat")
-    Call<SuccessResInsertChat> insertImageVideoChat (
+    Call<SuccessResInsertChat> insertImageVideoChat(
             @Part("sender_id") RequestBody senderId,
             @Part("receiver_id") RequestBody receiverId,
             @Part("chat_message") RequestBody chatMessage,
             @Part("type") RequestBody type
-            );
+    );
 
     @Multipart
     @POST("insert_group_chat")
-    Call<SuccessResInsertGroupChat> insertGroupImageVideoChat (
+    Call<SuccessResInsertGroupChat> insertGroupImageVideoChat(
             @Part("sender_id") RequestBody senderId,
             @Part("group_id") RequestBody receiverId,
             @Part("chat_message") RequestBody chatMessage,
@@ -234,31 +269,31 @@ public interface VibrasInterface {
 
     @Multipart
     @POST("add_event")
-    Call<SuccessResAddEvent> addEvent (@Part("user_id") RequestBody userId,
-                                            @Part("event_name") RequestBody eName,
-                                            @Part("address") RequestBody address,
-                                            @Part("lat") RequestBody lat,
-                                            @Part("lon") RequestBody lon,
-                                            @Part("event_date") RequestBody date,
-                                            @Part("event_start_time") RequestBody time1,
-                                            @Part("event_end_time") RequestBody time2,
-                                            @Part("description") RequestBody description,
-                                            @Part("booking_amount") RequestBody mobile,
-                                            @Part("type") RequestBody fullname,
-                                            @Part("event_cat") RequestBody eventCategory,
-                                            @Part MultipartBody.Part fileEvent,
-                                            @Part List<MultipartBody.Part> file);
+    Call<SuccessResAddEvent> addEvent(@Part("user_id") RequestBody userId,
+                                      @Part("event_name") RequestBody eName,
+                                      @Part("address") RequestBody address,
+                                      @Part("lat") RequestBody lat,
+                                      @Part("lon") RequestBody lon,
+                                      @Part("event_date") RequestBody date,
+                                      @Part("event_start_time") RequestBody time1,
+                                      @Part("event_end_time") RequestBody time2,
+                                      @Part("description") RequestBody description,
+                                      @Part("booking_amount") RequestBody mobile,
+                                      @Part("type") RequestBody fullname,
+                                      @Part("event_cat") RequestBody eventCategory,
+                                      @Part MultipartBody.Part fileEvent,
+                                      @Part List<MultipartBody.Part> file);
 
     @Multipart
     @POST("add_Restaurant")
-    Call<SuccessResAddRestaurant> addRestaurants (@Part("user_id") RequestBody userId,
-                                                  @Part("restaurant_name") RequestBody eName,
-                                                  @Part("address") RequestBody address,
-                                                  @Part("lat") RequestBody lat,
-                                                  @Part("lon") RequestBody lon,
-                                                  @Part("description") RequestBody description,
-                                                  @Part MultipartBody.Part fileEvent,
-                                                  @Part List<MultipartBody.Part> file);
+    Call<SuccessResAddRestaurant> addRestaurants(@Part("user_id") RequestBody userId,
+                                                 @Part("restaurant_name") RequestBody eName,
+                                                 @Part("address") RequestBody address,
+                                                 @Part("lat") RequestBody lat,
+                                                 @Part("lon") RequestBody lon,
+                                                 @Part("description") RequestBody description,
+                                                 @Part MultipartBody.Part fileEvent,
+                                                 @Part List<MultipartBody.Part> file);
 
     @FormUrlEncoded
     @POST("get_banner")
@@ -366,7 +401,7 @@ public interface VibrasInterface {
 
     @Multipart
     @POST("add_story")
-    Call<SuccessResUploadStory> uploadStory (
+    Call<SuccessResUploadStory> uploadStory(
             @Part("user_id") RequestBody userId,
             @Part("description") RequestBody description,
             @Part("story_type") RequestBody type,
@@ -374,7 +409,7 @@ public interface VibrasInterface {
 
     @Multipart
     @POST("update_story")
-    Call<SuccessResUploadStory> updateStory (
+    Call<SuccessResUploadStory> updateStory(
             @Part("user_id") RequestBody userID,
             @Part("story_id") RequestBody storyID,
             @Part("story_type") RequestBody type,
@@ -388,9 +423,9 @@ public interface VibrasInterface {
     @POST("apply_filter")
     Call<SuccessResFilterData> filter(@FieldMap Map<String, String> paramHashMap);
 
-/*    @FormUrlEncoded
-    @POST("create_group")
-    Call<ResponseBody> createGroup(@FieldMap Map<String, String> paramHashMap);*/
+    /*    @FormUrlEncoded
+        @POST("create_group")
+        Call<ResponseBody> createGroup(@FieldMap Map<String, String> paramHashMap);*/
     @Multipart
     @POST("create_group")
     Call<ResponseBody> createGroup(
@@ -398,6 +433,7 @@ public interface VibrasInterface {
             @Part("group_name") RequestBody group_name,
             @Part("members_id") RequestBody members_id,
             @Part MultipartBody.Part file);
+
     @FormUrlEncoded
     @POST("get_all_group")
     Call<SuccessResGetGroup> getAllGroupApi(@FieldMap Map<String, String> paramHashMap);
@@ -473,6 +509,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("storylikeunlike")
     Call<ResponseBody> addStoryLike(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("video_call_invitation")
     Call<SuccessResMakeCall> addNotification(@FieldMap Map<String, String> paramHashMap);

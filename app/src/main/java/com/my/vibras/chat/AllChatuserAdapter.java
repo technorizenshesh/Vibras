@@ -144,7 +144,7 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
 
             }
         });
-        holder.unseenmessagecount.setVisibility(View.VISIBLE);
+        holder.unseenmessagecount.setVisibility(View.GONE);
         mReference.child("From" + alluserchatlist.get(position).getSender_id() + "To"
                     + user_id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

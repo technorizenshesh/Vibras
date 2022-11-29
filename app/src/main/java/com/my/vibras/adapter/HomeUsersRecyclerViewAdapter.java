@@ -28,7 +28,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
+        > {
 
     private Context mContext;
     private ArrayList<SuccessResGetUsers.Result> modelList;

@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
-
     <LinearLayout
         android:background="@color/white"
         android:padding="@dimen/_5sdp"
@@ -74,11 +73,18 @@
             </RelativeLayout>
 
         </RelativeLayout>
-
+    <LinearLayout
+        android:id="@+id/suggaction_lay"
+        android:background="@color/white"
+        android:padding="@dimen/_5sdp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <TextView
@@ -92,17 +98,30 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_alignParentRight="true"
-                android:textStyle="bold"
-                android:padding="@dimen/_5sdp"
+                android:id="@+id/clear_search_history"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="@dimen/_5sdp"
                 android:text="@string/clear"
                 android:textAllCaps="true"
-                android:textSize="@dimen/_11sdp"
                 android:textColor="@color/black"
-                />
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
         </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggation_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggation_list_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            />
+    </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"

@@ -3,16 +3,22 @@ package com.my.vibras.act;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -20,23 +26,28 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.abedelazizshe.lightcompressorlibrary.CompressionListener;
-import com.abedelazizshe.lightcompressorlibrary.VideoCompressor;
-import com.abedelazizshe.lightcompressorlibrary.VideoQuality;
-import com.abedelazizshe.lightcompressorlibrary.config.Configuration;
-import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration;
 import com.bumptech.glide.Glide;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
+import com.iamkdblue.videocompressor.VideoCompress;
 import com.my.vibras.R;
 import com.my.vibras.databinding.ActivityCreatePostBinding;
 import com.my.vibras.model.SuccessResGetMyStories;
@@ -49,15 +60,19 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
+import com.my.vibras.utility.Util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,7 +93,6 @@ public class CreatePostAct extends AppCompatActivity {
     private static final int LOAD_TESTING_VIDEO = 108;
     private static final int ACTION_TAKE_VIDEO = 109;
     ActivityCreatePostBinding binding;
-    VideoCompressor videoCompressor;
     private static final int SELECT_FILE = 2;
     String str_image_path = "";
     String str_video_path = "";
@@ -97,6 +111,9 @@ public class CreatePostAct extends AppCompatActivity {
     Integer integer = 0;
     File videoone;
     File file101;
+    private  String destPath = "";
+    private Dialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,7 +160,12 @@ public class CreatePostAct extends AppCompatActivity {
                                 uploadStory(imagesVideosPathList, image, session.getPublishfile());
                             }
                         } else {
-                            uploadPost();
+                            if (session.getPublishfile().equalsIgnoreCase("image")) {
+                                uploadPost("image");
+
+                            } else {
+                                uploadPost("video");
+                            }
                         }
                     } else {
                         Toast.makeText(CreatePostAct.this, "Please select a media file.", Toast.LENGTH_SHORT).show();
@@ -223,73 +245,6 @@ public class CreatePostAct extends AppCompatActivity {
 
     }
 
-    public void uploadStory(ArrayList<String> imagesVideosPathList, boolean image, String type1) {
-        try {
-
-
-            String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
-
-            DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
-
-            List<MultipartBody.Part> filePartList = new LinkedList<>();
-            if (image) {
-                for (int i = 0; i < imagesVideosPathList.size(); i++) {
-                    File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
-                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
-                }
-            } else {
-                for (int i = 0; i < imagesVideosPathList.size(); i++) {
-                    //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
-                    File file = new File(imagesVideosPathList.get(i));
-               /* File getPathFile = new File(RealPathUtil.getVideoPath2(CreatePostAct.this,selectedVideo));
-                videoone = getPathFile;
-                System.out.println("getPathFile------   " + getPathFile);*/
-                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
-                }
-            }
-
-            RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
-            RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
-            RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
-            Call<SuccessResUploadStory> loginCall = apiInterface.uploadStory(userId, caption, type, filePartList);
-
-            loginCall.enqueue(new Callback<SuccessResUploadStory>() {
-                @Override
-                public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
-                    DataManager.getInstance().hideProgressMessage();
-                    try {
-                        if (response.body() != null) {
-                            SuccessResUploadStory data = response.body();
-                            Log.e("MapMap", "EDIT PROFILE RESPONSE" + new Gson().toJson(response.body()));
-                            Log.e("data", data.status);
-                            if (data.status.equals("1")) {
-                                String dataResponse = new Gson().toJson(response.body());
-                                Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                                showToast(CreatePostAct.this, data.message);
-                                finish();
-                            } else if (data.status.equals("0")) {
-                                showToast(CreatePostAct.this, data.message);
-                            }
-                        } else {
-                            showToast(CreatePostAct.this, "Something Went Wrong ");
-
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Log.e(TAG, "Test Response :" + response.body());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
-                    call.cancel();
-                    DataManager.getInstance().hideProgressMessage();
-                }
-            });
-        } catch (Exception e) {
-            Log.e(TAG, "uploadStory" + e.getLocalizedMessage());
-        }
-    }
 
     public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
 
@@ -331,10 +286,6 @@ public class CreatePostAct extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     try {
                         Uri selectedVideo = data.getData();
-                        ProgressDialog progressDialog = new ProgressDialog(this);
-                        progressDialog.setTitle("Compressing Video");
-                        progressDialog.create();
-                        progressDialog.show();
                         MediaPlayer mp = MediaPlayer.create(CreatePostAct.this,
                                 Uri.parse(String.valueOf(selectedVideo)));
                         int duration = mp.getDuration() / 1000;
@@ -347,58 +298,8 @@ public class CreatePostAct extends AppCompatActivity {
                             str_image_path = RealPathUtil.getVideoPath2(CreatePostAct.this, selectedVideo);
                              file101 = new File(str_image_path);
                          //   compressvidee();
-                            ArrayList<Uri> listss  =   new ArrayList<Uri>();
-                            listss.add(selectedVideo);
-                            videoCompressor.start(
-                                    getApplicationContext(), // => This is required
-                                    listss, // => Source can be provided as content uris
-                                    false, // => isStreamable
-                                    new StorageConfiguration(
-                                            file101.getName() ,
-                                            file101.getAbsolutePath(),  // => the directory to save the compressed video(s). Will be ignored if isExternal = false.
-                                            true // => false means save at app-specific file directory. Default is true.
-                                    ),
-                                    new Configuration(
-                                            VideoQuality.MEDIUM,
-                                            false, /*isMinBitrateCheckEnabled*/
-                                            null, /*videoBitrate: int, or null*/
-                                            false, /*disableAudio: Boolean, or null*/
-                                            false, /*keepOriginalResolution: Boolean, or null*/
-                                            360.0, /*videoWidth: Double, or null*/
-                                            480.0 /*videoHeight: Double, or null*/
-                                    ),
-                                    new CompressionListener() {
-                                        @Override
-                                        public void onSuccess(int i, long l, @Nullable String s) {
-                                            progressDialog.dismiss();
-                                        }
-
-
-                                        @Override
-                                        public void onStart(int i) {
-                                        }
-                                        @Override
-                                        public void onFailure(int index, String failureMessage) {
-                                            // On Failure
-                                            progressDialog.dismiss();
-                                        }
-
-                                        @Override
-                                        public void onProgress(int index, float progressPercent) {
-                                            // Update UI with progress value
-                                            runOnUiThread(new Runnable() {
-                                                public void run() {
-                                                    progressDialog.setTitle("progress--"+progressPercent);
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onCancelled(int index) {
-                                            // On Cancelled
-                                        }
-                                    }
-                            );
+                            compressVideo(str_image_path);
+                          str_image_path=  destPath;
                         } else {
                             Toast.makeText(CreatePostAct.this, "Please Select Video Duration 30  Sec Only", Toast.LENGTH_SHORT).show();
                         }
@@ -449,11 +350,6 @@ public class CreatePostAct extends AppCompatActivity {
             } else if (requestCode == ACTION_TAKE_VIDEO) {
 
                 try {
-
-                    ProgressDialog progressDialog = new ProgressDialog(this);
-                    progressDialog.setTitle("Compressing Video");
-                    progressDialog.create();
-                    progressDialog.show();
                     Uri vid = data.getData();
                     Glide.with(CreatePostAct.this)
                             .load(vid.toString())
@@ -462,61 +358,8 @@ public class CreatePostAct extends AppCompatActivity {
                     str_image_path = getRealPathFromURI(vid);
                  //   File f= new File(str_image_path);
                     file101 = new File(str_image_path);
-                    //   compressvidee();
-                    ArrayList<Uri> listss  =   new ArrayList<Uri>();
-                    listss.add(vid);
-                VideoCompressor.start(
-                            getApplicationContext(), // => This is required
-                            listss, // => Source can be provided as content uris
-                            false, // => isStreamable
-                            new StorageConfiguration(
-                                    file101.getName() ,
-                                    file101.getAbsolutePath(),  // => the directory to save the compressed video(s). Will be ignored if isExternal = false.
-                                    true // => false means save at app-specific file directory. Default is true.
-                            ),
-                            new Configuration(
-                                    VideoQuality.MEDIUM,
-                                    false, /*isMinBitrateCheckEnabled*/
-                                    null, /*videoBitrate: int, or null*/
-                                    false, /*disableAudio: Boolean, or null*/
-                                    false, /*keepOriginalResolution: Boolean, or null*/
-                                    360.0, /*videoWidth: Double, or null*/
-                                    480.0 /*videoHeight: Double, or null*/
-                            ),
-                            new CompressionListener() {
-                                @Override
-                                public void onSuccess(int i, long l, @Nullable String s) {
-                                    progressDialog.dismiss();
-                                    Log.e(TAG, "onSuccess: "+s );
-
-                                }
-
-
-                                @Override
-                                public void onStart(int i) {
-                                }
-                                @Override
-                                public void onFailure(int index, String failureMessage) {
-                                    // On Failure
-                                    progressDialog.dismiss();
-                                }
-
-                                @Override
-                                public void onProgress(int index, float progressPercent) {
-                                    // Update UI with progress value
-                                    runOnUiThread(new Runnable() {
-                                        public void run() {
-                                            progressDialog.setTitle("progress--"+progressPercent);
-                                        }
-                                    });
-                                }
-
-                                @Override
-                                public void onCancelled(int index) {
-                                    // On Cancelled
-                                }
-                            }
-                    );
+                    compressVideo(str_image_path);
+                    str_image_path=  destPath;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -648,10 +491,12 @@ public class CreatePostAct extends AppCompatActivity {
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
     }
 
-    public void uploadPost() {
+    public void uploadPost(String post_type) {
         String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
-        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+        DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string
+                .please_wait));
         MultipartBody.Part filePart;
+        if (post_type.equalsIgnoreCase("image")){
         if (!str_image_path.equalsIgnoreCase("")) {
             File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
             if (file != null) {
@@ -663,6 +508,20 @@ public class CreatePostAct extends AppCompatActivity {
         } else {
             RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
             filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
+        }}else {
+            if (!str_image_path.equalsIgnoreCase("")) {
+                File file = new File(str_image_path);
+                if (file != null) {
+                    filePart = MultipartBody.Part.createFormData("video",
+                            file.getName(), RequestBody.create(MediaType.parse("video/*"), file));
+                } else {
+                    filePart = null;
+                }
+            }else {
+                RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
+                filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
+
+            }
         }
 
         RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
@@ -806,45 +665,159 @@ public class CreatePostAct extends AppCompatActivity {
         });
 
     }
+    public void uploadStory(ArrayList<String> imagesVideosPathList, boolean image, String type1) {
+        try {
 
-/*    private File compressvidee( File f) {
-        File ex=null;
-        GiraffeCompressor.create() //two implementations: mediacodec and ffmpeg,default is mediacodec
-            .input(f) //set video to be compressed
-            .output(ex) //set compressed video output
-            .bitRate(120000)//set bitrate 码率
-            .resizeFactor(1.0F)//set video resize factor 分辨率缩放,默认保持原分辨率
-          //  .watermark("/sdcard/videoCompressor/watermarker.png")//add watermark(take a long time) 水印图片(需要长时间处理)
-            .ready()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(new Subscriber<GiraffeCompressor.Result>() {
+
+            String strUserId = SharedPreferenceUtility.getInstance(CreatePostAct.this).getString(USER_ID);
+
+            DataManager.getInstance().showProgressMessage(CreatePostAct.this, getString(R.string.please_wait));
+
+            List<MultipartBody.Part> filePartList = new LinkedList<>();
+            if (image) {
+                for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                    File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+                }
+            } else {
+                for (int i = 0; i < imagesVideosPathList.size(); i++) {
+                    //       File file = DataManager.getInstance().saveBitmapToFile(new File(imagesVideosPathList.get(i)));
+                    File file = new File(imagesVideosPathList.get(i));
+               /* File getPathFile = new File(RealPathUtil.getVideoPath2(CreatePostAct.this,selectedVideo));
+                videoone = getPathFile;
+                System.out.println("getPathFile------   " + getPathFile);*/
+
+
+
+
+
+                    filePartList.add(MultipartBody.Part.createFormData("image[]", file.getName(), RequestBody.create(MediaType.parse("image[]/*"), file)));
+                }
+            }
+
+            RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+            RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
+            RequestBody type = RequestBody.create(MediaType.parse("text/plain"), type1);
+            Call<SuccessResUploadStory> loginCall = apiInterface.uploadStory(userId, caption, type, filePartList);
+
+            loginCall.enqueue(new Callback<SuccessResUploadStory>() {
                 @Override
-                public void onCompleted() {
-                    //$.id(R.id.btn_start).enabled(true).text("start compress");
-//ex.getAbsolutePath();
+                public void onResponse(Call<SuccessResUploadStory> call, Response<SuccessResUploadStory> response) {
+                    DataManager.getInstance().hideProgressMessage();
+                    try {
+                        if (response.body() != null) {
+                            SuccessResUploadStory data = response.body();
+                            Log.e("MapMap", "EDIT PROFILE RESPONSE" + new Gson().toJson(response.body()));
+                            Log.e("data", data.status);
+                            if (data.status.equals("1")) {
+                                String dataResponse = new Gson().toJson(response.body());
+                                Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                                showToast(CreatePostAct.this, data.message);
+                                finish();
+                            } else if (data.status.equals("0")) {
+                                showToast(CreatePostAct.this, data.message);
+                            }
+                        } else {
+                            showToast(CreatePostAct.this, "Something Went Wrong ");
+
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "Test Response :" + response.body());
+                    }
                 }
 
                 @Override
-                public void onError(Throwable e) {
-                    e.printStackTrace();
-                  //  $.id(R.id.btn_start).enabled(true).text("start compress");
-                 //   $.id(R.id.tv_console).text("error:"+e.getMessage());
-
-                }
-
-                @Override
-                public void onNext(GiraffeCompressor.Result s) {
-                    String msg = String.format("compress completed \ntake time:%s \nout put file:%s", s.getCostTime(), s.getOutput());
-                    msg = msg + "\ninput file size:"+ Formatter.
-                            formatFileSize(getApplication(),f.length());
-                    msg = msg + "\nout file size:"+ Formatter.formatFileSize(getApplication(),new File(s.getOutput()).length());
-                    System.out.println(msg);
-                   // $.id(R.id.tv_console).text(msg);
+                public void onFailure(Call<SuccessResUploadStory> call, Throwable t) {
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
                 }
             });
-        return ex;
-    }*/
+        } catch (Exception e) {
+            Log.e(TAG, "uploadStory" + e.getLocalizedMessage());
+        }
+    }
+    public void compressVideo(String imagePath)
+    {
+        DataManager.getInstance().showProgressMessage(this, getString(R.string.please_wait));
 
+        File f = new File(imagePath);
+        Log.d("TAG", "onActivityResult: Desti"+f.length());
 
+        destPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                .getAbsolutePath()+ File.separator + "VID_" +
+                new SimpleDateFormat("yyyyMMdd_HHmmss", getLocale()).format(new Date()) + ".mp4";
+
+        VideoCompress.compressVideoLow(imagePath, destPath, new VideoCompress.CompressListener() {
+            @Override
+            public void onStart() {
+                 /*   tv_indicator.setText("Compressing..." + "\n"
+                            + "Start at: " + new SimpleDateFormat("HH:mm:ss", getLocale()).format(new Date()));
+                    pb_compress.setVisibility(View.VISIBLE);
+                    startTime = System.currentTimeMillis();
+                    */
+                Util.writeFile(CreatePostAct.this, "Start at: "
+                        + new SimpleDateFormat("HH:mm:ss",
+                        getLocale()).format(new Date()) + "\n");
+            }
+
+            @Override
+            public void onSuccess(String compressVideoPath) {
+
+                File f = new File(destPath);
+                Log.d("TAG", "onActivityResult: Desti"+f.length());
+
+                DataManager.getInstance().hideProgressMessage();
+
+                ArrayList<String> selectionResult = new ArrayList<>();
+                selectionResult.add(destPath);
+
+                File file = new File(destPath);
+
+                long length = file.length();
+
+                Log.d(TAG, "onActivityResult: " + file.length());
+                Log.d(TAG, "onActivityResult: " +selectionResult);
+
+               // fullScreenDialog(selectionResult, false);
+            }
+
+            @Override
+            public void onFail() {
+                  /*  tv_indicator.setText("Compress Failed!");
+                    pb_compress.setVisibility(View.INVISIBLE);
+                    endTime = System.currentTimeMillis();*/
+
+                DataManager.getInstance().hideProgressMessage();
+
+                Util.writeFile(CreatePostAct.this, "Failed Compress!!!" +
+                    new SimpleDateFormat("HH:mm:ss", getLocale()).format(new Date()));
+            }
+
+            @Override
+            public void onProgress(float percent) {
+//                    tv_progress.setText(String.valueOf(percent) + "%");
+            }
+        });
+    }
+    private Locale getLocale() {
+        Configuration config = getResources().getConfiguration();
+        Locale sysLocale = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            sysLocale = getSystemLocale(config);
+        } else {
+            sysLocale = getSystemLocaleLegacy(config);
+        }
+        return sysLocale;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Locale getSystemLocaleLegacy(Configuration config){
+        return config.locale;
+    }
+    @TargetApi(Build.VERSION_CODES.N)
+    public static Locale getSystemLocale(Configuration config){
+        return config.getLocales().get(0);
+    }
 
 }

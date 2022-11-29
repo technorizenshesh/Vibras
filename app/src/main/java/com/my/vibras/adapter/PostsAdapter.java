@@ -2,28 +2,41 @@ package com.my.vibras.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import com.my.vibras.R;
 import com.my.vibras.act.AddCommentAct;
 import com.my.vibras.databinding.PostItemBinding;
-import com.my.vibras.databinding.PostItemBinding;
 import com.my.vibras.model.SuccessResGetPosts;
-import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.utility.PostClickListener;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.extractor.ExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 
 /**
  * Created by Ravindra Birla on 06,July,2021
@@ -64,6 +77,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewH
         ImageView ivLike = holder.itemView.findViewById(R.id.ivLike);
         ImageView ivComment = holder.itemView.findViewById(R.id.ivComment);
         ImageView ivMore = holder.itemView.findViewById(R.id.ivMore);
+        // creating a variable for exoplayerview.
+        SimpleExoPlayerView exoPlayerView= holder.itemView.findViewById(R.id.idExoPlayerVIew);
+exoPlayerView.setVisibility(View.GONE);
+        // creating a variable for exoplayer
+        SimpleExoPlayer exoPlayer;
         if (From.equalsIgnoreCase("Mine")) {
             ivMore.setVisibility(View.VISIBLE);
         } else {
@@ -91,16 +109,21 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewH
                     postClickListener.selectLike(position, "");
                 }
         );
+        if (postList.get(position).getTypeStatus().equalsIgnoreCase("image")) {
+            Glide.with(context)
+                    .load(postList.get(position).getImage())
+                    .into(ivPOst);
+            exoPlayerView.setVisibility(View.GONE);
+            ivPOst.setVisibility(View.VISIBLE);
+        } else {
+        }
 
-        Glide.with(context)
-                .load(postList.get(position).getImage())
-                .into(ivPOst);
         Glide.with(context)
                 .load(postList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
         tvDescription.setText(postList.get(position).getDescription());
-    //    tvDistance.setText(postList.get(position).get());
+        //    tvDistance.setText(postList.get(position).get());
         tvUserName.setText(postList.get(position).getFirstName() + " "
                 + postList.get(position).getLastName());
 

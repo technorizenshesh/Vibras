@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -14,15 +15,30 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.act.FriendProfileActivity;
+import com.my.vibras.act.SearchAct;
 import com.my.vibras.databinding.SearchItemBinding;
+import com.my.vibras.model.SuccessAddSearchHistory;
 import com.my.vibras.model.SuccessResGetUsers;
+import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.VibrasInterface;
+import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.SharedPreferenceUtility;
 import com.my.vibras.utility.Util;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.google.firebase.messaging.Constants.TAG;
+import static com.my.vibras.retrofit.Constant.USER_ID;
 
 /**
  * Created by Ravindra Birla on 06,July,2021
@@ -35,13 +51,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesVie
     SearchItemBinding binding;
 
     private List<SuccessResGetUsers.Result> usersList;
+    private VibrasInterface apiInterface;
 
     private boolean from;
+String title;
 
-    public SearchAdapter(Context context, List<SuccessResGetUsers.Result> usersList, boolean from) {
+    public SearchAdapter(Context context, List<SuccessResGetUsers.Result> usersList, boolean from,String title) {
         this.context = context;
         this.usersList = usersList;
         this.from = from;
+        this.title = title;
     }
 
     @NonNull
@@ -53,6 +72,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesVie
 
     @Override
     public void onBindViewHolder(@NonNull StoriesViewHolder holder, int position) {
+        apiInterface  = ApiClient.getClient().create(VibrasInterface.class);
 
         CircleImageView circleImageView = holder.itemView.findViewById(R.id.ivProfile);
         TextView tvUserName;
@@ -71,12 +91,40 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.StoriesVie
 
         holder.itemView.setOnClickListener(v ->
                 {
+                    addSearchHistory(title);
                     Util.hideKeyboard((Activity)context );
                     context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("id", usersList.get(position).getId()));
                 }
         );
 
 
+    }
+    private void addSearchHistory(String toString) {
+        String userId=  SharedPreferenceUtility.getInstance(context).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("search",toString);
+        Call<SuccessAddSearchHistory> call = apiInterface.add_search_history(map);
+        call.enqueue(new Callback<SuccessAddSearchHistory>() {
+            @Override
+            public void onResponse(Call<SuccessAddSearchHistory> call,
+                                   Response<SuccessAddSearchHistory> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    String dataResponse = new Gson().toJson(response.body());
+
+                    Log.e(TAG, "dataResponsedataResponsedataResponse: "+ dataResponse);
+                    //  getSearchHistory();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessAddSearchHistory> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
     }
 
     @Override

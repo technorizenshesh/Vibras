@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_10sdp"
+        android:backgroundTint="@color/black"
         android:layout_margin="@dimen/_10sdp"
         >
     <RelativeLayout
@@ -22,8 +23,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/mediumgray"
-            android:scaleType="centerCrop">
-        </ImageView>
+            android:scaleType="centerCrop"/>
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/idExoPlayerVIew"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"

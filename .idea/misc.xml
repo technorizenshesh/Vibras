@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.18055555555555555" />
+        <entry key="../../.gradle/caches/transforms-3/33e87b6ba5970f98710d46542a1916c1/transformed/jetified-facebook-common-15.1.0/res/drawable/com_facebook_button_background.xml" value="0.122" />
         <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.1453125" />
         <entry key="app/src/main/res/drawable-v24/border_black_small.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/bottom_nav_icon_color_selector.xml" value="0.149" />
@@ -11,6 +12,7 @@
         <entry key="app/src/main/res/drawable-v24/right_message_background.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/activity_main__tab_background.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/arrow.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/background.xml" value="0.122" />
         <entry key="app/src/main/res/drawable/black_cornors_30.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/black_cornors_5.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/black_cornors_gray_30.xml" value="0.1" />
@@ -77,7 +79,8 @@
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_filter.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_friend_profile.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_get_events_by_category_id.xml" value="0.1984375" />
@@ -99,7 +102,7 @@
         <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_saved_events.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_saved_restaurant.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_search_conversation_user.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_event.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_rest.xml" value="0.14739583333333334" />
@@ -132,6 +135,7 @@
         <entry key="app/src/main/res/layout/dialog_select_date.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/dialog_show_image_selection.xml" value="0.11322463768115942" />
         <entry key="app/src/main/res/layout/dialog_show_options.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/dialog_user_purchase_subscription.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/faqs_item.xml" value="0.10410334346504559" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_comapny_my_profile.xml" value="0.22" />
@@ -148,6 +152,7 @@
         <entry key="app/src/main/res/layout/fragment_post_events_restaurent.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/fragment_post_restaurent.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_posts_video.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.28753541076487255" />
         <entry key="app/src/main/res/layout/fragment_restaurant.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/group_allmessagesholayout.xml" value="0.22" />
@@ -161,6 +166,9 @@
         <entry key="app/src/main/res/layout/item_group_member.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_group_member_hint.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_like_intrested.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_plan.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_search_suggaction.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_search_suggaction_2.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_selected_user.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_subscribe.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/item_view_all_group.xml" value="0.2140625" />
@@ -183,6 +191,7 @@
         <entry key="app/src/main/res/menu/bottom_nav_company_menu.xml" value="0.2140625" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2140625" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1135" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1455" />
       </map>
     </option>
   </component>

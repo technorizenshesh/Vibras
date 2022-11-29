@@ -46,8 +46,13 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/recycel_subsc"
+    />
         <androidx.core.widget.NestedScrollView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
