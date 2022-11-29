@@ -126,4 +126,12 @@
     <string name="answer_call">Answer Call</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="forget_password">Forget Your Password</string>
+    <string name="go_back_to_login">Go back to </string>
+    <string name="reset_passwod">Reset Password</string>
+
+    <string name="facebook_app_id" translatable="false">469678655289100</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
+    <string name="facebook_client_token" translatable="false">c6b8d03427898ad7827305c5775d5631</string>
+    <string name="facebook_appsecrety" translatable="false">e1e8d092f104955cadb9205dbd0a83c4</string>
 </resources>

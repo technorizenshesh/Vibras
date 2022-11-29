@@ -118,7 +118,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.6.0'
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
-
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
     //Google places
     implementation 'com.google.android.libraries.places:places:2.5.0'
 
@@ -126,10 +126,36 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.jackandphantom.android:blurimage:1.2.0'
     implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'
-    //implementation 'io.agora.rtc:full-sdk:4.0.1'
-  //  implementation 'com.github.tcking:giraffecompressor:0.1.4'
-    implementation 'com.github.AbedElazizShe:LightCompressor:1.2.0'
+    implementation 'com.facebook.android:facebook-login:15.1.0'
+    implementation("com.facebook.android:facebook-android-sdk:15.1.0") {
+        because("Social Media Login integration")
+    }
+   implementation project(path: ':compressvideo')
+    implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
 
+// for core support in exoplayer.
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
+
+// for adding dash support in our exoplayer.
+
+
+    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
+
+// for adding hls support in exoplayer.
+
+    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
+
+// for smooth streaming of video in our exoplayer.
+
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
+
+// for generating default ui of exoplayer
+
+    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
+
+
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
 }
 apply plugin: 'com.android.application'

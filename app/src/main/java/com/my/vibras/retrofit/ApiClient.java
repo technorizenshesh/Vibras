@@ -26,13 +26,18 @@ public class ApiClient {
                 @Override
                 public Response intercept(Chain chain) throws IOException {
                     Request newRequest = chain.request().newBuilder().
-                            addHeader("User-Agent", "Retrofit-Sample-App").build();
+                            addHeader("User-Agent", "Retrofit").build();
                     return chain.proceed(newRequest);
                 }
             };
             OkHttpClient client = new OkHttpClient.Builder()
 
-                    .connectTimeout(300, TimeUnit.SECONDS).addInterceptor(interceptor)
+                    .connectTimeout(300, TimeUnit.SECONDS)
+                    .addInterceptor(chain -> {
+                        Request newRequest = chain.request().newBuilder().
+                                addHeader("User-Agent", "Retrofit").build();
+                        return chain.proceed(newRequest);
+                    })
                     .readTimeout(300, TimeUnit.SECONDS).build();
 
             retrofit = new Retrofit.Builder()

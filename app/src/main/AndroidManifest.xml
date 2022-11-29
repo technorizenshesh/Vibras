@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.my.vibras">
-
+    <queries>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
+    </queries>
+    <!--  allows app to access Facebook app features  -->
     <application
         android:name=".VideoCalling.AppController"
         android:allowBackup="true"
@@ -16,9 +19,38 @@
         android:theme="@style/Theme.VIBRAS"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity android:name=".act.FriendProfileActivity"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:exported="false"
-            />
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".act.ForgetPasswordAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.FriendProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".chat.GroupChat.GroupChatInnerActivity"
             android:exported="false" />
@@ -230,7 +262,6 @@
             android:name=".VideoCalling.HeadsUpNotificationService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".utility.VibrasNotification"
             android:exported="false">
@@ -253,7 +284,6 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
@@ -273,8 +303,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove"/>
+
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
 </manifest>

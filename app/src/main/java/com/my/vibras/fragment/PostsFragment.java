@@ -54,14 +54,21 @@ public class PostsFragment extends Fragment implements PostClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts,container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posts,container,
+                false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         postsAdapter = new PostsAdapter(getActivity(),postList,PostsFragment.this,"Mine");
         binding.rvPosts.setHasFixedSize(true);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvPosts.setAdapter(postsAdapter);
-        getPosts();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        getPosts();
+
+        super.onResume();
     }
 
     private void getPosts() {
@@ -74,7 +81,8 @@ public class PostsFragment extends Fragment implements PostClickListener {
         Call<SuccessResGetPosts> call = apiInterface.getPost(map);
         call.enqueue(new Callback<SuccessResGetPosts>() {
             @Override
-            public void onResponse(Call<SuccessResGetPosts> call, Response<SuccessResGetPosts> response) {
+            public void onResponse(Call<SuccessResGetPosts> call, Response<SuccessResGetPosts>
+                    response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetPosts data = response.body();

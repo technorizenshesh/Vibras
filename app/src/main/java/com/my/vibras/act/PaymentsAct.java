@@ -773,7 +773,6 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
         RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
         RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
-
         Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId, eventName, address, lat, lon, description, filePart, filePartList);
         loginCall.enqueue(new Callback<SuccessResAddRestaurant>() {
             @Override

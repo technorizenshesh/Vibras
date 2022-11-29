@@ -56,7 +56,7 @@ public class FilterAct extends AppCompatActivity {
             "Vegetarian","Smoking","Family","Travel","Left-wing ideology","Right-wing ideology","Ideology of the centre"
     };
 
-    String[] arrayMeet = new String[] {
+    String[] Arraygender = new String[] {
             "Man", "Women","Both"
     };
 
@@ -71,7 +71,7 @@ public class FilterAct extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
 
-    private String shouldNot="",should="",wantToMeet="",ageRangeFrom="",ageRangeTo="",preferedLang="",location="",distance="";
+    private String shouldNot="",should="",gender="",ageRangeFrom="",ageRangeTo="",preferedLang="",location="",distance="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,8 @@ public class FilterAct extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayShould);
         binding.spinnerShould.setAdapter(adapter);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayMeet);
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, Arraygender);
         binding.spinnerWantToUse.setAdapter(adapter);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayLanaguage);
@@ -138,15 +139,15 @@ public class FilterAct extends AppCompatActivity {
 
         binding.btnAdd.setOnClickListener(v ->
                 {
-                    shouldNot = binding.spinnerShouldNot.getSelectedItem().toString();
-                    should = binding.spinnerShould.getSelectedItem().toString();
-                    wantToMeet = binding.spinnerWantToUse.getSelectedItem().toString();
+                   // shouldNot = binding.spinnerShouldNot.getSelectedItem().toString();
+                    //should = binding.spinnerShould.getSelectedItem().toString();
+                  gender = binding.spinnerWantToUse.getSelectedItem().toString();
                     List<Float> val = binding.ageSlider.getValues();
                     float f11 = val.get(0);
                     ageRangeFrom = String.valueOf(f11);
                     f11 = val.get(1);
                     ageRangeTo = String.valueOf(f11);
-                    preferedLang = binding.spinnerLanguage.getSelectedItem().toString();
+                    //preferedLang = binding.spinnerLanguage.getSelectedItem().toString();
                     location = binding.etLocation.getText().toString();
                     List<Float> values = binding.distanceSlider.getValues();
                     float f12 = values.get(0);
@@ -174,16 +175,17 @@ public class FilterAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(FilterAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
-        map.put("should_not", shouldNot);
-        map.put("should", should);
-        map.put("want_to", wantToMeet);
+  /*      map.put("should_not", shouldNot);
+        map.put("should", should);*/
+        map.put("gender", gender);
         map.put("age_range_from", ageRangeFrom);
         map.put("age_range_to", ageRangeTo);
-        map.put("p_language", preferedLang);
+     //   map.put("p_language", preferedLang);
         map.put("f_location", location);
         map.put("f_lat", "");
         map.put("f_lon", "");
         map.put("distance", distance);
+        Log.e("TAG", "filterLocation:-000000000000-------------- "+map );
         Call<SuccessResFilterData> call = apiInterface.filter(map);
         call.enqueue(new Callback<SuccessResFilterData>() {
             @Override
@@ -195,6 +197,7 @@ public class FilterAct extends AppCompatActivity {
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        finish();
                     } else if (data.status.equals("0")) {
                         showToast(FilterAct.this, data.message);
                     }
@@ -269,9 +272,9 @@ public class FilterAct extends AppCompatActivity {
 
         binding.spinnerShould.setSelection(selectedPosition);
 
-        for(int i=0;i<arrayMeet.length;i++)
+        for(int i=0;i<Arraygender.length;i++)
         {
-            if(arrayMeet[i].equalsIgnoreCase(userDetail.getWantTo()))
+            if(Arraygender[i].equalsIgnoreCase(userDetail.getWantTo()))
             {
                 selectedPosition = i;
                 break;

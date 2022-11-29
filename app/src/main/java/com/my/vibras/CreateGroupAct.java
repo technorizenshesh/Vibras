@@ -36,12 +36,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
-import com.abedelazizshe.lightcompressorlibrary.CompressionListener;
-import com.abedelazizshe.lightcompressorlibrary.VideoCompressor;
-import com.abedelazizshe.lightcompressorlibrary.VideoQuality;
-import com.abedelazizshe.lightcompressorlibrary.config.Configuration;
-import com.abedelazizshe.lightcompressorlibrary.config.StorageConfiguration;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 

@@ -35,10 +35,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
+import com.my.vibras.Company.EventsFragmentComapny;
 import com.my.vibras.R;
 import com.my.vibras.act.CreatePostAct;
 import com.my.vibras.act.EditProfileAct;
@@ -47,8 +49,11 @@ import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.databinding.FragmentMyProfileBinding;
-import com.my.vibras.databinding.FragmentProfileBinding;
+import com.my.vibras.fragment.AppointmentFragment;
+import com.my.vibras.fragment.ComapnyProfileFragment;
 import com.my.vibras.fragment.PostsFragment;
+import com.my.vibras.fragment.PostsVideoFragment;
+import com.my.vibras.fragment.RestaurantFragment;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResSignup;
@@ -81,7 +86,7 @@ import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class MyProfileFragment extends Fragment implements PostClickListener  {
+public class MyProfileFragment extends Fragment implements PostClickListener {
 
     private FragmentMyProfileBinding binding;
 
@@ -90,62 +95,112 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
     private SuccessResSignup.Result userDetail;
 
     private ArrayList<SuccessResGetPosts.Result> postList = new ArrayList<>();
-
     private MyProfileFragment.Qr_DetailsAdapter adapter;
 
-    String str_image_path="";
+    String str_image_path = "";
 
     private static final int REQUEST_CAMERA = 1;
 
     private static final int SELECT_FILE = 2;
 
     private Uri uriSavedImage;
-
+    Bundle bundle = new Bundle();
     private static final int MY_PERMISSION_CONSTANT = 5;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile,container, false);
-       apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-       binding.scrool.setNestedScrollingEnabled(false);
+    public class Qr_DetailsAdapter extends FragmentPagerAdapter {
 
-       binding.imgSetting.setOnClickListener(v -> {
+        private Context myContext;
+        int totalTabs;
+
+        public Qr_DetailsAdapter(Context context, FragmentManager fm, int totalTabs) {
+            super(fm);
+            myContext = context;
+            this.totalTabs = totalTabs;
+        }
+
+        // this is for fragment tabs
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    PostsFragment recents = new PostsFragment();
+                    return recents;
+
+                case 1:
+                    AppointmentFragment recents1 = new AppointmentFragment();
+                    return recents1;
+
+                case 2:
+                    PostsVideoFragment recents11 = new PostsVideoFragment();
+                    return recents11;
+
+               /* case 3:
+                    EventsFragmentComapny recents12 = new EventsFragmentComapny();
+                    return recents12;*/
+
+                default:
+                    return null;
+            }
+        }
+        @Override
+        public int getCount() {
+            return totalTabs;
+        }
+    }
+
+
+    @Override
+    public View onCreateView (LayoutInflater inflater,
+                              ViewGroup container,
+                              Bundle savedInstanceState) {
+        binding = FragmentMyProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
+
+      //  binding = FragmentMyProfileBinding.inflate(inflater,binding.getRoot(),false);
+            //    DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile, container, false);
+        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+     //   binding.scrool.setNestedScrollingEnabled(false);
+        binding.imgSetting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingAct.class));
-       });
+        });
 
-       binding.ivAddPost.setOnClickListener(v ->
-               {
-                   startActivity(new Intent(getActivity(), CreatePostAct.class));
-               }
-               );
+        binding.ivAddPost.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), CreatePostAct.class));
+                }
+        );
 
-       binding.llGroup.setOnClickListener(v ->
-               {
-                   startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from","my"));
-               }
-               );
+        binding.llGroup.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ViewAllGroupsAct.class)
+                            .putExtra("from", "my"));
+                }
+        );
 
-       binding.llViewEvents.setOnClickListener(v ->
-               {
-                   startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from","my"));
-               }
-               );
+        binding.llViewEvents.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(),
+                            ViewAllEventAct.class).putExtra("from", "my"));
+                }
+        );
 
-        setUpUi();
+      setUpUi();
 
         binding.ivEditConverPhoto.setOnClickListener(v ->
                 {
                     chooseToEdit();
                 }
         );
-        return binding.getRoot();
+        return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
             getProfile();
-            getPosts();
+            //  getPosts();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
@@ -154,9 +209,9 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
     private void getPosts() {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("type_status","IMAGE");
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("type_status", "IMAGE");
         Call<SuccessResGetPosts> call = apiInterface.getPost(map);
         call.enqueue(new Callback<SuccessResGetPosts>() {
             @Override
@@ -164,7 +219,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetPosts data = response.body();
-                    Log.e("data",data.status);
+                    Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
@@ -172,18 +227,19 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                         postList.addAll(data.getResult());
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this,"Mine"));
+                        binding.rvPosts.setAdapter(new PostsAdapter(getActivity(), postList, MyProfileFragment.this, "Mine"));
                     } else if (data.status.equals("0")) {
                         postList.clear();
                         binding.rvPosts.setHasFixedSize(true);
                         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvPosts.setAdapter( new PostsAdapter(getActivity(),postList,MyProfileFragment.this,"Mine"));
+                        binding.rvPosts.setAdapter(new PostsAdapter(getActivity(), postList, MyProfileFragment.this, "Mine"));
                         showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResGetPosts> call, Throwable t) {
                 call.cancel();
@@ -195,8 +251,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
     private void getProfile() {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
         Call<SuccessResSignup> call = apiInterface.getProfile(map);
         call.enqueue(new Callback<SuccessResSignup>() {
             @Override
@@ -205,7 +261,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 try {
                     SuccessResSignup data = response.body();
                     userDetail = data.getResult();
-                    Log.e("data",data.status);
+                    Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
@@ -217,6 +273,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResSignup> call, Throwable t) {
                 call.cancel();
@@ -228,8 +285,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
     private void getProfileImage() {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
         Call<SuccessResUploadSelfie> call = apiInterface.getProfileImage(map);
         call.enqueue(new Callback<SuccessResUploadSelfie>() {
             @Override
@@ -238,7 +295,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 try {
                     SuccessResUploadSelfie data = response.body();
                     SuccessResUploadSelfie.Result userData = data.getResult();
-                    Log.e("data",data.status);
+                    Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
@@ -258,6 +315,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResUploadSelfie> call, Throwable t) {
                 call.cancel();
@@ -266,51 +324,55 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         });
     }
 
-        private void setProfileDetails()
-        {
+    private void setProfileDetails() {
 
-            binding.tvName.setText(userDetail.getFirstName()+" "+userDetail.getLastName());
+        binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
 
-            if(!userDetail.getBio().equalsIgnoreCase(""))
-            {
-                binding.tvBio.setVisibility(View.VISIBLE);
-                binding.tvBio.setText(userDetail.getBio());
-            }else
-            {
-                binding.tvBio.setVisibility(View.GONE);
-            }
-
-            Glide
-                    .with(getActivity())
-                    .load(userDetail.getCoverImage())
-                    .into(binding.ivCoverPhoto);
-            Glide
-                    .with(getActivity())
-                    .load(userDetail.getImage())
-                    .placeholder(R.drawable.ic_user)
-                    .into(binding.ivProfile);
-
-            binding.tvLikeGiven.setText(userDetail.getGivenLikes()+"");
-            binding.tvLikeReceived.setText(userDetail.getReceviedLikes()+"");
-
+        if (!userDetail.getBio().equalsIgnoreCase("")) {
+            binding.tvBio.setVisibility(View.VISIBLE);
+            binding.tvBio.setText(userDetail.getBio());
+        } else {
+            binding.tvBio.setVisibility(View.GONE);
         }
+
+        Glide
+                .with(getActivity())
+                .load(userDetail.getCoverImage())
+                .into(binding.ivCoverPhoto);
+        Glide
+                .with(getActivity())
+                .load(userDetail.getImage())
+                .placeholder(R.drawable.ic_user)
+                .into(binding.ivProfile);
+
+        binding.tvLikeGiven.setText(userDetail.getGivenLikes() + "");
+        binding.tvLikeReceived.setText(userDetail.getReceviedLikes() + "");
+
+    }
 
     private void setUpUi() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Apointments"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Appointments"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        adapter = new MyProfileFragment.Qr_DetailsAdapter(getActivity(),getChildFragmentManager(), binding.tabLayout.getTabCount());
+         binding.tabLayout.setSelected(true);
+        adapter = new MyProfileFragment.Qr_DetailsAdapter(getActivity(),
+                getChildFragmentManager(), binding.tabLayout.getTabCount());
         binding.viewPager.setAdapter(adapter);
-        binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+
+        binding.viewPager.addOnPageChangeListener(new
+                TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
         binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 binding.viewPager.setCurrentItem(tab.getPosition());
+
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -325,15 +387,15 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     @Override
     public void bottomSheet(View param1, String postID, boolean isUser, int position) {
-        showDialog(postID,position);
+        showDialog(postID, position);
     }
+
     @Override
     public void savePost(View param1, String postID, boolean isUser, int position) {
 
     }
 
-    public void showDialog(String postId,int position)
-    {
+    public void showDialog(String postId, int position) {
 
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -348,23 +410,21 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         TextView tvDelete = dialog.findViewById(R.id.tvDelete);
         TextView tvShare = dialog.findViewById(R.id.tvShare);
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
-        if(userId.equalsIgnoreCase(postList.get(position).getUserId()))
-        {
+        if (userId.equalsIgnoreCase(postList.get(position).getUserId())) {
             tvDelete.setVisibility(View.VISIBLE);
-        }else
-        {
+        } else {
             tvDelete.setVisibility(View.GONE);
         }
 
         tvShare.setOnClickListener(v1 ->
                 {
                     dialog.dismiss();
-                    String shareBody = "User :"+postList.get(position).getFirstName()+" "+postList.get(position).getLastName() +"\n\nPosted :"+postList.get(position).getImage();
+                    String shareBody = "User :" + postList.get(position).getFirstName() + " " + postList.get(position).getLastName() + "\n\nPosted :" + postList.get(position).getImage();
                     Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                     sharingIntent.setType("text/plain");
                     sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
                     sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                    getActivity().startActivity(Intent.createChooser(sharingIntent,getActivity().getResources().getString(R.string.share_using)));
+                    getActivity().startActivity(Intent.createChooser(sharingIntent, getActivity().getResources().getString(R.string.share_using)));
                 }
         );
 
@@ -390,14 +450,13 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
     }
 
-    public void deletePost(String postId)
-    {
+    public void deletePost(String postId) {
 
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("post_id",postId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("post_id", postId);
         Call<SuccessResAddLike> call = apiInterface.deletePost(map);
         call.enqueue(new Callback<SuccessResAddLike>() {
             @Override
@@ -405,18 +464,19 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResAddLike data = response.body();
-                    Log.e("data",data.status+"");
-                    if (data.status==1) {
+                    Log.e("data", data.status + "");
+                    if (data.status == 1) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         getPosts();
-                    } else if (data.status==0) {
+                    } else if (data.status == 0) {
                         showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
                 call.cancel();
@@ -428,9 +488,9 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
     private void addLike(String postId) {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("post_id",postId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("post_id", postId);
         Call<SuccessResAddLike> call = apiInterface.addLike(map);
         call.enqueue(new Callback<SuccessResAddLike>() {
             @Override
@@ -438,18 +498,19 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResAddLike data = response.body();
-                    Log.e("data",data.status+"");
-                    if (data.status==1) {
+                    Log.e("data", data.status + "");
+                    if (data.status == 1) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         getPosts();
-                    } else if (data.status==0) {
+                    } else if (data.status == 0) {
                         showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
                 call.cancel();
@@ -458,46 +519,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         });
     }
 
-    public class Qr_DetailsAdapter extends FragmentPagerAdapter {
-
-        private Context myContext;
-        int totalTabs;
-
-        public Qr_DetailsAdapter(Context context, FragmentManager fm, int totalTabs) {
-            super(fm);
-            myContext = context;
-            this.totalTabs = totalTabs;
-        }
-
-        // this is for fragment tabs
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    PostsFragment recents = new PostsFragment();
-                    return recents;
-
-                case 1:
-                    PostsFragment recents1 = new PostsFragment();
-                    return recents1;
-
-                case 2:
-                    PostsFragment recents11 = new PostsFragment();
-                    return recents11;
-
-               case 3:
-                    PostsFragment recents113 = new PostsFragment();
-                    return recents113;
-
-                default:
-                    return null;
-            }
-        }
-        @Override
-        public int getCount() {
-            return totalTabs;
-        }
-    }
 
     public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
         Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
@@ -540,29 +561,28 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
         TextView tvCancel = dialog.findViewById(R.id.tvCancel);
 
-        RelativeLayout rlchangeCoverPhoto =dialog.findViewById(R.id.rrChangeCover);
-        RelativeLayout rlEditProfile =dialog.findViewById(R.id.rrEditProfile);
+        RelativeLayout rlchangeCoverPhoto = dialog.findViewById(R.id.rrChangeCover);
+        RelativeLayout rlEditProfile = dialog.findViewById(R.id.rrEditProfile);
 
         rlEditProfile.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getActivity(), EditProfileAct.class));
                 }
-                );
+        );
         rlchangeCoverPhoto.setOnClickListener(v ->
                 {
-                    if(checkPermisssionForReadStorage())
-                    {
+                    if (checkPermisssionForReadStorage()) {
                         dialog.dismiss();
                         showImageSelection();
                     }
                 }
-                );
+        );
 
         tvCancel.setOnClickListener(v ->
                 {
                     dialog.dismiss();
                 }
-                );
+        );
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
@@ -751,22 +771,18 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         }
     }
 
-    public void updateCoverPhoto()
-    {
+    public void updateCoverPhoto() {
 
         String strUserId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
 
-        DataManager.getInstance().showProgressMessage(getActivity(),getString(R.string.please_wait));
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
 
         MultipartBody.Part filePart;
         if (!str_image_path.equalsIgnoreCase("")) {
             File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-            if(file!=null)
-            {
+            if (file != null) {
                 filePart = MultipartBody.Part.createFormData("cover_image", file.getName(), RequestBody.create(MediaType.parse("cover_image/*"), file));
-            }
-            else
-            {
+            } else {
                 filePart = null;
             }
 
@@ -776,7 +792,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         }
         RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
 
-        Call<SuccessResUploadCoverPhoto> loginCall = apiInterface.uploadCoverPhoto(userId,filePart);
+        Call<SuccessResUploadCoverPhoto> loginCall = apiInterface.uploadCoverPhoto(userId, filePart);
         loginCall.enqueue(new Callback<SuccessResUploadCoverPhoto>() {
             @Override
             public void onResponse(Call<SuccessResUploadCoverPhoto> call, Response<SuccessResUploadCoverPhoto> response) {
@@ -785,13 +801,13 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
 
                     SuccessResUploadCoverPhoto data = response.body();
                     String responseString = new Gson().toJson(response.body());
-                    Log.e(TAG,"Test Response :"+responseString);
+                    Log.e(TAG, "Test Response :" + responseString);
 
                     getProfile();
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG,"Test Response :"+response.body());
+                    Log.e(TAG, "Test Response :" + response.body());
                 }
             }
 
@@ -803,8 +819,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener  {
         });
 
     }
-
-
 
 
 }

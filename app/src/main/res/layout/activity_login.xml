@@ -193,21 +193,32 @@
                 >
 
                 <ImageView
+                    android:id="@+id/google_login"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:src="@drawable/google_icon"
                     >
 
                 </ImageView>
+<RelativeLayout
+     android:id="@+id/fb_login_lay"
+    android:layout_marginLeft="@dimen/_20sdp"
+    android:layout_width="@dimen/_45sdp"
+    android:layout_height="@dimen/_45sdp"
+>
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 
-                <ImageView
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp"
-                    android:src="@drawable/facebook_icon"
-                    >
+    <ImageView
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:src="@drawable/facebook_icon">
 
-                </ImageView>
+    </ImageView>
+</RelativeLayout>
+
 
             </LinearLayout>
 

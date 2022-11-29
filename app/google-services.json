@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "117323972514",
-    "project_id": "vibras-2063f",
-    "storage_bucket": "vibras-2063f.appspot.com"
+    "project_number": "634353602769",
+    "firebase_url": "https://vibras-f3c99-default-rtdb.firebaseio.com",
+    "project_id": "vibras-f3c99",
+    "storage_bucket": "vibras-f3c99.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:117323972514:android:2c983a5f72d4015b513cfb",
+        "mobilesdk_app_id": "1:634353602769:android:05f606261ca453c356b5f0",
         "android_client_info": {
           "package_name": "com.my.vibras"
         }
       },
       "oauth_client": [
         {
-          "client_id": "117323972514-rgqpa4n188gntac94sct9euqg15p1e02.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.my.vibras",
-            "certificate_hash": "be053cf6e79e8a61ba7f5be6681e8978782d7b5e"
-          }
-        },
-        {
-          "client_id": "117323972514-q0m0cuorltkb3hc26t143plobgmb29kv.apps.googleusercontent.com",
+          "client_id": "634353602769-b91u6m9cvrtjjp5nm7sl56dh4r8unv89.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAxeQ8jsdAWD4hHToyEGF_wTytM4fpMg4I"
+          "current_key": "AIzaSyCfafYXWLedHR9L2hdYg8hFQs_bz1LbDmI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "117323972514-q0m0cuorltkb3hc26t143plobgmb29kv.apps.googleusercontent.com",
+              "client_id": "634353602769-b91u6m9cvrtjjp5nm7sl56dh4r8unv89.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

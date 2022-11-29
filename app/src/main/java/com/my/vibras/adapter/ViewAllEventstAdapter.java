@@ -66,7 +66,8 @@ public class ViewAllEventstAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             ivEvent.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, EventsDetailsScreen.class).putExtra("data",new Gson().toJson(modelList.get(position))));
+                        mContext.startActivity(new Intent(mContext, EventsDetailsScreen.class)
+                                .putExtra("data",new Gson().toJson(modelList.get(position))));
                     }
                     );
 

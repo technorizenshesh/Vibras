@@ -47,31 +47,30 @@ android:padding="@dimen/_5sdp"
 
             <LinearLayout
                 android:id="@+id/middle"
-                android:layout_toRightOf="@id/start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toRightOf="@id/start"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pria"
-                    android:maxLength="15"
                     android:fontFamily="@font/poppins_bold"
+                    android:maxLength="15"
+                    android:text="Pria"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
                     android:id="@+id/lastmeeage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hey..."
-                    android:maxLength="15"
                     android:fontFamily="@font/poppinsregular"
+                    android:maxLength="15"
+                    android:text="Hey..."
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />

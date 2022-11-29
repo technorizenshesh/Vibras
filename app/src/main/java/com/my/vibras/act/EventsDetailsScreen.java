@@ -78,6 +78,9 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_events_details_screen);
+        try {
+
+
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         Intent in = getIntent();
         if (in!=null)
@@ -114,7 +117,7 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 
         binding.tvDetails.setText(requestModel.getDescription());
 
-        if(requestModel.getLikeStatus().equalsIgnoreCase("false"))
+        if(requestModel.getLikeStatus()!=null&&requestModel.getLikeStatus().equalsIgnoreCase("false"))
         {
             binding.ivLikes.setImageResource(R.drawable.ic_rest_unlike);
         }else
@@ -161,16 +164,20 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(EventsDetailsScreen.this);
+if (requestModel.getIammember()!=null) {
+    if (requestModel.getIammember().equalsIgnoreCase("No")) {
+        binding.cvSignup.setVisibility(View.VISIBLE);
+    } else {
+        binding.cvSignup.setVisibility(View.GONE);
+    }
+}else {
+    binding.cvSignup.setVisibility(View.VISIBLE);
 
-        if(requestModel.getIammember().equalsIgnoreCase("No"))
-        {
-            binding.cvSignup.setVisibility(View.VISIBLE);
+}
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("TAG", "onCreate: "+e.getLocalizedMessage() );
         }
-        else
-        {
-            binding.cvSignup.setVisibility(View.GONE);
-        }
-
     }
 
     public void joinEvent()
