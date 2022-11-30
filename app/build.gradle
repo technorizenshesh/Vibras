@@ -156,6 +156,7 @@ dependencies {
 
 
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation "com.dolatkia:animated-theme-manager:1.1.4"
 
 }
 apply plugin: 'com.android.application'

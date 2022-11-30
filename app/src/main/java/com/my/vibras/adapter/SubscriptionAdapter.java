@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.vibras.R;
 import com.my.vibras.model.SuccessResGetSubscription;
-import com.my.vibras.model.SuccessResGetTransaction;
 
 import java.util.ArrayList;
 

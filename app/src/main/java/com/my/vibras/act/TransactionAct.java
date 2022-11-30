@@ -2,19 +2,14 @@ package com.my.vibras.act;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.my.vibras.R;
-import com.my.vibras.adapter.AllCpmentAdapter;
 import com.my.vibras.adapter.TrasactionAdapter;
 import com.my.vibras.databinding.ActivityTransactionBinding;
-import com.my.vibras.model.HomModel;
-import com.my.vibras.model.SuccessResGetTransaction;
 import com.my.vibras.model.SuccessResGetTransaction;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -29,7 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 

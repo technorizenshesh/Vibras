@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.adapter.PostsVideoAdapter;
 import com.my.vibras.databinding.FragmentPostsBinding;
 import com.my.vibras.databinding.FragmentPostsVideoBinding;

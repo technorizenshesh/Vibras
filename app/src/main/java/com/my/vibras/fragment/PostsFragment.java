@@ -1,6 +1,5 @@
 package com.my.vibras.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,16 +11,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.SearchAct;
 import com.my.vibras.adapter.PostsAdapter;
-import com.my.vibras.adapter.StoriesAdapter;
 import com.my.vibras.databinding.FragmentPostsBinding;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetStories;
-import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;

@@ -79,7 +79,11 @@ public class SettingAct extends AppCompatActivity {
 
         binding.RRprivacyPolicy.setOnClickListener(v ->
                 {
-                    startActivity(new Intent(SettingAct.this,PrivacyPolicyAct.class));
+                    startActivity(new Intent(SettingAct.this,PrivacyPolicyAct.class).putExtra("from","user").putExtra("is","1"));
+                }
+        ); binding.RRterms.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(SettingAct.this,PrivacyPolicyAct.class).putExtra("from","user").putExtra("is","2"));
                 }
         );
 

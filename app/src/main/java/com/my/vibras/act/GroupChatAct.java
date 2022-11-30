@@ -11,13 +11,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.adapter.ChatAdapter;
 import com.my.vibras.adapter.GroupOne2OneChatAdapter;
 import com.my.vibras.databinding.ActivityCreateGroupBinding;
 import com.my.vibras.databinding.ActivityGroupChatBinding;
-import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetGroupChat;
-import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResInsertGroupChat;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.NetworkAvailablity;

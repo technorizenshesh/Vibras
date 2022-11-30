@@ -38,8 +38,6 @@ import com.my.vibras.Company.ComapmnySettingAct;
 import com.my.vibras.Company.EventsFragmentComapny;
 import com.my.vibras.R;
 import com.my.vibras.act.EditProfileAct;
-import com.my.vibras.act.SettingAct;
-import com.my.vibras.act.ui.myprofile.MyProfileFragment;
 import com.my.vibras.databinding.FragmentComapnyMyProfileBinding;
 import com.my.vibras.databinding.FragmentMyProfileBinding;
 import com.my.vibras.model.SuccessResSignup;
@@ -131,7 +129,7 @@ public class ComapnyProfileFragment extends Fragment{
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Events"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Restaurant"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Accommodation"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Tagged"));
+    //    binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Tagged"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         adapter = new ComapnyProfileFragment.Qr_DetailsAdapter(getActivity(),getChildFragmentManager(), binding.tabLayout.getTabCount());
@@ -268,12 +266,12 @@ public class ComapnyProfileFragment extends Fragment{
                     return recents1;
 
                 case 2:
-                    EventsFragmentComapny recents11 = new EventsFragmentComapny();
+                    AccommadationFragment recents11 = new AccommadationFragment();
                     return recents11;
 
-                case 3:
+              /*  case 3:
                     EventsFragmentComapny recents12 = new EventsFragmentComapny();
-                    return recents12;
+                    return recents12;*/
 
                 default:
                     return null;

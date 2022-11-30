@@ -130,8 +130,9 @@
     <string name="go_back_to_login">Go back to </string>
     <string name="reset_passwod">Reset Password</string>
 
-    <string name="facebook_app_id" translatable="false">469678655289100</string>
+    <string name="facebook_app_id" translatable="false">838895714054178</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
-    <string name="facebook_client_token" translatable="false">c6b8d03427898ad7827305c5775d5631</string>
-    <string name="facebook_appsecrety" translatable="false">e1e8d092f104955cadb9205dbd0a83c4</string>
+    <string name="facebook_client_token" translatable="false">618483dab13b3748bbe692856f8730ba</string>
+    <string name="facebook_appsecrety" translatable="false">4962c554bf311c00a0b4fa539350f0e2</string>
+    <string name="terms_condition"><![CDATA[Terms & Condition]]></string>
 </resources>

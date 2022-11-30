@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.ui.dashboard.ChatFragment;
 import com.my.vibras.adapter.ConversationSearchAdapter;
-import com.my.vibras.adapter.SingleChatAdapter;
 import com.my.vibras.databinding.ActivitySearchConversationUserBinding;
 import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.retrofit.ApiClient;

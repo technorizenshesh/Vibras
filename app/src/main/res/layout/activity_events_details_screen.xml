@@ -58,7 +58,7 @@
                     android:text="Shelija Concert"
                     android:textColor="@color/dark_blues"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                android:fontFamily="@font/poppinsregular" />
 
                 <LinearLayout
                     android:layout_alignParentRight="true"
@@ -134,8 +134,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:drawableLeft="@drawable/watch"
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"
+android:fontFamily="@font/poppins_bold"                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -156,7 +155,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/poppinsregular"/>
 
             </LinearLayout>
                 <androidx.cardview.widget.CardView
@@ -197,8 +196,7 @@
                     android:id="@+id/eventLocation"
                     android:drawablePadding="@dimen/_5sdp"
                     android:drawableLeft="@drawable/location"
-                    android:textStyle="bold"
-                    android:layout_alignParentRight="true"
+android:fontFamily="@font/poppins_bold"                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vijay Nagar"
@@ -257,7 +255,7 @@
                 android:text="Details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/poppins_bold" />
 
 
             <TextView
@@ -283,7 +281,7 @@
                 android:text="Photos"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
-                android:textStyle="bold" />
+               android:fontFamily="@font/poppins_bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -358,7 +356,7 @@
                         android:text="Comments"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
+                       android:fontFamily="@font/poppins_bold" />
 
                     <TextView
                         android:layout_marginLeft="@dimen/_10sdp"

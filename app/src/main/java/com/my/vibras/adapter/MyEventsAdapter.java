@@ -1,7 +1,6 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,12 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.AddCommentAct;
 import com.my.vibras.databinding.MyeventItemBinding;
-import com.my.vibras.databinding.MyeventItemBinding;
-import com.my.vibras.model.SuccessResGetEvents;
-import com.my.vibras.model.SuccessResGetPosts;
-import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.utility.PostClickListener;
 

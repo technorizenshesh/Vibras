@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,6 @@ import com.my.vibras.databinding.CommentItemBinding;
 import com.my.vibras.databinding.RestrauntCommentItemBinding;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;

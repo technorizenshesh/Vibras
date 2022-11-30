@@ -3,7 +3,6 @@ package com.my.vibras.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,14 +10,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.act.FriendProfileActivity;
-import com.my.vibras.act.SearchAct;
 import com.my.vibras.databinding.SearchItemBinding;
 import com.my.vibras.model.SuccessAddSearchHistory;
 import com.my.vibras.model.SuccessResGetUsers;
@@ -93,7 +90,9 @@ String title;
                 {
                     addSearchHistory(title);
                     Util.hideKeyboard((Activity)context );
-                    context.startActivity(new Intent(context, FriendProfileActivity.class).putExtra("id", usersList.get(position).getId()));
+                    context.startActivity(new Intent(context,
+                            FriendProfileActivity.class).putExtra("id",
+                            usersList.get(position).getId()));
                 }
         );
 

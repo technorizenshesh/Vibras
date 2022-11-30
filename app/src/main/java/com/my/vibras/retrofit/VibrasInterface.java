@@ -489,6 +489,9 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_privacy_policy")
     Call<SuccessResGetPP> getPrivacyPolicy(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("get_term_conditions")
+    Call<SuccessResGetPP> get_term_conditions(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_about")

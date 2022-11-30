@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,19 +12,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
-import com.my.vibras.act.FilterAct;
-import com.my.vibras.act.SearchAct;
 import com.my.vibras.adapter.MyEventsAdapter;
-import com.my.vibras.adapter.SearchAdapter;
 import com.my.vibras.databinding.ActivitySavedEventsBinding;
 import com.my.vibras.databinding.ActivitySearchEventBinding;
-import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.PostClickListener;
-import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +29,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class SearchEventAct extends AppCompatActivity implements PostClickListener {

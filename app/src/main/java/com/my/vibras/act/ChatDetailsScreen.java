@@ -21,10 +21,8 @@ import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,13 +31,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 

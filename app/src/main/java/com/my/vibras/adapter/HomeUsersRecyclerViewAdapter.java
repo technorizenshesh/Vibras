@@ -3,24 +3,20 @@ package com.my.vibras.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.ChatDetailsScreen;
+import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.chat.ChatInnerMessagesActivity;
-import com.my.vibras.model.SuccessResGetInterest;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.utility.HomeItemClickListener;
 
@@ -136,9 +132,17 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
                 );
         smallImage.setOnClickListener(v ->
                 {
-                    Bundle bundle1 = new Bundle();
+                /*    Bundle bundle1 = new Bundle();
                     bundle1.putString("id",modelList.get(position).getId());
-                    Navigation.findNavController(v).navigate(R.id.action_navigation_home_to_otherUserProfileFragment,bundle1);
+                    Navigation.findNavController(v)
+                            .navigate(R.id.action_navigation_home_to_otherUserProfileFragment,bundle1);
+*/
+
+                    Intent intent = new Intent(mContext, FriendProfileActivity.class);
+                    intent.putExtra("id", modelList.get(position).getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+
                 }
         );
 

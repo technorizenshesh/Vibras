@@ -57,7 +57,7 @@ public class ChangePassAct extends AppCompatActivity {
                             Toast.makeText(ChangePassAct.this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(ChangePassAct.this, getResources().getString(R.string.on_error), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(ChangePassAct.this, getResources().getString(R.string.on_error), Toast.LENGTH_SHORT).show();
                     }
                 }
         );

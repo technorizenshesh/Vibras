@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
@@ -23,15 +22,12 @@ import android.widget.Toast;
 
 import com.braintreepayments.cardform.OnCardFormSubmitListener;
 import com.braintreepayments.cardform.view.CardForm;
-import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
 
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.R;
-import com.my.vibras.adapter.AllCpmentAdapter;
 import com.my.vibras.adapter.PaymentAdapter;
 import com.my.vibras.databinding.ActivityPaymentsBinding;
-import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResAddCard;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddRestaurant;

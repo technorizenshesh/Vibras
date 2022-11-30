@@ -13,11 +13,9 @@ import com.google.gson.Gson;
 import com.my.vibras.databinding.ActivityCompleteSignUpBinding;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
-import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
-import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -112,6 +110,7 @@ public class CompleteSignUpAct extends AppCompatActivity {
         map.put("type",userTYpe);
         map.put("gender",strGender);
         map.put("time_zone",id);
+        Log.e("HashMapHashMap", "signup: "+map );
         Call<SuccessResSignup> signupCall = apiInterface.signup(map);
         signupCall.enqueue(new Callback<SuccessResSignup>() {
             @Override
@@ -119,10 +118,11 @@ public class CompleteSignUpAct extends AppCompatActivity {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResSignup data = response.body();
+                    String dataResponse = new Gson().toJson(response.body());
+                    Log.e("onResponse", "signupsignupsignup" + dataResponse);
+
                     if (data.status.equals("1")) {
                         showToast(CompleteSignUpAct.this, data.message);
-                        String dataResponse = new Gson().toJson(response.body());
-                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
 
                         startActivity(new Intent(CompleteSignUpAct.this,VerificationAct.class)
                                 .putExtra("user_id",data.getResult().getId())
@@ -140,6 +140,11 @@ public class CompleteSignUpAct extends AppCompatActivity {
             @Override
             public void onFailure(Call<SuccessResSignup> call, Throwable t) {
                 call.cancel();
+                Log.e("onFailure", "signupsignupsignup" + t.getMessage());
+                Log.e("onFailure", "signupsignupsignup" + t.getLocalizedMessage());
+                Log.e("onFailure", "signupsignupsignup" + t.getCause());
+
+
                 DataManager.getInstance().hideProgressMessage();
             }
         });

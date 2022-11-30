@@ -92,7 +92,9 @@
                         android:id="@+id/ivProfile"
                         android:layout_width="@dimen/_85sdp"
                         android:layout_height="@dimen/_85sdp"
-                        android:layout_gravity="center"></de.hdodenhof.circleimageview.CircleImageView>
+                        android:layout_gravity="center">
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                     <ImageView
                         android:visibility="gone"
@@ -152,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                  android:padding="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     >
 
@@ -217,11 +220,48 @@
                             android:textSize="@dimen/_8sdp" />
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_weight=".5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        >
+
+                        <Button
+                            android:layout_margin="@dimen/_2sdp"
+                            android:id="@+id/btnIlike"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="I Like"
+                            android:background="@drawable/border_btn"
+                            android:layout_width="match_parent"
+                            android:textAllCaps="false"
+                            android:layout_height="match_parent"
+                            >
+
+                        </Button>
+
+                        <Button
+                            android:id="@+id/btnAddLike"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:text="@string/add_like"
+                            android:background="@drawable/border_btn"
+                            android:layout_width="match_parent"
+                            android:textAllCaps="false"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            >
+
+                        </Button>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:visibility="gone"
+             <!--   <LinearLayout
+                    android:visibility="visible"
                     android:padding="@dimen/_10sdp"
                     android:weightSum="2"
                     android:layout_width="match_parent"
@@ -270,6 +310,60 @@
                             android:textSize="@dimen/_12sdp"
                             />
 
+
+                    </LinearLayout>
+
+                </LinearLayout>-->
+                <LinearLayout
+                    android:id="@+id/event_group"
+                    android:visibility="gone"
+                    android:padding="@dimen/_10sdp"
+                    android:weightSum="2"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/llViewEvents"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/border_black_cir"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        >
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Events"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llGroup"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/border_black_cir"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        >
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Groups"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            />
 
                     </LinearLayout>
 

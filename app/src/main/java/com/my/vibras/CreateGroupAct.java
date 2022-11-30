@@ -1,18 +1,15 @@
 package com.my.vibras;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,56 +20,40 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
-import com.my.vibras.act.EditProfileAct;
 import com.my.vibras.act.PaymentsAct;
-import com.my.vibras.act.SettingAct;
-import com.my.vibras.act.SubsCriptionAct;
 import com.my.vibras.adapter.AddFriendAdapter;
-import com.my.vibras.adapter.FriendsListAdapter;
 import com.my.vibras.adapter.SelectedUserAdapter;
 import com.my.vibras.databinding.ActivityCreateGroupBinding;
-import com.my.vibras.model.HomModel;
-import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.retrofit.ApiClient;
-import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 

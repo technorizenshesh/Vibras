@@ -290,6 +290,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="center"
                 android:orientation="horizontal"

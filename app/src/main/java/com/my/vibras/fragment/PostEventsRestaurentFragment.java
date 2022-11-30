@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.my.vibras.R;
-import com.my.vibras.act.ui.myprofile.MyProfileFragment;
 import com.my.vibras.databinding.FragmentNotificationsBinding;
 import com.my.vibras.databinding.FragmentPostEventsBinding;
 import com.my.vibras.databinding.FragmentPostEventsRestaurentBinding;

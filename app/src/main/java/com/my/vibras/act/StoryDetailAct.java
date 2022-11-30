@@ -1,31 +1,22 @@
 package com.my.vibras.act;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowInsetsAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bolaware.viewstimerstory.Momentz;
@@ -33,8 +24,6 @@ import com.bolaware.viewstimerstory.MomentzCallback;
 import com.bolaware.viewstimerstory.MomentzView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.my.vibras.LoginAct;
-import com.my.vibras.MainActivity;
 import com.my.vibras.R;
 import com.my.vibras.act.ui.home.HomeFragment;
 import com.my.vibras.model.SuccessResGetStories;
@@ -59,7 +48,6 @@ import retrofit2.Response;
 
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
-import static com.smarteist.autoimageslider.IndicatorView.utils.DensityUtils.dpToPx;
 
 public class StoryDetailAct extends AppCompatActivity implements MomentzCallback , OnKeyboardVisibilityListener {
 
@@ -249,16 +237,13 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
         videoView.setVideoURI(uri);
         videoView.requestFocus();
         videoView.start();
-        videoView.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-            @Override
-            public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                if(what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
-                {
-                    momentz.editDurationAndResume(index, (videoView.getDuration()) / 1000);
-                    return true;
-                }
-                return false;
+        videoView.setOnInfoListener((mp, what, extra) -> {
+            if(what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
+            {
+                momentz.editDurationAndResume(index, (videoView.getDuration()) / 1000);
+                return true;
             }
+            return false;
         });
     }
 

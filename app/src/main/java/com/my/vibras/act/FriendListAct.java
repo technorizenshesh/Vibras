@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -12,17 +11,12 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.ui.home.HomeFragment;
-import com.my.vibras.adapter.BruseEventAdapter;
 import com.my.vibras.adapter.FriendsListAdapter;
-import com.my.vibras.adapter.HomeUsersRecyclerViewAdapter;
-import com.my.vibras.adapter.NEarmeEventstAdapter;
 import com.my.vibras.databinding.ActivityFriendListBinding;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
-import com.my.vibras.utility.CenterZoomLayoutManager;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 

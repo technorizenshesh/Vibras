@@ -22,8 +22,6 @@ import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
-import com.my.vibras.act.ui.myprofile.MyProfileFragment;
-import com.my.vibras.act.ui.profile.ProfileFragment;
 import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.databinding.FragmentOtherUserProfileBinding;
 import com.my.vibras.databinding.FragmentProfileBinding;
@@ -32,8 +30,6 @@ import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.model.SuccessResGetProfile;
-import com.my.vibras.model.SuccessResGetProfile;
-import com.my.vibras.model.SuccessResUploadSelfie;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -132,18 +128,18 @@ public class OtherUserProfileFragment extends Fragment implements PostClickListe
             otherUserId = bundle.getString("id");
         }
 
-        binding.llGroup.setOnClickListener(v ->
-                {
-                    startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from","other").putExtra("id",otherUserId));
-                }
-        );
+
 
         binding.btnAddLike.setOnClickListener(v ->
                 {
                     addOtherProfileLike(otherUserId,"Like");
                 }
                 );
-
+        binding.llGroup.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from","other").putExtra("id",otherUserId));
+                }
+        );
         binding.llViewEvents.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from","other")

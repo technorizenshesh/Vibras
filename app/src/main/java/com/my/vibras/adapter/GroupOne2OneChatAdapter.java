@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.vibras.R;
 import com.my.vibras.databinding.AdapterChatBinding;
-import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetGroupChat;
 
 import java.io.UnsupportedEncodingException;

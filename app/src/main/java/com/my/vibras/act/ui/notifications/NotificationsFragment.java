@@ -5,19 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.ui.GroupDetailAct;
 import com.my.vibras.adapter.NotificationAdapter;
 import com.my.vibras.databinding.FragmentNotificationsBinding;
 import com.my.vibras.model.SuccessResGetNotification;
@@ -40,6 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.my.vibras.retrofit.Constant.USER_ID;
+import static com.my.vibras.retrofit.Constant.USER_TYPE;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class NotificationsFragment extends Fragment implements DeletePost {
@@ -64,9 +61,11 @@ public class NotificationsFragment extends Fragment implements DeletePost {
     private void getNotification()
     {
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        String usertype = SharedPreferenceUtility.getInstance(getContext()).getString(USER_TYPE);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
+        map.put("type",usertype);
         Call<SuccessResGetNotification> call = apiInterface.getNotification(map);
         call.enqueue(new Callback<SuccessResGetNotification>() {
             @Override
@@ -82,7 +81,8 @@ public class NotificationsFragment extends Fragment implements DeletePost {
                         notificationList.addAll(data.getResult());
                         binding.rvNotification.setHasFixedSize(true);
                         binding.rvNotification.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvNotification.setAdapter(new NotificationAdapter(getActivity(),notificationList,NotificationsFragment.this::bottomSheet));
+                        binding.rvNotification.setAdapter(
+                                new NotificationAdapter(getActivity(),notificationList,NotificationsFragment.this::bottomSheet));
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(),""+data.message);
                     }

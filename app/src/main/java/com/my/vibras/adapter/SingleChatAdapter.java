@@ -17,8 +17,6 @@ import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.ChatDetailsScreen;
 import com.my.vibras.chat.AllChatUserModel;
-import com.my.vibras.model.HomModel;
-import com.my.vibras.model.SuccessResGetChat;
 import com.my.vibras.model.SuccessResGetConversation;
 
 import java.util.ArrayList;

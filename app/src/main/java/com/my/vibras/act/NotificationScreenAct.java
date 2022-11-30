@@ -9,7 +9,6 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.databinding.ActivityNotificationScreenBinding;
-import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.model.SuccessResUpdateRate;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;

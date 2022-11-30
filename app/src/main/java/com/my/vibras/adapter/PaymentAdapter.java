@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.vibras.R;
-import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetCard;
 
 import java.util.ArrayList;

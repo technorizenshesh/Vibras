@@ -7,12 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.my.vibras.Company.HomeComapnyAct;
-import com.my.vibras.act.PaymentsAct;
 import com.my.vibras.databinding.ActivityVerificationBinding;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
@@ -21,7 +17,6 @@ import com.my.vibras.utility.DataManager;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;

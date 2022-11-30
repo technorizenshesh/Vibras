@@ -1,24 +1,23 @@
-package com.my.vibras.model;
+package com.my.vibras.adapter;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 /**
- * Created by Ravindra Birla on 16,August,2022
+ * Created by Ravindra Birla on 30,November,2022
  */
-public class SuccessResSignup implements Serializable {
+public class SuccessResFriendProfile {
+
 
     @SerializedName("result")
     @Expose
-    public Result result;
+    private Result result;
     @SerializedName("message")
     @Expose
-    public String message;
+    private String message;
     @SerializedName("status")
     @Expose
-    public String status;
+    private String status;
 
     public Result getResult() {
         return result;
@@ -43,157 +42,145 @@ public class SuccessResSignup implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
     public class Result {
 
         @SerializedName("id")
         @Expose
-        public String id;
+        private String id;
         @SerializedName("first_name")
         @Expose
-        public String firstName;
+        private String firstName;
         @SerializedName("last_name")
         @Expose
-        public String lastName;
+        private String lastName;
         @SerializedName("email")
         @Expose
-        public String email;
+        private String email;
         @SerializedName("dob")
         @Expose
-        public String dob;
+        private String dob;
+        @SerializedName("age")
+        @Expose
+        private String age;
         @SerializedName("image")
         @Expose
-        public String image;
+        private String image;
         @SerializedName("mobile")
         @Expose
-        public String mobile;
+        private String mobile;
         @SerializedName("about")
         @Expose
-        public String about;
+        private String about;
         @SerializedName("password")
         @Expose
-        public String password;
+        private String password;
         @SerializedName("gender")
         @Expose
-        public String gender;
+        private String gender;
         @SerializedName("zipcode")
         @Expose
-        public String zipcode;
+        private String zipcode;
         @SerializedName("bio")
         @Expose
-        public String bio;
+        private String bio;
         @SerializedName("post_filter")
         @Expose
-        public String postFilter;
+        private String postFilter;
         @SerializedName("should_not")
         @Expose
-        public String shouldNot;
+        private String shouldNot;
         @SerializedName("want_to")
         @Expose
-        public String wantTo;
+        private String wantTo;
         @SerializedName("age_range_from")
         @Expose
-        public String ageRangeFrom;
+        private String ageRangeFrom;
         @SerializedName("age_range_to")
         @Expose
-        public String ageRangeTo;
+        private String ageRangeTo;
         @SerializedName("should")
         @Expose
-        public String should;
+        private String should;
         @SerializedName("p_language")
         @Expose
-        public String pLanguage;
+        private String pLanguage;
         @SerializedName("f_location")
         @Expose
-        public String fLocation;
+        private String fLocation;
         @SerializedName("f_lat")
         @Expose
-
-        public String fLat;
+        private String fLat;
         @SerializedName("f_lon")
         @Expose
-        public String fLon;
+        private String fLon;
+        @SerializedName("filter_gender")
+        @Expose
+        private String filterGender;
         @SerializedName("distance")
         @Expose
-        public String distance;
+        private String distance;
         @SerializedName("register_id")
         @Expose
-        public String registerId;
+        private String registerId;
         @SerializedName("social_id")
         @Expose
-        public String socialId;
+        private String socialId;
         @SerializedName("otp")
         @Expose
-        public String otp;
+        private String otp;
         @SerializedName("lat")
         @Expose
-        public String lat;
+        private String lat;
         @SerializedName("lon")
         @Expose
-        public String lon;
+        private String lon;
+        @SerializedName("time_zone")
+        @Expose
+        private String timeZone;
         @SerializedName("notification")
         @Expose
-        public String notification;
+        private String notification;
         @SerializedName("push_notification")
         @Expose
-        public String pushNotification;
+        private String pushNotification;
         @SerializedName("email_notification")
         @Expose
-        public String emailNotification;
+        private String emailNotification;
         @SerializedName("type")
         @Expose
-        public String type;
+        private String type;
+        @SerializedName("social_type")
+        @Expose
+        private String socialType;
         @SerializedName("status")
         @Expose
-        public String status;
+        private String status;
+        @SerializedName("online_status")
+        @Expose
+        private String onlineStatus;
         @SerializedName("date_time")
         @Expose
-        public String dateTime;
+        private String dateTime;
         @SerializedName("cover_image")
         @Expose
-        public String coverImage;
+        private String coverImage;
         @SerializedName("recevied_likes")
         @Expose
-        public Integer receviedLikes;
+        private Integer receviedLikes;
         @SerializedName("subscription")
         @Expose
-        public String subscription;
-
-        public String getRestaurantsPlan() {
-            return restaurantsPlan;
-        }
-
-        public void setRestaurantsPlan(String restaurantsPlan) {
-            this.restaurantsPlan = restaurantsPlan;
-        }
-
-        @SerializedName("given_likes")
-        @Expose
-        public Integer givenLikes;
+        private String subscription;
         @SerializedName("restaurants_plan")
         @Expose
         private String restaurantsPlan;
         @SerializedName("like_status")
         @Expose
-        private String like_status;
-        @SerializedName("match_status")
+        private String likeStatus;
+        @SerializedName("given_likes")
         @Expose
-        private String match_status;
-
-        public String getMatch_status() {
-            return match_status;
-        }
-
-        public void setMatch_status(String match_status) {
-            this.match_status = match_status;
-        }
-
-        public String getLike_status() {
-            return like_status;
-        }
-
-        public void setLike_status(String like_status) {
-            this.like_status = like_status;
-        }
+        private Integer givenLikes;
 
         public String getId() {
             return id;
@@ -233,6 +220,14 @@ public class SuccessResSignup implements Serializable {
 
         public void setDob(String dob) {
             this.dob = dob;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
         }
 
         public String getImage() {
@@ -371,6 +366,14 @@ public class SuccessResSignup implements Serializable {
             this.fLon = fLon;
         }
 
+        public String getFilterGender() {
+            return filterGender;
+        }
+
+        public void setFilterGender(String filterGender) {
+            this.filterGender = filterGender;
+        }
+
         public String getDistance() {
             return distance;
         }
@@ -419,6 +422,14 @@ public class SuccessResSignup implements Serializable {
             this.lon = lon;
         }
 
+        public String getTimeZone() {
+            return timeZone;
+        }
+
+        public void setTimeZone(String timeZone) {
+            this.timeZone = timeZone;
+        }
+
         public String getNotification() {
             return notification;
         }
@@ -451,12 +462,28 @@ public class SuccessResSignup implements Serializable {
             this.type = type;
         }
 
+        public String getSocialType() {
+            return socialType;
+        }
+
+        public void setSocialType(String socialType) {
+            this.socialType = socialType;
+        }
+
         public String getStatus() {
             return status;
         }
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getOnlineStatus() {
+            return onlineStatus;
+        }
+
+        public void setOnlineStatus(String onlineStatus) {
+            this.onlineStatus = onlineStatus;
         }
 
         public String getDateTime() {
@@ -491,6 +518,22 @@ public class SuccessResSignup implements Serializable {
             this.subscription = subscription;
         }
 
+        public String getRestaurantsPlan() {
+            return restaurantsPlan;
+        }
+
+        public void setRestaurantsPlan(String restaurantsPlan) {
+            this.restaurantsPlan = restaurantsPlan;
+        }
+
+        public String getLikeStatus() {
+            return likeStatus;
+        }
+
+        public void setLikeStatus(String likeStatus) {
+            this.likeStatus = likeStatus;
+        }
+
         public Integer getGivenLikes() {
             return givenLikes;
         }
@@ -500,4 +543,5 @@ public class SuccessResSignup implements Serializable {
         }
 
     }
+
 }

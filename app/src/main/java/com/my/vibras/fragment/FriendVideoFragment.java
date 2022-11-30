@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.adapter.PostsAdapter;
+import com.my.vibras.adapter.PostsVideoAdapter;
 import com.my.vibras.databinding.FragmentFriendPostsBinding;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetPosts;
@@ -46,7 +47,7 @@ public class FriendVideoFragment extends Fragment implements PostClickListener {
 
     private VibrasInterface apiInterface;
 
-    private PostsAdapter postsAdapter;
+    private PostsVideoAdapter postsAdapter;
     String Userid ="";
     String type ="";
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -55,7 +56,7 @@ public class FriendVideoFragment extends Fragment implements PostClickListener {
         Userid = getArguments().getString("user_id");
         type = getArguments().getString("type");
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-        postsAdapter = new PostsAdapter(getActivity(),postList,FriendVideoFragment.this,"Other");
+        postsAdapter = new PostsVideoAdapter(getActivity(),postList,FriendVideoFragment.this,"Other");
         binding.rvPosts.setHasFixedSize(true);
         binding.rvPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.rvPosts.setAdapter(postsAdapter);

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.adapter.CompanyNotificationAdapter;
-import com.my.vibras.adapter.NotificationAdapter;
 import com.my.vibras.databinding.FragmentNotificationsBinding;
 import com.my.vibras.databinding.FragmentNotificationsComapnyBinding;
 import com.my.vibras.model.SuccessResGetNotification;

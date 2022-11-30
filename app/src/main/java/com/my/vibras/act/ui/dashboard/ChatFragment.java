@@ -23,11 +23,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.ChatDetailsScreen;
-import com.my.vibras.act.FilterAct;
 import com.my.vibras.act.FriendListAct;
 import com.my.vibras.act.SearchConversationUserAct;
-import com.my.vibras.adapter.ChatAdapter;
 import com.my.vibras.adapter.GroupChatAdapter;
 import com.my.vibras.adapter.SingleChatAdapter;
 import com.my.vibras.chat.AllChatUserModel;
@@ -36,8 +33,6 @@ import com.my.vibras.databinding.FragmentChatBinding;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResDeleteConversation;
-import com.my.vibras.model.SuccessResDeleteConversation;
-import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetGroup;
 import com.my.vibras.retrofit.ApiClient;
@@ -48,7 +43,6 @@ import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;

@@ -17,6 +17,8 @@
         <entry key="app/src/main/res/drawable/black_cornors_5.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/black_cornors_gray_30.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border_black.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/border_black_cir.xml" value="0.1525" />
+        <entry key="app/src/main/res/drawable/border_btn.xml" value="0.1985" />
         <entry key="app/src/main/res/drawable/border_dark_gray.xml" value="0.149" />
         <entry key="app/src/main/res/drawable/border_stroke_color_gray.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bottom_nav_icon_color_selector.xml" value="0.1245" />
@@ -78,11 +80,11 @@
         <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_filter.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_forget_password.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_friend_list.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/activity_friend_profile.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_friend_profile.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_get_events_by_category_id.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/activity_good_vibes.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_group_chat.xml" value="0.17" />
@@ -102,12 +104,12 @@
         <entry key="app/src/main/res/layout/activity_restaurant_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_saved_events.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_saved_restaurant.xml" value="0.2140625" />
-        <entry key="app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_search_conversation_user.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_event.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_search_rest.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/activity_select_viber_login.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_story_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_subs_cription.xml" value="0.2140625" />

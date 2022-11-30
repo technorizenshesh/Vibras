@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.databinding.RestrauntCommentItemBinding;
 import com.my.vibras.model.SuccessResGetEventComment;
-import com.my.vibras.model.SuccessResGetRestaurantComment;
 
 import java.util.List;
 

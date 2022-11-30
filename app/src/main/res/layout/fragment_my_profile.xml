@@ -90,9 +90,12 @@
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/ivProfile"
-                                android:layout_width="@dimen/_85sdp"
-                                android:layout_height="@dimen/_85sdp"
-                                android:layout_gravity="center" />
+                                android:layout_width="@dimen/_75sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_gravity="center"
+                                 android:src="@drawable/user"
+                                app:civ_border_width="@dimen/_1sdp"
+                                app:civ_border_color="@color/quantum_grey"/>
 
                         </RelativeLayout>
 

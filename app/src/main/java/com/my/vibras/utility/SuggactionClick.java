@@ -1,7 +1,5 @@
 package com.my.vibras.utility;
 
-import android.view.View;
-
 import com.my.vibras.model.SuccessSearchHistoryRes;
 
 /**

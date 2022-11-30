@@ -44,22 +44,32 @@
         android:layout_above="@+id/bottm"
         android:layout_below="@+id/header"
         android:orientation="vertical">
-<LinearLayout
+<RelativeLayout
      android:padding="@dimen/_20sdp"
     android:layout_marginTop="@dimen/_40sdp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_gravity="center"
+    >
+<LinearLayout
+    android:id="@+id/cover"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
     >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image_show"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/circle_img"
         app:civ_border_color="@color/gray"
-        app:civ_border_width="@dimen/_2sdp"
-        android:layout_gravity="center"
-        android:src="@drawable/circle_img"/>
+        app:civ_border_width="@dimen/_2sdp" />
+</LinearLayout>
+
     <LinearLayout
+        android:layout_below="@id/cover"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -76,7 +86,7 @@
             android:fontFamily="@font/poppins_bold"
             android:padding="@dimen/_5sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
       <!--  <TextView
             android:id="@+id/timer"
@@ -103,7 +113,7 @@
             />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
 
     </LinearLayout>
     <LinearLayout

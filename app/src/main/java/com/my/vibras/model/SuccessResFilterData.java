@@ -143,6 +143,17 @@ public class SuccessResFilterData implements Serializable {
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("filter_gender")
+        @Expose
+        public String filter_gender;
+
+        public String getFilter_gender() {
+            return filter_gender;
+        }
+
+        public void setFilter_gender(String filter_gender) {
+            this.filter_gender = filter_gender;
+        }
 
         public String getId() {
             return id;

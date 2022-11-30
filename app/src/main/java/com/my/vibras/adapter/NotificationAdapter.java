@@ -3,15 +3,12 @@ package com.my.vibras.adapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.BlurMaskFilter;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -23,7 +20,6 @@ import com.jackandphantom.blurimage.BlurImage;
 import com.my.vibras.R;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetNotification;
-import com.my.vibras.utility.BlurDrawable;
 import com.my.vibras.utility.DeletePost;
 
 import java.util.ArrayList;
@@ -64,6 +60,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 CircleImageView ivProfile =   holder.itemView.findViewById(R.id.ivProfile);
                 ImageView ivPost =   holder.itemView.findViewById(R.id.ivPost);
                 tvMessage.setText(modelList.get(position).getMessage());
+                tvtimeAgo.setText(modelList.get(position).getDateTime());
                 Glide.with(mContext)
                         .load(modelList.get(position).getPostImage())
                         .into(ivPost);
@@ -113,7 +110,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         }
                         );
 
-                if(modelList.get(position).getStatus().equalsIgnoreCase("Unseen") && !modelList.get(position).getType().equalsIgnoreCase("JoinGroup"))
+              /*  if(modelList.get(position).getStatus().equalsIgnoreCase("Unseen")
+                        && !modelList.get(position).getType()
+                        .equalsIgnoreCase("JoinGroup"))
                 {
                     if (Build.VERSION.SDK_INT >= 11) {
                         tvMessage.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -124,12 +123,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     BlurImage.with(mContext).load(R.drawable.profile_banner).intensity(80).Async(true).into(ivProfile);
                 }
                 else
-                {
+                {*/
                     Glide.with(mContext)
                             .load(modelList.get(position).getUserImage())
                             .placeholder(mContext.getDrawable(R.drawable.circle_gray))
                             .into(ivProfile);
-                }
+               // }
                 if(modelList.get(position).getType().equalsIgnoreCase("Like"))
                 {
                     ivPost.setVisibility(View.VISIBLE);

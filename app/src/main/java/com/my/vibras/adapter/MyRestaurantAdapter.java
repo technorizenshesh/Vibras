@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.AddCommentAct;
 import com.my.vibras.act.AddRestaurantCommentAct;
 import com.my.vibras.databinding.MyeventItemBinding;
-import com.my.vibras.model.SuccessResGetRestaurants;
-import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.utility.PostClickListener;
 

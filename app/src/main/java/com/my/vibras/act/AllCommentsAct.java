@@ -11,10 +11,8 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.RestaurantDetailAct;
 import com.my.vibras.adapter.AllCpmentAdapter;
 import com.my.vibras.adapter.EventCommentAdapter;
-import com.my.vibras.adapter.FriendsListAdapter;
 import com.my.vibras.adapter.RestaurantCommentAdapter;
 import com.my.vibras.databinding.ActivityAllCommentsBinding;
 import com.my.vibras.model.HomModel;

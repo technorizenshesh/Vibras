@@ -54,6 +54,7 @@ import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -62,6 +63,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.retrofit.Constant.REGISTER_ID;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
@@ -91,6 +93,9 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         gpsTracker = new GPSTracker(getActivity());
         session = new Session(getActivity());
+
+        String firebasetoken = SharedPreferenceUtility.getInstance(getActivity()).getString(REGISTER_ID);
+        Log.e(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
         session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
         binding.RRSearch.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SearchAct.class));
@@ -245,18 +250,19 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                         binding.rvhome.setHasFixedSize(true);
                         // Scroll to the position we want to snap to
                         // Wait until the RecyclerView is laid out.
-                        binding.rvhome.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Shift the view to snap  near the center of the screen.
+                        binding.rvhome.post(() -> {
+                            // Shift the view to snap  near the center of the screen.
 //                                 This does not have to be precise.
-                                int dx = (binding.rvhome.getWidth() - binding.rvhome.getChildAt(0).getWidth()) / 2;
-                                binding.rvhome.scrollBy(-dx, 0);
-                                // Assign the LinearSnapHelper that will initially snap the near-center view.
-                                LinearSnapHelper snapHelper = new LinearSnapHelper();
-                                binding.rvhome.setOnFlingListener(null);
-                                snapHelper.attachToRecyclerView(binding.rvhome);
-                            }
+                             try{
+                            int dx = (binding.rvhome.getWidth()
+                                    - binding.rvhome.getChildAt(0).getWidth()) / 2;
+                            binding.rvhome.scrollBy(-dx, 0);
+                            // Assign the LinearSnapHelper that will initially snap the near-center view.
+                            LinearSnapHelper snapHelper = new LinearSnapHelper();
+                            binding.rvhome.setOnFlingListener(null);
+                            snapHelper.attachToRecyclerView(binding.rvhome);}catch (Exception e){
+                                 getActivity().recreate();
+                             }
                         });
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
@@ -350,11 +356,17 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                         if (!data.getUserMatch().equalsIgnoreCase("Notmatch")) {
                             fullScreenDialog();
                         }
-                    } else if (data.status == 0) {
-                        showToast(getActivity(), data.result);
-                        BuySubscriptionDialog();
                         usersList.remove(position);
                         usersAdapters.notifyDataSetChanged();
+                    } else if (data.status == 0) {
+
+                         if(data.getResult().equalsIgnoreCase
+                                 ("You have not a plan please subscribe our plan")){
+                             showToast(getActivity(), data.result);
+                             BuySubscriptionDialog();
+                         }
+
+
                         //fullScreenDialog();
                     }
 

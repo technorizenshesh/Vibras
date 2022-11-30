@@ -20,14 +20,11 @@ import com.google.gson.Gson;
 
 import com.my.vibras.act.AllCommentsAct;
 
-import com.my.vibras.act.EventsDetailsScreen;
 import com.my.vibras.act.PostCommentAct;
-import com.my.vibras.adapter.CommentRestaurantAdapter;
 import com.my.vibras.adapter.EventsImagesAdapter;
 import com.my.vibras.adapter.RestaurantCommentAdapter;
 import com.my.vibras.databinding.ActivityRestaurantDetailBinding;
 import com.my.vibras.model.SuccessResAddLike;
-import com.my.vibras.model.SuccessResGetEvents;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 import com.my.vibras.model.SuccessResGetRestaurants;
 import com.my.vibras.retrofit.ApiClient;

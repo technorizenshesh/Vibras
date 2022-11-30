@@ -12,11 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.databinding.CommentItemBinding;
-import com.my.vibras.model.SuccessResGetComment;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;

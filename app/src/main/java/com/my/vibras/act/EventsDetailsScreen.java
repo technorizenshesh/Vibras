@@ -5,7 +5,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
-import android.media.metrics.Event;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,21 +19,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.RestaurantDetailAct;
-import com.my.vibras.act.ui.GroupDetailAct;
 import com.my.vibras.adapter.EventCommentAdapter;
 import com.my.vibras.adapter.EventsImagesAdapter;
-import com.my.vibras.adapter.MultipleImagesAdapter;
-import com.my.vibras.adapter.RestaurantCommentAdapter;
 import com.my.vibras.databinding.ActivityEventsDetailsScreenBinding;
 import com.my.vibras.model.SuccessResAddLike;
 import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.model.SuccessResGetEvents;
-import com.my.vibras.model.SuccessResGetEventComment;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
-import com.my.vibras.utility.ImageCancelClick;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import org.json.JSONObject;
@@ -160,6 +153,11 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
                     joinEvent();
                 }
                 );
+        binding.RLogin.setOnClickListener(v ->
+                {
+                    joinEvent();
+                }
+                );
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -167,8 +165,11 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 if (requestModel.getIammember()!=null) {
     if (requestModel.getIammember().equalsIgnoreCase("No")) {
         binding.cvSignup.setVisibility(View.VISIBLE);
+        binding.RLogin.setVisibility(View.VISIBLE);
+
     } else {
         binding.cvSignup.setVisibility(View.GONE);
+        binding.RLogin.setVisibility(View.GONE);
     }
 }else {
     binding.cvSignup.setVisibility(View.VISIBLE);

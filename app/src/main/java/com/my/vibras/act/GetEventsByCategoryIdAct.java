@@ -4,20 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.SearchEventAct;
 import com.my.vibras.adapter.ViewAllEventstAdapter;
 import com.my.vibras.databinding.ActivityGetEventsByCategoryIdBinding;
 import com.my.vibras.model.SuccessResGetEvents;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
-import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class GetEventsByCategoryIdAct extends AppCompatActivity {

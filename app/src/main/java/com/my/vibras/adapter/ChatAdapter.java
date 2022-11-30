@@ -1,7 +1,6 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.databinding.AdapterChatBinding;
 import com.my.vibras.model.SuccessResGetChat;

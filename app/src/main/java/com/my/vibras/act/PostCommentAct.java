@@ -2,7 +2,6 @@ package com.my.vibras.act;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +9,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.adapter.NotificationAdapter;
 import com.my.vibras.databinding.ActivityPostCommentBinding;
-import com.my.vibras.model.SuccessResGetNotification;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;

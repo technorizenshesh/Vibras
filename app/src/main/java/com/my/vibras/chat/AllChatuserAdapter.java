@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.google.firebase.messaging.Constants.TAG;
+
 
 public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.ViewHolder>
         implements Filterable {
@@ -112,7 +114,6 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                     Log.e("onDataChange->00", "onDataChange: " + snapshot.getValue());
                     Log.e("onDataChange->01", "onDataChange: " + snapshot.getClass());
 
-                    String s = "Android_a_b.pdf";
                     String[] parts = snapshot.getValue().toString().split("=");
 
                     String part2 = parts[1];
@@ -152,6 +153,7 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                     Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
                     Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
                     if (snapshot.getValue() != null) {
+                        Log.e(TAG, "snapshot.getValue()snapshot.getValue(): "+snapshot.getValue() );
                         String[] parts = snapshot.getValue().toString().split("=");
 
                         String part2 = parts[1];

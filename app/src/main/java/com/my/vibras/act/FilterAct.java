@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -16,12 +15,10 @@ import com.google.android.material.slider.LabelFormatter;
 import com.google.gson.Gson;
 
 import com.my.vibras.R;
-import com.my.vibras.TakeSelfieAct;
 import com.my.vibras.databinding.ActivityFilterBinding;
 import com.my.vibras.model.SuccessResFilterData;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
-import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -57,7 +54,7 @@ public class FilterAct extends AppCompatActivity {
     };
 
     String[] Arraygender = new String[] {
-            "Man", "Women","Both"
+            "Male", "Female","Both"
     };
 
     String[] arrayAgeRange = new String[] {
@@ -177,7 +174,6 @@ public class FilterAct extends AppCompatActivity {
         map.put("user_id", userId);
   /*      map.put("should_not", shouldNot);
         map.put("should", should);*/
-        map.put("gender", gender);
         map.put("age_range_from", ageRangeFrom);
         map.put("age_range_to", ageRangeTo);
      //   map.put("p_language", preferedLang);
@@ -185,11 +181,24 @@ public class FilterAct extends AppCompatActivity {
         map.put("f_lat", "");
         map.put("f_lon", "");
         map.put("distance", distance);
+        map.put("gender", gender);
+       /* if (gender.equalsIgnoreCase("Man")){
+            map.put("gender", "Male");
+
+        }else  if (gender.equalsIgnoreCase("Women")){
+            map.put("gender", "Female");
+
+        }else {
+            map.put("gender", "both");
+
+        }*/
+
         Log.e("TAG", "filterLocation:-000000000000-------------- "+map );
         Call<SuccessResFilterData> call = apiInterface.filter(map);
         call.enqueue(new Callback<SuccessResFilterData>() {
             @Override
-            public void onResponse(Call<SuccessResFilterData> call, Response<SuccessResFilterData> response) {
+            public void onResponse(Call<SuccessResFilterData> call,
+                                   Response<SuccessResFilterData> response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResFilterData data = response.body();

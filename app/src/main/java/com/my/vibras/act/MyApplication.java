@@ -24,7 +24,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.my.vibras.retrofit.Constant.USER_ID;
-import static com.my.vibras.retrofit.Constant.showToast;
 
 /**
  * Created by Ravindra Birla on 05,November,2022

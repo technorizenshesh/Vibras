@@ -16,8 +16,6 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.RestaurantDetailAct;
-import com.my.vibras.act.EventsDetailsScreen;
-import com.my.vibras.model.SuccessResGetRestaurants.Result;
 import com.my.vibras.model.SuccessResGetRestaurants;
 
 import java.util.ArrayList;

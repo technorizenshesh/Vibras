@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.GroupChatAct;
 import com.my.vibras.chat.GroupChat.GroupChatInnerActivity;
-import com.my.vibras.model.SuccessResGetGroup.Result;
 import com.my.vibras.model.SuccessResGetGroup;
 import com.my.vibras.utility.SharedPreferenceUtility;
 

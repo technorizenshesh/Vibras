@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.adapter.AllGroupChatAdapter;
-import com.my.vibras.adapter.GroupChatAdapter;
 import com.my.vibras.adapter.ViewAllGroupChatAdapter;
 import com.my.vibras.databinding.ActivityViewAllGroupsBinding;
 import com.my.vibras.model.SuccessResGetGroup;

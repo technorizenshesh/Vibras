@@ -1,13 +1,10 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -15,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
-import com.my.vibras.act.ChatDetailsScreen;
-import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetGroupDetails;
 
 import java.util.ArrayList;

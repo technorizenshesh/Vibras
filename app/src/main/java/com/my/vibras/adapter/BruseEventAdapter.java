@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.act.GetEventsByCategoryIdAct;
-import com.my.vibras.act.ui.home.HomeViewModel;
-import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetCategory;
 
 import java.util.ArrayList;

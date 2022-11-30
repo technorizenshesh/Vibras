@@ -58,47 +58,10 @@
                     android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/_10sdp"
-                    android:visibility="gone"
-                    android:src="@drawable/profile_img">
+                    android:src="@drawable/profile_img"
+                    android:visibility="gone">
 
                 </ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:padding="@dimen/_5sdp"
-                    android:text="Olivia Austin"
-                    android:textAllCaps="true"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="oliviaaustin@gmail.com"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray"
-                    android:visibility="gone"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Account Type"
-                    android:textColor="@color/black"
-                    android:visibility="gone"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -107,9 +70,9 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="Personal Account"
                     android:textColor="@color/black"
-                    android:visibility="gone"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold">
+                    android:textStyle="bold"
+                    android:visibility="gone">
 
                 </RadioButton>
 
@@ -119,24 +82,11 @@
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="Business Account"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp">
-
-                </RadioButton>
-
-                <TextView
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Privacy Options"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:visibility="gone">
+
+                </RadioButton>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -224,75 +174,64 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsregular"
+                        android:gravity="center"
+                        android:text="Dark Theme"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:padding="15dp"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        android:id="@+id/theme_switch"
+                        android:theme="@style/control" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:id="@+id/RRtrasaction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp">
 
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/gray"
+
                         android:gravity="center"
                         android:text="@string/transactions"
-                        android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
-
-                    </ImageView>
 
                 </RelativeLayout>
 
-                <TextView
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Security Options"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:id="@+id/RRchangePassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
-                        android:gravity="center"
-                        android:text="Change password"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
-
-                    </ImageView>
-
-                </RelativeLayout>
 
                 <RelativeLayout
                     android:id="@+id/RRcSubsCription"
@@ -300,6 +239,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -312,36 +260,13 @@
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_10sdp" />
 
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
-
-                    </ImageView>
-
                 </RelativeLayout>
-
-                <TextView
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Theme"
-                    android:visibility="gone"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginLeft="@dimen/_10sdp">
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -377,11 +302,11 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
+                        android:paddingVertical="@dimen/_10sdp"
                         android:text="@string/notifications"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
-                        android:paddingVertical="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -392,29 +317,28 @@
                         android:padding="15dp"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
-                        android:visibility="gone"
-                        android:theme="@style/control" />
+                        android:theme="@style/control"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Privacy Options"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
                 <RelativeLayout
                     android:id="@+id/RRAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
-                        android:gravity="center"
-                        android:text="About Us"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
@@ -424,6 +348,19 @@
                         android:src="@drawable/back_right">
 
                     </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="About Us"
+                        android:textSize="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/gray"
+
+                        />
 
                 </RelativeLayout>
 
@@ -434,17 +371,6 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
-                        android:gravity="center"
-                        android:text="Help"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold" />
-
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
@@ -453,6 +379,18 @@
                         android:src="@drawable/back_right">
 
                     </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="Help"
+                        android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/gray"
+
+                        android:textSize="@dimen/_10sdp"
+                      />
 
                 </RelativeLayout>
 
@@ -463,16 +401,113 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp">
 
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right"></ImageView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/roboto_light"
                         android:gravity="center"
                         android:text="Privacy Policy"
-                        android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/gray"
+
+                        />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/RRterms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right"></ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsregular"
+                        android:gravity="center"
+                        android:text="@string/terms_condition"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Olivia Austin"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="oliviaaustin@gmail.com"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Account Type"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Security Options"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/RRchangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
 
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
@@ -480,53 +515,79 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
                         android:src="@drawable/back_right">
+
                     </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsregular"
+                        android:gravity="center"
+                        android:text="Change password"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10sdp" />
 
                 </RelativeLayout>
 
                 <TextView
-                    android:padding="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Get Verified"
                     android:fontFamily="@font/poppins_bold"
+                    android:text="Theme"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:text="Get Verified"
                     android:textAllCaps="true"
                     android:textColor="#8FB61C"
                     android:textSize="@dimen/_12sdp"
-                    android:visibility="gone"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvLogout"
-                    android:padding="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/logout"
                     android:fontFamily="@font/poppins_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/logout"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDeleteAccount"
-                    android:padding="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/delete_account"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_bold"
+                    android:padding="@dimen/_10sdp"
+                    android:text="@string/delete_account"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />

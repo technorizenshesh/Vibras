@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.databinding.SearchItemBinding;
 import com.my.vibras.model.SuccessResGetConversation;
-import com.my.vibras.model.SuccessResGetUsers;
 
 import java.util.List;
 

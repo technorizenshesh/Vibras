@@ -1,21 +1,14 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
-import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.act.SearchAct;
 import com.my.vibras.databinding.ItemSearchSuggaction2Binding;
 import com.my.vibras.databinding.ItemSearchSuggactionBinding;
 import com.my.vibras.model.SuccessSearchHistoryRes;
@@ -25,10 +18,6 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 import com.my.vibras.utility.SuggactionClick;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +27,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.google.firebase.messaging.Constants.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 
 /**

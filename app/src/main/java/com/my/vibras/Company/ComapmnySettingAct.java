@@ -11,11 +11,9 @@ import com.my.vibras.SelectViberLoginAct;
 import com.my.vibras.act.ChangePassAct;
 import com.my.vibras.act.HelpAct;
 import com.my.vibras.act.NotificationScreenAct;
-import com.my.vibras.act.PaymentsAct;
 import com.my.vibras.act.PrivacyPolicyAct;
 import com.my.vibras.act.SavedEventsAct;
 import com.my.vibras.act.SavedRestaurantAct;
-import com.my.vibras.act.SettingAct;
 import com.my.vibras.act.TransactionAct;
 import com.my.vibras.databinding.ActivityComapmnySettingBinding;
 
@@ -49,7 +47,8 @@ public class ComapmnySettingAct extends AppCompatActivity {
         });
 
         binding.RRPP.setOnClickListener(v -> {
-            startActivity(new Intent(ComapmnySettingAct.this, PrivacyPolicyAct.class));
+            startActivity(new Intent(ComapmnySettingAct.this, PrivacyPolicyAct.class)
+                    .putExtra("from","company"));
         });
 
         binding.RRFAQ.setOnClickListener(v ->

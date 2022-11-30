@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
-import com.my.vibras.adapter.CommentAdapter;
 import com.my.vibras.adapter.CommentRestaurantAdapter;
 import com.my.vibras.databinding.ActivityAddCommentBinding;
 import com.my.vibras.model.SuccessResGetRestaurantComment;

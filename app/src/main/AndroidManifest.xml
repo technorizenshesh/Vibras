@@ -7,7 +7,7 @@
     </queries>
     <!--  allows app to access Facebook app features  -->
     <application
-        android:name=".VideoCalling.AppController"
+        android:name="com.my.vibras.VideoCalling.AppController"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -46,158 +46,158 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".act.ForgetPasswordAct"
+            android:name="com.my.vibras.act.ForgetPasswordAct"
             android:exported="false" />
         <activity
-            android:name=".act.FriendProfileActivity"
+            android:name="com.my.vibras.act.FriendProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".chat.GroupChat.GroupChatInnerActivity"
+            android:name="com.my.vibras.chat.GroupChat.GroupChatInnerActivity"
             android:exported="false" />
         <activity
-            android:name=".AudioCalling.CallWaitingActivity"
+            android:name="com.my.vibras.AudioCalling.CallWaitingActivity"
             android:exported="false" />
         <activity
-            android:name=".AudioCalling.VoiceChatViewActivity"
+            android:name="com.my.vibras.AudioCalling.VoiceChatViewActivity"
             android:exported="false" />
         <activity
-            android:name=".VideoCalling.VideoCallingAct"
+            android:name="com.my.vibras.VideoCalling.VideoCallingAct"
             android:exported="false" />
         <activity
-            android:name=".VideoCalling.IncomingCallActivity"
+            android:name="com.my.vibras.VideoCalling.IncomingCallActivity"
             android:exported="false" />
         <activity
-            android:name=".chat.ChatInnerMessagesActivity"
+            android:name="com.my.vibras.chat.ChatInnerMessagesActivity"
             android:exported="false" />
         <activity
-            android:name=".act.AboutUsActivity"
+            android:name="com.my.vibras.act.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".act.AboutUsAct"
+            android:name="com.my.vibras.act.AboutUsAct"
             android:exported="false" />
         <activity
-            android:name=".act.PrivacyPolicyAct"
+            android:name="com.my.vibras.act.PrivacyPolicyAct"
             android:exported="false" />
         <activity
-            android:name=".act.ViewAllGroupsAct"
+            android:name="com.my.vibras.act.ViewAllGroupsAct"
             android:exported="false" />
         <activity
-            android:name=".act.HelpAct"
+            android:name="com.my.vibras.act.HelpAct"
             android:exported="false" />
         <activity
-            android:name=".act.ViewAllCategoryAct"
+            android:name="com.my.vibras.act.ViewAllCategoryAct"
             android:exported="false" />
         <activity
-            android:name=".act.GetEventsByCategoryIdAct"
+            android:name="com.my.vibras.act.GetEventsByCategoryIdAct"
             android:exported="false" />
         <activity
-            android:name=".act.ui.GroupDetailAct"
+            android:name="com.my.vibras.act.ui.GroupDetailAct"
             android:exported="false" />
         <activity
-            android:name=".act.GroupChatAct"
+            android:name="com.my.vibras.act.GroupChatAct"
             android:exported="false" />
         <activity
-            android:name=".CreateGroupAct"
+            android:name="com.my.vibras.CreateGroupAct"
             android:exported="false" />
         <activity
-            android:name=".act.GoodVibesAct"
+            android:name="com.my.vibras.act.GoodVibesAct"
             android:exported="false" />
         <activity
-            android:name=".act.SearchConversationUserAct"
+            android:name="com.my.vibras.act.SearchConversationUserAct"
             android:exported="false" />
         <activity
-            android:name=".act.ViewAllEventAct"
+            android:name="com.my.vibras.act.ViewAllEventAct"
             android:exported="false" />
         <activity
-            android:name=".SearchRestAct"
+            android:name="com.my.vibras.SearchRestAct"
             android:exported="false" />
         <activity
-            android:name=".act.RestaurantAct"
+            android:name="com.my.vibras.act.RestaurantAct"
             android:exported="false" />
         <activity
-            android:name=".SearchEventAct"
+            android:name="com.my.vibras.SearchEventAct"
             android:exported="false" />
         <activity
-            android:name=".act.SavedEventsAct"
+            android:name="com.my.vibras.act.SavedEventsAct"
             android:exported="false" />
         <activity
-            android:name=".act.SavedRestaurantAct"
+            android:name="com.my.vibras.act.SavedRestaurantAct"
             android:exported="false" />
         <activity
-            android:name=".RestaurantDetailAct"
+            android:name="com.my.vibras.RestaurantDetailAct"
             android:exported="false" />
         <activity
-            android:name=".act.StoryDetailAct"
+            android:name="com.my.vibras.act.StoryDetailAct"
             android:exported="false" />
         <activity
-            android:name=".act.AddCommentAct"
+            android:name="com.my.vibras.act.AddCommentAct"
             android:exported="false" />
         <activity
-            android:name=".act.CreatePostAct"
+            android:name="com.my.vibras.act.CreatePostAct"
             android:exported="false" />
         <activity
-            android:name=".act.AddRestaurantCommentAct"
+            android:name="com.my.vibras.act.AddRestaurantCommentAct"
             android:exported="false" />
         <activity
-            android:name=".act.AddEventCommentAct"
+            android:name="com.my.vibras.act.AddEventCommentAct"
             android:exported="false" />
         <activity
-            android:name=".act.ChangePassAct"
+            android:name="com.my.vibras.act.ChangePassAct"
             android:exported="false" />
         <activity
-            android:name=".Company.ComapmnySettingAct"
+            android:name="com.my.vibras.Company.ComapmnySettingAct"
             android:exported="false" />
         <activity
-            android:name=".Company.HomeComapnyAct"
+            android:name="com.my.vibras.Company.HomeComapnyAct"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".act.NotificationScreenAct"
+            android:name="com.my.vibras.act.NotificationScreenAct"
             android:exported="false" />
         <activity
-            android:name=".act.AddPaymentCard"
+            android:name="com.my.vibras.act.AddPaymentCard"
             android:exported="false" />
         <activity
-            android:name=".act.SubsCriptionAct"
+            android:name="com.my.vibras.act.SubsCriptionAct"
             android:exported="false" />
         <activity
-            android:name=".act.PaymentsAct"
+            android:name="com.my.vibras.act.PaymentsAct"
             android:exported="false" />
         <activity
-            android:name=".act.TermsCondition"
+            android:name="com.my.vibras.act.TermsCondition"
             android:exported="false" />
         <activity
-            android:name=".act.TransactionAct"
+            android:name="com.my.vibras.act.TransactionAct"
             android:exported="false" />
         <activity
-            android:name=".act.EditProfileAct"
+            android:name="com.my.vibras.act.EditProfileAct"
             android:exported="false" />
         <activity
-            android:name=".act.PostCommentAct"
+            android:name="com.my.vibras.act.PostCommentAct"
             android:exported="false" />
         <activity
-            android:name=".act.AllCommentsAct"
+            android:name="com.my.vibras.act.AllCommentsAct"
             android:exported="false" />
         <activity
-            android:name=".act.EventsDetailsScreen"
+            android:name="com.my.vibras.act.EventsDetailsScreen"
             android:exported="false" />
         <activity
-            android:name=".act.SettingAct"
+            android:name="com.my.vibras.act.SettingAct"
             android:exported="false" />
         <activity
-            android:name=".act.ChatDetailsScreen"
+            android:name="com.my.vibras.act.ChatDetailsScreen"
             android:exported="false" />
         <activity
-            android:name=".act.FriendListAct"
+            android:name="com.my.vibras.act.FriendListAct"
             android:exported="false" />
         <activity
-            android:name=".act.FilterAct"
+            android:name="com.my.vibras.act.FilterAct"
             android:exported="false" />
         <activity
-            android:name=".act.SearchAct"
+            android:name="com.my.vibras.act.SearchAct"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.my.vibras.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -206,29 +206,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LikeInterestsAct"
+            android:name="com.my.vibras.LikeInterestsAct"
             android:exported="false" />
         <activity
-            android:name=".VerificationAct"
+            android:name="com.my.vibras.VerificationAct"
             android:exported="false" />
         <activity
-            android:name=".TakeSelfieAct"
+            android:name="com.my.vibras.TakeSelfieAct"
             android:exported="false" />
         <activity
-            android:name=".CompleteSignUpAct"
+            android:name="com.my.vibras.CompleteSignUpAct"
             android:exported="false" />
         <activity
-            android:name=".SignUpAct"
+            android:name="com.my.vibras.SignUpAct"
             android:exported="false" />
         <activity
-            android:name=".LoginAct"
+            android:name="com.my.vibras.LoginAct"
             android:exported="false" />
         <activity
-            android:name=".SelectViberLoginAct"
+            android:name="com.my.vibras.SelectViberLoginAct"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".act.HomeUserAct"
+            android:name="com.my.vibras.act.HomeUserAct"
             android:exported="true"
             android:screenOrientation="portrait">
 
@@ -249,7 +249,7 @@
             android:value="@integer/google_play_services_version" />
 
         <receiver
-            android:name=".VideoCalling.CallNotificationActionReceiver"
+            android:name="com.my.vibras.VideoCalling.CallNotificationActionReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="999">
@@ -259,18 +259,18 @@
         </receiver>
 
         <service
-            android:name=".VideoCalling.HeadsUpNotificationService"
+            android:name="com.my.vibras.VideoCalling.HeadsUpNotificationService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".utility.VibrasNotification"
+            android:name="com.my.vibras.utility.VibrasNotification"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name=".VideoCalling.IncomingCallService"
+            android:name="com.my.vibras.VideoCalling.IncomingCallService"
             android:enabled="true"
             android:exported="true" />
     </application>

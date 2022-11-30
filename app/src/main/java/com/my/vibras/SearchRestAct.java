@@ -3,7 +3,6 @@ package com.my.vibras;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,11 +11,8 @@ import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
-import com.my.vibras.act.RestaurantAct;
-import com.my.vibras.adapter.MyEventsAdapter;
 import com.my.vibras.adapter.ViewAllRestaurentAdapter;
 import com.my.vibras.databinding.ActivitySearchRestBinding;
-import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
