@@ -14,8 +14,11 @@ import com.my.vibras.act.NotificationScreenAct;
 import com.my.vibras.act.PrivacyPolicyAct;
 import com.my.vibras.act.SavedEventsAct;
 import com.my.vibras.act.SavedRestaurantAct;
+import com.my.vibras.act.SettingAct;
 import com.my.vibras.act.TransactionAct;
 import com.my.vibras.databinding.ActivityComapmnySettingBinding;
+import com.my.vibras.retrofit.Constant;
+import com.my.vibras.utility.SharedPreferenceUtility;
 
 public class ComapmnySettingAct extends AppCompatActivity {
 
@@ -70,8 +73,16 @@ public class ComapmnySettingAct extends AppCompatActivity {
         });
 
         binding.RRSignOut.setOnClickListener(v -> {
-            startActivity(new Intent(ComapmnySettingAct.this, SelectViberLoginAct.class));
-            finish();
+           /* startActivity(new Intent(ComapmnySettingAct.this, SelectViberLoginAct.class));
+            finish();*/
+            SharedPreferenceUtility.getInstance(getApplicationContext())
+                    .putBoolean(Constant.IS_USER_LOGGED_IN, false);
+            Intent intent = new Intent(ComapmnySettingAct.this,
+                    SelectViberLoginAct.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
     }
 

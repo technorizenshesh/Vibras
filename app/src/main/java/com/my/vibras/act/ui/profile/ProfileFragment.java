@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment{
     private void setUpUi() {
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
+       // binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         adapter = new ProfileFragment.Qr_DetailsAdapter(getActivity(),getChildFragmentManager(), binding.tabLayout.getTabCount());

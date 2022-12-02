@@ -148,7 +148,10 @@ public class LoginAct extends AppCompatActivity {
         binding.fbLoginLay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+
+
+               // hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+                  hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
                 FacebookSdk.sdkInitialize(getApplicationContext());
                 AppEventsLogger.activateApp(getApplication());
                 login_button.performClick();

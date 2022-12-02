@@ -219,7 +219,7 @@
                         app:tabIndicatorHeight="@dimen/_2sdp"
                         app:tabSelectedTextColor="@color/black"
                         app:tabTextAppearance="@style/tab_text"
-                        app:tabTextColor="@color/gray1"></com.google.android.material.tabs.TabLayout>
+                        app:tabTextColor="@color/gray1"/>
 
                 </LinearLayout>
 

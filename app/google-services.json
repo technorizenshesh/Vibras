@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "634353602769-hjfcjgaf1knmtk84oi8l72cq8uvfr61i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my.vibras",
+            "certificate_hash": "be053cf6e79e8a61ba7f5be6681e8978782d7b5e"
+          }
+        },
+        {
           "client_id": "634353602769-b91u6m9cvrtjjp5nm7sl56dh4r8unv89.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -120,11 +120,11 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                     PostsFragment recents = new PostsFragment();
                     return recents;
 
-                case 1:
+              /*  case 1:
                     AppointmentFragment recents1 = new AppointmentFragment();
-                    return recents1;
+                    return recents1;*/
 
-                case 2:
+                case 1:
                     PostsVideoFragment recents11 = new PostsVideoFragment();
                     return recents11;
 
@@ -346,7 +346,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
 
     private void setUpUi() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Appointments"));
+       // binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Appointments"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
          binding.tabLayout.setSelected(true);

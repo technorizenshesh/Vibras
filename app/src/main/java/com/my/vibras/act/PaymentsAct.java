@@ -165,7 +165,6 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
         ImageView ivBack;
         ivBack = dialog.findViewById(R.id.img_header);
         CardForm cardForm = dialog.findViewById(R.id.card_form);
-
         cardForm.cardRequired(true)
                 .maskCardNumber(true)
                 .maskCvv(true)

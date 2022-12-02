@@ -19,7 +19,6 @@ import static com.my.vibras.retrofit.Constant.USER_TYPE;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
     private boolean isUserLoggedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
