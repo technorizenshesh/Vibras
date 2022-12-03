@@ -94,10 +94,12 @@ public class VerificationAct extends AppCompatActivity {
 
                         if(LoginType.equalsIgnoreCase("user"))
                         {
-                            startActivity(new Intent(VerificationAct.this,LoginAct.class).putExtra("loginType","user"));
+                            startActivity(new Intent(VerificationAct.this,
+                                    LoginAct.class).putExtra("loginType","user"));
                         }else
                         {
-                            startActivity(new Intent(VerificationAct.this,LoginAct.class).putExtra("loginType","company"));
+                            startActivity(new Intent(VerificationAct.this,
+                                    LoginAct.class).putExtra("loginType","company"));
 
                         }
 

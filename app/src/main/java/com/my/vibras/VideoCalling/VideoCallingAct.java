@@ -221,7 +221,7 @@ public class VideoCallingAct extends AppCompatActivity {
         try {
 //            mRtcEngine = RtcEngine.create(getBaseContext(), getString(R.string.agora_app_id), mRtcEventHandler);
 
-            mRtcEngine = RtcEngine.create(getBaseContext(), "1362d5af232340c39f521565d01ca1e9", mRtcEventHandler);
+            mRtcEngine = RtcEngine.create(getBaseContext(), "d4311c64c69d4615afab65cc233605fb", mRtcEventHandler);
 
         } catch (Exception e) {
             Log.e(TAG, Log.getStackTraceString(e));

@@ -98,8 +98,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
         Log.e(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
         session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
         binding.RRSearch.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), SearchAct.class));
-        });
+            startActivity(new Intent(getActivity(), SearchAct.class)); });
         getLocation();
         binding.RREvents.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -336,9 +335,9 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-        map.put("user_id", userId);
+        map.put("user_id"       , userId);
         map.put("profile_user", otherUserId);
-        map.put("type", type);
+        map.put("type"        , type);
         Call<SuccessResAddOtherProfileLike> call = apiInterface.addFireLikeLove(map);
 
         call.enqueue(new Callback<SuccessResAddOtherProfileLike>() {

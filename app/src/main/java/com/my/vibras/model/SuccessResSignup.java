@@ -157,6 +157,17 @@ public class SuccessResSignup implements Serializable {
         @SerializedName("subscription")
         @Expose
         public String subscription;
+        @SerializedName("first_login")
+        @Expose
+        public String first_login;
+
+        public String getFirst_login() {
+            return first_login;
+        }
+
+        public void setFirst_login(String first_login) {
+            this.first_login = first_login;
+        }
 
         public String getRestaurantsPlan() {
             return restaurantsPlan;

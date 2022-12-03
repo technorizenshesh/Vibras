@@ -25,86 +25,45 @@
             </ImageView>
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/_80sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                android:layout_marginTop="@dimen/_80sdp"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_gravity="center"
-                    android:background="@drawable/profile_photo"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
-                    >
-                </ImageView>
-
-                <TextView
-                    android:textStyle="bold"
-                    android:padding="@dimen/_5sdp"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kat Williams"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    />
-
-                <TextView
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Boston, MA"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/gray"
-                    />
-
-                <TextView
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="I design experiences mostly. I also sometimes travel."
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/gray"
-                    />
+                    android:background="@drawable/profile_photo"></ImageView>
 
                 <LinearLayout
-                    android:padding="@dimen/_10sdp"
-                    android:weightSum="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:padding="@dimen/_10sdp"
+                    android:weightSum="3">
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:textStyle="bold"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:text="6,281k "
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
-                            />
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:text="Likes Received"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
@@ -113,28 +72,27 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:textStyle="bold"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:text="6,281k "
                             android:textAllCaps="true"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:text="Likes Received"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
@@ -143,20 +101,18 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <Button
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:text="I LIke"
-                            android:background="@drawable/border_btn"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            >
+                            android:background="@drawable/border_btn"
+                            android:text="I LIke"
+                            android:textColor="@color/white"
+                            android:textStyle="bold">
 
                         </Button>
 
@@ -165,66 +121,59 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:padding="@dimen/_10sdp"
-                    android:weightSum="2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    >
+                    android:padding="@dimen/_10sdp"
+                    android:weightSum="2">
 
                     <LinearLayout
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:background="@drawable/border_black_cir"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
-                        >
+                        android:layout_weight="1"
+                        android:background="@drawable/border_black_cir"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Events"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
-                            />
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:background="@drawable/border_black_cir"
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
-                        >
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_black_cir"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Groups"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
-                            />
+                            android:textStyle="bold" />
 
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:id="@+id/linear1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -237,24 +186,54 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="gravity"
                             app:tabIndicator="@color/black"
-                            app:tabIndicatorHeight="@dimen/_2sdp"
                             app:tabIndicatorColor="@color/blue"
+                            app:tabIndicatorHeight="@dimen/_2sdp"
                             app:tabSelectedTextColor="@color/black"
                             app:tabTextAppearance="@style/tab_text"
-                            app:tabTextColor="@color/gray1"
-                            >
-                        </com.google.android.material.tabs.TabLayout>
+                            app:tabTextColor="@color/gray1"></com.google.android.material.tabs.TabLayout>
 
                     </LinearLayout>
 
 
                 </LinearLayout>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Kat Williams"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Boston, MA"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="I design experiences mostly. I also sometimes travel."
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_250sdp"
-                   />
+                    android:layout_height="@dimen/_250sdp" />
 
             </LinearLayout>
 

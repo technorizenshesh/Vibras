@@ -191,7 +191,7 @@ public class VibrasNotification extends FirebaseMessagingService {
         }else  if(key.equalsIgnoreCase("New Audio Call Invitation"))
         {
 /*payload:{result=successful, username=Ritesh, user_id=29, key=New Audio Call Invitation,
-type=Plumber, token=0061362d5af232340c39f521565d01ca1e9IACHUya7iY5ryUhls12C0/sOrJeRMDuAc6j
+type=Plumber, token=006d4311c64c69d4615afab65cc233605fbIACHUya7iY5ryUhls12C0/sOrJeRMDuAc6j
 FWEBcjtZxWnv9M9MAAAAAIgBJ4xK19Hp8YwQAAQA00ntjAgA00ntjAwA00ntjBAA00ntj, user_name=Ritesh
 Patel, userimage=https://myasp-app.com/vibras/uploads/images/User_image20221017071533.jpg
 , channel=0ApEfelv5q, message=Ritesh Patel invite to you for video call!}*/
@@ -283,7 +283,7 @@ Patel, userimage=https://myasp-app.com/vibras/uploads/images/User_image202210170
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(this, channelId)
-                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setSmallIcon(R.drawable.login_logo)
                             .setContentTitle(title)
                             .setContentText(key1)
                             .setAutoCancel(true)

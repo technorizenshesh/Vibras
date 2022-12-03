@@ -124,7 +124,8 @@ public class CompleteSignUpAct extends AppCompatActivity {
                     if (data.status.equals("1")) {
                         showToast(CompleteSignUpAct.this, data.message);
 
-                        startActivity(new Intent(CompleteSignUpAct.this,VerificationAct.class)
+                        startActivity(new Intent(CompleteSignUpAct.this,
+                                VerificationAct.class)
                                 .putExtra("user_id",data.getResult().getId())
                                 .putExtra("loginType",LoginType)
                         );

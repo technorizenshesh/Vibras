@@ -100,10 +100,14 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     TextView username;
     private VibrasInterface apiInterface;
 
-    static String appId = "1362d5af232340c39f521565d01ca1e9";
-    static String appCertificate = "0333ebf80dac40e2a2a657fa9b7ea5f8";
+    static String appId = "d4311c64c69d4615afab65cc233605fb";
+    static String appCertificate = "24c609f228764230a692c6bca95b40a9";
     static String channelName = "Vibras";
-    static String userAccount = "833504";
+    static String userAccount = "427554";
+    /*  static String appId = "d4311c64c69d4615afab65cc233605fb";
+    static String appCertificate = "24c609f228764230a692c6bca95b40a9";
+    static String channelName = "Vibras";
+    static String userAccount = "427554";*/
     static int uid = 0;
     static int expirationTimeInSeconds = 43200;
     private String token;

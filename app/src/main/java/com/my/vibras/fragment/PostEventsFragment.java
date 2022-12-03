@@ -92,7 +92,7 @@ public class PostEventsFragment extends Fragment {
 
     private FragmentPostEventsBinding binding;
 
-    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 5;
 
     private String eventName="",eventDate="",eventTime="",eventCategory="",eventLocation="",etAmount="",eventDetails="",eventType="";
 
@@ -460,7 +460,8 @@ public class PostEventsFragment extends Fragment {
                     Log.i("TAG", "Some exception " + e);
                 }
 
-            } else if (requestCode == REQUEST_CAMERA) {
+            } else
+                if (requestCode == REQUEST_CAMERA) {
 
                 try {
                     if (data != null) {

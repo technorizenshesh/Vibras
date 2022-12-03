@@ -51,27 +51,69 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          >
+         <RelativeLayout
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Allow Notifcations"
+                 android:textColor="@color/black"
+                 android:layout_margin="@dimen/_10sdp"
+                 android:textSize="@dimen/_12sdp"
+                 android:textStyle="bold" />
+
+             <Switch
+                 android:layout_margin="@dimen/_10sdp"
+                 android:id="@+id/switchNotification"
+                 android:checked="true"
+                 android:layout_alignParentEnd="true"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 />
+         </RelativeLayout>
+
+
 
          <TextView
+
+             android:layout_marginTop="@dimen/_10sdp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_centerInParent="true"
-             android:text="Allow Notifcations"
-             android:textColor="@color/black"
-             android:layout_marginTop="@dimen/_10sdp"
-             android:textSize="@dimen/_12sdp"
-             android:textStyle="bold" />
+             android:text="Lorem ipsum dolor sit amet, consetetur sadi pscing elitr, sed diam nonumym"
+           android:visibility="gone"
+             android:textAllCaps="true"
+             android:textColor="@color/gray"
+             android:textSize="@dimen/_10sdp"
+             />
+         <RelativeLayout
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:layout_margin="@dimen/_10sdp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Email Notifcations"
+                 android:textColor="@color/black"
+                 android:textSize="@dimen/_12sdp"
+                 android:textStyle="bold" />
 
-         <Switch
-             android:id="@+id/switchNotification"
-             android:checked="true"
-             android:layout_gravity="right"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             >
-         </Switch>
+             <Switch
+                 android:layout_alignParentEnd="true"
+                 android:layout_margin="@dimen/_10sdp"
+                 android:id="@+id/switchEmailNotification"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 >
+             </Switch>
+         </RelativeLayout>
+
 
          <TextView
+             android:visibility="gone"
              android:layout_marginTop="@dimen/_10sdp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
@@ -81,54 +123,34 @@
              android:textColor="@color/gray"
              android:textSize="@dimen/_10sdp"
              />
+         <RelativeLayout
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+             <TextView
+                 android:layout_margin="@dimen/_10sdp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/push_notifications"
+                 android:textColor="@color/black"
+                 android:textSize="@dimen/_12sdp"
+                 android:textStyle="bold" />
+
+             <Switch
+                 android:layout_margin="@dimen/_10sdp"
+
+                 android:id="@+id/switchPushNotification"
+                 android:checked="true"
+                 android:layout_alignParentEnd="true"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                />
+         </RelativeLayout>
+
 
          <TextView
-             android:layout_marginTop="@dimen/_40sdp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="Email Notifcations"
-             android:textColor="@color/black"
-             android:textSize="@dimen/_12sdp"
-             android:textStyle="bold" />
+             android:visibility="gone"
 
-         <Switch
-             android:id="@+id/switchEmailNotification"
-             android:layout_gravity="right"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             >
-         </Switch>
-
-         <TextView
-             android:layout_marginTop="@dimen/_10sdp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_centerInParent="true"
-             android:text="Lorem ipsum dolor sit amet, consetetur sadi pscing elitr, sed diam nonumym"
-             android:textAllCaps="true"
-             android:textColor="@color/gray"
-             android:textSize="@dimen/_10sdp"
-             />
-
-         <TextView
-             android:layout_marginTop="@dimen/_40sdp"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:text="@string/push_notifications"
-             android:textColor="@color/black"
-             android:textSize="@dimen/_12sdp"
-             android:textStyle="bold" />
-
-         <Switch
-             android:id="@+id/switchPushNotification"
-             android:checked="true"
-             android:layout_gravity="right"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             >
-         </Switch>
-
-         <TextView
              android:layout_marginTop="@dimen/_10sdp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"

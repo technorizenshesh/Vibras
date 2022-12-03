@@ -336,7 +336,6 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         Glide
                 .with(getActivity())
                 .load(userDetail.getImage())
-                .placeholder(R.drawable.ic_user)
                 .into(binding.ivProfile);
 
         binding.tvLikeGiven.setText(userDetail.getGivenLikes() + "");

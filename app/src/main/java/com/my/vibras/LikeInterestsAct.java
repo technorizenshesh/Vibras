@@ -54,8 +54,10 @@ public class LikeInterestsAct extends AppCompatActivity {
         });
 
         binding.RContinew.setOnClickListener(v -> {
-            SharedPreferenceUtility.getInstance(getApplication()).putBoolean(Constant.IS_USER_LOGGED_IN, true);
-            startActivity(new Intent(LikeInterestsAct.this, HomeUserAct.class));
+            SharedPreferenceUtility.getInstance(getApplication())
+                    .putBoolean(Constant.IS_USER_LOGGED_IN, true);
+            startActivity(new Intent(LikeInterestsAct.this,
+                    HomeUserAct.class));
         });
         setAdapter();
     }

@@ -39,6 +39,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.act.ForgetPasswordAct;
+import com.my.vibras.act.HomeUserAct;
 import com.my.vibras.databinding.ActivityLoginBinding;
 import com.my.vibras.model.SocilaLoginResponse;
 import com.my.vibras.model.SuccessResSignup;
@@ -128,9 +129,9 @@ public class LoginAct extends AppCompatActivity {
         loginManager = LoginManager.getInstance();
         loginManager.logOut();
         callbackManager = CallbackManager.Factory.create();
-         binding.loginButton.setReadPermissions("email", "public_profile");
+        binding.loginButton.setReadPermissions("email", "public_profile");
         login_button = (LoginButton) findViewById(R.id.login_button);
-      //  LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+        //  LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -150,8 +151,8 @@ public class LoginAct extends AppCompatActivity {
             public void onClick(View v) {
 
 
-               // hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
-                  hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+                // hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
+                hashFromSHA1("BE:05:3C:F6:E7:9E:8A:61:BA:7F:5B:E6:68:1E:89:78:78:2D:7B:5E");
                 FacebookSdk.sdkInitialize(getApplicationContext());
                 AppEventsLogger.activateApp(getApplication());
                 login_button.performClick();
@@ -192,8 +193,10 @@ public class LoginAct extends AppCompatActivity {
                             final String socialId = (response.getString("id"));
                             String email = null;
                             final String username = (response.get("name").toString());
-                            JSONObject profile_pic_data = new JSONObject(response.get("picture").toString());
-                            JSONObject profile_pic_url = new JSONObject(profile_pic_data.getString("data"));
+                            JSONObject profile_pic_data =
+                                    new JSONObject(response.get("picture").toString());
+                            JSONObject profile_pic_url =
+                                    new JSONObject(profile_pic_data.getString("data"));
                             final String imageUrl = profile_pic_url.getString("url");
                             Log.e("imageUrl---->", "" + imageUrl);
                             // SocialLogin(socialId, "",username,"",imageUrl);
@@ -300,7 +303,8 @@ public class LoginAct extends AppCompatActivity {
         Call<SuccessResSignup> call = apiInterface.login(map);
         call.enqueue(new Callback<SuccessResSignup>() {
             @Override
-            public void onResponse(Call<SuccessResSignup> call, Response<SuccessResSignup> response) {
+            public void onResponse(Call<SuccessResSignup> call,
+                                   Response<SuccessResSignup> response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResSignup data = response.body();
@@ -311,13 +315,30 @@ public class LoginAct extends AppCompatActivity {
                         SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_ID, data.getResult().getId());
                         Toast.makeText(LoginAct.this, "" + getResources().getString(R.string.logged_in_success), Toast.LENGTH_SHORT).show();
                         if (LoginType.equalsIgnoreCase("user")) {
-                            SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE, "user");
-                            startActivity(new Intent(LoginAct.this, TakeSelfieAct.class).putExtra("loginType", LoginType));
-                            finish();
+                            if (data.getResult().getFirst_login() != null
+                                    && data.getResult().getFirst_login().equalsIgnoreCase("0")) {
+                                SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE, "user");
+                                startActivity(new Intent(LoginAct.this, TakeSelfieAct.class)
+                                        .putExtra("loginType", LoginType)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                finish();
+                            } else {
+                                SharedPreferenceUtility.getInstance(LoginAct.this)
+                                        .putString(Constant.USER_TYPE, "user");
+                                SharedPreferenceUtility.getInstance(getApplication())
+                                        .putBoolean(Constant.IS_USER_LOGGED_IN, true);
+                                startActivity(new Intent(LoginAct.this,
+                                        HomeUserAct.class));
+                                finish();
+
+                            }
                         } else {
                             SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE, "company");
                             SharedPreferenceUtility.getInstance(getApplication()).putBoolean(Constant.IS_USER_LOGGED_IN, true);
-                            startActivity(new Intent(LoginAct.this, HomeComapnyAct.class).putExtra("loginType", LoginType).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            startActivity(new Intent(LoginAct.this, HomeComapnyAct.class)
+                                    .putExtra("loginType",
+                                            LoginType)
+                                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                             finish();
                         }
 
