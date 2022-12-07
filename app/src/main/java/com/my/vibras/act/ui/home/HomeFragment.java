@@ -353,7 +353,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
 
                         showToast(getActivity(), data.result);
                         if (!data.getUserMatch().equalsIgnoreCase("Notmatch")) {
-                            fullScreenDialog();
+                           // fullScreenDialog();
                         }
                         usersList.remove(position);
                         usersAdapters.notifyDataSetChanged();
@@ -362,7 +362,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                          if(data.getResult().equalsIgnoreCase
                                  ("You have not a plan please subscribe our plan")){
                              showToast(getActivity(), data.result);
-                             BuySubscriptionDialog();
+                           //  BuySubscriptionDialog();
                          }
 
 

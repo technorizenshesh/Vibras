@@ -50,7 +50,7 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         TextView txtName,tvDistance,tvOnlineStatus;
-        ImageView ivFull,ivOtherLike,ivProfileLike,ivChat,ivFire;
+        ImageView ivFull,ivOtherLike,ivProfileLike,ivChat,send_msg,ivFire;
         CircleImageView smallImage;
         txtName = holder.itemView.findViewById(R.id.tvUserName);
         tvOnlineStatus = holder.itemView.findViewById(R.id.tvOnlineStatus);
@@ -84,7 +84,7 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
 
         if(modelList.get(position).getUserMatch().equalsIgnoreCase("Matched"))
         {
-            ivChat.setVisibility(View.VISIBLE);
+            ivChat.setVisibility(View.GONE);
         }
         else
         {

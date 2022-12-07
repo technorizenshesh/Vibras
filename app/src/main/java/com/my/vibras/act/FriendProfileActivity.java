@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.chat.ChatInnerMessagesActivity;
 import com.my.vibras.databinding.ActivityFriendProfileBinding;
 import com.my.vibras.fragment.FriendPostsFragment;
 import com.my.vibras.fragment.FriendVideoFragment;
@@ -88,6 +89,23 @@ public class FriendProfileActivity extends AppCompatActivity {
                             ViewAllEventAct.class).putExtra("from","other")
                             .putExtra("id",User_id)
                     );
+                }
+        );  binding.sendMsg.setOnClickListener(v ->
+                {
+                    Intent intent = new Intent(FriendProfileActivity.this,
+                            ChatInnerMessagesActivity.class);
+                    intent.putExtra("friend_id", userDetail.getId());
+                    intent.putExtra("friendimage", userDetail.getImage());
+                    intent.putExtra("friend_name", userDetail.getFirstName()+
+                            " "+userDetail.getLastName());
+                    intent.putExtra("last_message", "hii");
+                    intent.putExtra("messagetime", "1");
+                    intent.putExtra("status_check", userDetail.getId());
+                    intent.putExtra("id", userDetail.getId());
+                    intent.putExtra("onlinestatus", userDetail.getImage());
+                    intent.putExtra("unique_id", userDetail.getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
                 }
         );
 
@@ -238,7 +256,7 @@ public class FriendProfileActivity extends AppCompatActivity {
         binding.tvLikeReceived.setText(userDetail.getReceviedLikes() + "");
         if(userDetail.getMatch_status().equalsIgnoreCase("0"))
         {
-            binding.eventGroup.setVisibility(View.GONE);
+            binding.eventGroup.setVisibility(View.VISIBLE);
         }else {
             binding.eventGroup.setVisibility(View.VISIBLE);
 
@@ -250,6 +268,8 @@ public class FriendProfileActivity extends AppCompatActivity {
         }
         else
         {
+
+            binding.sendMsg.setVisibility(View.VISIBLE);
             binding.btnIlike.setVisibility(View.VISIBLE);
             binding.btnAddLike.setVisibility(View.GONE);
         }

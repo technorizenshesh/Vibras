@@ -83,9 +83,9 @@
                 >
 
                 <RelativeLayout
-                    android:layout_width="@dimen/_85sdp"
-                    android:layout_height="@dimen/_85sdp"
-                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
                     >
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -108,6 +108,19 @@
                         android:layout_marginEnd="@dimen/_3sdp"
                         android:layout_marginBottom="@dimen/_3sdp"
                         android:src="@drawable/ic_add_post" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/send_msg"
+                         android:visibility="gone"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_65sdp"
+                        android:layout_toEndOf="@+id/ivProfile"
+                        android:src="@drawable/ic_chat_one"
+
+                        >
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
 
                 </RelativeLayout>
 
@@ -316,7 +329,7 @@
                 </LinearLayout>-->
                 <LinearLayout
                     android:id="@+id/event_group"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:padding="@dimen/_10sdp"
                     android:weightSum="2"
                     android:layout_margin="@dimen/_5sdp"
@@ -328,7 +341,6 @@
                         android:id="@+id/llViewEvents"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:background="@drawable/border_black_cir"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
