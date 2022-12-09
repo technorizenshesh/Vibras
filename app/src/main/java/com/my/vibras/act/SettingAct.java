@@ -8,10 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.SelectViberLoginAct;
+import com.my.vibras.VerificationAct;
 import com.my.vibras.databinding.ActivitySettingBinding;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.Constant;
@@ -47,6 +49,10 @@ public class SettingAct extends AppCompatActivity {
 
         binding.RRtrasaction.setOnClickListener(v -> {
            startActivity(new Intent(SettingAct.this,TransactionAct.class));
+        });
+        binding.getVerifiedBtn.setOnClickListener(v -> {
+            startActivity(new Intent(SettingAct.this, VerificationAct.class));
+
         });
 
         binding.RRAbout.setOnClickListener(v -> {

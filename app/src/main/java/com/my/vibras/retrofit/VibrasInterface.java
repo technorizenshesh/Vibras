@@ -1,7 +1,9 @@
 package com.my.vibras.retrofit;
 
+import com.my.vibras.model.NotificationCount;
 import com.my.vibras.model.SocilaLoginResponse;
 import com.my.vibras.model.SuccessAddSearchHistory;
+import com.my.vibras.model.SuccessFollowersRes;
 import com.my.vibras.model.SuccessResAddCard;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddLike;
@@ -516,6 +518,13 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("video_call_invitation")
     Call<SuccessResMakeCall> addNotification(@FieldMap Map<String, String> paramHashMap);
-
-
+ @FormUrlEncoded
+    @POST("get_followers")
+    Call<SuccessFollowersRes> get_followers(@FieldMap Map<String, String> paramHashMap);
+ @FormUrlEncoded
+    @POST("get_following")
+    Call<SuccessFollowersRes> get_following(@FieldMap Map<String, String> paramHashMap);
+ @FormUrlEncoded
+    @POST("get_total_useen_notification")
+    Call<NotificationCount> get_total_useen_notification(@FieldMap Map<String, String> paramHashMap);
 }

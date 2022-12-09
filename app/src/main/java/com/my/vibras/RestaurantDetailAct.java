@@ -85,10 +85,10 @@ public class RestaurantDetailAct extends AppCompatActivity implements OnMapReady
         binding.tvCommentCount.setText(requestModel.getTotalComments()+"");
         if(requestModel.getLikeStatus().equalsIgnoreCase("false"))
         {
-            binding.ivLike.setImageResource(R.drawable.ic_rest_unlike);
+            binding.ivLike.setImageResource(R.drawable.likedd);
         }else
         {
-            binding.ivLike.setImageResource(R.drawable.ic_rest_like);
+            binding.ivLike.setImageResource(R.drawable.liked_yes);
         }
 
         Glide.with(RestaurantDetailAct.this)
@@ -100,7 +100,7 @@ public class RestaurantDetailAct extends AppCompatActivity implements OnMapReady
         imagesList.clear();
 
         strLat = requestModel.getLat();
-        strLng = requestModel.getLat();
+        strLng = requestModel.getLon();
 
 
         for(SuccessResGetRestaurants.RestaurantGallery eventGallery:requestModel.getRestaurantGallery())

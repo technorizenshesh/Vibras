@@ -40,6 +40,8 @@ import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.act.CreatePostAct;
 import com.my.vibras.act.EditProfileAct;
+import com.my.vibras.act.LikeReceivedActivity;
+import com.my.vibras.act.LikeSentActivity;
 import com.my.vibras.act.SettingAct;
 import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
@@ -67,6 +69,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -178,7 +181,20 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                             ViewAllEventAct.class).putExtra("from", "my"));
                 }
         );
+        binding.likeRecived.setOnClickListener(v -> {
+            String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
 
+            startActivity(new Intent(getActivity(),
+                    LikeReceivedActivity.class)
+                    .putExtra("id",userId));
+        });
+        binding.followers.setOnClickListener(v -> {
+            String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+
+            startActivity(new Intent(getActivity(),
+                    LikeSentActivity.class)
+                    .putExtra("id",userId));
+        });
       setUpUi();
 
         binding.ivEditConverPhoto.setOnClickListener(v ->
@@ -321,6 +337,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
     private void setProfileDetails() {
 
         binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
+       //                     binding.tvName.setCompoundDrawables(null,null, requireActivity().getResources().getDrawable(R.drawable.ic_baseline_verified),null);
+       // .. // binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
 
         if (!userDetail.getBio().equalsIgnoreCase("")) {
             binding.tvBio.setVisibility(View.VISIBLE);

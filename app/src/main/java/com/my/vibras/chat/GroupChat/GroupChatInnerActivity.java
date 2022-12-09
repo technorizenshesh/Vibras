@@ -116,7 +116,7 @@ Session session;
                             Log.e("-->>kisne", "onDataChange: " + senderID);
                             ChatMessage chatMessage = new ChatMessage(senderID,
                                     receiveerID, message, username, image, video, time,
-                                    "", friendImage, session.getChatImage());
+                                    "", friendImage, session.getChatImage(),"0.0","0.0");
                             Log.e("insertID", "onDataChange: " + message);
 
                             allmessagelist.add(chatMessage);
@@ -169,7 +169,7 @@ Session session;
                                         (session.getUserId(), "group",
                                                 messagesend, session.getChatName(),
                                                 "", "", time, ""
-                                                ,  session.getChatImage(), session.getChatImage()));
+                                                ,  session.getChatImage(), session.getChatImage(),"0.0","0.0"));
                       //  sendmessage(useriddeivce, messagesend, friend_idlast);
                      //   uploadImageVideoPost(messagesend);
                         binding.etText.setText("");
@@ -241,7 +241,7 @@ Session session;
                         .setValue(new ChatMessage(session.getUserId(), "group",
                                 "", session.getChatName()
                                 , base64String, "", "", "", session.getChatImage(),
-                                session.getChatImage()));
+                                session.getChatImage(),"0.0","0.0"));
 
             } else if (requestCode == 1000) {
 
@@ -263,7 +263,7 @@ Session session;
                             .setValue(new ChatMessage(session.getUserId(), "group",
                                     "", session.getChatName()
                                     , base64String, "", "", "",  session.getChatImage(),
-                                    session.getChatImage()));
+                                    session.getChatImage(),"0.0","0.0"));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

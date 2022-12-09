@@ -84,7 +84,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 //                 .into(ivRight);
 //        rightTime1.setText(chatList.get(position).getTimeAgo());
 
-         if(chatList.get(position).getType().equalsIgnoreCase("image") || chatList.get(position).getType().equalsIgnoreCase("video"))
+         if(chatList.get(position).getType().equalsIgnoreCase("image")
+                 || chatList.get(position).getType().equalsIgnoreCase("video"))
          {
 
              tvRightMessage.setVisibility(View.GONE);
@@ -127,7 +128,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 //
 //         leftTime1.setText(chatList.get(position).getTimeAgo());
 
-         if(chatList.get(position).getType().equalsIgnoreCase("image") || chatList.get(position).getType().equalsIgnoreCase("video"))
+         if(chatList.get(position).getType().equalsIgnoreCase("image") ||
+                 chatList.get(position).getType().equalsIgnoreCase("video"))
          {
              tvLeftMessage.setVisibility(View.GONE);
              tvleftTime.setVisibility(View.GONE);

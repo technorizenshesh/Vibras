@@ -126,19 +126,36 @@
                             </ImageView>
 
                         </RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:gravity="center"
+    android:padding="@dimen/_5sdp"
+    >
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="testtc"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+         android:drawablePadding="@dimen/_15sdp"
+         android:drawableRight="@drawable/ic_baseline_verified"
+        />
 
-                        <TextView
-                            android:id="@+id/tvName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:gravity="center"
-                            android:padding="@dimen/_5sdp"
-                            android:text="testtc"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:textStyle="bold" />
+    <!--<ImageView
+
+        android:src="@drawable/ic_add_post"
+
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        />-->
+
+</RelativeLayout>
+
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -171,6 +188,7 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/like_recived"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight=".5"
@@ -201,6 +219,8 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/followers"
+
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight=".5"

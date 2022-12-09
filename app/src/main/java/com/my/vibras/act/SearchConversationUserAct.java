@@ -52,7 +52,6 @@ public class SearchConversationUserAct extends AppCompatActivity {
        searchAdapter = new ConversationSearchAdapter(SearchConversationUserAct.this,searhList);
 
        binding.ivBack.setOnClickListener(v -> finish());
-
        binding.rvUsers.setHasFixedSize(true);
        binding.rvUsers.setLayoutManager(new LinearLayoutManager(SearchConversationUserAct.this));
        binding.rvUsers.setAdapter(searchAdapter);
@@ -70,9 +69,7 @@ public class SearchConversationUserAct extends AppCompatActivity {
 
            @Override
            public void afterTextChanged(Editable s) {
-
                searhList.clear();
-
                for (SuccessResGetConversation.Result result:conversation)
                {
                    if(result.getFirstName().contains(s.toString()))

@@ -2,9 +2,11 @@ package com.my.vibras.chat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -25,6 +27,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.maps.model.LatLng;
 import com.my.vibras.R;
 import com.my.vibras.utility.Session;
 
@@ -75,6 +78,18 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
         Log.e("adapterID", "onBindViewHolder: "+chat.getTime() );
 
         if(chat.getSenderID().equalsIgnoreCase(userid)) {
+
+
+            if (!chat.getLattitude().equalsIgnoreCase("0.0")){
+                holder.mycard_locat.setVisibility(View.VISIBLE);
+                holder.friendcard_locat.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.recievesendimage.setVisibility(View.GONE);
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+
+            }else
             if (chat.getMessage().equalsIgnoreCase("")){
                 holder.usercard.setVisibility(View.VISIBLE);
                 holder.friendcard.setVisibility(View.GONE);
@@ -84,8 +99,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 holder.userTextSHow.setVisibility(View.GONE);
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 holder.usermessagelayout.setVisibility(View.GONE);
-
-
             }else {
                 holder.usercard.setVisibility(View.GONE);
                 holder.friendcard.setVisibility(View.GONE);
@@ -94,7 +107,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 holder.userTextSHow.setText(chat.getMessage());
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 System.out.println("userid" + chat.getSenderID());
-
                 Glide.with(mContext)
                         .load(  chat.getUserImage())
                         .into(holder.userimage);
@@ -105,6 +117,19 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         }
         else {
+
+            if (!chat.getLattitude().equalsIgnoreCase("0.0")){
+                holder.friendcard_locat.setVisibility(View.VISIBLE);
+                holder.mycard_locat.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder.usercard.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.recievesendimage.setVisibility(View.GONE);
+            }else
             if (chat.getMessage().equalsIgnoreCase("")){
                 holder.  recievesendimage.setVisibility(View.VISIBLE);
                 holder.usercard.setVisibility(View.GONE);
@@ -115,6 +140,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 holder.friendTextShow.setVisibility(View.GONE);
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 holder.usermessagelayout.setVisibility(View.GONE);
+               /* if (chat.getImage().equalsIgnoreCase("")){
+                    holder.friendcard_locat.setVisibility(View.VISIBLE);
+                }*/
+
+
+
             }else {
                 holder.usercard.setVisibility(View.GONE);
                 holder.friendcard.setVisibility(View.GONE);
@@ -129,8 +160,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 Glide.with(mContext)
                         .load(   chat.getFriendImage())
                         .into(holder.friendsenderimage);
-
-
                 System.out.println("elseuserid" + chat.getReceiveerID());
 
             }
@@ -144,6 +173,23 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             }
 
         }
+         holder.friendcard_locat.setOnClickListener(v -> {
+             Intent intent = new Intent(Intent.ACTION_VIEW,
+                     Uri.parse("geo:"+ chat.getLattitude()+","+ chat.getLongitude()+"?q="+ chat.getLattitude()+","+ chat.getLongitude()));
+             mContext. startActivity(intent);
+           /*  Log.e("TAG", "onBindViewHolder: "+  chat.getLattitude());
+             Log.e("TAG", "onBindViewHolder: "+  chat.getLongitude());
+             Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("geo:" +chat.getLattitude()+","+chat.getLongitude()));
+             i.setClassName("com.google.android.apps.maps",
+                     "com.google.android.maps.MapsActivity");
+             mContext.  startActivity(i);*/
+         });
+
+        holder.mycard_locat.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:"+ chat.getLattitude()+","+ chat.getLongitude()+"?q="+ chat.getLattitude()+","+ chat.getLongitude()));
+           mContext. startActivity(intent);
+         });
 
         holder.usercard.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -215,19 +261,24 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
     }
     private Bitmap base64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        byte[] imageAsBytes = new byte[0];
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO) {
+            imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
+        }
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView userTextSHow,friendTextShow,usertime,friendtime;
-        CardView usercard,friendcard;
+        CardView usercard,friendcard,friendcard_locat,mycard_locat;
 
         LinearLayout usermessagelayout,friendmessagelayout;
         ImageView usersendimage,recievesendimage;
         CircleImageView friendsenderimage,userimage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            friendcard_locat =itemView.findViewById(R.id.friendcard_locat);
+            mycard_locat =itemView.findViewById(R.id.mycard_locat);
             usercard =itemView.findViewById(R.id.usercard);
             friendcard =itemView.findViewById(R.id.friendcard);
             userTextSHow =itemView.findViewById(R.id.userTextSHow);
