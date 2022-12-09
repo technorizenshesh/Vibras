@@ -1,5 +1,6 @@
 package com.my.vibras.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.BlurMaskFilter;
@@ -48,7 +49,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             try {
@@ -60,10 +61,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 CircleImageView ivProfile =   holder.itemView.findViewById(R.id.ivProfile);
                 ImageView ivPost =   holder.itemView.findViewById(R.id.ivPost);
                 tvMessage.setText(modelList.get(position).getMessage());
-                tvtimeAgo.setText(modelList.get(position).getDateTime());
-                Glide.with(mContext)
-                        .load(modelList.get(position).getPostImage())
-                        .into(ivPost);
+              //  tvtimeAgo.setText(modelList.get(position).getDateTime());
 
                 tvReject.setOnClickListener(v ->
                         {
@@ -131,6 +129,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                // }
                 if(modelList.get(position).getType().equalsIgnoreCase("Like"))
                 {
+                    Glide.with(mContext)
+                            .load(modelList.get(position).getPostImage())
+                            .into(ivPost);
+
                     ivPost.setVisibility(View.VISIBLE);
                     llJoinGroup.setVisibility(View.GONE);
                 } else  if(modelList.get(position).getType().equalsIgnoreCase("JoinGroup"))

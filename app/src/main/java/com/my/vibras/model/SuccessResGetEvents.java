@@ -96,6 +96,9 @@ public class SuccessResGetEvents implements Serializable {
 
     public class Result implements Serializable {
 
+        @SerializedName("event_user_mobile")
+        @Expose
+        public String event_user_mobile;
         @SerializedName("id")
         @Expose
         public String id;
@@ -297,6 +300,14 @@ public class SuccessResGetEvents implements Serializable {
 
         public void setEventStartTime(String eventStartTime) {
             this.eventStartTime = eventStartTime;
+        }
+
+        public String getEvent_user_mobile() {
+            return event_user_mobile;
+        }
+
+        public void setEvent_user_mobile(String event_user_mobile) {
+            this.event_user_mobile = event_user_mobile;
         }
 
         public String getEventEndTime() {

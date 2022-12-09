@@ -22,9 +22,7 @@
                     android:id="@+id/ivEvent"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"
-                    android:background="@drawable/events_details"
-                    android:padding="@dimen/_10sdp"
-                    android:scaleType="fitCenter">
+                    android:scaleType="centerCrop">
 
                 </ImageView>
 
@@ -133,8 +131,9 @@
                     android:drawablePadding="@dimen/_5sdp"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:drawableLeft="@drawable/watch"
-android:fontFamily="@font/poppins_bold"                    android:layout_alignParentRight="true"
+                    android:drawableLeft="@drawable/ic_outline_watch_later"
+android:fontFamily="@font/poppins_bold"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -150,7 +149,6 @@ android:fontFamily="@font/poppins_bold"                    android:layout_alignP
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_20sdp"
-                    android:drawableRight="@drawable/likee"
                     android:text="10:00 PM - 12:00 PM"
                     android:textAllCaps="true"
                     android:textColor="@color/gray"
@@ -197,6 +195,43 @@ android:fontFamily="@font/poppins_bold"                    android:layout_alignP
                     android:drawablePadding="@dimen/_5sdp"
                     android:drawableLeft="@drawable/location"
 android:fontFamily="@font/poppins_bold"                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vijay Nagar"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:text="Scheme Number 71, Vijay Nagar, Indore (MP)"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_margin="@dimen/_5sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableLeft="@drawable/ic_baseline_call"
+android:fontFamily="@font/poppins_bold"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vijay Nagar"

@@ -11,8 +11,13 @@ public class ChatMessage {
     String status;
     String FriendImage;
     String UserImage;
+    String Lattitude;
+    String longitude;
 
-    public ChatMessage(String senderID, String receiveerID, String message, String username, String image, String video, String time, String status, String friendImage, String userImage) {
+    public ChatMessage(String senderID, String receiveerID, String message,
+                       String username, String image, String video, String time, String status
+            , String friendImage, String userImage,String Lattitude,String
+longitude) {
         this.senderID = senderID;
         this.receiveerID = receiveerID;
         this.message = message;
@@ -21,8 +26,26 @@ public class ChatMessage {
         this.video = video;
         this.time = time;
         this.status = status;
-        FriendImage = friendImage;
-        UserImage = userImage;
+        this.FriendImage = friendImage;
+        this.UserImage = userImage;
+        this.Lattitude = Lattitude;
+        this.longitude = longitude;
+    }
+
+    public String getLattitude() {
+        return Lattitude;
+    }
+
+    public void setLattitude(String lattitude) {
+        Lattitude = lattitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getSenderID() {

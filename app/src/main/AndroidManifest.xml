@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.my.vibras">
+    package="com.my.vibras" >
+
     <queries>
-        <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
-    <!--  allows app to access Facebook app features  -->
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.    READ_GSERVICES" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
     <application
         android:name="com.my.vibras.VideoCalling.AppController"
         android:allowBackup="true"
@@ -18,16 +53,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VIBRAS"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.facebook.sdk.ClientToken"
-            android:value="@string/facebook_client_token" />
-        <meta-data
-            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
-            android:value="false" />
+        tools:targetApi="31" >
+        <activity
+            android:name=".act.SearchLocationMapAct"
+            android:exported="false"/>
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -35,7 +65,7 @@
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -46,10 +76,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.my.vibras.act.ForgetPasswordAct"
+            android:name=".act.LikeSentActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.FriendProfileActivity"
+            android:name=".act.LikeReceivedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".act.ForgetPasswordAct"
+            android:exported="false" />
+        <activity
+            android:name=".act.FriendProfileActivity"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.chat.GroupChat.GroupChatInnerActivity"
@@ -70,79 +106,79 @@
             android:name="com.my.vibras.chat.ChatInnerMessagesActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AboutUsActivity"
+            android:name=".act.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AboutUsAct"
+            android:name=".act.AboutUsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.PrivacyPolicyAct"
+            android:name=".act.PrivacyPolicyAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ViewAllGroupsAct"
+            android:name=".act.ViewAllGroupsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.HelpAct"
+            android:name=".act.HelpAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ViewAllCategoryAct"
+            android:name=".act.ViewAllCategoryAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.GetEventsByCategoryIdAct"
+            android:name=".act.GetEventsByCategoryIdAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ui.GroupDetailAct"
+            android:name=".act.ui.GroupDetailAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.GroupChatAct"
+            android:name=".act.GroupChatAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.CreateGroupAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.GoodVibesAct"
+            android:name=".act.GoodVibesAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SearchConversationUserAct"
+            android:name=".act.SearchConversationUserAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ViewAllEventAct"
+            android:name=".act.ViewAllEventAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.SearchRestAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.RestaurantAct"
+            android:name=".act.RestaurantAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.SearchEventAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SavedEventsAct"
+            android:name=".act.SavedEventsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SavedRestaurantAct"
+            android:name=".act.SavedRestaurantAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.RestaurantDetailAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.StoryDetailAct"
+            android:name=".act.StoryDetailAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AddCommentAct"
+            android:name=".act.AddCommentAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.CreatePostAct"
+            android:name=".act.CreatePostAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AddRestaurantCommentAct"
+            android:name=".act.AddRestaurantCommentAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AddEventCommentAct"
+            android:name=".act.AddEventCommentAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ChangePassAct"
+            android:name=".act.ChangePassAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.Company.ComapmnySettingAct"
@@ -152,53 +188,53 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.my.vibras.act.NotificationScreenAct"
+            android:name=".act.NotificationScreenAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AddPaymentCard"
+            android:name=".act.AddPaymentCard"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SubsCriptionAct"
+            android:name=".act.SubsCriptionAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.PaymentsAct"
+            android:name=".act.PaymentsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.TermsCondition"
+            android:name=".act.TermsCondition"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.TransactionAct"
+            android:name=".act.TransactionAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.EditProfileAct"
+            android:name=".act.EditProfileAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.PostCommentAct"
+            android:name=".act.PostCommentAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.AllCommentsAct"
+            android:name=".act.AllCommentsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.EventsDetailsScreen"
+            android:name=".act.EventsDetailsScreen"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SettingAct"
+            android:name=".act.SettingAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.ChatDetailsScreen"
+            android:name=".act.ChatDetailsScreen"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.FriendListAct"
+            android:name=".act.FriendListAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.FilterAct"
+            android:name=".act.FilterAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.act.SearchAct"
+            android:name=".act.SearchAct"
             android:exported="false" />
         <activity
             android:name="com.my.vibras.MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -228,9 +264,9 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.my.vibras.act.HomeUserAct"
+            android:name=".act.HomeUserAct"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
 
             <!--
             <intent-filter>
@@ -242,6 +278,15 @@
         </activity>
 
         <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false" />
+        <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/api_key" />
         <meta-data
@@ -251,8 +296,8 @@
         <receiver
             android:name="com.my.vibras.VideoCalling.CallNotificationActionReceiver"
             android:enabled="true"
-            android:exported="true">
-            <intent-filter android:priority="999">
+            android:exported="true" >
+            <intent-filter android:priority="999" >
                 <action android:name="ConstantApp.CALL_RECEIVE_ACTION" />
                 <action android:name="ConstantApp.CALL_CANCEL_ACTION" />
             </intent-filter>
@@ -264,7 +309,7 @@
             android:exported="true" />
         <service
             android:name="com.my.vibras.utility.VibrasNotification"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -274,39 +319,5 @@
             android:enabled="true"
             android:exported="true" />
     </application>
-
-    <queries>
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-    </queries>
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission
-        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.    READ_GSERVICES" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"
-        tools:node="remove"/>
-
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
 </manifest>

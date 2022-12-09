@@ -433,7 +433,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                                 .push()
                                 .setValue(new ChatMessage(strUserId, selectedUser.getId(), strChatMessage,
                                         selectedUser.getLastName(), "", "",
-                                        "", "", selectedUser.getImage(), session.getChatImage()));
+                                        "", "", selectedUser.getImage(), session.getChatImage(),
+                                        "0.0","0.0"));
                         dialog.dismiss();
 
                     } else if (data.status.equals("0")) {

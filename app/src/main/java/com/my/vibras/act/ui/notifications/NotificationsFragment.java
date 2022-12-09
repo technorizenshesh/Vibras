@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.act.HomeUserAct;
 import com.my.vibras.adapter.NotificationAdapter;
 import com.my.vibras.databinding.FragmentNotificationsBinding;
 import com.my.vibras.model.SuccessResGetNotification;
@@ -35,6 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.my.vibras.act.HomeUserAct.hideBadge;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.USER_TYPE;
 import static com.my.vibras.retrofit.Constant.showToast;
@@ -52,6 +54,12 @@ public class NotificationsFragment extends Fragment implements DeletePost {
 
         if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
             getNotification();
+          //  HomeUserAct.hideBadge();
+            try {
+                HomeUserAct activity = (HomeUserAct) getActivity();
+                activity.hideBadge();
+            }catch (Exception e){
+                e.printStackTrace();}
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }

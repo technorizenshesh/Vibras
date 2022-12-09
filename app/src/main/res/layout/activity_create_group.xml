@@ -51,7 +51,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
-        android:visibility="gone"
+        android:visibility="visible"
         >
              <RelativeLayout
             android:layout_width="match_parent"
@@ -115,6 +115,7 @@
         android:textSize="@dimen/_12sdp"
         android:layout_marginLeft="@dimen/_10sdp"
         android:textStyle="bold" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

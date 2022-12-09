@@ -1,8 +1,10 @@
 package com.my.vibras.chat;
 
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -21,10 +23,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,16 +38,18 @@ import com.google.gson.Gson;
 import com.my.vibras.AudioCalling.VoiceChatViewActivity;
 import com.my.vibras.R;
 import com.my.vibras.VideoCalling.VideoCallingAct;
+import com.my.vibras.act.SearchLocationMapAct;
 import com.my.vibras.media.RtcTokenBuilder;
 import com.my.vibras.model.SuccessResInsertChat;
 import com.my.vibras.model.SuccessResMakeCall;
 import com.my.vibras.retrofit.ApiClient;
+import com.my.vibras.retrofit.Constant;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -111,11 +117,38 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     static int uid = 0;
     static int expirationTimeInSeconds = 43200;
     private String token;
+    ImageView live_location;
+    GPSTracker gpsTracker;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+
+            case 1000: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Log.e("Latittude====", gpsTracker.getLatitude() + "");
+                    live_location.performClick();
+
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            getResources().getString(R.string.permisson_denied),
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_inner_messages);
+        gpsTracker = new GPSTracker(this);
         chat_messages_list = findViewById(R.id.chat_messages_list);
         audio_call_rela = findViewById(R.id.audio_call_rela);
         call_relat = findViewById(R.id.call_relat);
@@ -124,6 +157,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         backbutton = findViewById(R.id.backbutton);
         chatmessage_edit = findViewById(R.id.etText);
         username = findViewById(R.id.username);
+        live_location = findViewById(R.id.live_location);
         session = new Session(ChatInnerMessagesActivity.this);
         useriddeivce = session.getUserId();
         mReference = FirebaseDatabase.getInstance().getReference();
@@ -206,6 +240,8 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                             String video = chatt.child("video").getValue(String.class);
                             String time = chatt.child("time").getValue(String.class);
                             String status = chatt.child("status").getValue(String.class);
+                            String Lattitude = chatt.child("lattitude").getValue(String.class);
+                            String longitude = chatt.child("longitude").getValue(String.class);
 
                             // FireCons.currentuser=currentuser;
                             Log.e("useriddeivce", "onDataChange: " + useriddeivce);
@@ -221,7 +257,8 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                                     friend_idlast.equalsIgnoreCase(receiveerID)) {
                                 ChatMessage chatMessage = new ChatMessage(senderID,
                                         receiveerID, message, username, image, video, time,
-                                        "", friendimage, session.getChatImage());
+                                        "", friendimage, session.getChatImage(), Lattitude,
+                                        longitude);
                                 Log.e("insertID", "onDataChange: " + message);
 
                                 allmessagelist.add(chatMessage);
@@ -231,14 +268,16 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                             } else if (useriddeivce.equals(receiveerID) && friend_idlast.equals(senderID)) {
                                 ChatMessage chatMessage = new ChatMessage(senderID,
                                         receiveerID, message, username, image, video, time,
-                                        "", friendimage, session.getChatImage());
+                                        "", friendimage, session.getChatImage(), Lattitude,
+                                        longitude);
                                 allmessagelist.add(chatMessage);
                                 System.out.println("conditiionelseif");
                             } else {
                                 System.out.println("else<><><><userid");
 
                             }
-                            chatListAdapter = new ChatListAdapter(ChatInnerMessagesActivity.this, allmessagelist);
+                            chatListAdapter = new ChatListAdapter(
+                                    ChatInnerMessagesActivity.this, allmessagelist);
                             RecyclerView.LayoutManager mLayoutManger = new LinearLayoutManager(ChatInnerMessagesActivity.this);
                             chat_messages_list.setLayoutManager(mLayoutManger);
                             chat_messages_list.setLayoutManager(new LinearLayoutManager(ChatInnerMessagesActivity.this, RecyclerView.VERTICAL, false));
@@ -268,6 +307,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -286,17 +326,80 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                                 .getReference()
                                 .child("chat")
                                 .push()
-                                .setValue(new ChatMessage(useriddeivce, friend_idlast, messagesend, friendnamelast, "", "", time, "", friendimage, session.getChatImage()));
+                                .setValue(new ChatMessage(useriddeivce, friend_idlast, messagesend, friendnamelast,
+                                        "", "", time, "", friendimage, session.getChatImage(),
+                                        "0.0", "0.0"));
                         chatmessage_edit.setText("");
                         sendmessage(useriddeivce, messagesend, friend_idlast);
-
-
                         SETUNSEENCOUNTSTATUS();
                     }
                 } else {
                     Toast.makeText(ChatInnerMessagesActivity.this, "Something Went Wrong !", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+        live_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(ChatInnerMessagesActivity.this,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION},
+                            Constant.LOCATION_REQUEST);
+                } else {
+
+
+                    final CharSequence[] options = {"Share Current Location", "Pick on Map", "Cancel"};
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ChatInnerMessagesActivity.this);
+                    builder.setTitle("Share Location!");
+                    builder.setItems(options, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int item) {
+                            if (options[item].equals("Share Current Location")) {
+                                if (gpsTracker.canGetLocation()) {
+                                    Log.e("sendmessage", "onClick: ");
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat(" hh:mm");
+                                    Log.e("TAG", "onClick: " + dateFormat.format(new Date()));
+                                    String time = dateFormat.format(new Date());
+                                    LatLng latLng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLatitude());
+                                    FirebaseDatabase.getInstance()
+                                            .getReference()
+                                            .child("chat")
+                                            .push()
+                                            .setValue(new ChatMessage(useriddeivce, friend_idlast,
+                                                    "", friendnamelast,
+                                                    "", "", time, "",
+                                                    friendimage, session.getChatImage(),
+                                                    "" + gpsTracker.getLatitude()
+                                                    , "" + gpsTracker.getLongitude()));
+                                    chatmessage_edit.setText("");
+                                } else {
+
+
+                                }
+
+
+                            } else if (options[item].equals("Pick on Map")) {
+
+                                startActivity(new Intent(ChatInnerMessagesActivity.this,
+                                        SearchLocationMapAct.class)
+                                        .putExtra("useriddeivce"           , useriddeivce)
+                                        .putExtra("friend_idlast"           , friend_idlast)
+                                        .putExtra("friendnamelast"          , friendnamelast)
+                                        .putExtra("friendimage"             , friendimage)
+                                        .putExtra("getChatImage"   , session.getChatImage()));
+
+                            } else if (options[item].equals("Cancel")) {
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                    builder.show();
+                }
             }
         });
         camerabutton.setOnClickListener(new View.OnClickListener() {
@@ -323,7 +426,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-
     }
 
 
@@ -349,7 +451,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                         .child("chat")
                         .push()
                         .setValue(new ChatMessage(useriddeivce, friend_idlast, "", session.getChatName()
-                                , base64String, "", "", "", friendimage, session.getChatImage()));
+                                , base64String, "", "", "", friendimage, session.getChatImage(), "0.0", "0.0"));
                 chatmessage_edit.setText("");
 
             } else if (requestCode == 1000) {
@@ -368,7 +470,8 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                             .getReference()
                             .child("chat")
                             .push()
-                            .setValue(new ChatMessage(useriddeivce, friend_idlast, "", friendnamelast, base64String, "", "", "", friendimage, session.getChatImage()));
+                            .setValue(new ChatMessage(useriddeivce, friend_idlast, "", friendnamelast, base64String, "", "", "",
+                                    friendimage, session.getChatImage(), "0.0", "0.0"));
                     chatmessage_edit.setText("");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -543,46 +646,46 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                         if (type.equalsIgnoreCase("Video")) {
                             startActivity(new Intent(ChatInnerMessagesActivity.this,
                                     VideoCallingAct.class).putExtra("id"
-                                    , friend_idlast)
+                                            , friend_idlast)
                                     .putExtra("channel_name", channelName)
                                     .putExtra("token", token)
                                     .putExtra("id", friend_idlast)
                                     .putExtra("from", "user")
                                     .putExtra("name", friendnamelast)
                                     .putExtra("userimage", friendimage)
-                                    .putExtra("call_type",type )
+                                    .putExtra("call_type", type)
                                     .putExtra("Profile", 0));
                             finish();
                         } else {
                             startActivity(new Intent(ChatInnerMessagesActivity.this,
-                                   VoiceChatViewActivity.class).putExtra("id"
-                                    , friend_idlast)
+                                    VoiceChatViewActivity.class).putExtra("id"
+                                            , friend_idlast)
                                     .putExtra("channel_name", channelName)
                                     .putExtra("token", token)
                                     .putExtra("call_type", type)
-                                    .putExtra("Profile",0)
+                                    .putExtra("Profile", 0)
                                     .putExtra("name", friendnamelast)
                                     .putExtra("userimage", friendimage)
                                     .putExtra("from", "user"));
                             finish();
-}
-
-
-                        } else{
-                            showToast(ChatInnerMessagesActivity.this, data.getMessage());
                         }
-                    } catch(Exception e){
-                        e.printStackTrace();
+
+
+                    } else {
+                        showToast(ChatInnerMessagesActivity.this, data.getMessage());
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onFailure (Call < SuccessResMakeCall > call, Throwable t){
+            @Override
+            public void onFailure(Call<SuccessResMakeCall> call, Throwable t) {
 
-                    call.cancel();
-                    DataManager.getInstance().hideProgressMessage();
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
 
-                }
-            });
-        }
+            }
+        });
     }
+}

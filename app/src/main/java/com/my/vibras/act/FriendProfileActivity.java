@@ -22,6 +22,7 @@ import com.my.vibras.chat.ChatInnerMessagesActivity;
 import com.my.vibras.databinding.ActivityFriendProfileBinding;
 import com.my.vibras.fragment.FriendPostsFragment;
 import com.my.vibras.fragment.FriendVideoFragment;
+import com.my.vibras.model.SuccessFollowersRes;
 import com.my.vibras.model.SuccessResAddOtherProfileLike;
 import com.my.vibras.model.SuccessResSignup;
 import com.my.vibras.retrofit.ApiClient;
@@ -68,6 +69,16 @@ public class FriendProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
+         binding.likeRecived.setOnClickListener(v -> {
+             startActivity(new Intent(getApplicationContext(),
+                     LikeReceivedActivity.class)
+                     .putExtra("id",User_id));
+         });
+        binding.followers.setOnClickListener(v -> {
+             startActivity(new Intent(getApplicationContext(),
+                     LikeSentActivity.class)
+                     .putExtra("id",User_id));
+         });
         binding.ivBack.setOnClickListener(v -> {
             onBackPressed();
         });
@@ -225,6 +236,33 @@ public class FriendProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SuccessResSignup> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+    private void getFollowers(String userId) {
+        DataManager.getInstance().showProgressMessage(FriendProfileActivity.this
+                , getString(R.string.please_wait));
+        String self_id = SharedPreferenceUtility.getInstance(FriendProfileActivity.this).getString(USER_ID);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        Call<SuccessFollowersRes> call = apiInterface.get_followers(map);
+        call.enqueue(new Callback<SuccessFollowersRes>() {
+            @Override
+            public void onResponse(Call<SuccessFollowersRes> call, Response<SuccessFollowersRes> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessFollowersRes data = response.body();
+                    data.getResult().get(0).getUserDetails();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessFollowersRes> call, Throwable t) {
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
             }

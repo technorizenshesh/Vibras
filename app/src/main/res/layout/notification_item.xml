@@ -75,7 +75,7 @@
                 android:textAlignment="textEnd"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_10sdp"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </LinearLayout>
 
 

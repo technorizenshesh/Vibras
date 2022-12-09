@@ -46,6 +46,7 @@ import retrofit2.Response;
 
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
+import static io.agora.rtc.gl.VideoFrame.TextureBuffer.TAG;
 
 public class EventsDetailsScreen extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -71,7 +72,7 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_events_details_screen);
-        try {
+
 
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
@@ -101,25 +102,38 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
                 .into(binding.ivEvent);
 
         binding.tvEventName.setText(requestModel.getEventName());
-
+        try {
+            Log.e(TAG, "onCreate: "+requestModel.getDateTimeEvent() );
+            Log.e(TAG, "onCreate: "+parseDateToddMMyyyy(requestModel.getDateTimeEvent()) );
         binding.tvEventDate.setText(parseDateToddMMyyyy(requestModel.getDateTimeEvent()));
-
+        }catch (Exception e){
+            e.printStackTrace();
+            binding.tvEventDate.setText(requestModel.getDateTimeEvent());
+            Log.e("TAG", "onCreate: "+e.getLocalizedMessage() );
+        }
         binding.tvEventTime.setText(requestModel.getEventStartTime());
 
         binding.eventLocation.setText(requestModel.getAddress());
 
         binding.tvDetails.setText(requestModel.getDescription());
+        binding.phone.setText(requestModel.getEvent_user_mobile());
 
         if(requestModel.getLikeStatus()!=null&&requestModel.getLikeStatus().equalsIgnoreCase("false"))
         {
-            binding.ivLikes.setImageResource(R.drawable.ic_rest_unlike);
+            binding.ivLikes.setImageResource(R.drawable.likedd);
         }else
         {
-            binding.ivLikes.setImageResource(R.drawable.ic_rest_like);
+            binding.ivLikes.setImageResource(R.drawable.liked_yes);
         }
 
         strLat = requestModel.getLat();
-        strLng = requestModel.getLat();
+        strLng = requestModel.getLon();
+
+
+
+
+
+
 
         binding.tvLikesCount.setText(requestModel.getTotalLike()+"");
         binding.tvCommentCount.setText(requestModel.getTotalComments()+"");
@@ -175,10 +189,7 @@ if (requestModel.getIammember()!=null) {
     binding.cvSignup.setVisibility(View.VISIBLE);
 
 }
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.e("TAG", "onCreate: "+e.getLocalizedMessage() );
-        }
+
     }
 
     public void joinEvent()
@@ -310,18 +321,15 @@ if (requestModel.getIammember()!=null) {
     }
 
     public String parseDateToddMMyyyy(String time) {
-
-        String inputPattern = "dd-MM-yyyy";
-        String outputPattern = "MMM d, yyyy";
-
+        String inputPattern = "dd/MM/yyyy";
+        String outputPattern = " MMM d, yyyy";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
         SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
-
         Date date = null;
         String str = null;
 
         try {
-             if (time.equalsIgnoreCase("")){
+             if (!time.equalsIgnoreCase("")){
             date = inputFormat.parse(time);
             str = outputFormat.format(date);}
         } catch (ParseException e) {
@@ -334,23 +342,26 @@ if (requestModel.getIammember()!=null) {
     public void onMapReady(GoogleMap googleMap) {
         try {
             gMap = googleMap;
-            double  lat = Double.parseDouble(strLat);
-            double  lng = Double.parseDouble(strLng);
-            LatLng sydney = new LatLng(lat, lng);
-            gMap.addMarker(new MarkerOptions()
-                    .position(sydney)
-                    .title("Marker"));
-            //   gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            strLat = requestModel.getLat();
+            strLng = requestModel.getLon();
+            if (strLat!=null&&strLng!=null) {
+                double lat = Double.parseDouble(strLat);
+                double lng = Double.parseDouble(strLng);
+                LatLng sydney = new LatLng(lat, lng);
+                gMap.addMarker(new MarkerOptions()
+                        .position(sydney)
+                        .title("Marker"));
+                //   gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(sydney)      // Sets the center of the map to location user
-                    .zoom(17)                   // Sets the zoom
-                    .bearing(90)                // Sets the orientation of the camera to east
-                    .tilt(40)                   // Sets the tilt of the camera to 30 degrees
-                    .build();
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(sydney)      // Sets the center of the map to location user
+                        .zoom(17)                   // Sets the zoom
+                        .bearing(90)                // Sets the orientation of the camera to east
+                        .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                        .build();
 
-            gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+                gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            }
         }catch (Exception e)
         {
             Log.d("TAG", "onMapReady: "+e);

@@ -49,6 +49,7 @@
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1135" />
         <entry key="app/src/main/res/drawable/ic_homes.xml" value="0.114" />
+        <entry key="app/src/main/res/drawable/ic_map.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_nt.xml" value="0.114" />
         <entry key="app/src/main/res/drawable/ic_us.xml" value="0.114" />
@@ -77,10 +78,10 @@
         <entry key="app/src/main/res/layout/activity_change_pass.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_chat_details_screen.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/activity_chat_inner_messages.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/activity_chat_inner_messages.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_comapmny_setting.xml" value="0.2140625" />
         <entry key="app/src/main/res/layout/activity_complete_sign_up.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_create_group.xml" value="0.21" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_events_details_screen.xml" value="0.18" />

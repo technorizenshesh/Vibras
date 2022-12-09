@@ -23,6 +23,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -33,9 +35,12 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import com.my.vibras.act.PaymentsAct;
+import com.my.vibras.act.SearchConversationUserAct;
 import com.my.vibras.adapter.AddFriendAdapter;
+import com.my.vibras.adapter.ConversationSearchAdapter;
 import com.my.vibras.adapter.SelectedUserAdapter;
 import com.my.vibras.databinding.ActivityCreateGroupBinding;
+import com.my.vibras.model.SuccessResGetConversation;
 import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -63,7 +68,10 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
     private static final int REQUEST_CAMERA = 1;
     ActivityCreateGroupBinding binding;
     private VibrasInterface apiInterface;
-    private ArrayList<SuccessResGetUsers.Result> usersList = new ArrayList<>();
+
+    private ArrayList<SuccessResGetUsers.Result> conversation = new ArrayList<>();
+    private ArrayList<SuccessResGetUsers.Result> searhList = new ArrayList<>();
+
     private ArrayList<SuccessResGetUsers.Result> selectedUserList = new ArrayList<>();
     private AddFriendAdapter mAdapter;
     private SelectedUserAdapter selectedUserAdapter;
@@ -77,20 +85,54 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
        super.onCreate(savedInstanceState);
        binding = DataBindingUtil.setContentView(this,R.layout.activity_create_group);
        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-       getAllUsers();
        binding.RRFrnd.setOnClickListener(v -> finish());
        binding.ivReferesh.setOnClickListener(v ->
                {
                  getAllUsers();
+                 binding.etSearch.setText("");
                }
                );
-       selectedUserAdapter = new SelectedUserAdapter(CreateGroupAct.this, selectedUserList, new SelectedUserAdapter.OnItemClickListener() {
-           @Override
-           public void onItemClick(View view, int position, SuccessResGetUsers.Result model) {
-               selectedUserList.remove(position);
-               selectedUserAdapter.notifyDataSetChanged();
-           }
-       });
+
+        mAdapter = new AddFriendAdapter(CreateGroupAct.this,searhList,CreateGroupAct.this);
+        binding.rvFrnd.setHasFixedSize(true);
+        binding.rvFrnd.setLayoutManager(new LinearLayoutManager(CreateGroupAct.this));
+        binding.rvFrnd.setAdapter(mAdapter);
+        getAllUsers();
+
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                searhList.clear();
+
+                for (SuccessResGetUsers.Result result:conversation)
+                {
+                    if(result.getFirstName().contains(s.toString()))
+                    {
+                        searhList.add(result);
+                    }
+                }
+
+                mAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+        selectedUserAdapter = new SelectedUserAdapter(CreateGroupAct.this,
+                selectedUserList, (view, position, model) -> {
+                    selectedUserList.remove(position);
+                    selectedUserAdapter.notifyDataSetChanged();
+                });
        binding.btnCreate.setOnClickListener(v ->
                {
                    if(selectedUserList.size()>0)
@@ -249,12 +291,11 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
-                        usersList.clear();
-                        usersList.addAll(data.getResult());
-                        mAdapter = new AddFriendAdapter(CreateGroupAct.this,usersList,CreateGroupAct.this);
-                        binding.rvFrnd.setHasFixedSize(true);
-                        binding.rvFrnd.setLayoutManager(new LinearLayoutManager(CreateGroupAct.this));
-                        binding.rvFrnd.setAdapter(mAdapter);
+                        searhList.clear();
+                        searhList.addAll(data.getResult());
+                        conversation.clear();
+                        conversation.addAll(data.getResult());
+mAdapter.notifyDataSetChanged();
                     } else if (data.status.equals("0")) {
                         showToast(CreateGroupAct.this, data.message);
                     }
@@ -275,14 +316,14 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
         boolean found = false;
         if(selectedUserList.size()==0)
         {
-            selectedUserList.add(usersList.get(position));
+            selectedUserList.add(searhList.get(position));
             selectedUserAdapter.notifyDataSetChanged();
         } else
         {
             for (SuccessResGetUsers.Result result:selectedUserList)
             {
                 String id1 = result.getId();
-                String id2 = usersList.get(position).getId();
+                String id2 = searhList.get(position).getId();
                 if(id1.equalsIgnoreCase(id2))
                 {
                     found = true;
@@ -291,7 +332,7 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
             }
             if(!found)
             {
-                selectedUserList.add(usersList.get(position));
+                selectedUserList.add(searhList.get(position));
                 selectedUserAdapter.notifyDataSetChanged();
             } else
             {

@@ -51,6 +51,7 @@ public class FriendListAct extends AppCompatActivity {
         binding.RRFrnd.setOnClickListener(v -> {
             onBackPressed();
         });
+
     }
 
     private void getAllUsers() {

@@ -58,14 +58,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 >
+
                 <EditText
                     android:id="@+id/etSearch"
-                    android:editable="false"
-                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:drawableRight="@drawable/search"
+                    android:editable="false"
+                    android:focusable="false"
                     android:hint="Who do you want to chat with?"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/black"

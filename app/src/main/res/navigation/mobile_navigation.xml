@@ -18,6 +18,7 @@
         <action
             android:id="@+id/action_navigation_home_to_otherUserProfileFragment"
             app:destination="@id/otherUserProfileFragment" />
+
     </fragment>
 
     <fragment
@@ -43,7 +44,8 @@
     <fragment
         android:id="@+id/eventsFragment"
         android:name="com.my.vibras.fragment.EventsFragment"
-        android:label="EventsFragment" />
+        android:label="EventsFragment"
+        />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.my.vibras.act.ui.profile.ProfileFragment"
