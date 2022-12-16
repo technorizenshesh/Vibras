@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_5sdp"
         >
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,9 +28,6 @@
             android:layout_above="@+id/nav_view_comapny"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toTopOf="@id/nav_view_comapny"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/mobile_navigation_comapny"
             />
 

@@ -81,7 +81,7 @@ public class FriendListAct extends AppCompatActivity {
                         binding.rvFrnd.setHasFixedSize(true);
                         // use a linear layout manager
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FriendListAct.this);
-                        binding.rvFrnd.setLayoutManager(new GridLayoutManager(FriendListAct.this,2));
+                        binding.rvFrnd.setLayoutManager(new GridLayoutManager(FriendListAct.this,3));
                         //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
                         binding.rvFrnd.setAdapter(mAdapter);
                         mAdapter.SetOnItemClickListener(new FriendsListAdapter.OnItemClickListener() {

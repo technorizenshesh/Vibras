@@ -3,7 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    >
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -15,13 +19,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_120sdp"
             android:background="@color/mediumgray"
-            android:scaleType="centerCrop">
+            android:scaleType="centerCrop"/>
 
-        </ImageView>
 
         <LinearLayout
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
@@ -97,23 +100,97 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
+            <!--
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:weightSum="3">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:text="6,281k "
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:text="Likes Received"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8sdp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_30sdp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:text="6,281k "
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:text="Likes Received"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8sdp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+            -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:weightSum="3">
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/like_recived"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight=".5"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvLikeReceived"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="6,281k "
                         android:textAllCaps="true"
@@ -125,7 +202,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="Likes Received"
                         android:textColor="@color/black"
@@ -134,17 +210,19 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/followers"
+
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_30sdp"
-                    android:layout_weight="1"
+                    android:layout_weight=".5"
+                    android:gravity="center"
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvLikeGiven"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:text="6,281k "
                         android:textAllCaps="true"
@@ -156,9 +234,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="Likes Received"
+                        android:text="Likes Given"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_8sdp" />
 
@@ -235,6 +312,8 @@
 
 
     </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
 
 
 </layout>

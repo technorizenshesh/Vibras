@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Created by Ravindra Birla on 16,August,2022
  */
 public class SuccessResUpdateRate implements Serializable {
-
     @SerializedName("result")
     @Expose
     public Result result;
@@ -118,6 +117,17 @@ public class SuccessResUpdateRate implements Serializable {
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("admin_approval")
+        @Expose
+        public String admin_approval;
+
+        public String getAdmin_approval() {
+            return admin_approval;
+        }
+
+        public void setAdmin_approval(String admin_approval) {
+            this.admin_approval = admin_approval;
+        }
 
         public String getId() {
             return id;

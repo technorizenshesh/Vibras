@@ -121,6 +121,7 @@ public class ComapnyProfileFragment extends Fragment{
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
+
         return binding.getRoot();
     }
 
@@ -231,8 +232,11 @@ public class ComapnyProfileFragment extends Fragment{
         Glide
                 .with(getActivity())
                 .load(userDetail.getCoverImage())
+                .centerCrop()
                 .into(binding.ivCoverPhoto);
 
+        binding.tvLikeGiven.setText(userDetail.getGivenLikes() + "");
+        binding.tvLikeReceived.setText(userDetail.getReceviedLikes() + "");
 //        Glide
 //                .with(getActivity())
 //                .load(userDetail.getBgImage())

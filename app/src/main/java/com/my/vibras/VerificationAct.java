@@ -1,12 +1,19 @@
 package com.my.vibras;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.my.vibras.databinding.ActivityVerificationBinding;
@@ -32,7 +39,8 @@ public class VerificationAct extends AppCompatActivity {
     private VibrasInterface apiInterface;
 
     private Context mContext;
-
+    private EditText[] editTexts;
+ String otppp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +53,33 @@ public class VerificationAct extends AppCompatActivity {
         if(getIntent()!=null)
         {
 
-            LoginType=getIntent().getStringExtra("loginType").toString();
+            otppp=getIntent().getStringExtra("otp").toString();
+            LoginType=getIntent().getStringExtra("type").toString();
             userId=getIntent().getStringExtra("user_id").toString();
+        //    Toast.makeText(getApplicationContext(),otppp,Toast.LENGTH_SHORT).show();
+            if (otppp!=null&&otppp.length()>3){
+                for (int i = 0; i <otppp.length() ; i++) {
+                    String  s[]= otppp.split("");
+
+                    binding.et1.setText(s[0]);
+                    binding.et2.setText(s[1]);
+                    binding.et3.setText(s[2]);
+                    binding.et4.setText(s[3]);
+                }
+
+            }
 
         }
 
+        editTexts = new EditText[]{binding.et1, binding.et2, binding.et3, binding.et4};
+        binding.et1   .addTextChangedListener(new PinTextWatcher(0));
+        binding.et2   .addTextChangedListener(new PinTextWatcher(1));
+        binding.et3  .addTextChangedListener(new PinTextWatcher(2));
+        binding.et4  .addTextChangedListener(new PinTextWatcher(3));
+        binding.et1  .setOnKeyListener(new PinOnKeyListener(0));
+        binding.et2  .setOnKeyListener(new PinOnKeyListener(1));
+        binding.et3  .setOnKeyListener(new PinOnKeyListener(2));
+        binding.et4   .setOnKeyListener(new PinOnKeyListener(3));
         binding.RVerify.setOnClickListener(v ->
         {
 
@@ -117,6 +147,94 @@ public class VerificationAct extends AppCompatActivity {
             }
         });
     }
+    public class PinTextWatcher implements TextWatcher {
 
+        private final int currentIndex;
+        private boolean isFirst = false, isLast = false;
+        private String newTypedString = "";
+
+        PinTextWatcher(int currentIndex) {
+            this.currentIndex = currentIndex;
+
+            if (currentIndex == 0)
+                this.isFirst = true;
+            else if (currentIndex == editTexts.length - 1)
+                this.isLast = true;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            newTypedString = s.subSequence(start, start + count).toString().trim();
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            String text = newTypedString;
+
+            /* Detect paste event and set first char */
+            if (text.length() > 1)
+                text = String.valueOf(text.charAt(0)); // TODO: We can fill out other EditTexts
+
+            editTexts[currentIndex].removeTextChangedListener(this);
+            editTexts[currentIndex].setText(text);
+            editTexts[currentIndex].setSelection(text.length());
+            editTexts[currentIndex].addTextChangedListener(this);
+            editTexts[currentIndex].setBackground(ContextCompat.getDrawable(getApplicationContext(),
+                    R.drawable.border_gray));
+            if (text.length() == 1)
+                moveToNext();
+            else if (text.length() == 0)
+                moveToPrevious();
+        }
+
+        private void moveToNext() {
+            if (!isLast)
+                editTexts[currentIndex + 1].requestFocus();
+
+            if (isAllEditTextsFilled() && isLast) { // isLast is optional
+                editTexts[currentIndex].clearFocus();
+                // hideKeyboard();
+            }
+        }
+
+        private void moveToPrevious() {
+            if (!isFirst)
+                editTexts[currentIndex - 1].requestFocus();
+        }
+
+        private boolean isAllEditTextsFilled() {
+            for (EditText editText : editTexts)
+                if (editText.getText().toString().trim().length() == 0)
+                    return false;
+            return true;
+        }
+    }
+
+    public class PinOnKeyListener implements View.OnKeyListener {
+
+        private final int currentIndex;
+
+        PinOnKeyListener(int currentIndex) {
+            this.currentIndex = currentIndex;
+        }
+
+        @Override
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (editTexts[currentIndex].getText().toString().isEmpty() && currentIndex != 0)
+                    editTexts[currentIndex - 1].requestFocus();
+            }
+            return false;
+        }
+
+
+    }
 
 }

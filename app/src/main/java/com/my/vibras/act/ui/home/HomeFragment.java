@@ -25,6 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 
 import com.bumptech.glide.Glide;
+import com.faltenreich.skeletonlayout.Skeleton;
+import com.faltenreich.skeletonlayout.SkeletonLayoutUtils;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.my.vibras.R;
@@ -87,13 +89,18 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
 
     private GPSTracker gpsTracker;
     Session session;
+   // private Skeleton skeleton;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         gpsTracker = new GPSTracker(getActivity());
         session = new Session(getActivity());
-
+       // skeleton = binding.getRoot().findViewById(R.id.skeletonLayout);
+       // skeleton = SkeletonLayoutUtils.createSkeleton(binding.rvhome);
+       // skeleton = SkeletonLayoutUtils.applySkeleton(binding.rvhome, R.layout.user_item);
+      //  skeleton.showSkeleton();
         String firebasetoken = SharedPreferenceUtility.getInstance(getActivity()).getString(REGISTER_ID);
         Log.e(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
         session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
@@ -247,6 +254,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                         binding.rvhome.setLayoutManager(layoutManager);
                         binding.rvhome.setAdapter(usersAdapters);
                         binding.rvhome.setHasFixedSize(true);
+                     //   skeleton.showOriginal();
                         // Scroll to the position we want to snap to
                         // Wait until the RecyclerView is laid out.
                         binding.rvhome.post(() -> {

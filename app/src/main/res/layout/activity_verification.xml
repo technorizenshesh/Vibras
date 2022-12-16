@@ -71,7 +71,7 @@
                 <EditText
                     android:id="@+id/et1"
                     android:gravity="center"
-                    android:digits="1"
+                    android:digits="1234567890"
                     android:inputType="number"
                     android:background="@drawable/border_gray"
                     android:layout_weight="1"
@@ -85,7 +85,7 @@
                 <EditText
                     android:id="@+id/et2"
                     android:gravity="center"
-                    android:digits="1"
+                    android:digits="1234567890"
                     android:inputType="number"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:background="@drawable/border_gray"
@@ -101,7 +101,7 @@
                 <EditText
                     android:id="@+id/et3"
                     android:gravity="center"
-                    android:digits="1"
+                    android:digits="1234567890"
                     android:inputType="number"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:background="@drawable/border_gray"
@@ -113,7 +113,7 @@
                 </EditText>
                 <EditText
                     android:id="@+id/et4"
-                    android:digits="1"
+                    android:digits="1234567890"
                     android:inputType="number"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:background="@drawable/border_gray"

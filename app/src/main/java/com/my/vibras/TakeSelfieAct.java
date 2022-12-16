@@ -51,7 +51,6 @@ import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 
 public class TakeSelfieAct extends AppCompatActivity {
-
     ActivityTakeSelfieBinding binding;
     String LoginType;
     String str_image_path="";
@@ -59,25 +58,27 @@ public class TakeSelfieAct extends AppCompatActivity {
     private static final int MY_PERMISSION_CONSTANT = 5;
     private static final int SELECT_FILE = 2;
     private static final int REQUEST_CAMERA = 1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding= DataBindingUtil.setContentView(this,R.layout.activity_take_selfie);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-       
         if(getIntent()!=null)
         {
             LoginType=getIntent().getStringExtra("loginType").toString();
+
         }
 
        binding.RNext.setOnClickListener(v -> {
 
            if(!str_image_path.equalsIgnoreCase(""))
            {
-               updateCoverPhoto();
-           }else
+
+               if (LoginType.equalsIgnoreCase("home")){
+                   ApplyForVerify();
+               }else {
+                   updateCoverPhoto();
+               } }else
            {
                Toast.makeText(TakeSelfieAct.this,"Please upload selfie.",Toast.LENGTH_SHORT).show();
            }
@@ -92,6 +93,51 @@ public class TakeSelfieAct extends AppCompatActivity {
                 }
         );
         
+    }
+
+    private void ApplyForVerify() {
+       // enum('Not Applied', 'Pending', 'Approved', 'Rejected
+            String strUserId = SharedPreferenceUtility.getInstance(TakeSelfieAct.this).getString(USER_ID);
+            DataManager.getInstance().showProgressMessage(TakeSelfieAct.this,getString(R.string.please_wait));
+            MultipartBody.Part filePart;
+            if (!str_image_path.equalsIgnoreCase("")) {
+                File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
+                if(file!=null) {
+                    filePart = MultipartBody.Part.createFormData("identify_image",
+                            file.getName(), RequestBody.create(MediaType.parse("image/*"), file));}
+                else {
+                    filePart = null;}
+            } else {
+                RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
+                filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
+            }
+            RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+            Call<SuccessResUploadSelfie> loginCall = apiInterface.self_identify(userId,filePart);
+            loginCall.enqueue(new Callback<SuccessResUploadSelfie>() {
+                @Override
+                public void onResponse(Call<SuccessResUploadSelfie> call,
+                                       Response<SuccessResUploadSelfie> response) {
+                    DataManager.getInstance().hideProgressMessage();
+                    try {
+                        SuccessResUploadSelfie data = response.body();
+                        String responseString = new Gson().toJson(response.body());
+                        Log.e(TAG,"Test Response :"+responseString);
+                        finish();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG,"Test Response :"+response.body());
+                    }
+                }
+                @Override
+                public void onFailure(Call<SuccessResUploadSelfie> call, Throwable t) {
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
+                }
+            });
+
+
+
+
     }
 
     //CHECKING FOR Camera STATUS

@@ -174,6 +174,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp">
@@ -231,9 +232,39 @@
                         android:textSize="@dimen/_10sdp" />
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/tvNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsregular"
+                        android:textColor="@color/gray"
+
+                        android:gravity="center"
+                        android:text="@string/notifications"
+                        android:textSize="@dimen/_10sdp" />
+
+                </RelativeLayout>
 
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/RRcSubsCription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -291,37 +322,8 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp">
-
-                    <TextView
-                        android:id="@+id/tvNotification"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
-                        android:paddingVertical="@dimen/_10sdp"
-                        android:text="@string/notifications"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:checked="true"
-                        android:padding="15dp"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
-                        android:theme="@style/control"
-                        android:visibility="gone" />
-
-                </RelativeLayout>
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -334,6 +336,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/RRAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -544,23 +547,62 @@
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     android:visibility="gone" />
-
                 <TextView
-                     android:id="@+id/get_verified_btn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/poppins_bold"
                     android:padding="@dimen/_10sdp"
-                    android:text="Get Verified"
-                    android:textAllCaps="true"
-                    android:textColor="#8FB61C"
+                    android:text="Apply For Verified Profile"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_10sdp"
+                        android:text="Status "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/get_verified_btn"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_10sdp"
+                        android:text="Get Verified"
+                        android:drawableRight="@drawable/ic_baseline_verified"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+                </RelativeLayout>
+
 
                 <TextView
                     android:id="@+id/tvLogout"

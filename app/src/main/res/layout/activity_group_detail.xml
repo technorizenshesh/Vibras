@@ -48,8 +48,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivGroupImage"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/circle_gray"
@@ -59,7 +59,7 @@
         android:id="@+id/tvGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_18sdp"
+        android:textSize="@dimen/_16sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/black"
@@ -71,7 +71,7 @@
         android:id="@+id/tvGroupParticipants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_16sdp"
+        android:textSize="@dimen/_13sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/gray"

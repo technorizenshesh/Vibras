@@ -39,15 +39,13 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:orientation="horizontal">
-
                     <ImageView
                         android:id="@+id/ivEditConverPhoto"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
                         android:background="@drawable/settings"
                         android:padding="@dimen/_5sdp"
-                        android:scaleType="fitXY"></ImageView>
-
+                        android:scaleType="fitXY" />
                     <ImageView
                         android:id="@+id/imgSetting"
                         android:layout_width="@dimen/_25sdp"
@@ -55,7 +53,7 @@
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:background="@drawable/settings_new"
                         android:padding="@dimen/_5sdp"
-                        android:scaleType="fitXY"></ImageView>
+                        android:scaleType="fitXY" />
 
                 </LinearLayout>
 
@@ -140,9 +138,9 @@
         android:layout_height="wrap_content"
         android:text="testtc"
         android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-         android:drawablePadding="@dimen/_15sdp"
+         android:drawablePadding="@dimen/_10sdp"
          android:drawableRight="@drawable/ic_baseline_verified"
         />
 
@@ -158,11 +156,11 @@
 
 
                         <TextView
+                            android:id="@+id/city_state"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="Boston, MA"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
@@ -174,7 +172,6 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:gravity="center"
-                            android:text="dflj;dsfjdsjdfjdlj"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />

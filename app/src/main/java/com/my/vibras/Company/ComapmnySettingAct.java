@@ -2,14 +2,12 @@ package com.my.vibras.Company;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
-
 import com.my.vibras.R;
 import com.my.vibras.SelectViberLoginAct;
 import com.my.vibras.act.ChangePassAct;
-import com.my.vibras.act.HelpAct;
+import com.my.vibras.act.HelpContactActivity;
 import com.my.vibras.act.NotificationScreenAct;
 import com.my.vibras.act.PrivacyPolicyAct;
 import com.my.vibras.act.SavedEventsAct;
@@ -56,7 +54,7 @@ public class ComapmnySettingAct extends AppCompatActivity {
 
         binding.RRFAQ.setOnClickListener(v ->
                 {
-                    startActivity(new Intent(ComapmnySettingAct.this, HelpAct.class));
+                    startActivity(new Intent(ComapmnySettingAct.this, HelpContactActivity.class));
                 }
         );
 

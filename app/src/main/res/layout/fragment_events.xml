@@ -245,6 +245,7 @@
             </androidx.recyclerview.widget.RecyclerView>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/btnCreateGroup"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"

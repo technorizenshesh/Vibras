@@ -126,8 +126,9 @@ public class CompleteSignUpAct extends AppCompatActivity {
 
                         startActivity(new Intent(CompleteSignUpAct.this,
                                 VerificationAct.class)
+                                .putExtra("otp",data.getResult().getOtp())
                                 .putExtra("user_id",data.getResult().getId())
-                                .putExtra("loginType",LoginType)
+                                .putExtra("type",LoginType)
                         );
 
 

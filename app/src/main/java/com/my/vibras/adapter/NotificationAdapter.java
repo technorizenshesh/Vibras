@@ -3,7 +3,6 @@ package com.my.vibras.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.BlurMaskFilter;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.jackandphantom.blurimage.BlurImage;
 import com.my.vibras.R;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetNotification;
@@ -27,7 +25,7 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<SuccessResGetNotification.Result> modelList;
@@ -35,7 +33,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private DeletePost deletePost;
 
-    public NotificationAdapter(Context context, ArrayList<SuccessResGetNotification.Result> modelList,DeletePost deletePost) {
+    public NotificationAdapter(Context context, ArrayList<SuccessResGetNotification.Result> modelList, DeletePost deletePost) {
         this.mContext = context;
         this.modelList = modelList;
         this.deletePost = deletePost;
@@ -49,65 +47,59 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder,
+                                 @SuppressLint("RecyclerView") final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
             try {
                 LinearLayout llJoinGroup = holder.itemView.findViewById(R.id.llJoinGroup);
-                TextView tvMessage =   holder.itemView.findViewById(R.id.tvNotiMessage);
-                TextView tvAccept =   holder.itemView.findViewById(R.id.tvAccept);
-                TextView tvReject =   holder.itemView.findViewById(R.id.tvReject);
-                TextView tvtimeAgo =   holder.itemView.findViewById(R.id.tvTimeAgo);
-                CircleImageView ivProfile =   holder.itemView.findViewById(R.id.ivProfile);
-                ImageView ivPost =   holder.itemView.findViewById(R.id.ivPost);
+                TextView tvMessage = holder.itemView.findViewById(R.id.tvNotiMessage);
+                TextView tvAccept = holder.itemView.findViewById(R.id.tvAccept);
+                TextView tvReject = holder.itemView.findViewById(R.id.tvReject);
+                TextView tvtimeAgo = holder.itemView.findViewById(R.id.tvTimeAgo);
+                CircleImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
+                ImageView ivPost = holder.itemView.findViewById(R.id.ivPost);
                 tvMessage.setText(modelList.get(position).getMessage());
-              //  tvtimeAgo.setText(modelList.get(position).getDateTime());
+                //  tvtimeAgo.setText(modelList.get(position).getDateTime());
+                // 'Like', 'Comment', 'Fire','JoinGroup', 'Love
+                //
+                tvReject.setOnClickListener(v -> {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("Reject Request")
+                            .setMessage("Are you sure you want to reject this request?")
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deletePost.bottomSheet(v, "Rejected", false, position);
+                                    // Continue with delete operation
+                                }
+                            })
 
-                tvReject.setOnClickListener(v ->
-                        {
-                            new AlertDialog.Builder(mContext)
-                                    .setTitle("Reject Request")
-                                    .setMessage("Are you sure you want to reject this request?")
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                });
+                tvAccept.setOnClickListener(v -> {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("Accept Request")
+                            .setMessage("Are you sure you want to accept this request?")
 
-                                    // Specifying a listener allows you to take an action before dismissing the dialog.
-                                    // The dialog is automatically dismissed when a dialog button is clicked.
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            deletePost.bottomSheet(v,"Rejected",false,position);
-                                            // Continue with delete operation
-                                        }
-                                    })
+                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                            // The dialog is automatically dismissed when a dialog button is clicked.
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deletePost.bottomSheet(v, "Accepted", false, position);
+                                    // Continue with delete operation
+                                }
+                            })
 
-                                    // A null listener allows the button to dismiss the dialog and take no further action.
-                                    .setNegativeButton(android.R.string.no, null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
-                        }
-                );
-
-
-                tvAccept.setOnClickListener(v ->
-                        {
-                            new AlertDialog.Builder(mContext)
-                                    .setTitle("Accept Request")
-                                    .setMessage("Are you sure you want to accept this request?")
-
-                                    // Specifying a listener allows you to take an action before dismissing the dialog.
-                                    // The dialog is automatically dismissed when a dialog button is clicked.
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            deletePost.bottomSheet(v,"Accepted",false,position);
-                                            // Continue with delete operation
-                                        }
-                                    })
-
-                                    // A null listener allows the button to dismiss the dialog and take no further action.
-                                    .setNegativeButton(android.R.string.no, null)
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .show();
-                        }
-                        );
-
+                            // A null listener allows the button to dismiss the dialog and take no further action.
+                            .setNegativeButton(android.R.string.no, null)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                });
               /*  if(modelList.get(position).getStatus().equalsIgnoreCase("Unseen")
                         && !modelList.get(position).getType()
                         .equalsIgnoreCase("JoinGroup"))
@@ -122,42 +114,36 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
                 else
                 {*/
-                    Glide.with(mContext)
-                            .load(modelList.get(position).getUserImage())
-                            .placeholder(mContext.getDrawable(R.drawable.circle_gray))
-                            .into(ivProfile);
-               // }
-                if(modelList.get(position).getType().equalsIgnoreCase("Like"))
-                {
+                Glide.with(mContext)
+                        .load(modelList.get(position).getUserImage())
+                        .placeholder(mContext.getDrawable(R.drawable.circle_gray))
+                        .into(ivProfile);
+                // }
+                if (modelList.get(position).getType().equalsIgnoreCase("Like")) {
                     Glide.with(mContext)
                             .load(modelList.get(position).getPostImage())
                             .into(ivPost);
-
                     ivPost.setVisibility(View.VISIBLE);
                     llJoinGroup.setVisibility(View.GONE);
-                } else  if(modelList.get(position).getType().equalsIgnoreCase("JoinGroup"))
-                {
+                } else
+                    if (modelList.get(position).getType().equalsIgnoreCase("JoinGroup")) {
                     ivPost.setVisibility(View.GONE);
                     llJoinGroup.setVisibility(View.VISIBLE);
-                }else
-                {
+                } else {
                     ivPost.setVisibility(View.GONE);
                     llJoinGroup.setVisibility(View.GONE);
                 }
 
-            }catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
 
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
 
             }
         }
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return modelList.size();
     }
 

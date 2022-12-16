@@ -12,6 +12,8 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -59,6 +61,7 @@ import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.PostClickListener;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
@@ -68,6 +71,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -95,7 +100,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
     private MyProfileFragment.Qr_DetailsAdapter adapter;
 
     String str_image_path = "";
-
+    GPSTracker gpsTracker;
     private static final int REQUEST_CAMERA = 1;
 
     private static final int SELECT_FILE = 2;
@@ -152,6 +157,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                               Bundle savedInstanceState) {
         binding = FragmentMyProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+         gpsTracker =new GPSTracker(getActivity());
 
 
       //  binding = FragmentMyProfileBinding.inflate(inflater,binding.getRoot(),false);
@@ -358,6 +364,46 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
 
         binding.tvLikeGiven.setText(userDetail.getGivenLikes() + "");
         binding.tvLikeReceived.setText(userDetail.getReceviedLikes() + "");
+        if (userDetail.getLat()!=null&&!
+                userDetail.getLat().equalsIgnoreCase("0.0"))
+        {
+            String ff =CurrentCity(Double.parseDouble(userDetail.getLat()),
+                    Double.parseDouble(userDetail.getLon()));
+            binding.cityState.setText(ff);
+        }else {
+            if (gpsTracker.getLatitude()>0) {
+                binding.cityState.setText(CurrentCity(
+                        gpsTracker.getLatitude()
+                        , gpsTracker.getLongitude()));
+            }
+        }
+    }
+    public  String CurrentCity(double latitude,double longitude) {
+
+        Log.e(TAG, "CurrentCity: "+ latitude);
+        Log.e(TAG, "CurrentCity: "+ longitude);
+        if (latitude>=0.0) {
+            try {
+            //List<Address> addresses =geocoder.getFromLocation(latitude, longitude, 1);
+            Geocoder geocoder = new Geocoder(requireActivity(), Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses!=null) {
+                Log.e(TAG, "CurrentCity:  addressesaddresses "+ addresses);
+                String cityName = addresses.get(0).getLocality();
+                String stateName = addresses.get(0).getAdminArea();
+           //     String countryName = addresses.get(0).getAddressLine(2);
+
+                // txt_paddress.setText(address);
+                return cityName+","+stateName ;
+            }
+                //   txt_state.setText(stateName);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return  "  ";
 
     }
 

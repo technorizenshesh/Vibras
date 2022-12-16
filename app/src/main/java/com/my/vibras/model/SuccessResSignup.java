@@ -160,6 +160,17 @@ public class SuccessResSignup implements Serializable {
         @SerializedName("first_login")
         @Expose
         public String first_login;
+        @SerializedName("admin_approval")
+        @Expose
+        public String admin_approval;
+
+        public String getAdmin_approval() {
+            return admin_approval;
+        }
+
+        public void setAdmin_approval(String admin_approval) {
+            this.admin_approval = admin_approval;
+        }
 
         public String getFirst_login() {
             return first_login;

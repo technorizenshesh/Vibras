@@ -4,8 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_10sdp"
-    android:layout_margin="@dimen/_10sdp"
-
+app:cardUseCompatPadding="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,12 +15,12 @@
 
         <ImageView
             android:id="@+id/ivUserProfile"
-            android:layout_marginRight="-20dp"
-            android:layout_marginTop="-10dp"
-            android:layout_marginLeft="-20dp"
+            android:layout_marginRight="-2dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginLeft="-2dp"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_height="@dimen/_60sdp"
             >
 
         </ImageView>
@@ -35,19 +34,19 @@
             android:text="Maren Philips"
             android:layout_marginVertical="@dimen/_5sdp"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_10sdp"
           />
 
         <TextView
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginTop="5sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvViewProfile"
             android:text="VIEW PROFILE"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp" />
+            android:textSize="@dimen/_8sdp" />
 
     </LinearLayout>
 

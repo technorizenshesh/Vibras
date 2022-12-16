@@ -77,7 +77,8 @@ public class NotificationsFragment extends Fragment implements DeletePost {
         Call<SuccessResGetNotification> call = apiInterface.getNotification(map);
         call.enqueue(new Callback<SuccessResGetNotification>() {
             @Override
-            public void onResponse(Call<SuccessResGetNotification> call, Response<SuccessResGetNotification> response) {
+            public void onResponse(Call<SuccessResGetNotification> call,
+                                   Response<SuccessResGetNotification> response) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetNotification data = response.body();

@@ -421,7 +421,8 @@ public class EventsFragment extends Fragment {
         binding.recycleNEarme.setHasFixedSize(true);
         // use a linear layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        binding.recycleNEarme.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        binding.recycleNEarme.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL,false));
         //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
         binding.recycleNEarme.setAdapter(mAdapterNEarMe);
         mAdapterNEarMe.SetOnItemClickListener(new NEarmeEventstAdapter.OnItemClickListener() {
@@ -438,7 +439,8 @@ public class EventsFragment extends Fragment {
         binding.recycleRestoaurent.setHasFixedSize(true);
         // use a linear layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        binding.recycleRestoaurent.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        binding.recycleRestoaurent.setLayoutManager(new LinearLayoutManager(getActivity()
+                ,LinearLayoutManager.HORIZONTAL,false));
         //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
         binding.recycleRestoaurent.setAdapter(mAdapterNEarMeRest);
     }

@@ -22,11 +22,9 @@ import com.my.vibras.model.SuccessResGetEvents;
 import java.util.ArrayList;
 
 public class NEarmeEventstAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
     private Context mContext;
     private ArrayList<SuccessResGetEvents.Result> modelList;
     private OnItemClickListener mItemClickListener;
-
     public NEarmeEventstAdapter(Context context, ArrayList<SuccessResGetEvents.Result> modelList) {
         this.mContext = context;
         this.modelList = modelList;

@@ -33,7 +33,6 @@ import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class RestaurantAct extends AppCompatActivity implements PostClickListener {
-
     ActivityRestaurantBinding binding;
     VibrasInterface apiInterface;
     private ViewAllRestaurentAdapter myEventsAdapter;
@@ -48,7 +47,6 @@ public class RestaurantAct extends AppCompatActivity implements PostClickListene
         binding.rvRestaurants.setHasFixedSize(true);
         binding.rvRestaurants.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         binding.rvRestaurants.setAdapter(myEventsAdapter);
-
         binding.RRSearch.setOnClickListener(v ->
                 {
                     startActivity(new Intent(RestaurantAct.this, SearchRestAct.class));

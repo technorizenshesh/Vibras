@@ -53,7 +53,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .load(usersList.get(position).getImage())
                     .into(ivUserProfile);
 
-            tvUsername.setText(usersList.get(position).getFirstName()+" "+usersList.get(position).getFirstName());
+            tvUsername.setText(usersList.get(position).getFirstName()+" "+usersList.get(position).getLastName());
 
         }
     }

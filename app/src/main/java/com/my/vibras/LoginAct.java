@@ -305,11 +305,12 @@ public class LoginAct extends AppCompatActivity {
             @Override
             public void onResponse(Call<SuccessResSignup> call,
                                    Response<SuccessResSignup> response) {
-                DataManager.getInstance().hideProgressMessage();
                 try {
+                    DataManager.getInstance().hideProgressMessage();
                     SuccessResSignup data = response.body();
                     Log.e("data", data.status);
                     if (data.status.equals("1")) {
+                        DataManager.getInstance().hideProgressMessage();
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_ID, data.getResult().getId());
@@ -343,7 +344,10 @@ public class LoginAct extends AppCompatActivity {
                         }
 
                     } else if (data.status.equals("0")) {
-                        showToast(LoginAct.this, data.message);
+                        if (data.getMessage().equalsIgnoreCase("Your account is not verified please verify your email now")){
+getOTP();
+                        }else {                        showToast(LoginAct.this, data.message);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -357,6 +361,40 @@ public class LoginAct extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getOTP() {
+        Map<String, String> map = new HashMap<>();
+        map.put("email", strEmail);
+        Call<SuccessResSignup> call = apiInterface.resend_otp(map);
+        call.enqueue(new Callback<SuccessResSignup>() {
+            @Override
+            public void onResponse(Call<SuccessResSignup> call,
+                                   Response<SuccessResSignup> response) {
+                try {
+                    SuccessResSignup data = response.body();
+                    Log.e("data", data.status);
+                    if (data.status.equals("1")) {
+                        showToast(LoginAct.this, "Your account is not verified please verify your email now");
+                        DataManager.getInstance().hideProgressMessage();
+                        startActivity(new Intent(LoginAct.this,
+                                VerificationAct.class)
+                                .putExtra("otp",data.getResult().getOtp())
+                                .putExtra("user_id",data.getResult().getId())
+                                .putExtra("type",LoginType)
+                        );
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResSignup> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
     }
 
     private boolean isValid() {

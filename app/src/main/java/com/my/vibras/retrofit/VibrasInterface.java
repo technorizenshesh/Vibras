@@ -108,6 +108,11 @@ public interface VibrasInterface {
     Call<SuccessResUploadSelfie> uploadSelfie(
             @Part("user_id") RequestBody userId,
             @Part MultipartBody.Part file);
+    @Multipart
+    @POST("self_identify")
+    Call<SuccessResUploadSelfie> self_identify(
+            @Part("user_id") RequestBody userId,
+            @Part MultipartBody.Part file);
 
     @GET("getPassion")
     Call<SuccessResGetInterest> getPassion();
@@ -527,4 +532,9 @@ public interface VibrasInterface {
  @FormUrlEncoded
     @POST("get_total_useen_notification")
     Call<NotificationCount> get_total_useen_notification(@FieldMap Map<String, String> paramHashMap);
+ @FormUrlEncoded
+    @POST("resend_otp")
+    Call<SuccessResSignup> resend_otp(@FieldMap Map<String, String> paramHashMap);
+
+ //https://myasp-app.com/vibras/webservice/resend_otp?email=tessdfgfgsy@gmail.com
 }
