@@ -182,7 +182,13 @@ public class FriendProfileActivity extends AppCompatActivity {
                     FriendPostsFragment recents = new FriendPostsFragment();
                     recents.setArguments(bundle);
                     return recents;
-                case 1:
+                    case 1:
+                    //  fm.
+
+                    FriendPostsFragment recentsq = new FriendPostsFragment();
+                    recentsq.setArguments(bundle);
+                    return recentsq;
+                case 2:
                     // bundle.putString("type","VIDEO" );
                     FriendVideoFragment recents1 = new FriendVideoFragment();
                     recents1.setArguments(bundle);
@@ -315,7 +321,7 @@ public class FriendProfileActivity extends AppCompatActivity {
 
     private void setUpUi() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-        //  binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Apointments"));
+         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         adapter = new Qr_DetailsAdapter(getApplicationContext(), getSupportFragmentManager(), binding.tabLayout.getTabCount(), binding.tabLayout.getSelectedTabPosition());

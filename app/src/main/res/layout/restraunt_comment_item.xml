@@ -8,13 +8,11 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_10sdp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="@dimen/_3sdp"
         >
         <LinearLayout
             android:orientation="vertical"
@@ -113,7 +111,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 />
 
         </LinearLayout>

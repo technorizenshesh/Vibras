@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,6 +37,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -128,11 +133,11 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                     PostsFragment recents = new PostsFragment();
                     return recents;
 
-              /*  case 1:
-                    AppointmentFragment recents1 = new AppointmentFragment();
-                    return recents1;*/
+               case 1:
+                    PostsFragment recents1 = new PostsFragment();
+                    return recents1;
 
-                case 1:
+                case 2:
                     PostsVideoFragment recents11 = new PostsVideoFragment();
                     return recents11;
 
@@ -150,23 +155,29 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         }
     }
 
+    private PurchasesUpdatedListener purchasesUpdatedListener = (responseCode, purchases) -> {
+
+    };
+
 
     @Override
     public View onCreateView (LayoutInflater inflater,
                               ViewGroup container,
                               Bundle savedInstanceState) {
-        binding = FragmentMyProfileBinding.inflate(inflater, container, false);
+        binding = FragmentMyProfileBinding.inflate(inflater, container,
+                false);
         View view = binding.getRoot();
          gpsTracker =new GPSTracker(getActivity());
 
 
-      //  binding = FragmentMyProfileBinding.inflate(inflater,binding.getRoot(),false);
-            //    DataBindingUtil.inflate(inflater, R.layout.fragment_my_profile, container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-     //   binding.scrool.setNestedScrollingEnabled(false);
         binding.imgSetting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingAct.class));
         });
+
+         binding.top.setOnClickListener(v->{
+             Toast.makeText(getActivity(), "Pay", Toast.LENGTH_SHORT).show();
+           });
 
         binding.ivAddPost.setOnClickListener(v ->
                 {
@@ -189,14 +200,12 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         );
         binding.likeRecived.setOnClickListener(v -> {
             String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
-
             startActivity(new Intent(getActivity(),
                     LikeReceivedActivity.class)
                     .putExtra("id",userId));
         });
         binding.followers.setOnClickListener(v -> {
             String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
-
             startActivity(new Intent(getActivity(),
                     LikeSentActivity.class)
                     .putExtra("id",userId));
@@ -341,6 +350,8 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
     }
 
     private void setProfileDetails() {
+        if (userDetail.getAdmin_approval().equalsIgnoreCase("Approved")){}else {
+        binding.tvName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);}
 
         binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
        //                     binding.tvName.setCompoundDrawables(null,null, requireActivity().getResources().getDrawable(R.drawable.ic_baseline_verified),null);
@@ -409,7 +420,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
 
     private void setUpUi() {
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-       // binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Appointments"));
+  binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
          binding.tabLayout.setSelected(true);

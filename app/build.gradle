@@ -8,8 +8,8 @@ android {
         applicationId "com.my.vibras"
         minSdk 23
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "1.06"
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -159,9 +159,21 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation "com.dolatkia:animated-theme-manager:1.1.4"
     implementation 'com.faltenreich:skeletonlayout:4.0.0'
+    //def billing_version = "5.1.0"
+
+ //   implementation "com.android.billingclient:billing:$billing_version"
+    def billing_version = "5.0.0"
+    implementation "com.android.billingclient:billing:$billing_version"
+
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    implementation 'com.google.guava:guava:24.1-jre'
+
+    ///lotti
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
 }
 apply plugin: 'com.android.application'
 // Add the following line:
 apply plugin: 'com.google.gms.google-services'  // Google Services plugin
 //gaurav@123!
+//vibras22  jks pass

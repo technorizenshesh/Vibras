@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/_5sdp"
+    android:layout_marginTop="@dimen/_2sdp"
     >
     <RelativeLayout
         android:id="@+id/rlParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
         >
     <LinearLayout
         android:orientation="horizontal"
@@ -19,8 +19,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
-            android:layout_width="@dimen/_45sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:background="@drawable/circle_gray" />
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pria"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 />
 
             <TextView

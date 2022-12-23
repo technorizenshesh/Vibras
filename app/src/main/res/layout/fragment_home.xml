@@ -23,6 +23,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
+                android:maxLength="25"
                 android:textStyle="bold" />
 
             <LinearLayout

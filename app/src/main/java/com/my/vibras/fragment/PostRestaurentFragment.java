@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -92,7 +93,7 @@ public class PostRestaurentFragment extends Fragment {
     private String myLatitude = "",myLongitude="";
 
     private VibrasInterface apiInterface;
-    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 55;
     private String status;
 
     private ArrayList<SuccessResGetCategory.Result> categoryResult = new ArrayList<>();
@@ -104,7 +105,7 @@ public class PostRestaurentFragment extends Fragment {
     private static final int MY_PERMISSION_CONSTANT = 5;
 
     String str_image_path="";
-
+    String  eventCategory="";
     private SuccessResSignup.Result userDetail;
 
     final Calendar myCalendar= Calendar.getInstance();
@@ -120,13 +121,11 @@ public class PostRestaurentFragment extends Fragment {
     private String whichSelected="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-        ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_restaurent,container, false);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
+        get_restra_category22();
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
-
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
 
@@ -135,7 +134,8 @@ public class PostRestaurentFragment extends Fragment {
 //                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
 
                     List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
-                    Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                    Intent intent = new Autocomplete.IntentBuilder(
+                            AutocompleteActivityMode.FULLSCREEN, fields)
                             .build(getActivity());
                     startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
                 }
@@ -162,7 +162,7 @@ public class PostRestaurentFragment extends Fragment {
 
                     if(status.equalsIgnoreCase("Deactive"))
                     {
-
+                        eventCategory = binding.spinnerCategory.getSelectedItem().toString();
                         restrantName = binding.etRestaurantName.getText().toString().trim();
                         strDetails = binding.etDetails.getText().toString().trim();
                         strLocation = binding.etLocation.getText().toString().trim();
@@ -174,14 +174,14 @@ public class PostRestaurentFragment extends Fragment {
                     } else
                     {
 
-                    restrantName = binding.etRestaurantName.getText().toString().trim();
-                    strDetails = binding.etDetails.getText().toString().trim();
-                    strLocation = binding.etLocation.getText().toString().trim();
-                    if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
-                        isValid();
-                    } else {
-                        Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
-                    }
+                        restrantName = binding.etRestaurantName.getText().toString().trim();
+                        strDetails = binding.etDetails.getText().toString().trim();
+                        strLocation = binding.etLocation.getText().toString().trim();
+                        if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
+                            isValid();
+                        } else {
+                            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 }
@@ -201,6 +201,61 @@ public class PostRestaurentFragment extends Fragment {
         getProfile();
         return binding.getRoot();
     }
+
+
+
+    private void get_restra_category22() {
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String,String> map = new HashMap<>();
+        Call<SuccessResGetCategory> call = apiInterface.get_restra_category(map);
+        call.enqueue(new Callback<SuccessResGetCategory>() {
+            @Override
+            public void onResponse(Call<SuccessResGetCategory> call, Response<SuccessResGetCategory> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetCategory data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+//                        setProfileDetails();
+                        categoryResult.clear();
+                        categoryResult.addAll(data.getResult());
+                        setSpinner();
+
+                    } else if (data.status.equals("0")) {
+                        showToast(getActivity(), data.message);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResGetCategory> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    public void setSpinner()
+    {
+
+        eventsCategories.clear();
+
+        for(SuccessResGetCategory.Result result:categoryResult)
+        {
+            eventsCategories.add(result.getName());
+        }
+
+//      Application of the Array to the Spinner
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(getActivity(),   R.layout.simple_spinner, eventsCategories);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        binding.spinnerCategory.setAdapter(spinnerArrayAdapter);
+    }
+
+
+
 
     @Override
     public void onResume() {
@@ -253,6 +308,8 @@ public class PostRestaurentFragment extends Fragment {
             binding.etDetails.setError(getString(R.string.enter_details));
         }else if (imagesList.size()==0) {
             showToast(getActivity(),"Please select Event Images.");
+        }else if (eventCategory.equalsIgnoreCase("")) {
+            showToast(getActivity(),"Please select Restaurant Category");
         }else
         {
             purchasePlan();
@@ -368,15 +425,12 @@ public class PostRestaurentFragment extends Fragment {
         }
 
 
-
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == SELECT_FILE) {
                 try {
-
                     if(whichSelected.equalsIgnoreCase("event"))
                     {
-
                         Uri selectedImage = data.getData();
                         Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
@@ -387,7 +441,6 @@ public class PostRestaurentFragment extends Fragment {
                         Uri tempUri = getImageUri(getActivity(), bitmap);
                         String image = RealPathUtil.getRealPath(getActivity(), tempUri);
                         str_image_path = image;
-
                     }
                     else
                     {
@@ -572,8 +625,10 @@ public class PostRestaurentFragment extends Fragment {
         RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
         RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
+        RequestBody eventCat = RequestBody.create(MediaType.parse("text/plain"), eventCategory);
 
-        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId,eventName,address,lat,lon,description,filePart,filePartList);
+        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId,eventName,address,lat,lon,
+                description,eventCat,filePart,filePartList);
         loginCall.enqueue(new Callback<SuccessResAddRestaurant>() {
             @Override
             public void onResponse(Call<SuccessResAddRestaurant> call, Response<SuccessResAddRestaurant> response) {
@@ -626,7 +681,6 @@ public class PostRestaurentFragment extends Fragment {
     }
 
     public void purchasePlan() {
-
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
@@ -651,13 +705,14 @@ public class PostRestaurentFragment extends Fragment {
                             .putExtra("restrantName",restrantName)
                             .putExtra("str_image_path",str_image_path)
                             .putExtra("strLocation",strLocation)
+                            .putExtra("event_Category",eventCategory)
                             .putExtra("lat",myLatitude)
                             .putExtra("lon",myLongitude)
                             .putExtra("strDetails",strDetails)
                             .putExtra("imagesList",imagesList)
                     );
                 }
-                );
+        );
 
         cancelBtn.setOnClickListener(v ->
                 {

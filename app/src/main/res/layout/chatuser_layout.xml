@@ -37,10 +37,10 @@ android:padding="@dimen/_5sdp"
                     android:background="@drawable/unseen_circle"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text=""
+                    android:text="0"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:visibility="gone" />
+                    android:textSize="@dimen/_8sdp"
+                    android:visibility="visible" />
 
 
             </LinearLayout>

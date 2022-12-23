@@ -1,13 +1,13 @@
 package com.my.vibras.act;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.my.vibras.R;
@@ -18,6 +18,8 @@ import com.my.vibras.model.SuccessResGetUsers;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
+import com.my.vibras.utility.GPSTracker;
+import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
@@ -38,14 +40,21 @@ public class FriendListAct extends AppCompatActivity {
     FriendsListAdapter mAdapter;
     private ArrayList<SuccessResGetUsers.Result> usersList = new ArrayList<>();
     private VibrasInterface apiInterface;
+    GPSTracker gpsTracker;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_friend_list);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_friend_list);
 
-        apiInterface  = ApiClient.getClient().create(VibrasInterface.class);
-
+        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+        session = new Session(this);
+        gpsTracker = new GPSTracker(this);
+        if (gpsTracker.canGetLocation()) {
+            session.setHOME_LAT(gpsTracker.getLatitude() + "");
+            session.setHOME_LONG(gpsTracker.getLongitude() + "");
+        }
         getAllUsers();
 
         binding.RRFrnd.setOnClickListener(v -> {
@@ -60,10 +69,10 @@ public class FriendListAct extends AppCompatActivity {
 
         DataManager.getInstance().showProgressMessage(FriendListAct.this, getString(R.string.please_wait));
 
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("lat","22.7196");
-        map.put("lon","75.8577");
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("lat", session.getHOME_LAT());
+        map.put("lon",session.getHOME_LONG());
         Call<SuccessResGetUsers> call = apiInterface.getFriendsList(map);
         call.enqueue(new Callback<SuccessResGetUsers>() {
             @Override
@@ -72,16 +81,16 @@ public class FriendListAct extends AppCompatActivity {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetUsers data = response.body();
-                    Log.e("data",data.status);
+                    Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         usersList.clear();
                         usersList.addAll(data.getResult());
-                        mAdapter = new FriendsListAdapter(FriendListAct.this,usersList);
+                        mAdapter = new FriendsListAdapter(FriendListAct.this, usersList);
                         binding.rvFrnd.setHasFixedSize(true);
                         // use a linear layout manager
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FriendListAct.this);
-                        binding.rvFrnd.setLayoutManager(new GridLayoutManager(FriendListAct.this,3));
+                        binding.rvFrnd.setLayoutManager(new GridLayoutManager(FriendListAct.this, 3));
                         //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
                         binding.rvFrnd.setAdapter(mAdapter);
                         mAdapter.SetOnItemClickListener(new FriendsListAdapter.OnItemClickListener() {
@@ -98,6 +107,7 @@ public class FriendListAct extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResGetUsers> call, Throwable t) {
                 call.cancel();
@@ -106,8 +116,7 @@ public class FriendListAct extends AppCompatActivity {
         });
     }
 
-    private void setAdapter()
-    {
+    private void setAdapter() {
         modelListbrouse.add(new HomModel(""));
         modelListbrouse.add(new HomModel(""));
         modelListbrouse.add(new HomModel(""));

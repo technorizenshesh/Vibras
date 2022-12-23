@@ -10,11 +10,14 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +37,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.Constants;
 import com.google.gson.Gson;
 import com.my.vibras.AudioCalling.VoiceChatViewActivity;
 import com.my.vibras.R;
 import com.my.vibras.VideoCalling.VideoCallingAct;
+import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.act.SearchLocationMapAct;
 import com.my.vibras.media.RtcTokenBuilder;
 import com.my.vibras.model.SuccessResInsertChat;
@@ -119,6 +124,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     private String token;
     ImageView live_location;
     GPSTracker gpsTracker;
+    LinearLayout typing_layout;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -143,12 +149,18 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        mReference.child("type" + useriddeivce + "To" + friend_idlast).setValue("false");
+        super.onStop();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_inner_messages);
         gpsTracker = new GPSTracker(this);
+        typing_layout = findViewById(R.id.typing_layout);
         chat_messages_list = findViewById(R.id.chat_messages_list);
         audio_call_rela = findViewById(R.id.audio_call_rela);
         call_relat = findViewById(R.id.call_relat);
@@ -160,9 +172,9 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         live_location = findViewById(R.id.live_location);
         session = new Session(ChatInnerMessagesActivity.this);
         useriddeivce = session.getUserId();
+
         mReference = FirebaseDatabase.getInstance().getReference();
         if (getIntent() != null) {
-
             friend_idlast = getIntent().getStringExtra("id");
             friendimage = getIntent().getStringExtra("friendimage");
             friendnamelast = getIntent().getStringExtra("friend_name");
@@ -173,9 +185,16 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             Log.e("->>", "onCreate: friend_idlastfriend_idlastfriend_idlastfriend_idlast  " + friend_idlast + status_check);
             Log.e("->>", "onCreate: friend_idlastfriend_idlastfriend_idlastfriend_idlast    idd " + id + "----" + status_check);
             username.setText(friendnamelast);
+            session.setLastChatId(friend_idlast);
         }
-        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
+        apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+        username.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatInnerMessagesActivity.this, FriendProfileActivity.class);
+            intent.putExtra("id", friend_idlast);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        });
         mReference.child(friend_idlast).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -221,7 +240,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             }
 
         });
-
         if (unique_id != null) {
             mReference.child("chat").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -229,9 +247,9 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                     if (snapshot.getValue() != null) {
                         allmessagelist.clear();
                         for (DataSnapshot chatt : snapshot.getChildren()) {
-                            if (status.equalsIgnoreCase("1")) {
-                                ChangeUNSEENCOUNTSTATUS();
-                            }
+                            //    if (status.equalsIgnoreCase("1")) {
+                            ChangeUNSEENCOUNTSTATUS();
+                            // }
                             String message = chatt.child("message").getValue(String.class);
                             String senderID = chatt.child("senderID").getValue(String.class);
                             String receiveerID = chatt.child("receiveerID").getValue(String.class);
@@ -298,8 +316,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
 
             });
         }
-
-
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,7 +323,62 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        //    mReference.child("type" + useriddeivce + "To" + friend_idlast).setValue("false");
+        Log.e(TAG, "onCreate: ----------------------______+++&&&&&(((((((((((" +
+                " " + "type" + friend_idlast + "To"
+                + session.getUserId());
+        mReference.child("type" + friend_idlast + "To"
+                + session.getUserId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e("UnReadCount->00", "typetypetypetype: " + snapshot.getValue());
+                Log.e("UnReadCount->01", "typetypetypetype: " + snapshot.getClass());
+                if (snapshot.getValue() != null) {
+                    Log.e(Constants.TAG, "TypingTypingTypingTyping: " + snapshot.getValue());
+                    if (snapshot.getValue().toString().equalsIgnoreCase("true")) {
+                        typing_layout.setVisibility(View.VISIBLE);
+                    } else {
+                        typing_layout.setVisibility(View.GONE);
 
+                    }
+
+                    /*String[] parts = snapshot.getValue().toString().split("=");
+
+                    String part2 = parts[1];
+
+                    String unreadstatus = part2.replace("}", "");*/
+                    //    Log.e("statusget", "UnReadCount: " + unreadstatus);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        chatmessage_edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                Map<String, Object> params = new HashMap<>();
+                params.put("first_user", charSequence.length() > 0);
+                mReference.child("type" + useriddeivce + "To" + friend_idlast).setValue("true");
+               /* HashMap<String, Object> HashMap = new HashMap<String, Object>();
+                HashMap.put("UnReadMessageStatus", 1);*/
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //     mReference.child("From" + useriddeivce + "To" + friend_idlast).child("Typing").setValue(false);
+
+            }
+        });
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -387,11 +458,11 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
 
                                 startActivity(new Intent(ChatInnerMessagesActivity.this,
                                         SearchLocationMapAct.class)
-                                        .putExtra("useriddeivce"           , useriddeivce)
-                                        .putExtra("friend_idlast"           , friend_idlast)
-                                        .putExtra("friendnamelast"          , friendnamelast)
-                                        .putExtra("friendimage"             , friendimage)
-                                        .putExtra("getChatImage"   , session.getChatImage()));
+                                        .putExtra("useriddeivce", useriddeivce)
+                                        .putExtra("friend_idlast", friend_idlast)
+                                        .putExtra("friendnamelast", friendnamelast)
+                                        .putExtra("friendimage", friendimage)
+                                        .putExtra("getChatImage", session.getChatImage()));
 
                             } else if (options[item].equals("Cancel")) {
                                 dialog.dismiss();
@@ -413,7 +484,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int item) {
                         if (options[item].equals("Take Photo")) {
                             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
                             startActivityForResult(intent, 1);
                         } else if (options[item].equals("Choose from Gallery")) {
                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -505,41 +575,44 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
     }
 
     private void SETUNSEENCOUNTSTATUS() {
-        mReference.child("From" + useriddeivce + "To" + friend_idlast).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+        mReference.child("type" + useriddeivce + "To" + friend_idlast).setValue("false");
+        typing_layout.setVisibility(View.GONE);
+        mReference.child("From" + useriddeivce + "To" + friend_idlast)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
 
-                Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
-                Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
-                if (snapshot.getValue() != null) {
-                    String[] parts = snapshot.getValue().toString().split("=");
+                        Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
+                        Log.e("UnReadCount->01", "UnReadCount: " + snapshot.getClass());
+                        if (snapshot.getValue() != null) {
+                            String[] parts = snapshot.getValue().toString().split("=");
 
-                    String part2 = parts[1];
+                            String part2 = parts[1];
 
 
-                    messageunreadcount = Integer.parseInt(part2.replace("}", ""));
-                    Log.e("onDataChange-0", "onDataChange: " + messageunreadcount);
+                            messageunreadcount = Integer.parseInt(part2.replace("}", ""));
+                            Log.e("onDataChange-0", "onDataChange: " + messageunreadcount);
 
-                    HashMap<String, Object> HashMap = new HashMap<String, Object>();
-                    HashMap.put("UnReadMessageStatus", messageunreadcount + 1);
-                    // mReference.child("From" + useriddeivce + "To" + friend_idlast).removeValue();
-                    mReference.child("From" + useriddeivce + "To" + friend_idlast).setValue(HashMap);
+                            HashMap<String, Object> HashMap = new HashMap<String, Object>();
+                            HashMap.put("UnReadMessageStatus", messageunreadcount + 1);
+                            // mReference.child("From" + useriddeivce + "To" + friend_idlast).removeValue();
+                            mReference.child("From" + useriddeivce + "To" + friend_idlast).setValue(HashMap);
 
-                } else {
-                    HashMap<String, Object> HashMap = new HashMap<String, Object>();
-                    HashMap.put("UnReadMessageStatus", 1);
-                    // mReference.child("From" + useriddeivce + "To" + friend_idlast).removeValue();
-                    mReference.child("From" + useriddeivce + "To" + friend_idlast).setValue(HashMap);
-                }
+                        } else {
+                            HashMap<String, Object> HashMap = new HashMap<String, Object>();
+                            HashMap.put("UnReadMessageStatus", 1);
+                            // mReference.child("From" + useriddeivce + "To" + friend_idlast).removeValue();
+                            mReference.child("From" + useriddeivce + "To" + friend_idlast).setValue(HashMap);
+                        }
 
-            }
+                    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
 
         Log.e("SETUNSEENCOUNTSTATUS", "SETUNSEENCOUNTSTATUS: " + useriddeivce);
 
@@ -688,4 +761,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -18,7 +18,10 @@ import com.my.vibras.R;
 import com.my.vibras.RestaurantDetailAct;
 import com.my.vibras.model.SuccessResGetRestaurants;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class NEarmeRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -58,17 +61,31 @@ public class NEarmeRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.V
 
             ivRestaurants.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class).putExtra("data",new Gson().toJson(modelList.get(position))));
+                        mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class)
+                                .putExtra("data",new Gson().toJson(modelList.get(position))));
                     }
             );
 
             Glide.with(mContext)
                     .load(model.getImage())
                     .into(ivRestaurants);
-
             tvName.setText(model.getRestaurantName());
+//            if (model.getEstimateTime()>60) {
+//
+//                SimpleDateFormat sdf = new SimpleDateFormat("mm");
+//                try {
+//                    Date dt = sdf.parse(model.getEstimateTime() + "");
+//                    sdf = new SimpleDateFormat("HH:mm");
+//                    System.out.println(sdf.format(dt));
+//                    tvDistance.setText("" + sdf.format(dt) + " Hour's");
+//
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//            }else {
+                tvDistance.setText("" + model.getAddress());
 
-
+           // }
         }
     }
 

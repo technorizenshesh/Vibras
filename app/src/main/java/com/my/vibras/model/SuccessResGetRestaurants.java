@@ -145,9 +145,21 @@ public class SuccessResGetRestaurants implements Serializable {
         @SerializedName("save_post")
         @Expose
         public String savePost;
+
+        @SerializedName("user_contact")
+        @Expose
+        public String user_contact;
         @SerializedName("restaurant_gallery")
         @Expose
         public List<RestaurantGallery> restaurantGallery = null;
+
+        public String getUser_contact() {
+            return user_contact;
+        }
+
+        public void setUser_contact(String user_contact) {
+            this.user_contact = user_contact;
+        }
 
         public String getId() {
             return id;
@@ -172,11 +184,9 @@ public class SuccessResGetRestaurants implements Serializable {
         public void setRestaurantName(String restaurantName) {
             this.restaurantName = restaurantName;
         }
-
         public String getAddress() {
             return address;
         }
-
         public void setAddress(String address) {
             this.address = address;
         }

@@ -23,6 +23,7 @@ import com.my.vibras.act.SettingAct;
 import com.my.vibras.databinding.FragmentHomeBinding;
 import com.my.vibras.databinding.FragmentProfileBinding;
 import com.my.vibras.fragment.PostsFragment;
+import com.my.vibras.fragment.PostsVideoFragment;
 import com.my.vibras.model.SuccessResUpdateRate;
 import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
@@ -134,7 +135,7 @@ public class ProfileFragment extends Fragment{
     private void setUpUi() {
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-       // binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
+       binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         adapter = new ProfileFragment.Qr_DetailsAdapter(getActivity(),getChildFragmentManager(), binding.tabLayout.getTabCount());
@@ -180,7 +181,7 @@ public class ProfileFragment extends Fragment{
                     return recents1;
 
                 case 2:
-                    PostsFragment recents11 = new PostsFragment();
+                    PostsVideoFragment recents11 = new PostsVideoFragment();
                     return recents11;
 
                 default:

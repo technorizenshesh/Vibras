@@ -45,6 +45,8 @@
         </RelativeLayout>
 
        <androidx.cardview.widget.CardView
+           android:id="@+id/email_now"
+           android:layout_marginTop="@dimen/_13sdp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="@dimen/_2sdp"
@@ -57,14 +59,22 @@
                android:layout_margin="@dimen/_10sdp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:orientation="vertical"
+               android:orientation="horizontal"
                >
 <TextView
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/email"
+    android:text="@string/e_mail"
     android:layout_marginStart="@dimen/_10sdp"
     android:fontFamily="@font/poppins_bold"
+    android:textSize="@dimen/_14sdp"
+    android:textColor="@color/black"
+    /><TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="info@vibrasapp.com"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:fontFamily="@font/poppins_medium"
     android:textSize="@dimen/_14sdp"
     android:textColor="@color/black"
     />
@@ -77,6 +87,7 @@
 
        </androidx.cardview.widget.CardView>
        <androidx.cardview.widget.CardView
+           android:visibility="gone"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="@dimen/_2sdp"

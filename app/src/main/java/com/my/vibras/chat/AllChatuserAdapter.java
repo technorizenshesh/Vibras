@@ -36,7 +36,6 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
     List<AllChatUserModel> alluserchatlist;
     Context context;
     View viewlike;
-    ;
     Intent intent = new Intent();
     Session session;
     String user_id, statusget;
@@ -106,6 +105,14 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
         Log.e("==>>", "onBindViewHolder: " + model.getReceiver_id());
         Log.e("==>>", "onBindViewHolder: " + model.getSender_id());
         Log.e("==>>", "onBindViewHolder: " + session.getUserId());
+
+        try
+        {
+            mReference.child("type" + session.getUserId() + "To" + model.getId()).setValue("false");
+
+        }catch (Exception e){
+
+        }
         mReference.child(alluserchatlist.get(position).getSender_id()).
                 addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,35 +162,27 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                     if (snapshot.getValue() != null) {
                         Log.e(TAG, "snapshot.getValue()snapshot.getValue(): "+snapshot.getValue() );
                         String[] parts = snapshot.getValue().toString().split("=");
-
                         String part2 = parts[1];
-
-
                         String unreadstatus = part2.replace("}", "");
                         Log.e("statusget", "UnReadCount: " + unreadstatus);
 
                         if (unreadstatus.equalsIgnoreCase("0")) {
                             holder.unseenmessagecount.setVisibility(View.GONE);
-                            //   holder.unssencard.setVisibility(View.GONE);
-                            //holder.  unseenmessagecount.setText(unreadstatus);
+                            //  holder.unssencard.setVisibility(View.GONE);
+                            holder.  unseenmessagecount.setText(unreadstatus);
                         } else {
                             holder.unseenmessagecount.setVisibility(View.VISIBLE);
                             holder.unseenmessagecount.setText(unreadstatus);
                             notifyItemChanged(position);
-                        }
-
-                    }
-
-                }
-
+                        }}}
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
             });
-
-            mReference.child("From" + alluserchatlist.get(position).getReceiver_id() + "To"
-                    + user_id).addListenerForSingleValueEvent(new ValueEventListener() {
+        Log.e(TAG, "onBindViewHolder:   From"+alluserchatlist.get(position).getId()+"To"+session.getUserId() );
+            mReference.child("From" + alluserchatlist.get(position).getId() + "To"
+                    + session.getUserId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     Log.e("UnReadCount->00", "UnReadCount: " + snapshot.getValue());
@@ -193,7 +192,6 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                         String part2 = parts[1];
                         String unreadstatus = part2.replace("}", "");
                         Log.e("statusget", "UnReadCount: " + unreadstatus);
-
                         if (unreadstatus.equalsIgnoreCase("0")) {
                             holder.unseenmessagecount.setVisibility(View.GONE);
                             //   holder.unssencard.setVisibility(View.GONE);
@@ -202,34 +200,10 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                             holder.unseenmessagecount.setVisibility(View.VISIBLE);
                             holder.unseenmessagecount.setText(unreadstatus);
                             // notifyItemChanged(position);
-                        }
-
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
+                        }}}@Override public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
-
-
         Log.e("statusgot-->.", "onBindViewHolder: " + alluserchatlist.get(position).getId());
-
-
-
-/*
-        Log.e("ID_---------->", "onBindViewHolder: " + model.getFriend_id());
-        Log.e("ID_---------->", "onBindViewHolder: " + model.getFriendname());
-        Log.e("ID_---------->", "onBindViewHolder: " + model.getFriend_image());
-        Log.e("ID_---------->", "onBindViewHolder: " + model.getLastmessage());
-*/
-
-
-      /*  Glide.with(context)
-                .load(  + model.getFriend_image())
-                .into(holder.user_Image);*/
   holder .ivDelete.setOnClickListener( v -> {
       onItemClick.onItemDeleteClick(holder.itemView,position, model);
 
@@ -258,11 +232,7 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
                 }
             }
         });
-
-
     }
-
-
     @Override
     public int getItemCount() {
         return alluserchatlist.size();

@@ -273,6 +273,9 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_category")
     Call<SuccessResGetCategory> getEventsCategory(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("get_restra_category")
+    Call<SuccessResGetCategory> get_restra_category(@FieldMap Map<String, String> paramHashMap);
 
     @Multipart
     @POST("add_event")
@@ -298,6 +301,7 @@ public interface VibrasInterface {
                                                  @Part("address") RequestBody address,
                                                  @Part("lat") RequestBody lat,
                                                  @Part("lon") RequestBody lon,
+                                                 @Part("category_id") RequestBody  category_id,
                                                  @Part("description") RequestBody description,
                                                  @Part MultipartBody.Part fileEvent,
                                                  @Part List<MultipartBody.Part> file);

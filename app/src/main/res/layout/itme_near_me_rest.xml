@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_150sdp"
-    android:layout_height="@dimen/_150sdp"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="@dimen/_120sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_10sdp"
     android:layout_margin="@dimen/_8sdp"
@@ -14,18 +14,16 @@
         >
 
         <ImageView
-            android:layout_marginRight="-20dp"
-            android:layout_marginTop="-10dp"
-            android:layout_marginLeft="-20dp"
+            android:layout_marginRight="-10dp"
+            android:layout_marginTop="-5dp"
+            android:layout_marginLeft="-10dp"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="@dimen/_60sdp"
             android:id="@+id/ivRestaurant"
             android:layout_gravity="center"
             android:src="@drawable/resturant_img"
-            >
-
-        </ImageView>
+            />
 
         <TextView
             android:id="@+id/tvName"
@@ -37,17 +35,21 @@
             android:text="Vegan Resto"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_12sdp"
           />
 
         <TextView
             android:id="@+id/tvDistance"
             android:layout_gravity="center"
             android:padding="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12 Mins"
+            android:drawableLeft="@drawable/icon_pin"
+android:drawablePadding="@dimen/_10sdp"
+            android:maxLength="24"
             android:textColor="@color/black"
             android:textSize="@dimen/_10sdp"
           />

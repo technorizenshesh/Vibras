@@ -59,7 +59,7 @@ public class CallNotificationActionReceiver extends BroadcastReceiver {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S || "S".equals(Build.VERSION.CODENAME)) {
                 // Android 12 or Android 12 Beta
-                Intent iclose = new Intent();
+                Intent iclose = new Intent(Intent.ACTION_SENDTO);
                 context.sendBroadcast(iclose);
                 context.stopService(new Intent(context, HeadsUpNotificationService.class));
 

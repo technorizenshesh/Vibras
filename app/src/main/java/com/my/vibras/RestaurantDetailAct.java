@@ -80,7 +80,7 @@ public class RestaurantDetailAct extends AppCompatActivity implements OnMapReady
             startActivity(new Intent(RestaurantDetailAct.this, PostCommentAct.class)
                     .putExtra("from","restaurant").putExtra("id",requestModel.getId()));
         });
-
+binding.contactNo.setText(requestModel.getUser_contact());
         binding.tvLikeCount.setText(requestModel.getResCountLike()+"");
         binding.tvCommentCount.setText(requestModel.getTotalComments()+"");
         if(requestModel.getLikeStatus().equalsIgnoreCase("false"))
@@ -98,7 +98,6 @@ public class RestaurantDetailAct extends AppCompatActivity implements OnMapReady
         binding.tvRestaurantLocation.setText(requestModel.getAddress());
         binding.tvDetails.setText(requestModel.getDescription());
         imagesList.clear();
-
         strLat = requestModel.getLat();
         strLng = requestModel.getLon();
 

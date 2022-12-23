@@ -72,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="21-2-2020"
+                android:maxLength="10"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp" />
 

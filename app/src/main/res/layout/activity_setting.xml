@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/like_count"
                         android:textColor="@color/gray"
@@ -127,7 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/followers_count"
                         android:textColor="@color/gray"
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/private_account"
                         android:textColor="@color/gray"
@@ -215,7 +215,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/gray"
 
                         android:gravity="center"
@@ -244,7 +244,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -253,9 +253,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/gray"
-
                         android:gravity="center"
                         android:text="@string/notifications"
                         android:textSize="@dimen/_10sdp" />
@@ -276,7 +275,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -348,7 +347,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -379,7 +378,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -389,7 +388,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Help"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/gray"
 
                         android:textSize="@dimen/_10sdp"
@@ -409,7 +408,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right"></ImageView>
+                        android:src="@drawable/ic_baseline_arrow_forward_ios"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -419,7 +418,7 @@
                         android:text="Privacy Policy"
                         android:textSize="@dimen/_10sdp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:textColor="@color/gray"
 
                         />
@@ -437,13 +436,13 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right"></ImageView>
+                        android:src="@drawable/ic_baseline_arrow_forward_ios"></ImageView>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/terms_condition"
                         android:textColor="@color/gray"
@@ -517,7 +516,7 @@
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/back_right">
+                        android:src="@drawable/ic_baseline_arrow_forward_ios">
 
                     </ImageView>
 
@@ -526,7 +525,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppinsregular"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="Change password"
                         android:textColor="@color/gray"
@@ -552,10 +551,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/poppins_bold"
-                    android:padding="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
                     android:text="Apply For Verified Profile"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
@@ -583,23 +582,21 @@
 
                     <TextView
                         android:id="@+id/get_verified_btn"
-                        android:drawablePadding="@dimen/_10sdp"
+                        android:drawableTint="@color/black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_2sdp"
-                        android:layout_marginBottom="@dimen/_2sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:fontFamily="@font/poppins_bold"
-                        android:padding="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
                         android:text="Get Verified"
-                        android:drawableRight="@drawable/ic_baseline_verified"
                         android:textAllCaps="true"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10sdp"
                         android:visibility="visible" />
                 </RelativeLayout>
 

@@ -12,6 +12,7 @@ public class Session extends Object {
     private static final String FormStatus = "formstatus";
     private static final String Mobile = "mobile";
     private static final String UserId = "user_id";
+    private static final String LastChatId = "last_chat_activity";
     private static final String User_name = "user_name";
     private static final String FireBaseToken = "fcmid";
     private static final String HOME_LAT = "home_lat";
@@ -124,6 +125,14 @@ public class Session extends Object {
 
     public void setUserId(String userId) {
         editor.putString(UserId, userId);
+        this.editor.apply();
+    }
+ public String getLastChatId() {
+        return Rapidine_pref.getString(LastChatId, "");
+    }
+
+    public void setLastChatId(String userId) {
+        editor.putString(LastChatId, userId);
         this.editor.apply();
     }
 

@@ -92,7 +92,7 @@ public class PostEventsFragment extends Fragment {
 
     private FragmentPostEventsBinding binding;
 
-    private static int AUTOCOMPLETE_REQUEST_CODE = 5;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 9;
 
     private String eventName="",eventDate="",eventTime="",eventCategory="",eventLocation="",etAmount="",eventDetails="",eventType="";
 
@@ -111,19 +111,13 @@ public class PostEventsFragment extends Fragment {
     final Calendar myCalendar= Calendar.getInstance();
 
     private ArrayList<String> imagesList = new ArrayList<>();
-
     private static final int REQUEST_CAMERA = 1;
-
     private static final int SELECT_FILE = 2;
-
     private MultipleImagesAdapter multipleImagesAdapter;
-
     private String whichSelected="";
-
     private static final int MY_PERMISSION_CONSTANT = 5;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
-        ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_events,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
@@ -133,7 +127,6 @@ public class PostEventsFragment extends Fragment {
 
         eventsType.add("Public");
         eventsType.add("Private");
-
         binding.etLocation.setOnClickListener(v ->
                 {
 //                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
@@ -170,9 +163,9 @@ public class PostEventsFragment extends Fragment {
                     if(checkPermisssionForReadStorage())
                         showImageSelection();
                 }
-                );
+        );
 
-            binding.etTime.setOnClickListener(new View.OnClickListener() {
+        binding.etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -197,7 +190,7 @@ public class PostEventsFragment extends Fragment {
                     whichSelected = "multiple";
                     if(checkPermisssionForReadStorage())
                         showImageSelection();
-                 }
+                }
         );
 
         binding.rlAdd.setOnClickListener(v ->
@@ -217,7 +210,7 @@ public class PostEventsFragment extends Fragment {
                         Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
                     }
                 }
-                );
+        );
 
         getEventCategory();
 
@@ -327,7 +320,7 @@ public class PostEventsFragment extends Fragment {
 
         for(SuccessResGetCategory.Result result:categoryResult)
         {
-        eventsCategories.add(result.getName());
+            eventsCategories.add(result.getName());
         }
 
 //      Application of the Array to the Spinner
@@ -393,19 +386,13 @@ public class PostEventsFragment extends Fragment {
 
                 eventLocation = place.getAddress();
                 LatLng latLng = place.getLatLng();
-
                 Double latitude = latLng.latitude;
                 Double longitude = latLng.longitude;
-
                 myLatitude = Double.toString(latitude);
                 myLongitude = Double.toString(longitude);
-
                 String address = place.getAddress();
-
                 eventLocation = address;
-
                 binding.etLocation.setText(address);
-
                 binding.etLocation.post(new Runnable(){
                     @Override
                     public void run() {
@@ -423,15 +410,12 @@ public class PostEventsFragment extends Fragment {
             }
             return;
         }
-
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == SELECT_FILE) {
                 try {
-
                     if(whichSelected.equalsIgnoreCase("event"))
                     {
-
                         Uri selectedImage = data.getData();
                         Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                         Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
@@ -442,7 +426,6 @@ public class PostEventsFragment extends Fragment {
                         Uri tempUri = getImageUri(getActivity(), bitmap);
                         String image = RealPathUtil.getRealPath(getActivity(), tempUri);
                         str_image_path = image;
-
                     }
                     else
                     {
@@ -460,8 +443,7 @@ public class PostEventsFragment extends Fragment {
                     Log.i("TAG", "Some exception " + e);
                 }
 
-            } else
-                if (requestCode == REQUEST_CAMERA) {
+            } else if (requestCode == REQUEST_CAMERA) {
 
                 try {
                     if (data != null) {
@@ -498,6 +480,78 @@ public class PostEventsFragment extends Fragment {
 
             }
         }
+
+     /*   if (resultCode == RESULT_OK) {
+            Log.e("Result_code", requestCode + "");
+            if (requestCode == SELECT_FILE) {
+                try {
+                    if(whichSelected.equalsIgnoreCase("event"))
+                    {
+
+                        Uri selectedImage = data.getData();
+                        Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                        Glide.with(getActivity())
+                                .load(selectedImage)
+                                .centerCrop()
+                                .into(binding.ivProfile);
+                        Uri tempUri = getImageUri(getActivity(), bitmap);
+                        String image = RealPathUtil.getRealPath(getActivity(), tempUri);
+                        str_image_path = image;
+
+                    }
+                    else
+                    {
+                        Uri selectedImage = data.getData();
+                        Bitmap bitmapNew = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        Bitmap bitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                        Uri tempUri = getImageUri(getActivity(), bitmap);
+                        String image = RealPathUtil.getRealPath(getActivity(), tempUri);
+                        imagesList.add(image);
+                        multipleImagesAdapter.notifyDataSetChanged();
+
+                    }
+
+                } catch (IOException e) {
+                    Log.i("TAG", "Some exception " + e);
+                }
+
+            } else
+            if (requestCode == REQUEST_CAMERA) {
+                try {
+                    if (data != null) {
+
+                        if(whichSelected.equalsIgnoreCase("event"))
+                        {
+                            Bundle extras = data.getExtras();
+                            Bitmap bitmapNew = (Bitmap) extras.get("data");
+                            Bitmap imageBitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                            Uri tempUri = getImageUri(getActivity(), imageBitmap);
+                            String image = RealPathUtil.getRealPath(getActivity(), tempUri);
+                            str_image_path = image;
+                            Glide.with(getActivity())
+                                    .load(imageBitmap)
+                                    .centerCrop()
+                                    .into(binding.ivProfile);
+                        }
+                        else
+                        {
+                            Bundle extras = data.getExtras();
+                            Bitmap bitmapNew = (Bitmap) extras.get("data");
+                            Bitmap imageBitmap = BITMAP_RE_SIZER(bitmapNew, bitmapNew.getWidth(), bitmapNew.getHeight());
+                            Uri tempUri = getImageUri(getActivity(), imageBitmap);
+                            String image = RealPathUtil.getRealPath(getActivity(), tempUri);
+                            imagesList.add(image);
+                            multipleImagesAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }*/
     }
 
     //CHECKING FOR Camera STATUS

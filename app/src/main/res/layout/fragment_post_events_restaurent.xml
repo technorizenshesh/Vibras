@@ -46,7 +46,17 @@
                 android:padding="@dimen/_5sdp"
                 android:text="Event"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txtAccomadtion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:text="Accommodation"
+                android:layout_centerInParent="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,7 +67,7 @@
                 android:padding="@dimen/_5sdp"
                 android:text="Restaurant"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

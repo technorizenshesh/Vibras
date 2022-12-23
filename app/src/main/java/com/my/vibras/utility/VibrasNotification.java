@@ -283,7 +283,7 @@ Patel, userimage=https://myasp-app.com/vibras/uploads/images/User_image202210170
             Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(this, channelId)
-                            .setSmallIcon(R.drawable.login_logo)
+                            .setSmallIcon(R.mipmap.ic_launcher_round)
                             .setContentTitle(title)
                             .setContentText(key1)
                             .setAutoCancel(true)

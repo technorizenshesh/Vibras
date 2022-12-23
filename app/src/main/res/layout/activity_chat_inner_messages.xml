@@ -65,6 +65,7 @@
 
         <TextView
             android:id="@+id/username"
+            android:padding="@dimen/_5sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -85,9 +86,45 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp" />
-    <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/rlBottom"
         android:layout_alignParentBottom="true"
+        android:background="@color/lightgray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+             android:id="@+id/typing_layout"
+            android:visibility="gone"
+            android:padding="@dimen/_1sdp"
+            android:layout_above="@+id/rlBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="@drawable/left_message_background"
+            >
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Typing"
+    android:padding="@dimen/_5sdp"
+    android:textSize="@dimen/_10sdp"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_25sdp"
+                app:lottie_rawRes="@raw/typing"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+        </LinearLayout>
+
+        <RelativeLayout
         android:background="@color/lightgray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_45sdp"
@@ -164,5 +201,6 @@
         </ImageView>
 
     </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

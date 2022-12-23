@@ -55,22 +55,14 @@ public class SearchAct extends AppCompatActivity implements SuggactionClick {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
-
         binding.ivBack.setOnClickListener(v -> finish());
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         binding.RRfilter.setOnClickListener(v -> {
-            startActivity(new Intent(new Intent(SearchAct.this, FilterAct.class)));
-        });
-
+            startActivity(new Intent(new Intent(SearchAct.this, FilterAct.class)));});
         binding.etSearch.requestFocus();
-        binding.clearSearchHistory.setOnClickListener(v -> {
-            removeAll();
-        });
+        binding.clearSearchHistory.setOnClickListener(v -> {removeAll();});
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
         binding.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
@@ -80,13 +72,10 @@ public class SearchAct extends AppCompatActivity implements SuggactionClick {
                     binding.suggactionLay.setVisibility(View.GONE);
                     getUsers(cs.toString());
                     //addSearchHistory(cs.toString());
-                }
-            }
-
+                }}
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
             }
-
             @Override
             public void afterTextChanged(Editable arg0) {
             }

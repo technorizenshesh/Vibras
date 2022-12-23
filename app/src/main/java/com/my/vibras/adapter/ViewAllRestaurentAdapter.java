@@ -16,12 +16,11 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.RestaurantDetailAct;
-
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 
 import java.util.ArrayList;
 
-public class ViewAllRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ViewAllRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private ArrayList<SuccessResMyRestaurantRes.Result> modelList;
@@ -51,13 +50,13 @@ public class ViewAllRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.
             final SuccessResMyRestaurantRes.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-           ImageView ivRestaurants = holder.itemView.findViewById(R.id.ivRestaurant);
+            ImageView ivRestaurants = holder.itemView.findViewById(R.id.ivRestaurant);
             TextView tvName = holder.itemView.findViewById(R.id.tvName);
             TextView tvDistance = holder.itemView.findViewById(R.id.tvDistance);
 
             ivRestaurants.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class).putExtra("data",new Gson().toJson(modelList.get(position))));
+                        mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class).putExtra("data", new Gson().toJson(modelList.get(position))));
                     }
             );
 
@@ -66,13 +65,12 @@ public class ViewAllRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.
                     .into(ivRestaurants);
 
             tvName.setText(model.getRestaurantName());
-
+            tvDistance.setText(model.getAddress());
         }
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return modelList.size();
     }
 
@@ -99,12 +97,11 @@ public class ViewAllRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.
             super(itemView);
 
 
-        //    this.txtName=itemView.findViewById(R.id.txtName);
+            //    this.txtName=itemView.findViewById(R.id.txtName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
 
 
                 }

@@ -124,6 +124,12 @@ public class HomeUsersRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerV
         Glide.with(mContext)
                 .load(modelList.get(position).getImage())
                 .into(smallImage);
+
+        if (modelList.get(position).getAdmin_approval().equalsIgnoreCase("Approved")){
+            txtName.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_verified_white, 0);
+        }else {
+            txtName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);}
+
         txtName.setText(modelList.get(position).getFirstName()+" "+modelList.get(position).getLastName());
         ivOtherLike.setOnClickListener(v ->
                 {

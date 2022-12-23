@@ -1,5 +1,6 @@
 package com.my.vibras.act;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,9 +46,7 @@ public class SettingAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_setting);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
-
         binding.RRtrasaction.setOnClickListener(v -> {
             startActivity(new Intent(SettingAct.this, TransactionAct.class));
         });
@@ -55,7 +54,6 @@ public class SettingAct extends AppCompatActivity {
             startActivity(new Intent(SettingAct.this,
                     TakeSelfieAct.class)
                     .putExtra("loginType", "home"));
-
         });
 
         binding.RRAbout.setOnClickListener(v -> {
@@ -196,6 +194,7 @@ public class SettingAct extends AppCompatActivity {
         map.put("user_id", userId);
         Call<SuccessResUpdateRate> call = apiInterface.getNotificationStatus(map);
         call.enqueue(new Callback<SuccessResUpdateRate>() {
+            @SuppressLint({"ResourceType", "UseCompatLoadingForDrawables"})
             @Override
             public void onResponse(Call<SuccessResUpdateRate> call, Response<SuccessResUpdateRate> response) {
                 DataManager.getInstance().hideProgressMessage();
@@ -222,7 +221,7 @@ public class SettingAct extends AppCompatActivity {
                                 binding.getVerifiedBtn.setText("Verified");
                                 binding.getVerifiedBtn.setTextColor(getResources().getColor(R.color.green));
                                 binding.getVerifiedBtn.setClickable(false);
-
+                                binding.getVerifiedBtn.setCompoundDrawablesWithIntrinsicBounds(0, 0,R.drawable.ic_baseline_verified_green, 0);
                             } else if (admin_approval.equalsIgnoreCase("Rejected")) {
                                 binding.getVerifiedBtn.setText("Rejected");
                                 binding.getVerifiedBtn.setTextColor(getResources().getColor(R.color.red));

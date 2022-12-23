@@ -44,6 +44,8 @@
 
                     <TextView
                         android:id="@+id/tvUserName"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:drawableRight="@drawable/ic_baseline_verified_white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

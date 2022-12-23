@@ -68,7 +68,7 @@ public class VerificationAct extends AppCompatActivity {
                 }
 
             }
-
+            signup();
         }
 
         editTexts = new EditText[]{binding.et1, binding.et2, binding.et3, binding.et4};
@@ -110,7 +110,7 @@ public class VerificationAct extends AppCompatActivity {
         DataManager.getInstance().showProgressMessage(VerificationAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
-        map.put("otp",finalOtp);
+        map.put("otp",otppp);
 
         Call<SuccessResSignup> signupCall = apiInterface.verifyOtp(map);
         signupCall.enqueue(new Callback<SuccessResSignup>() {

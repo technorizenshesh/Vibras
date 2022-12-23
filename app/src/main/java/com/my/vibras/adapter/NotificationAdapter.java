@@ -3,6 +3,7 @@ package com.my.vibras.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetNotification;
 import com.my.vibras.utility.DeletePost;
@@ -134,6 +136,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     llJoinGroup.setVisibility(View.GONE);
                 }
 
+
+                    holder.itemView.setOnClickListener(v -> {
+                        Intent intent = new Intent(mContext, FriendProfileActivity.class);
+                        intent.putExtra("id", modelList.get(position).getOwnerId());
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
+                    });
             } catch (NullPointerException e) {
 
             } catch (Exception e) {

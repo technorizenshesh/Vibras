@@ -28,13 +28,22 @@ public class PostEventsRestaurentFragment extends Fragment {
         binding.txtEvents.setOnClickListener(v -> {
             binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
             binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+            binding.txtAccomadtion.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
             fragment = new PostEventsFragment();
             loadFragment(fragment);
         });
 
         binding.txtRestaurant.setOnClickListener(v -> {
             binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+            binding.txtAccomadtion.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
             binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+            fragment = new PostRestaurentFragment();
+            loadFragment(fragment);
+        });
+        binding.txtAccomadtion.setOnClickListener(v -> {
+            binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
+            binding.txtAccomadtion.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+            binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
             fragment = new PostRestaurentFragment();
             loadFragment(fragment);
         });

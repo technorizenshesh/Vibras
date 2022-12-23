@@ -25,6 +25,7 @@ import com.braintreepayments.cardform.view.CardForm;
 import com.google.gson.Gson;
 
 import com.my.vibras.Company.HomeComapnyAct;
+import com.my.vibras.ConsumableItemsActivity;
 import com.my.vibras.R;
 import com.my.vibras.adapter.PaymentAdapter;
 import com.my.vibras.databinding.ActivityPaymentsBinding;
@@ -112,6 +113,9 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
             groupName = getIntent().getExtras().getString("groupName");
             planId = "0";
             getGroupPayPrice();
+           /* startActivity(new Intent(PaymentsAct.this, ConsumableItemsActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK));*/
         } else if (from.equalsIgnoreCase("event")) {
             eventName = getIntent().getExtras().getString("eventName");
             str_image_path = getIntent().getExtras().getString("str_image_path");
@@ -134,6 +138,7 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
             strDetails = getIntent().getExtras().getString("strDetails");
             myLatitude = getIntent().getExtras().getString("lat");
             myLongitude = getIntent().getExtras().getString("lon");
+            eventCategory = getIntent().getExtras().getString("eventCategory");
             imagesList = (ArrayList<String>) getIntent().getSerializableExtra("imagesList");
             planId = "0";
             getGroupPayPrice();
@@ -462,7 +467,10 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
 
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
 
-                        startActivity(new Intent(PaymentsAct.this, HomeComapnyAct.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        startActivity(new Intent(
+                                PaymentsAct.this, HomeUserAct.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK));
 
                     } else if (data.equals("0")) {
                         showToast(PaymentsAct.this, message);
@@ -768,7 +776,9 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
         RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
         RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
-        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId, eventName, address, lat, lon, description, filePart, filePartList);
+        RequestBody eventCat = RequestBody.create(MediaType.parse("text/plain"), eventCategory);
+
+        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId, eventName, address, lat, lon, description,eventCat, filePart, filePartList);
         loginCall.enqueue(new Callback<SuccessResAddRestaurant>() {
             @Override
             public void onResponse(Call<SuccessResAddRestaurant> call, Response<SuccessResAddRestaurant> response) {

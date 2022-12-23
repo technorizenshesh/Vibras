@@ -69,8 +69,8 @@ import static com.my.vibras.retrofit.Constant.REGISTER_ID;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class HomeFragment extends Fragment implements HomeItemClickListener {
-
+public class HomeFragment extends Fragment implements HomeItemClickListener
+{
     private static final String TAG = "HomeFragmentHomeFragment";
     public static SuccessResGetStories.Result story;
     private FragmentHomeBinding binding;
@@ -80,9 +80,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
     private StoriesAdapter mAdapter;
     private HomeUsersRecyclerViewAdapter usersAdapters;
     private VibrasInterface apiInterface;
-
     private SuccessResGetUsers.Result selectedUser;
-
     private Dialog dialog;
 
     private String strLat = "", strLng = "";
@@ -105,7 +103,8 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
         Log.e(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
         session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
         binding.RRSearch.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), SearchAct.class)); });
+            startActivity(new Intent(getActivity(), SearchAct.class));
+        });
         getLocation();
         binding.RREvents.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -213,7 +212,6 @@ public class HomeFragment extends Fragment implements HomeItemClickListener {
                             session.setChatImage(data.getResult().getImage());
                             session.setChatName(data.getResult().getFirstName());
                             binding.txtName.setText("Good Vibes, " + data.getResult().getFirstName());
-
                         } else if (data.status.equals("0")) {
                             showToast(getActivity(), data.message);
                         }

@@ -57,7 +57,6 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
     {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events_copamny,container, false);
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
 
         myEventsAdapter = new MyEventsAdapter(getActivity(),eventsList,this);
@@ -89,7 +88,6 @@ public class EventsFragmentComapny extends Fragment implements PostClickListener
                     SuccessResMyEventRes data = response.body();
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
-
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         eventsList.clear();

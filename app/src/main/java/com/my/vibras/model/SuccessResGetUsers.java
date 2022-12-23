@@ -155,7 +155,17 @@ public class SuccessResGetUsers implements Serializable {
         @SerializedName("user_match")
         @Expose
         public String userMatch;
+        @SerializedName("admin_approval")
+        @Expose
+        public String admin_approval;
 
+        public String getAdmin_approval() {
+            return admin_approval;
+        }
+
+        public void setAdmin_approval(String admin_approval) {
+            this.admin_approval = admin_approval;
+        }
         public String getId() {
             return id;
         }

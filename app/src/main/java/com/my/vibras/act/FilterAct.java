@@ -6,11 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.slider.LabelFormatter;
 import com.google.gson.Gson;
 
@@ -24,6 +34,7 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
@@ -41,7 +53,9 @@ public class FilterAct extends AppCompatActivity {
     private VibrasInterface apiInterface;
     ActivityFilterBinding binding;
     private SuccessResSignup.Result userDetail;
-
+    private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
+          String  myLatitude  ="";
+    String        myLongitude ="";
     String[] arrrayShouldNot = new String[] {
             "Smoke", "Animals", "Children", "Alcohol"
             ,"Parties","Ego","Vegetarian","Left-wing ideology","Right-wing ideology","Centrist","ideology"
@@ -74,9 +88,23 @@ public class FilterAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          binding= DataBindingUtil.setContentView(this,R.layout.activity_filter);
+        Places.initialize(getApplicationContext().getApplicationContext(), getString(R.string.api_key));
 
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(getApplicationContext());
          binding.RRback.setOnClickListener(v -> {
             onBackPressed();
+         });     binding.etLocation.setOnClickListener(v -> {
+
+
+
+//                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
+
+                        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,
+                                Place.Field.ADDRESS,Place.Field.LAT_LNG);
+                        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                                .build(getApplicationContext());
+                        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
          });
 
          apiInterface = ApiClient.getClient().create(VibrasInterface.class);
@@ -86,7 +114,6 @@ public class FilterAct extends AppCompatActivity {
                     new AlertDialog.Builder(FilterAct.this)
                             .setTitle("Reset Filter")
                             .setMessage("Are you sure you want to reset this filter?")
-
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -158,13 +185,50 @@ public class FilterAct extends AppCompatActivity {
                     }
                 }
                 );
+
+        getProfile();
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+
+                //  eventLocation = place.getAddress();
+                LatLng latLng = place.getLatLng();
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+                myLatitude = Double.toString(latitude);
+                myLongitude = Double.toString(longitude);
+                String address = place.getAddress();
+                //  eventLocation = address;
+                binding.etLocation.setText(address);
+               /* binding.etLocation.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.etLocation.setText(address);
+                    }
+                });*/
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+    }
+ /*    @Override
     protected void onResume() {
         super.onResume();
-        getProfile();
-    }
+
+    }*/
 
     public void filterLocation()
     {
@@ -178,8 +242,8 @@ public class FilterAct extends AppCompatActivity {
         map.put("age_range_to", ageRangeTo);
      //   map.put("p_language", preferedLang);
         map.put("f_location", location);
-        map.put("f_lat", "");
-        map.put("f_lon", "");
+        map.put("f_lat",  myLatitude );
+        map.put("f_lon",  myLongitude);
         map.put("distance", distance);
         map.put("gender", gender);
        /* if (gender.equalsIgnoreCase("Man")){
@@ -310,6 +374,8 @@ public class FilterAct extends AppCompatActivity {
         }
         binding.spinnerLanguage.setSelection(selectedPosition);
         binding.etLocation.setText(userDetail.getfLocation());
+        myLatitude=userDetail.getfLat();
+                myLongitude=userDetail.getLon();
         float f = Float.parseFloat(userDetail.getDistance());
         binding.slider.setValue(f);
 

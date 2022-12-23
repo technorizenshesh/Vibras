@@ -344,7 +344,8 @@ public class LoginAct extends AppCompatActivity {
                         }
 
                     } else if (data.status.equals("0")) {
-                        if (data.getMessage().equalsIgnoreCase("Your account is not verified please verify your email now")){
+                        if (data.getMessage().equalsIgnoreCase("Your account is not verified please verify your email now"))
+                        {
 getOTP();
                         }else {                        showToast(LoginAct.this, data.message);
                         }

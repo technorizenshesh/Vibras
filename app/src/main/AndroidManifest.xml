@@ -4,7 +4,7 @@
     package="com.my.vibras">
 
     <application
-        android:name="com.my.vibras.VideoCalling.AppController"
+        android:name=".VideoCalling.AppController"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -23,6 +23,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".ConsumableItemsActivity"
+            android:exported="false" />
         <activity
             android:name=".act.SearchLocationMapAct"
             android:exported="false" />
@@ -56,22 +59,22 @@
             android:name=".act.FriendProfileActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.chat.GroupChat.GroupChatInnerActivity"
+            android:name=".chat.GroupChat.GroupChatInnerActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.AudioCalling.CallWaitingActivity"
+            android:name=".AudioCalling.CallWaitingActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.AudioCalling.VoiceChatViewActivity"
+            android:name=".AudioCalling.VoiceChatViewActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.VideoCalling.VideoCallingAct"
+            android:name=".VideoCalling.VideoCallingAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.VideoCalling.IncomingCallActivity"
+            android:name=".VideoCalling.IncomingCallActivity"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.chat.ChatInnerMessagesActivity"
+            android:name=".chat.ChatInnerMessagesActivity"
             android:exported="false" />
         <activity
             android:name=".act.AboutUsActivity"
@@ -101,7 +104,7 @@
             android:name=".act.GroupChatAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.CreateGroupAct"
+            android:name=".CreateGroupAct"
             android:exported="false" />
         <activity
             android:name=".act.GoodVibesAct"
@@ -113,13 +116,13 @@
             android:name=".act.ViewAllEventAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.SearchRestAct"
+            android:name=".SearchRestAct"
             android:exported="false" />
         <activity
             android:name=".act.RestaurantAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.SearchEventAct"
+            android:name=".SearchEventAct"
             android:exported="false" />
         <activity
             android:name=".act.SavedEventsAct"
@@ -128,7 +131,7 @@
             android:name=".act.SavedRestaurantAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.RestaurantDetailAct"
+            android:name=".RestaurantDetailAct"
             android:exported="false" />
         <activity
             android:name=".act.StoryDetailAct"
@@ -149,10 +152,10 @@
             android:name=".act.ChangePassAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.Company.ComapmnySettingAct"
+            android:name=".Company.ComapmnySettingAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.Company.HomeComapnyAct"
+            android:name=".Company.HomeComapnyAct"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -201,7 +204,7 @@
             android:name=".act.SearchAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -210,25 +213,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.my.vibras.LikeInterestsAct"
+            android:name=".LikeInterestsAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.VerificationAct"
+            android:name=".VerificationAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.TakeSelfieAct"
+            android:name=".TakeSelfieAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.CompleteSignUpAct"
+            android:name=".CompleteSignUpAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.SignUpAct"
+            android:name=".SignUpAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.LoginAct"
+            android:name=".LoginAct"
             android:exported="false" />
         <activity
-            android:name="com.my.vibras.SelectViberLoginAct"
+            android:name=".SelectViberLoginAct"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -262,7 +265,7 @@
             android:value="@integer/google_play_services_version" />
 
         <receiver
-            android:name="com.my.vibras.VideoCalling.CallNotificationActionReceiver"
+            android:name=".VideoCalling.CallNotificationActionReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="999">
@@ -272,18 +275,18 @@
         </receiver>
 
         <service
-            android:name="com.my.vibras.VideoCalling.HeadsUpNotificationService"
+            android:name=".VideoCalling.HeadsUpNotificationService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name="com.my.vibras.utility.VibrasNotification"
+            android:name=".utility.VibrasNotification"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name="com.my.vibras.VideoCalling.IncomingCallService"
+            android:name=".VideoCalling.IncomingCallService"
             android:enabled="true"
             android:exported="true" />
     </application>
@@ -321,11 +324,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission
         android:name="com.google.android.gms.permission.AD_ID"
         tools:node="remove" />
 
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
 </manifest>

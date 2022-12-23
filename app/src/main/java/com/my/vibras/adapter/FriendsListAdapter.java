@@ -1,6 +1,7 @@
 package com.my.vibras.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,23 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetUsers;
 
 import java.util.ArrayList;
 
-public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
+public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-
     private OnItemClickListener mItemClickListener;
-
-    private ArrayList<SuccessResGetUsers.Result> usersList ;
-    public FriendsListAdapter(Context context,ArrayList<SuccessResGetUsers.Result> usersList) {
+    private ArrayList<SuccessResGetUsers.Result> usersList;
+    public FriendsListAdapter(Context context, ArrayList<SuccessResGetUsers.Result> usersList) {
         this.mContext = context;
         this.usersList = usersList;
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_frndlist, viewGroup, false);
@@ -47,20 +45,24 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             TextView tvUsername = holder.itemView.findViewById(R.id.tvUsername);
             TextView tvViewProfile = holder.itemView.findViewById(R.id.tvViewProfile);
 
-            Log.d("TAG", "onBindViewHolder: "+usersList.get(position).getImage());
+            Log.d("TAG", "onBindViewHolder: " + usersList.get(position).getImage());
 
             Glide.with(mContext)
                     .load(usersList.get(position).getImage())
                     .into(ivUserProfile);
 
-            tvUsername.setText(usersList.get(position).getFirstName()+" "+usersList.get(position).getLastName());
-
+            tvUsername.setText(usersList.get(position).getFirstName() + " " + usersList.get(position).getLastName());
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(mContext, FriendProfileActivity.class);
+                intent.putExtra("id", usersList.get(position).getId());
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+            });
         }
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return usersList.size();
     }
 
@@ -81,7 +83,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public ViewHolder(final View itemView) {
             super(itemView);
 
-        //    this.txtName=itemView.findViewById(R.id.txtName);
+            //    this.txtName=itemView.findViewById(R.id.txtName);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
