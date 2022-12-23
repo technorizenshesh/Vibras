@@ -386,7 +386,8 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                         Toast.makeText(CreateGroupAct.this, "Please enter group name.", Toast.LENGTH_SHORT).show();
                     } else if (str_image_path.equalsIgnoreCase("")) {
                         Toast.makeText(CreateGroupAct.this, "Please Pick group Image.", Toast.LENGTH_SHORT).show();
-                    } else {
+                    } else
+                    {
                        dialog6 = new Dialog(CreateGroupAct.this);
                         dialog6.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog6.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
@@ -424,7 +425,6 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                             groupName=  edtEmail.getText().toString();
                              if (productDetailsList!=null&&productDetailsList.size()>=1){
                                  launchPurchaseFlow(productDetailsList.get(0));
-
                              }
 
                          /*   startActivity(new Intent(CreateGroupAct.this, ConsumableItemsActivity.class)

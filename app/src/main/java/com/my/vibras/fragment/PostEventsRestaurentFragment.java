@@ -44,7 +44,7 @@ public class PostEventsRestaurentFragment extends Fragment {
             binding.txtEvents.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
             binding.txtAccomadtion.setTextColor(ContextCompat.getColor(getActivity(), R.color.black));
             binding.txtRestaurant.setTextColor(ContextCompat.getColor(getActivity(), R.color.gray));
-            fragment = new PostRestaurentFragment();
+            fragment = new PostAccommadationsFragment();
             loadFragment(fragment);
         });
         fragment = new PostEventsFragment();

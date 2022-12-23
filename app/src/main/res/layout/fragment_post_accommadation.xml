@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Restaurant Details"
+                android:text="Accommodation Details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name of Restaurant"
+                android:text="Name of Accommodation"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -84,11 +84,11 @@
 
                 <EditText
                     android:fontFamily="@font/roboto_light"
-                    android:id="@+id/etRestaurantName"
+                    android:id="@+id/etAccommodationName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:hint="@string/enter_restaurant_name"
+                    android:hint="@string/enter_accommodation_name"
                     android:inputType="text"
                     android:padding="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp"
@@ -104,7 +104,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location of restaurant"
+                android:text="Location of Accommodation"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -135,12 +135,43 @@
             </androidx.cardview.widget.CardView>
 
 
+
+
+            <TextView
+
+                android:visibility="gone"
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_of_event"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/gray"
+                />
+
+            <androidx.cardview.widget.CardView
+                 android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                app:cardCornerRadius="@dimen/_2sdp">
+
+                <Spinner
+                    android:id="@+id/spinnerCategory"
+                    android:drawableRight="@drawable/arrw_bttm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColorHint="@color/gray">
+
+                </Spinner>
+
+            </androidx.cardview.widget.CardView>
             <TextView
                 android:fontFamily="@font/roboto_light"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/contact_of_rect"
+                android:text="@string/contact_of_acco"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -168,33 +199,6 @@
                     android:textColorHint="@color/gray">
 
                 </EditText>
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:fontFamily="@font/roboto_light"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/category_of_event"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/gray"
-                />
-
-            <androidx.cardview.widget.CardView
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                app:cardCornerRadius="@dimen/_2sdp">
-
-                <Spinner
-                    android:id="@+id/spinnerCategory"
-                    android:drawableRight="@drawable/arrw_bttm"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColorHint="@color/gray">
-
-                </Spinner>
 
             </androidx.cardview.widget.CardView>
 

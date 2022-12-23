@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_80sdp"
-    android:layout_height="@dimen/_80sdp"
+    android:layout_width="@dimen/_65sdp"
+    android:layout_height="@dimen/_65sdp"
     android:orientation="vertical"
     >
 
@@ -20,9 +20,9 @@
             android:id="@+id/ivCategory"
             android:layout_gravity="center"
             android:src="@drawable/icon_online"
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
             android:scaleType="fitXY"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="@dimen/_20sdp"
             >
         </ImageView>
 
@@ -34,7 +34,7 @@
             android:text="@string/online_courses"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/_5sdp"
           />
 
         <TextView
@@ -44,7 +44,7 @@
             android:text="4 Events"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/_6sdp"
           />
 
     </LinearLayout>

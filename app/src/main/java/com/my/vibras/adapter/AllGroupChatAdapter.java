@@ -57,6 +57,8 @@ public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             TextView tvGroupName = holder.itemView.findViewById(R.id.tvGroupName);
             RecyclerView recyc_members = holder.itemView.findViewById(R.id.recyc_members);
             List<SuccessResGetGroup.GroupMembersDetail> modelList = new ArrayList<>();
+            if (model.getGroupMembersDetail()!=null){
+
             modelList = model.getGroupMembersDetail();
             LinearLayoutManager linearLayoutManager= new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
             GroupHintedMembersAdapter groupHintedMembersAdapter= new
@@ -64,9 +66,8 @@ public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             recyc_members.setAdapter(groupHintedMembersAdapter);
             recyc_members.setLayoutManager(linearLayoutManager);
             recyc_members.hasFixedSize();
-            recyc_members.hasNestedScrollingParent();
+            recyc_members.hasNestedScrollingParent();}
             tvGroupName.setText(model.getGroupName());
-
             Glide.with(mContext).load(model.getGroupImage()).into(ivProfile);
             tvView.setOnClickListener(v ->
                     {

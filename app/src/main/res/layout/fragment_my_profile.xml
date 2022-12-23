@@ -133,10 +133,10 @@
     android:padding="@dimen/_5sdp"
     >
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="testtc"
         android:textColor="@color/black"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
@@ -198,7 +198,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="6,281k "
                                 android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12sdp"
@@ -230,7 +229,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:text="6,281k "
                                 android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12sdp"

@@ -73,19 +73,12 @@ public class EventsFragment extends Fragment {
     private ArrayList<SuccessResGetRestaurants.Result> modelListNearMERest = new ArrayList<>();
 
     private boolean addGroup = false;
-
     private VibrasInterface apiInterface;
-
     BruseEventAdapter mAdapter;
-
     AllGroupChatAdapter groupChatAdapter;
-
     private ArrayList<SuccessResGetCategory.Result> categoryResult = new ArrayList<>();
-
     NEarmeEventstAdapter mAdapterNEarMe;
-
     NEarmeRestaurentAdapter mAdapterNEarMeRest;
-
     private SliderAdapter sliderAdapter;
     GPSTracker gpsTracker;
     private boolean isUserLoggedIn;
@@ -102,13 +95,11 @@ public class EventsFragment extends Fragment {
         session = new Session(getContext());
         isUserLoggedIn = SharedPreferenceUtility.getInstance(getActivity()).getBoolean(Constant.IS_USER_LOGGED_IN);
 
-
         Bundle bundle1 = this.getArguments();
         if (bundle1 != null) {
             Gson gson = new Gson();
 //            binding.RRtoolbar.setVisibility(View.VISIBLE);
         }
-
         binding.imgBack.setOnClickListener(v -> {
             getActivity().onBackPressed();
         });
@@ -116,6 +107,8 @@ public class EventsFragment extends Fragment {
 
          if (type.equalsIgnoreCase("user")){
              binding.btnCreateGroup.setVisibility(View.VISIBLE);
+         }else {
+             binding.imgBack.setVisibility(View.GONE);
          }
         binding.btnCreateGroup.setOnClickListener(v ->
                 {
@@ -203,20 +196,17 @@ public class EventsFragment extends Fragment {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetGroup data = response.body();
-                    Log.e("data", data.status);
-                    if (data.status.equals("1")) {
-                        String dataResponse = new Gson().toJson(response.body());
+                    String dataResponse = new Gson().toJson(response.body());
 
+                    Log.e("dataResponsedataResponse", dataResponse);
+                    if (data.status.equals("1")) {
+                        //String dataResponse = new Gson().toJson(response.body());
                         groupList.clear();
                         groupList.addAll(data.getResult());
                         groupChatAdapter = new AllGroupChatAdapter(getActivity(), groupList);
                         binding.rvGrp.setHasFixedSize(true);
-                        // use a linear layout manager
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.rvGrp.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-                        //binding.recyclermyAccount.setLayoutManager(linearLayoutManager);
                         binding.rvGrp.setAdapter(new AllGroupChatAdapter(getActivity(), groupList));
-
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }

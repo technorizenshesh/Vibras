@@ -1,6 +1,7 @@
 package com.my.vibras.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -25,16 +26,27 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeParams;
+import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.QueryProductDetailsParams;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -44,8 +56,10 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
+import com.my.vibras.CreateGroupAct;
 import com.my.vibras.R;
 import com.my.vibras.act.PaymentsAct;
 import com.my.vibras.adapter.MultipleImagesAdapter;
@@ -73,6 +87,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import io.agora.rtc.gl.VideoFrame;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -94,7 +109,7 @@ public class PostEventsFragment extends Fragment {
 
     private static int AUTOCOMPLETE_REQUEST_CODE = 9;
 
-    private String eventName="",eventDate="",eventTime="",eventCategory="",eventLocation="",etAmount="",eventDetails="",eventType="";
+    private String eventName="",eventContact="",eventDate="",eventTime="",eventCategory="",eventLocation="",etAmount="",eventDetails="",eventType="";
 
     private String myLatitude = "",myLongitude="";
 
@@ -116,21 +131,38 @@ public class PostEventsFragment extends Fragment {
     private MultipleImagesAdapter multipleImagesAdapter;
     private String whichSelected="";
     private static final int MY_PERMISSION_CONSTANT = 5;
+
+
+    BillingClient billingClient;
+    List<ProductDetails> productDetailsList= new ArrayList<>();
+    Dialog  dialog6;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_events,container, false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
-
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
-
         eventsType.add("Public");
         eventsType.add("Private");
+
+        billingClient = BillingClient.newBuilder(getActivity())
+                .enablePendingPurchases()
+                .setListener(
+                        (billingResult, list) -> {
+                            if(billingResult.getResponseCode()
+                                    ==BillingClient.BillingResponseCode.OK && list != null) {
+                                for (Purchase purchase: list){
+                                    verifyPurchase(purchase);
+                                }
+                            }
+                        }
+                ).build();
+        connectGooglePlayBilling();
+
         binding.etLocation.setOnClickListener(v ->
                 {
 //                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
-
                     List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
                     Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
                             .build(getActivity());
@@ -204,6 +236,7 @@ public class PostEventsFragment extends Fragment {
                     etAmount = binding.etBookingAmount.getText().toString().trim();
                     eventDetails = binding.etEventDetails.getText().toString().trim();
                     eventType = binding.spinnerType.getSelectedItem().toString();
+                    eventContact = binding.edtContact.getText().toString();
                     if (NetworkAvailablity.checkNetworkStatus(getActivity())) {
                         isValid();
                     } else {
@@ -227,7 +260,83 @@ public class PostEventsFragment extends Fragment {
         binding.rvImages.setAdapter(multipleImagesAdapter);
         return binding.getRoot();
     }
+    void launchPurchaseFlow(ProductDetails productDetails) {
+        ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList =
+                ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                        .setProductDetails(productDetails)
+                        .build());
+        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                .setProductDetailsParamsList(productDetailsParamsList)
+                .build();
+        billingClient.launchBillingFlow(getActivity(), billingFlowParams);
+    }
+    void connectGooglePlayBilling() {
 
+        Log.d(VideoFrame.TextureBuffer.TAG,"connectGooglePlayBilling ");
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectGooglePlayBilling();
+                Log.e(VideoFrame.TextureBuffer.TAG, "onBillingServiceDisconnected: " );
+            }
+
+            @Override
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    Log.e(VideoFrame.TextureBuffer.TAG, "onBillingSetupFinished: " );
+                    showProducts();
+                }
+            }
+        });
+
+    }
+    @SuppressLint("SetTextI18n")
+
+    void showProducts() {
+
+        Log.d(VideoFrame.TextureBuffer.TAG, "showProducts");
+
+        ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.of(
+                //Product 1
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId("add_event")
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build()
+        );
+        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
+                .setProductList(productList)
+                .build();
+
+        billingClient.queryProductDetailsAsync(params, (billingResult, list) -> {
+            //Clear the list
+            productDetailsList.clear();
+            Log.d(VideoFrame.TextureBuffer.TAG, "SizeSizeSizeSizeSizeSize " + list.size());
+            try {
+                productDetailsList.addAll(list);
+                ProductDetails productDetails = list.get(0);
+                String price = productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice();
+                String productName = productDetails.getName();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+
+    }
+
+    void verifyPurchase(Purchase purchase) {
+        ConsumeParams consumeParams = ConsumeParams.newBuilder()
+                .setPurchaseToken(purchase.getPurchaseToken())
+                .build();
+        ConsumeResponseListener listener = (billingResult, s) -> {
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                //   giveUserCoins(purchase);
+                addEvent()   ;
+                dialog6.dismiss();
+            }
+        };
+        billingClient.consumeAsync(consumeParams, listener);
+    }
     private void updateLabel(){
         String myFormat="MM/dd/yyyy";
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
@@ -254,29 +363,141 @@ public class PostEventsFragment extends Fragment {
             binding.etEventDetails.setError("Please Enter Event Details");
         }else if (eventType.equalsIgnoreCase("")) {
             showToast(getActivity(),"Please select Event Type");
+        }else if (eventContact.equalsIgnoreCase("")) {
+            showToast(getActivity(),"Please Enter Event Contact Info");
         }else if (imagesList.size()==0) {
             showToast(getActivity(),"Please select Event Images.");
         }else
         {
+                dialog6 = new Dialog(getActivity());
+                dialog6.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog6.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
+                dialog6.setContentView(R.layout.dialog_choose_pay);
+                WindowManager.LayoutParams lp6 = new WindowManager.LayoutParams();
+                Window window6 = dialog6.getWindow();
+                lp6.copyFrom(window6.getAttributes());
+                //This makes the dialog take up the full width
+                lp6.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp6.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog6.show();
+                AppCompatButton btnClose = dialog6.findViewById(R.id.btnCreate);
+                TextView edtg_pay = dialog6.findViewById(R.id.edtg_pay);
+                TextView edt_pay = dialog6.findViewById(R.id.edt_pay);
+                btnClose.setOnClickListener(c ->
+                {
+                    dialog6.dismiss();
+                });
+                edt_pay.setOnClickListener(c ->
+                {
+                    dialog6.dismiss();
+                    startActivity(new Intent(getActivity(), PaymentsAct.class)
+                            .putExtra("from","event")
+                            .putExtra("eventName",eventName)
+                            .putExtra("str_image_path",str_image_path)
+                            .putExtra("eventDate",eventDate)
+                            .putExtra("eventTime",eventTime)
+                            .putExtra("eventCategory",eventCategory)
+                            .putExtra("eventLocation",eventLocation)
+                            .putExtra("etAmount",etAmount)
+                            .putExtra("eventContact",eventContact)
+                            .putExtra("eventDetails",eventDetails)
+                            .putExtra("eventType",eventType)
+                            .putExtra("lat",myLatitude)
+                            .putExtra("lon",myLongitude)
+                            .putExtra("imagesList",imagesList));
+                });
+                edtg_pay.setOnClickListener(c ->
+                {
 
-//            addEvent();
+                 //   groupName=  edtEmail.getText().toString();
+                    if (productDetailsList!=null&&productDetailsList.size()>=1){
+                        launchPurchaseFlow(productDetailsList.get(0));
 
-            startActivity(new Intent(getActivity(), PaymentsAct.class)
-                    .putExtra("from","event")
-                    .putExtra("eventName",eventName)
-                    .putExtra("str_image_path",str_image_path)
-                    .putExtra("eventDate",eventDate)
-                    .putExtra("eventTime",eventTime)
-                    .putExtra("eventCategory",eventCategory)
-                    .putExtra("eventLocation",eventLocation)
-                    .putExtra("etAmount",etAmount)
-                    .putExtra("eventDetails",eventDetails)
-                    .putExtra("eventType",eventType)
-                    .putExtra("lat",myLatitude)
-                    .putExtra("lon",myLongitude)
-                    .putExtra("imagesList",imagesList)
-            );
+                    }
+                });}
+
+
+
+
+
+
+
         }
+
+    public void addEvent() {
+
+        String strUserId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+
+        List<MultipartBody.Part> filePartList = new LinkedList<>();
+
+        for (int i = 0; i < imagesList.size(); i++) {
+
+            String image = imagesList.get(i);
+
+            if (!imagesList.get(i).contains("https://nobu.es/tasknobu/uploads")) {
+                File file = DataManager.getInstance().saveBitmapToFile(new File(imagesList.get(i)));
+                filePartList.add(MultipartBody.Part.createFormData("image_file[]", file.getName()
+                        , RequestBody.create(MediaType.parse("image_file[]/*"), file)));
+            }
+        }
+
+        MultipartBody.Part filePart;
+        if (!str_image_path.equalsIgnoreCase("")) {
+            File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
+            if (file != null) {
+                filePart = MultipartBody.Part.createFormData("image", file.getName(),
+                        RequestBody.create(MediaType.parse("image/*"), file));
+            } else {
+                filePart = null;
+            }
+
+        } else {
+            RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
+            filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
+        }
+
+        RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+        RequestBody eventNm = RequestBody.create(MediaType.parse("text/plain"), eventName);
+        RequestBody address = RequestBody.create(MediaType.parse("text/plain"), eventLocation);
+        RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
+        RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
+        RequestBody eventDat = RequestBody.create(MediaType.parse("text/plain"), eventDate);
+        RequestBody startTime = RequestBody.create(MediaType.parse("text/plain"), eventTime);
+        RequestBody endTIme = RequestBody.create(MediaType.parse("text/plain"), eventTime);
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), eventDetails);
+        RequestBody bookingAmount = RequestBody.create(MediaType.parse("text/plain"), etAmount);
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), eventType);
+        RequestBody eventCat = RequestBody.create(MediaType.parse("text/plain"), eventCategory);
+
+        Call<SuccessResAddEvent> loginCall = apiInterface.addEvent(userId, eventNm, address, lat, lon, eventDat, startTime, endTIme, description, bookingAmount, type, eventCat, filePart, filePartList);
+        loginCall.enqueue(new Callback<SuccessResAddEvent>() {
+            @Override
+            public void onResponse(Call<SuccessResAddEvent> call, Response<SuccessResAddEvent> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+
+                    SuccessResAddEvent data = response.body();
+                    String responseString = new Gson().toJson(response.body());
+                    Log.e(TAG, "Test Response :" + responseString);
+
+                    startActivity(new Intent(getActivity(), HomeComapnyAct.class).
+                            setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Test Response :" + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResAddEvent> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+
     }
 
     private void getEventCategory() {
@@ -640,7 +861,7 @@ public class PostEventsFragment extends Fragment {
         }
     }
 
-    public void addEvent()
+   /* public void addEvent()
     {
 
         String strUserId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
@@ -717,7 +938,7 @@ public class PostEventsFragment extends Fragment {
             }
         });
 
-    }
+    }*/
 
     public Bitmap BITMAP_RE_SIZER(Bitmap bitmap, int newWidth, int newHeight) {
         Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
@@ -737,7 +958,6 @@ public class PostEventsFragment extends Fragment {
         return scaledBitmap;
 
     }
-
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);

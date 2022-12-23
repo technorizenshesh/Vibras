@@ -25,7 +25,6 @@ import com.braintreepayments.cardform.view.CardForm;
 import com.google.gson.Gson;
 
 import com.my.vibras.Company.HomeComapnyAct;
-import com.my.vibras.ConsumableItemsActivity;
 import com.my.vibras.R;
 import com.my.vibras.adapter.PaymentAdapter;
 import com.my.vibras.databinding.ActivityPaymentsBinding;
@@ -77,7 +76,7 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
 
     String cardNo = "", expirationMonth = "", expirationYear = "", cvv = "", holderName = "";
 
-    private String eventName = "", eventDate = "", eventTime = "", eventCategory = "", eventLocation = "", etAmount = "", eventDetails = "", eventType = "", str_image_path;
+    private String eventName = "", eventDate = "", eventContact = "", eventTime = "", eventCategory = "", eventLocation = "", etAmount = "", eventDetails = "", eventType = "", str_image_path;
 
     private String myLatitude = "", myLongitude = "";
 
@@ -121,6 +120,7 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
             str_image_path = getIntent().getExtras().getString("str_image_path");
             eventDate = getIntent().getExtras().getString("eventDate");
             eventTime = getIntent().getExtras().getString("eventTime");
+            eventContact = getIntent().getExtras().getString("eventContact");
             eventCategory = getIntent().getExtras().getString("eventCategory");
             eventLocation = getIntent().getExtras().getString("eventLocation");
             etAmount = getIntent().getExtras().getString("etAmount");

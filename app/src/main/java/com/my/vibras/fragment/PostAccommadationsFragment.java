@@ -1,7 +1,6 @@
 package com.my.vibras.fragment;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +22,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,15 +32,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingClientStateListener;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.ConsumeParams;
-import com.android.billingclient.api.ConsumeResponseListener;
-import com.android.billingclient.api.ProductDetails;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.QueryProductDetailsParams;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
@@ -52,13 +41,12 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
-import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.R;
 import com.my.vibras.act.PaymentsAct;
 import com.my.vibras.adapter.MultipleImagesAdapter;
-import com.my.vibras.databinding.FragmentPostEventsBinding;
+import com.my.vibras.databinding.FragmentPostAccommadationBinding;
 import com.my.vibras.databinding.FragmentPostRestaurentBinding;
 import com.my.vibras.model.SuccessResAddRestaurant;
 import com.my.vibras.model.SuccessResGetCategory;
@@ -82,7 +70,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import io.agora.rtc.gl.VideoFrame;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -96,13 +83,13 @@ import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class PostRestaurentFragment extends Fragment {
+public class PostAccommadationsFragment extends Fragment {
 
     private Fragment fragment;
 
-    private FragmentPostRestaurentBinding binding;
+    private FragmentPostAccommadationBinding binding;
 
-    private String restrantName="",strLocation="",strDetails="",edt_contact="";
+    private String restrantName="",edt_contact="",strLocation="",strDetails="";
     private String myLatitude = "",myLongitude="";
 
     private VibrasInterface apiInterface;
@@ -132,30 +119,17 @@ public class PostRestaurentFragment extends Fragment {
     private MultipleImagesAdapter multipleImagesAdapter;
 
     private String whichSelected="";
-    BillingClient billingClient;
-    List<ProductDetails> productDetailsList= new ArrayList<>();
-    Dialog  dialog6;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_restaurent,container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_accommadation,container,
+                false);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         get_restra_category22();
         Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key));
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
-        billingClient = BillingClient.newBuilder(getActivity())
-                .enablePendingPurchases()
-                .setListener(
-                        (billingResult, list) -> {
-                            if(billingResult.getResponseCode()
-                                    ==BillingClient.BillingResponseCode.OK && list != null) {
-                                for (Purchase purchase: list){
-                                    verifyPurchase(purchase);
-                                }
-                            }
-                        }
-                ).build();
-        connectGooglePlayBilling();
+
         binding.etLocation.setOnClickListener(v ->
                 {
 //                        Navigation.findNavController(v).navigate(R.id.action_addAddressFragment_to_currentLocationFragment);
@@ -190,7 +164,7 @@ public class PostRestaurentFragment extends Fragment {
                     if(status.equalsIgnoreCase("Deactive"))
                     {
                         eventCategory = binding.spinnerCategory.getSelectedItem().toString();
-                        restrantName = binding.etRestaurantName.getText().toString().trim();
+                        restrantName = binding.etAccommodationName.getText().toString().trim();
                         strDetails = binding.etDetails.getText().toString().trim();
                         strLocation = binding.etLocation.getText().toString().trim();
                         edt_contact = binding.edtContact.getText().toString().trim();
@@ -202,7 +176,7 @@ public class PostRestaurentFragment extends Fragment {
                     } else
                     {
 
-                        restrantName = binding.etRestaurantName.getText().toString().trim();
+                        restrantName = binding.etAccommodationName.getText().toString().trim();
                         strDetails = binding.etDetails.getText().toString().trim();
                         strLocation = binding.etLocation.getText().toString().trim();
                         edt_contact = binding.edtContact.getText().toString().trim();
@@ -232,81 +206,7 @@ public class PostRestaurentFragment extends Fragment {
     }
 
 
-    void launchPurchaseFlow(ProductDetails productDetails) {
-        ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList =
-                ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
-                        .setProductDetails(productDetails)
-                        .build());
-        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build();
-        billingClient.launchBillingFlow(getActivity(), billingFlowParams);
-    }
-    void connectGooglePlayBilling() {
 
-        Log.d(VideoFrame.TextureBuffer.TAG,"connectGooglePlayBilling ");
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingServiceDisconnected() {
-                connectGooglePlayBilling();
-                Log.e(VideoFrame.TextureBuffer.TAG, "onBillingServiceDisconnected: " );
-            }
-
-            @Override
-            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    Log.e(VideoFrame.TextureBuffer.TAG, "onBillingSetupFinished: " );
-                    showProducts();
-                }
-            }
-        });
-
-    }
-    @SuppressLint("SetTextI18n")
-
-    void showProducts() {
-
-        Log.d(VideoFrame.TextureBuffer.TAG, "showProducts");
-
-        ImmutableList<QueryProductDetailsParams.Product> productList = ImmutableList.of(
-                //Product 1
-                QueryProductDetailsParams.Product.newBuilder()
-                        .setProductId("create_restra")
-                        .setProductType(BillingClient.ProductType.INAPP)
-                        .build());
-        QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()
-                .setProductList(productList)
-                .build();
-
-        billingClient.queryProductDetailsAsync(params, (billingResult, list) -> {
-            //Clear the list
-            productDetailsList.clear();
-            Log.d(VideoFrame.TextureBuffer.TAG, "SizeSizeSizeSizeSizeSize " + list.size());
-            try {
-                productDetailsList.addAll(list);
-                ProductDetails productDetails = list.get(0);
-                String price = productDetails.getOneTimePurchaseOfferDetails().getFormattedPrice();
-                String productName = productDetails.getName();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        });
-
-    }
-
-    void verifyPurchase(Purchase purchase) {
-        ConsumeParams consumeParams = ConsumeParams.newBuilder()
-                .setPurchaseToken(purchase.getPurchaseToken())
-                .build();
-        ConsumeResponseListener listener = (billingResult, s) -> {
-            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                addRestaurant();
-                dialog6.dismiss();
-            }
-        };
-        billingClient.consumeAsync(consumeParams, listener);
-    }
     private void get_restra_category22() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
@@ -402,7 +302,7 @@ public class PostRestaurentFragment extends Fragment {
 
     private void isValidate() {
         if (restrantName.equalsIgnoreCase("")) {
-            binding.etRestaurantName.setError(getString(R.string.enter_restaurant_name));
+            binding.etAccommodationName.setError(getString(R.string.enter_restaurant_name));
         }else if (str_image_path.equalsIgnoreCase("")) {
             showToast(getActivity(),"Please select Event Image");
         }else if (strLocation.equalsIgnoreCase("")) {
@@ -412,9 +312,9 @@ public class PostRestaurentFragment extends Fragment {
         }else if (imagesList.size()==0) {
             showToast(getActivity(),"Please select Event Images.");
         }else if (eventCategory.equalsIgnoreCase("")) {
-            showToast(getActivity(),"Please select Restaurant Category");
+            showToast(getActivity(),"Please select Accommodation Category");
         }else if (edt_contact.equalsIgnoreCase("")) {
-            showToast(getActivity(),"Please select Restaurant Contact No ");
+            showToast(getActivity(),"Please Enter Accommodation Category");
         }else
         {
             purchasePlan();
@@ -424,15 +324,15 @@ public class PostRestaurentFragment extends Fragment {
 
     private void isValid() {
         if (restrantName.equalsIgnoreCase("")) {
-            binding.etRestaurantName.setError(getString(R.string.enter_restaurant_name));
+            binding.etAccommodationName.setError(getString(R.string.enter_restaurant_name));
         }else if (str_image_path.equalsIgnoreCase("")) {
             showToast(getActivity(),"Please select Event Image");
         }else if (strLocation.equalsIgnoreCase("")) {
             binding.etLocation.setError(getString(R.string.enter_restaurant_location));
         }else if (strDetails.equalsIgnoreCase("")) {
             binding.etDetails.setError(getString(R.string.enter_details));
-        }else  if (edt_contact.equalsIgnoreCase("")) {
-            binding.edtContact.setError("Please Enter Contact No");
+        }else if (edt_contact.equalsIgnoreCase("")) {
+            binding.edtContact.setError("Enter Contact Number");
         }else if (imagesList.size()==0) {
             showToast(getActivity(),"Please select Event Images.");
         }else
@@ -483,6 +383,7 @@ public class PostRestaurentFragment extends Fragment {
     }
 
     private void openCamera() {
+
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null)
             startActivityForResult(cameraIntent, REQUEST_CAMERA);
@@ -805,52 +706,19 @@ public class PostRestaurentFragment extends Fragment {
         AppCompatButton cancelBtn = dialog.findViewById(R.id.btnCancel);
 
         purchaseBtn.setOnClickListener(v ->
-
-                    {
-                        dialog.dismiss();
-                        dialog6 = new Dialog(getActivity());
-                        dialog6.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog6.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
-                        dialog6.setContentView(R.layout.dialog_choose_pay);
-                        WindowManager.LayoutParams lp6 = new WindowManager.LayoutParams();
-                        Window window6 = dialog6.getWindow();
-                        lp6.copyFrom(window6.getAttributes());
-                        //This makes the dialog take up the full width
-                        lp6.width = WindowManager.LayoutParams.WRAP_CONTENT;
-                        lp6.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                        dialog6.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        dialog6.show();
-                        AppCompatButton btnClose = dialog6.findViewById(R.id.btnCreate);
-                        TextView edtg_pay = dialog6.findViewById(R.id.edtg_pay);
-                        TextView edt_pay = dialog6.findViewById(R.id.edt_pay);
-                        btnClose.setOnClickListener(c ->
-                        {
-                            dialog6.dismiss();
-                        });
-                        edt_pay.setOnClickListener(c ->
-                        {
-                            dialog6.dismiss();
-                            startActivity(new Intent(getActivity(), PaymentsAct.class)
-                                    .putExtra("from","rest")
-                                    .putExtra("restrantName",restrantName)
-                                    .putExtra("str_image_path",str_image_path)
-                                    .putExtra("strLocation",strLocation)
-                                    .putExtra("event_Category",eventCategory)
-                                    .putExtra("lat",myLatitude)
-                                    .putExtra("lon",myLongitude)
-                                    .putExtra("strDetails",strDetails)
-                                    .putExtra("imagesList",imagesList)
-                            );
-                        });
-                        edtg_pay.setOnClickListener(c ->
-                        {
-
-                            //   groupName=  edtEmail.getText().toString();
-                            if (productDetailsList!=null&&productDetailsList.size()>=1){
-                                launchPurchaseFlow(productDetailsList.get(0));
-
-                            }
-                        });}
+                {
+                    startActivity(new Intent(getActivity(), PaymentsAct.class)
+                            .putExtra("from","rest")
+                            .putExtra("restrantName",restrantName)
+                            .putExtra("str_image_path",str_image_path)
+                            .putExtra("strLocation",strLocation)
+                            .putExtra("event_Category",eventCategory)
+                            .putExtra("lat",myLatitude)
+                            .putExtra("lon",myLongitude)
+                            .putExtra("strDetails",strDetails)
+                            .putExtra("imagesList",imagesList)
+                    );
+                }
         );
 
         cancelBtn.setOnClickListener(v ->

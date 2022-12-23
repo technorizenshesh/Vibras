@@ -59,7 +59,7 @@
         android:id="@+id/tvGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_16sdp"
+        android:textSize="@dimen/_14sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/black"
@@ -71,7 +71,7 @@
         android:id="@+id/tvGroupParticipants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_11sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/gray"
@@ -94,8 +94,7 @@
         android:id="@+id/rvParticipants"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -110,7 +109,7 @@
         <RelativeLayout
             android:id="@+id/rlJoin"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_44sdp"
+            android:layout_height="@dimen/_35sdp"
             android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/_10sdp"
@@ -122,7 +121,7 @@
                 android:text="@string/join"
                 android:textColor="@color/white"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
         </RelativeLayout>
 

@@ -36,11 +36,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.android.billingclient.api.BillingClient;
-import com.android.billingclient.api.BillingFlowParams;
-import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -155,9 +150,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         }
     }
 
-    private PurchasesUpdatedListener purchasesUpdatedListener = (responseCode, purchases) -> {
 
-    };
 
 
     @Override
@@ -350,8 +343,12 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
     }
 
     private void setProfileDetails() {
-        if (userDetail.getAdmin_approval().equalsIgnoreCase("Approved")){}else {
-        binding.tvName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);}
+         binding.tvName.setVisibility(View.VISIBLE);
+        if (userDetail.getAdmin_approval().equalsIgnoreCase("Approved")){
+
+        }else {
+        binding.tvName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+        }
 
         binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
        //                     binding.tvName.setCompoundDrawables(null,null, requireActivity().getResources().getDrawable(R.drawable.ic_baseline_verified),null);

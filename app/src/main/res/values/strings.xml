@@ -81,7 +81,9 @@
     <string name="allow_users_to_comment_on_the_event_post">Allow users to comment on the event post.</string>
     <string name="add_event">Add Event</string>
     <string name="enter_restaurant_name">Enter Restaurant Name</string>
-    <string name="enter_restaurant_location">Enter Restaurant Location</string>
+    <string name="enter_accommodation_name">Enter Accommodation Name</string>
+    <string name="enter_accommodation_location">Enter   Restaurant Location</string>
+    <string name="enter_restaurant_location">Enter Accommodation Location</string>
     <string name="enter_details">Enter Details</string>
     <string name="add_restaurant">Add Restaurant</string>
     <string name="restaurant">Restaurant</string>
@@ -106,6 +108,9 @@
     <string name="date_of_event">Date of Event</string>
     <string name="name_of_event">Name of Event</string>
     <string name="time_of_event">Time of Event</string>
+    <string name="contact_of_acco">Contact No of Accommodation</string>
+    <string name="contact_of_event">Contact No of Event</string>
+    <string name="contact_of_rect">Contact No of Restaurants</string>
     <string name="location_of_event">Location of event</string>
     <string name="add_photos_videos">Add Photos/ Videos</string>
     <string name="group_detail">Group Detail</string>
