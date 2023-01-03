@@ -58,6 +58,7 @@ import com.my.vibras.retrofit.ApiClient;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
+import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import org.json.JSONObject;
@@ -353,26 +354,26 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
         ivProfile = dialog.findViewById(R.id.ivProfile);
         ivProfile.setOnClickListener(v ->
                 {
-                    final CharSequence[] options = {"Take Video", "Choose from Gallery", "Cancel"};
+                    final CharSequence[] options = {getString(R.string.take_photo),getString( R.string.select_from_gallery), getString(R.string.cancel)};
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateGroupAct.this);
-                    builder.setTitle("Add Video!");
+                    builder.setTitle(getString(R.string.select_image));
                     builder.setItems(options, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int item) {
-                            if (options[item].equals("Take Photo")) {
+                            if (options[item].equals(getString(R.string.take_photo))) {
                                 cameraClicked = true;
                                 if (checkPermisssionForReadStorage()) {
 
                                     openCamera();
                                 }
-                            } else if (options[item].equals("Choose from Gallery")) {
+                            } else if (options[item].equals(getString(R.string.select_from_gallery))) {
                                 cameraClicked = false;
                                 if (checkPermisssionForReadStorage()) {
 
                                     getPhotoFromGallary();
 
                                 }
-                            } else if (options[item].equals("Cancel")) {
+                            } else if (options[item].equals(getString(R.string.cancel))) {
                                 dialog.dismiss();
                             }
                         }
@@ -383,9 +384,9 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
         btnCreate.setOnClickListener(v ->
                 {
                     if (edtEmail.getText().toString().equalsIgnoreCase("")) {
-                        Toast.makeText(CreateGroupAct.this, "Please enter group name.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateGroupAct.this, R.string.please_enter_group_name, Toast.LENGTH_SHORT).show();
                     } else if (str_image_path.equalsIgnoreCase("")) {
-                        Toast.makeText(CreateGroupAct.this, "Please Pick group Image.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateGroupAct.this, R.string.please_pick_group_image, Toast.LENGTH_SHORT).show();
                     } else
                     {
                        dialog6 = new Dialog(CreateGroupAct.this);
@@ -498,12 +499,13 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
     }*/
 
     private void getAllUsers() {
+        Session  session= new Session(getApplicationContext());
         String userId = SharedPreferenceUtility.getInstance(CreateGroupAct.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(CreateGroupAct.this, getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("user_id", userId);
-        map.put("lat", "22.7196");
-        map.put("lon", "75.8577");
+        map.put("lat", session.getHOME_LAT());
+        map.put("lon", session.getHOME_LONG());
         Call<SuccessResGetUsers> call = apiInterface.getFriendsList(map);
         call.enqueue(new Callback<SuccessResGetUsers>() {
             @Override
@@ -554,7 +556,7 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
                 selectedUserList.add(searhList.get(position));
                 selectedUserAdapter.notifyDataSetChanged();
             } else {
-                Toast.makeText(CreateGroupAct.this, "User already added.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateGroupAct.this, getString(R.string.user_already_added), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -659,7 +661,7 @@ public class CreateGroupAct extends AppCompatActivity implements AddFriendAdapte
 //                        strLng = Double.toString(gpsTracker.getLongitude()) ;
 //                    }
                 } else {
-                    Toast.makeText(CreateGroupAct.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateGroupAct.this,  getResources().getString(R.string.permission_denied_boo), Toast.LENGTH_SHORT).show();
                 }
                 break;
             }

@@ -316,23 +316,31 @@ public class LoginAct extends AppCompatActivity {
                         SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_ID, data.getResult().getId());
                         Toast.makeText(LoginAct.this, "" + getResources().getString(R.string.logged_in_success), Toast.LENGTH_SHORT).show();
                         if (LoginType.equalsIgnoreCase("user")) {
-                            if (data.getResult().getFirst_login() != null
-                                    && data.getResult().getFirst_login().equalsIgnoreCase("0")) {
+                         /*   if ( data.getResult().getFirst_login().equalsIgnoreCase("0")) {
                                 SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE, "user");
                                 startActivity(new Intent(LoginAct.this, TakeSelfieAct.class)
                                         .putExtra("loginType", LoginType)
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                                 finish();
-                            } else {
+                            } else {*/
+                                if ( data.getResult().getFirst_login().equalsIgnoreCase("1")) {
                                 SharedPreferenceUtility.getInstance(LoginAct.this)
                                         .putString(Constant.USER_TYPE, "user");
                                 SharedPreferenceUtility.getInstance(getApplication())
                                         .putBoolean(Constant.IS_USER_LOGGED_IN, true);
                                 startActivity(new Intent(LoginAct.this,
                                         HomeUserAct.class));
-                                finish();
+                                finish();}
+                                else {
+                                    SharedPreferenceUtility.getInstance(LoginAct.this).
+                                            putString(Constant.USER_TYPE, "user");
+                                    startActivity(new Intent(LoginAct.this, TakeSelfieAct.class)
+                                            .putExtra("loginType", LoginType)
+                                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                    finish();
+                                }
 
-                            }
+                           // }
                         } else {
                             SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE, "company");
                             SharedPreferenceUtility.getInstance(getApplication()).putBoolean(Constant.IS_USER_LOGGED_IN, true);
@@ -344,10 +352,10 @@ public class LoginAct extends AppCompatActivity {
                         }
 
                     } else if (data.status.equals("0")) {
-                        if (data.getMessage().equalsIgnoreCase("Your account is not verified please verify your email now"))
-                        {
-getOTP();
-                        }else {                        showToast(LoginAct.this, data.message);
+                        if (data.getMessage().equalsIgnoreCase("Your account is not verified please verify your email now")) {
+                            getOTP();
+                        } else {
+                            showToast(LoginAct.this, data.message);
                         }
                     }
                 } catch (Exception e) {
@@ -380,9 +388,9 @@ getOTP();
                         DataManager.getInstance().hideProgressMessage();
                         startActivity(new Intent(LoginAct.this,
                                 VerificationAct.class)
-                                .putExtra("otp",data.getResult().getOtp())
-                                .putExtra("user_id",data.getResult().getId())
-                                .putExtra("type",LoginType)
+                                .putExtra("otp", data.getResult().getOtp())
+                                .putExtra("user_id", data.getResult().getId())
+                                .putExtra("type", LoginType)
                         );
                     }
                 } catch (Exception e) {

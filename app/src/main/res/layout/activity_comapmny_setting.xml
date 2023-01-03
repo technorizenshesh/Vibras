@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -59,6 +59,7 @@
                     android:layout_gravity="center">
 
                     <ImageView
+                        android:id="@+id/ivProfile"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="@dimen/_80sdp"
                         android:src="@drawable/profile_im">
@@ -66,6 +67,7 @@
                     </ImageView>
 
                     <ImageView
+                        android:visibility="gone"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
                         android:layout_alignParentRight="true"
@@ -102,7 +104,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="About me"
+                        android:text="@string/about_me"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -132,7 +134,7 @@
                         android:drawableLeft="@drawable/password"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Change Password"
+                        android:text="@string/change_password"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -165,7 +167,7 @@
                         android:drawableLeft="@drawable/ic_baseline_event"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Saved Events"
+                        android:text="@string/saved_events"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -195,7 +197,7 @@
                         android:drawableLeft="@drawable/ic_baseline_restaurant"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Saved Restaurantd"
+                        android:text="@string/saved_restaurants"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -225,7 +227,7 @@
                         android:drawableLeft="@drawable/payment"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Payment"
+                        android:text="@string/payment"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -258,7 +260,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Transactions"
+                        android:text="@string/transactions"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -288,13 +290,42 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Notifications"
+                        android:text="@string/notifications"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
 
 
+                <RelativeLayout
+                    android:id="@+id/RRChangel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/back_right">
+
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_baseline_language"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Select Language"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/RRPP"
                     android:layout_width="match_parent"
@@ -319,7 +350,7 @@
                         android:drawableLeft="@drawable/ic_baseline_privacy_tip"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Privacy Policy"
+                        android:text="@string/privacy_policy"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -349,7 +380,7 @@
                         android:drawableLeft="@drawable/ic_baseline_help"
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
-                        android:text="Help"
+                        android:text="@string/help"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -371,7 +402,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Sign out"
+                        android:text="@string/sign_out"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 

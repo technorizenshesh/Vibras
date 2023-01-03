@@ -20,8 +20,12 @@ import com.my.vibras.act.StoryDetailAct;
 import com.my.vibras.act.ui.home.HomeFragment;
 import com.my.vibras.model.SuccessResGetStories;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 
+ 
 /**
  * Created by Ravindra Birla on 06,July,2021
  */
@@ -55,7 +59,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof ViewHolder) {
             final SuccessResGetStories.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
-            genericViewHolder.txtName.setText(model.getUserName());
+            genericViewHolder.txtName.setText(  StringEscapeUtils.unescapeJava(model.getUserName()));
             Glide.with(mContext)
                     .load(model.getUserImage())
                     .into(genericViewHolder.image);
@@ -98,8 +102,8 @@ public class StoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 public void onClick(View view) {
 
                     HomeFragment.story = modelList.get(getAdapterPosition());
-
-                    mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+                    mItemClickListener.onItemClick(itemView, getAdapterPosition(),
+                            modelList.get(getAdapterPosition()));
                     Intent intent = new Intent(mContext, StoryDetailAct.class);
                     Bundle bundle = new Bundle();
                     intent.putExtras(bundle);

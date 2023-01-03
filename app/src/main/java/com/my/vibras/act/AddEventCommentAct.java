@@ -19,6 +19,7 @@ import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -92,7 +93,7 @@ public class AddEventCommentAct extends AppCompatActivity {
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
         map.put("post_id",postId);
-        map.put("comment",text);
+        map.put("comment", StringEscapeUtils.escapeJava(text));
 
         Call<ResponseBody> call = apiInterface.addComment(map);
         call.enqueue(new Callback<ResponseBody>() {

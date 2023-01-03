@@ -30,6 +30,7 @@ public class Constant {
     public static final String USER_IMAGE = "userimage";
     public static final String USER_TYPE = "userType";
     public static final String REGISTER_ID = "register_id";
+    public static final String SELECTED_LANGUAGE = "register_id";
     public static final int LOCATION_REQUEST = 1000;
     public static final int GPS_REQUEST = 1001;
 
@@ -48,12 +49,9 @@ public class Constant {
     public static void updateResources(Context context, String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
-
         Resources resources = context.getResources();
-
         Configuration configuration = resources.getConfiguration();
         configuration.locale = locale;
-
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
     }
 

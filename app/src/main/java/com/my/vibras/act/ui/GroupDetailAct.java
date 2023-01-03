@@ -23,6 +23,7 @@ import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -215,7 +216,7 @@ public class GroupDetailAct extends AppCompatActivity {
 
                         memberIds = data.getResult().getMembersId();
 
-                        binding.tvGroupName.setText(data.getResult().getGroupName());
+                        binding.tvGroupName.setText(StringEscapeUtils.unescapeJava(data.getResult().getGroupName()));
                         binding.tvGroupParticipants.setText("Group : Participants "+membersDetailArrayList.size());
                         binding.rvParticipants.setHasFixedSize(true);
                         binding.rvParticipants.setLayoutManager(new LinearLayoutManager(GroupDetailAct.this));

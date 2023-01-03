@@ -158,6 +158,17 @@ public class SuccessResGetUsers implements Serializable {
         @SerializedName("admin_approval")
         @Expose
         public String admin_approval;
+        @SerializedName("identify_image")
+        @Expose
+        public String identify_image;
+
+        public String getIdentify_image() {
+            return identify_image;
+        }
+
+        public void setIdentify_image(String identify_image) {
+            this.identify_image = identify_image;
+        }
 
         public String getAdmin_approval() {
             return admin_approval;

@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Messages"
+                    android:text="@string/messages"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
@@ -67,7 +67,7 @@
                     android:drawableRight="@drawable/search"
                     android:editable="false"
                     android:focusable="false"
-                    android:hint="Who do you want to chat with?"
+                    android:hint="@string/who_do_you_want_to_chat_with"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Messages"
+                android:text="@string/messages"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />

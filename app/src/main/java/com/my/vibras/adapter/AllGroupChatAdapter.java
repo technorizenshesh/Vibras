@@ -71,7 +71,8 @@ public class AllGroupChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             Glide.with(mContext).load(model.getGroupImage()).into(ivProfile);
             tvView.setOnClickListener(v ->
                     {
-                        mContext.startActivity(new Intent(mContext, GroupDetailAct.class).putExtra("id", model.getId()));
+                        mContext.startActivity(new Intent(mContext, GroupDetailAct.class)
+                                .putExtra("id", model.getId()));
                     }
             );
 

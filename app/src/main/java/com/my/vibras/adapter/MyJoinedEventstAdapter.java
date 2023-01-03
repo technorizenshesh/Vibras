@@ -19,6 +19,7 @@ import com.my.vibras.act.EventsDetailsScreen;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResMyJoinedEvents;
 
+
 import java.util.ArrayList;
 
 public class MyJoinedEventstAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -60,7 +61,7 @@ public class MyJoinedEventstAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             Glide.with(mContext)
                     .load(modelList.get(position).getEventDetails().getImage())
                     .into(ivEvent);
-            tvName.setText(modelList.get(position).getEventDetails().getEventName());
+            tvName.setText(  (modelList.get(position).getEventDetails().getEventName()));
             tvLocation.setText(modelList.get(position).getEventDetails().getAddress());
             tvDate.setText(modelList.get(position).getEventDetails().getDateTime());
             ivEvent.setOnClickListener(v ->

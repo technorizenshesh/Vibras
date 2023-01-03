@@ -75,9 +75,10 @@ public class SignUpAct extends AppCompatActivity {
             Toast.makeText(SignUpAct.this, ""+getString(R.string.select_dare), Toast.LENGTH_SHORT).show();
         } else
         {
-            startActivity(new Intent(SignUpAct.this,CompleteSignUpAct.class).putExtra("email",strEmail).putExtra("pass",strPass)
-                    .putExtra("dob",strDob).putExtra("loginType",LoginType)
-            );
+            startActivity(new
+                    Intent(SignUpAct.this,CompleteSignUpAct.class)
+                    .putExtra("email",strEmail).putExtra("pass",strPass)
+                    .putExtra("dob",strDob).putExtra("loginType",LoginType));
             finish();
         }
 

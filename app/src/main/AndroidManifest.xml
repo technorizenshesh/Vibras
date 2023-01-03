@@ -15,7 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VIBRAS"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="32">
+        <activity
+            android:name=".ChooseLanguage"
+            android:exported="false" />
+        <activity
+            android:name=".act.AccAct"
+            android:exported="false" />
+        <activity
+            android:name=".AccomdDetailAct"
+            android:exported="false" />
         <activity
             android:name=".act.HelpContactActivity"
             android:exported="false">
@@ -23,9 +32,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".ConsumableItemsActivity"
-            android:exported="false" />
+
         <activity
             android:name=".act.SearchLocationMapAct"
             android:exported="false" />
@@ -290,6 +297,7 @@
             android:enabled="true"
             android:exported="true" />
     </application>
+
     <queries>
         <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
@@ -303,6 +311,7 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"

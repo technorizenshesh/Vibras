@@ -32,6 +32,7 @@ import com.my.vibras.R;
 import com.my.vibras.utility.Session;
 
 
+   
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -104,7 +105,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                 holder.friendcard.setVisibility(View.GONE);
                 holder.  usersendimage.setVisibility(View.GONE);
                 holder.recievesendimage.setVisibility(View.GONE);
-                holder.userTextSHow.setText(chat.getMessage());
+                holder.userTextSHow.setText(  (chat.getMessage()));
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 System.out.println("userid" + chat.getSenderID());
                 Glide.with(mContext)
@@ -143,15 +144,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
                /* if (chat.getImage().equalsIgnoreCase("")){
                     holder.friendcard_locat.setVisibility(View.VISIBLE);
                 }*/
-
-
-
             }else {
                 holder.usercard.setVisibility(View.GONE);
                 holder.friendcard.setVisibility(View.GONE);
                 holder.  usersendimage.setVisibility(View.GONE);
                 holder.recievesendimage.setVisibility(View.GONE);
-                holder.friendTextShow.setText(chat.getMessage());
+                holder.friendTextShow.setText(  (chat.getMessage()));
                 holder.usermessagelayout.setVisibility(View.GONE);
                 holder. friendtime.setVisibility(View.VISIBLE);
                 holder. usertime.setVisibility(View.GONE);

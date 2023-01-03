@@ -36,7 +36,7 @@ public class IncomingCallService extends Service {
         PendingIntent fullScreenPendingIntent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             fullScreenPendingIntent= PendingIntent.getActivity(this,
-                    0, fullScreenIntent, PendingIntent.FLAG_IMMUTABLE);
+                    0, fullScreenIntent, PendingIntent.FLAG_MUTABLE);
 
         }else {
             fullScreenPendingIntent= PendingIntent.getActivity(this,

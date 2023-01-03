@@ -23,6 +23,7 @@ import com.my.vibras.R;
 import com.my.vibras.chat.ChatMessage;
 import com.my.vibras.databinding.ActMapLocationSearchBinding;
 import com.my.vibras.utility.GPSTracker;
+import com.my.vibras.utility.Session;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,17 +40,24 @@ public class SearchLocationMapAct extends AppCompatActivity implements OnMapRead
     String friendnamelast = "";
     String friendimage = "";
     String getChatImage = "";
-
+    String from = "";
+    String id = "";
+Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.act_map_location_search);
+        session = new Session(this);
         try {
-            useriddeivce = getIntent().getStringExtra("useriddeivce");
-            friend_idlast = getIntent().getStringExtra("friend_idlast");
-            friendnamelast = getIntent().getStringExtra("friendnamelast");
-            friendimage = getIntent().getStringExtra("friendimage");
-            getChatImage = getIntent().getStringExtra("getChatImage");
+            from = getIntent().getStringExtra("from");
+            if (from.equalsIgnoreCase("121")) {
+                useriddeivce = getIntent().getStringExtra("useriddeivce");
+                friend_idlast = getIntent().getStringExtra("friend_idlast");
+                friendnamelast = getIntent().getStringExtra("friendnamelast");
+                friendimage = getIntent().getStringExtra("friendimage");
+                getChatImage = getIntent().getStringExtra("getChatImage");
+            } else {
+                id = getIntent().getStringExtra("id");}
         } catch (Exception e) {
 
         }
@@ -58,18 +66,37 @@ public class SearchLocationMapAct extends AppCompatActivity implements OnMapRead
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(SearchLocationMapAct.this);
         binding.sendBtn.setOnClickListener(v -> {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(" hh:mm");
-            Log.e("TAG", "onClick: " + dateFormat.format(new Date()));
-            String time = dateFormat.format(new Date());
-            FirebaseDatabase.getInstance()
-                    .getReference()
-                    .child("chat")
-                    .push()
-                    .setValue(new ChatMessage(useriddeivce, friend_idlast,
-                            "", friendnamelast,
-                            "", "", time, "",
-                            friendimage, getChatImage, lat, lon));
-            Snackbar.make(binding.getRoot(), "Sending...", Snackbar.LENGTH_SHORT).show();
+
+            if (from.equalsIgnoreCase("group")) {
+                SimpleDateFormat dateFormat = new SimpleDateFormat(" hh:mm");
+                Log.e("TAG", "onClick: " + dateFormat.format(new Date()));
+                String time = dateFormat.format(new Date());
+
+                LatLng latLng = new LatLng(gpsTracker.getLatitude(), gpsTracker.getLongitude());
+                FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child("group_chat").child(id)
+                        .push()
+                        .setValue(new ChatMessage(session.getUserId(), "group",
+                                "", session.getChatName()
+                                , "", "", time, "", session.getChatImage(),
+                                session.getChatImage(), lat,
+                                lon));
+                Snackbar.make(binding.getRoot(), "Sending...", Snackbar.LENGTH_SHORT).show();
+            } else {
+                SimpleDateFormat dateFormat = new SimpleDateFormat(" hh:mm");
+                Log.e("TAG", "onClick: " + dateFormat.format(new Date()));
+                String time = dateFormat.format(new Date());
+                FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child("chat")
+                        .push()
+                        .setValue(new ChatMessage(useriddeivce, friend_idlast,
+                                "", friendnamelast,
+                                "", "", time, "",
+                                friendimage, getChatImage, lat, lon));
+                Snackbar.make(binding.getRoot(), "Sending...", Snackbar.LENGTH_SHORT).show();
+            }
             onBackPressed();
         });
 
@@ -87,7 +114,7 @@ public class SearchLocationMapAct extends AppCompatActivity implements OnMapRead
                     ActivityCompat.checkSelfPermission(
                             this, Manifest.permission.ACCESS_COARSE_LOCATION)
                             != PackageManager.PERMISSION_GRANTED) {
-               return;
+                return;
             }
             gMap.setMyLocationEnabled(true);
             gMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -115,8 +142,6 @@ public class SearchLocationMapAct extends AppCompatActivity implements OnMapRead
                 lat = "" + latLng.latitude;
                 lon = "" + latLng.longitude;
                 binding.eventLocation.setText(lat + " , " + lon);
-
-
             });
 
         } catch (Exception e) {

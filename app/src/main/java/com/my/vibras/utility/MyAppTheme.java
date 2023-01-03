@@ -4,12 +4,11 @@ import android.content.Context;
 
 import androidx.core.content.ContextCompat;
 
-import com.dolatkia.animatedThemeManager.AppTheme;
 import com.my.vibras.R;
 
 import org.jetbrains.annotations.NotNull;
 
-interface MyAppTheme extends AppTheme {
+interface MyAppTheme  {
     int firstActivityBackgroundColor(@NotNull Context context);
     int firstActivityTextColor(@NotNull Context context);
     int firstActivityIconColor(@NotNull Context context);

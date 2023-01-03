@@ -15,10 +15,14 @@ import com.my.vibras.R;
 import com.my.vibras.databinding.RestrauntCommentItemBinding;
 import com.my.vibras.model.SuccessResGetEventComment;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+ 
 
 /**
  * Created by Ravindra Birla on 06,July,2021
@@ -66,8 +70,8 @@ public class EventCommentAdapter extends RecyclerView.Adapter<EventCommentAdapte
                 .placeholder(R.drawable.ic_user)
                 .into(imageView);
 
-        tvName.setText(commentList.get(position).getFirstName());
-        tvComment.setText(commentList.get(position).getComment());
+        tvName.setText(  StringEscapeUtils.unescapeJava(commentList.get(position).getFirstName()));
+        tvComment.setText(   StringEscapeUtils.unescapeJava(commentList.get(position).getComment()));
         tvRating.setText(commentList.get(position).getRating());
 
         try {

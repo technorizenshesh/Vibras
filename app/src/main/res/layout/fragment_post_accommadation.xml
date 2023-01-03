@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     >
 
     <androidx.core.widget.NestedScrollView
@@ -51,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post Cover Image"
+                android:text="@string/post_cover_image"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/black"
                 />
@@ -61,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Accommodation Details"
+                android:text="@string/accommodation_details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
@@ -71,7 +72,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name of Accommodation"
+                android:text="@string/name_of_accommodation"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -104,7 +105,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location of Accommodation"
+                android:text="@string/location_of_accommodation"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -207,7 +208,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
+                android:text="@string/details"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -238,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Add Photos"
+                android:text="@string/add_photos"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
@@ -282,7 +283,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="20sp"
-                    android:text="@string/add_restaurant"
+                    android:text="@string/add_accommodation"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />

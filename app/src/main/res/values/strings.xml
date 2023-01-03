@@ -1,16 +1,11 @@
 <resources>
-
-    <!--    <string name="api_key">AIzaSyBduv61ywGy3e9mU6NJ_a7GHCf5oSbxT2w</string>-->
-
-    <string name="api_key">AIzaSyCKqIVsOkMowy5Ur9mY-K2QN2Lax4F9O-c</string>
-
     <string name="app_name">Vibras</string>
     <string name="select_one">Select One-</string>
     <string name="default_notification_channel_id">1</string>
     <string name="user">User</string>
     <string name="company">Company</string>
     <string name="email_mobile_number">Email</string>
-    <string name="forgot_your_password"><u>Forgot your password?</u></string>
+    <string name="forgot_your_password">Forgot your password?</string>
     <string name="next">Next</string>
     <string name="fetching_fcm_token_failed">Fetching FCM registration token failed</string>
     <string name="password">Password</string>
@@ -31,7 +26,7 @@
     <string name="hey_there">Hey there,</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="settings">Settings</string>
-    <string name="textab">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra gravida amet, mi nunc amet mi et. Cursus blandit lobortis curabitur sit massa lobortis pulvinar bibendum. Ultrices integer cum turpis tortor posuere tincidunt viverra eget. Etiam est varius platea vitae commodo. Venenatis, odio quis eu congue donec. Nisl vitae purus sed etiam. Molestie sed id congue tellus amet, dui nunc, tincidunt vitae. Elit suspendisse in porta lectus felis vitae lectus pretium. Non et elit eu pharetra adipiscing elit pulvinar est. Arcu ut at tincidunt fermentum. Duis aliquet ut rhoncus, odio ac ac aliquam rhoncus. Egestas eu, tincidunt gravida vitae molestie pharetra. Sapien laoreet in turpis tortor morbi egestas ligula ac. Faucibus porta molestie a phasellus at. Turpis ultrices ut vulputate vel sed bibendum sit vitae nunc. Platea platea vestibulum, sit euismod proin viverra. Sagittis sed quis gravida cras adipiscing sed faucibus. Aliquet egestas massa eu urna, mi et egestas leo adipiscing. Mi risus augue sed aenean faucibus id odio. In et arcu nunc, mauris, venenatis dignissim nisl blandit. Lectus lacus, quis amet vel nam vel feugiat. Morbi cras placerat vel turpis ipsum tellus arcu metus. Cursus purus lectus gravida quam tellus sollicitudin volutpat lectus. Lorem consequat vitae in rutrum. Nunc euismod aliquam, duis cursus enim at et phasellus.</string>
+    <string name="textab">Lorem ipsum dolor.</string>
     <string name="save_profile">Save Profile</string>
     <string name="payments">Payments</string>
     <string name="subscription">Subscription</string>
@@ -61,11 +56,10 @@
     <string name="please_enter_old_pass">Please enter old password.</string>
     <string name="please_enter_confirm_password">Please enter confirm password.</string>
     <string name="password_mismatched">Please make sure your password match.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="enter_new_password">Please enter new password.</string>
     <string name="transactions">Transactions</string>
     <string name="notifications">Notifications</string>
-    <string name="general_notifcations">General Notifcations</string>
+    <string name="general_notifcations">General Notifications</string>
     <string name="friends">Friends</string>
     <string name="comments">Comments</string>
     <string name="delete_post">Delete Post</string>
@@ -129,16 +123,120 @@
     <string name="share_using">Share Using</string>
     <string name="reject_call">Reject Call</string>
     <string name="answer_call">Answer Call</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="forget_password">Forget Your Password</string>
     <string name="go_back_to_login">Go back to </string>
     <string name="reset_passwod">Reset Password</string>
-
+      <string name="e_mail">"E-mail:"</string>
+    <string name="select_language">Select Language</string>
+    <string name="change_language">Change Language</string>
+    <string name="send"> Send </string>
+    <string name="add_new_card">ADD NEW CARD</string>
+    <string name="all_comments">All Comments</string>
+    <string name="in_coming_call">In Coming Call</string>
+    <string name="current_password">Current password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_message">Enter Message...</string>
+    <string name="about_me">About me</string>
+    <string name="saved_events">Saved Events</string>
+    <string name="saved_restaurants">Saved Restaurants</string>
+    <string name="payment">Payment</string>
+    <string name="sign_out">Sign out</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="complete_profile">Complete Profile</string>
+    <string name="gender">Gender</string>
+    <string name="or">Or</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="search">Search</string>
+    <string name="what_s_on_your_mind">What\'s on your mind?</string>
+    <string name="post">Post</string>
+    <string name="posts">Posts</string>
+    <string name="story">Story</string>
+    <string name="discard">Discard</string>
+    <string name="publish">Publish</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="edit_bio">Edit Bio</string>
+    <string name="details">Details</string>
+    <string name="photos">Photos</string>
+    <string name="join_event">Join Event</string>
+    <string name="filter">Filter</string>
+    <string name="want_to_meet">Want to Meet</string>
+    <string name="preferred_age_range">Preferred Age Range</string>
+    <string name="location">Location</string>
+    <string name="distance_range">Distance Range</string>
+    <string name="likes_received">Likes Received</string>
+    <string name="likes_given">Likes Given</string>
+    <string name="i_like">I Like</string>
+    <string name="write_him_something_original">Write him something original :)</string>
+    <string name="likes_interests">Likes, Interests</string>
+    <string name="skip">Skip</string>
+    <string name="email_notifications">Email Notifications</string>
+    <string name="post_comment">Post comment</string>
+    <string name="what_do_you_think">What do you think ?</string>
+    <string name="please_give_your_rating_by_clicking_on_the_stars_below">Please give your rating by clicking on the stars below</string>
+    <string name="tell_us_about_your_experience">Tell us about your experience</string>
+    <string name="contact_no">Contact No :-</string>
+    <string name="search_history">Search History</string>
+    <string name="security_options">Security Options</string>
+    <string name="apply_for_verified_profile">Apply For Verified Profile</string>
+    <string name="get_verified">Get Verified</string>
+    <string name="by_continuing_you_accept_our_privacy_policy_and_term_of_use">By continuing you accept our Privacy Policy and Term of Use</string>
+    <string name="htake_selfie">HTake Selfie!</string>
+    <string name="please_enter_the_4_digit_code_sent_to_your_number_mail_id">Please enter the 4-digit code sent to your number/ mail ID.</string>
+    <string name="verification">Verification</string>
+    <string name="enter_the_code">Enter the Code</string>
+    <string name="messages">Messages</string>
+    <string name="who_do_you_want_to_chat_with">Who do you want to chat with?</string>
+    <string name="browse_events_by_categories">Browse Events by Categories</string>
+    <string name="events_near_me">Events Near Me</string>
+    <string name="nearest_restaurant">Nearest Restaurant</string>
+    <string name="best_groups">Best Groups</string>
+    <string name="new_group">New Group</string>
+    <string name="accommodation_details">Accommodation Details</string>
+    <string name="post_cover_image">Post Cover Image</string>
+    <string name="name_of_accommodation">Name of Accommodation</string>
+    <string name="location_of_accommodation">Location of Accommodation</string>
+    <string name="add_photos">Add Photos</string>
+    <string name="event_details">Event Details</string>
+    <string name="event">Event</string>
+    <string name="accommodation">Accommodation</string>
+    <string name="restaurant_details">Restaurant Details</string>
+    <string name="name_of_restaurant">Name of Restaurant</string>
+    <string name="location_of_restaurant">Location of restaurant</string>
+    <string name="api_key"   translatable="false">AIzaSyCKqIVsOkMowy5Ur9mY-K2QN2Lax4F9O-c</string>
     <string name="facebook_app_id" translatable="false">838895714054178</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
     <string name="facebook_client_token" translatable="false">618483dab13b3748bbe692856f8730ba</string>
     <string name="terms_condition"><![CDATA[Terms & Condition]]></string>
-
-    <string name="e_mail">"E-mail : "</string>
+    <string name="share_your_likes_amp_passion_with_others"><![CDATA[Share your likes & passion with others]]></string>
+    <string name="continu">Continue</string>
+    <string name="all_photos">All photos</string>
+    <string name="videos">Videos</string>
+    <string name="please_enter_event_image">Please select Event Image</string>
+    <string name="please_select_acc_cet">Please select Accommodation Category</string>
+    <string name="please_enter_acc_con">Please Enter Accommodation Contact</string>
+    <string name="select_image">Select Image</string>
+    <string name="rejected">Rejected</string>
+    <string name="reject_request">Reject Request</string>
+    <string name="are_you_sure">Are you sure you want to reject this request?</string>
+    <string name="accept_request">Accept Request</string>
+    <string name="are_you_sure_accept">Are you sure you want to accept this request?</string>
+    <string name="accepted">Accepted</string>
+    <string name="good_vibes">"Good Vibes,"</string>
+    <string name="nearest_accommadtion" >Nearest Accommodation</string>
+    <string name="add_accommodation">Add Accommodation</string>
+    <string name="turn_on_gps">Please TurnOn your Location</string>
+    <string name="select_option" translatable="false">Select Option</string>
+    <string name="delete" translatable="false">Delete</string>
+    <string name="share" translatable="false">Share</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_cover_photo">Edit Cover Photo</string>
+    <string name="pay_by_card">Pay by Card</string>
+    <string name="pay_by_google_play">Pay by google play</string>
+    <string name="enter_comment">Enter Comment...</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="select_from_gallery">Select From Gallery</string>
+    <string name="please_enter_group_name">Please enter group name.</string>
+    <string name="please_pick_group_image">Please Pick group Image.</string>
+    <string name="user_already_added">User already added.</string>
 </resources>

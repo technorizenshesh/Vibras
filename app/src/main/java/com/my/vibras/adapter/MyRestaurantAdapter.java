@@ -18,6 +18,7 @@ import com.my.vibras.databinding.MyeventItemBinding;
 import com.my.vibras.model.SuccessResMyRestaurantRes;
 import com.my.vibras.utility.PostClickListener;
 
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -83,7 +84,7 @@ public class MyRestaurantAdapter extends RecyclerView.Adapter<MyRestaurantAdapte
 
         tvDescription.setText(postList.get(position).getTimeAgo());
 
-        tvUserName.setText(postList.get(position).getRestaurantName());
+        tvUserName.setText(  (postList.get(position).getRestaurantName()));
 
         linearLayoutCompat.setOnClickListener(v ->
                 {

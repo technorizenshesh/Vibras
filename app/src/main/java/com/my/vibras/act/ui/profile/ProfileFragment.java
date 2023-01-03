@@ -68,18 +68,17 @@ public class ProfileFragment extends Fragment{
                     Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
-                        if (userDetail.getLat()!=null&&!
-                                userDetail.getLat().equalsIgnoreCase(""))
+                        if (userDetail.getLat()!=null&&!userDetail.getLat().equalsIgnoreCase(""))
                         {
                             binding.cityState.setText(CurrentCity(
                                     Double.parseDouble(userDetail.getLat())
                                     ,Double.parseDouble(userDetail.getLon())));
                         }else {
                             GPSTracker gpsTracker =new GPSTracker(getActivity());
-                            if (gpsTracker.getLatitude()>=0)
+                            if (gpsTracker.getLatitude()>=0){
                             binding.cityState.setText(CurrentCity(
                                   gpsTracker.getLatitude()
-                                    ,gpsTracker.getLongitude()));
+                                    ,gpsTracker.getLongitude()));}
                         }
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);

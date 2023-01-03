@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_230sdp"
     android:layout_height="match_parent"
     >
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
     <RelativeLayout
         android:layout_gravity="center"
@@ -17,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_bg"></ImageView>
+            android:src="@color/dark_black"
+           ></ImageView>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,6 +33,7 @@
             android:padding="@dimen/_10sdp">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -33,7 +42,9 @@
                     android:id="@+id/icSmallProfile"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:src="@drawable/circle_img"></de.hdodenhof.circleimageview.CircleImageView>
+                    android:src="@drawable/circle">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -115,5 +126,6 @@
         </RelativeLayout>
 
     </RelativeLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </LinearLayout>

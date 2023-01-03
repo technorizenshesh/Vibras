@@ -117,7 +117,7 @@
                     android:layout_toLeftOf="@id/llRight"
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical"
-                    android:hint="Enter Message..."
+                    android:hint="@string/enter_message"
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
@@ -151,7 +151,17 @@
                         android:visibility="gone"
                         android:layout_centerInParent="true"
                         android:src="@drawable/stickers"></ImageView>
-
+                    <ImageView
+                        android:id="@+id/live_location"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:visibility="visible"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_map"/>
                 </LinearLayout>
 
             </RelativeLayout>

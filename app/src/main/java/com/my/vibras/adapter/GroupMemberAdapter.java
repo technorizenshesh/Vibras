@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.model.SuccessResGetGroupDetails;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,7 +49,7 @@ public class GroupMemberAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             TextView tvUserName = holder.itemView.findViewById(R.id.tvUserName);
             CircleImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
 
-            tvUserName.setText(model.getUserName());
+            tvUserName.setText(StringEscapeUtils.unescapeJava(model.getUserName()));
 
             Glide.with(mContext)
                     .load(model.getImage())

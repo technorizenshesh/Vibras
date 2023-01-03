@@ -16,6 +16,7 @@ import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
 import static com.my.vibras.retrofit.Constant.USER_TYPE;
+import static com.my.vibras.retrofit.Constant.updateResources;
 
 public class MainActivity extends AppCompatActivity {
     //  BillingClient billingClient;
@@ -34,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
         session = new Session(this);
 
         isUserLoggedIn = SharedPreferenceUtility.getInstance(MainActivity.this).getBoolean(Constant.IS_USER_LOGGED_IN);
-
+        boolean val =  SharedPreferenceUtility.getInstance(MainActivity.this).getBoolean(Constant.SELECTED_LANGUAGE);
+        if(!val)
+        {
+            updateResources(MainActivity.this,"en");
+        }else
+        {
+            updateResources(MainActivity.this,"es");
+        }
         handlerMethod();
 /*
         billingClient = BillingClient.newBuilder(getApplicationContext())
@@ -70,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 } else {
-                    Intent intent = new Intent(MainActivity.this, SelectViberLoginAct.class);
+                    Intent intent = new Intent(MainActivity.this, ChooseLanguage.class).
+                            putExtra("from","login");
                     startActivity(intent);
                     finish();
                 }

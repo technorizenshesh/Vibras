@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Filter"
+                android:text="@string/filter"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Want to Meet"
+                    android:text="@string/want_to_meet"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -169,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Preferred Age Range"
+                    android:text="@string/preferred_age_range"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -259,7 +259,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Location"
+                    android:text="@string/location"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -290,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Distance Range"
+                    android:text="@string/distance_range"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -373,6 +373,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_50sdp"
                     android:background="@drawable/border_btn">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -380,8 +381,7 @@
                         android:layout_marginLeft="20sp"
                         android:text="@string/apply_filters"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_16sdp"
-                        />
+                        android:textSize="@dimen/_16sdp" />
                 </RelativeLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

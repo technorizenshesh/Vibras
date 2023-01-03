@@ -3,6 +3,8 @@ package com.my.vibras.act;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.gson.Gson;
 import com.my.vibras.R;
 import com.my.vibras.chat.ChatInnerMessagesActivity;
 import com.my.vibras.databinding.ActivityFriendProfileBinding;
+import com.my.vibras.fragment.FriendAllPhotosFragment;
 import com.my.vibras.fragment.FriendPostsFragment;
 import com.my.vibras.fragment.FriendVideoFragment;
 import com.my.vibras.model.SuccessFollowersRes;
@@ -31,13 +34,19 @@ import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 import static com.my.vibras.utility.Util.hideKeyboard;
@@ -69,46 +78,47 @@ public class FriendProfileActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-         binding.likeRecived.setOnClickListener(v -> {
-             startActivity(new Intent(getApplicationContext(),
-                     LikeReceivedActivity.class)
-                     .putExtra("id",User_id));
-         });
+        binding.likeRecived.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),
+                    LikeReceivedActivity.class)
+                    .putExtra("id", User_id));
+        });
         binding.followers.setOnClickListener(v -> {
-             startActivity(new Intent(getApplicationContext(),
-                     LikeSentActivity.class)
-                     .putExtra("id",User_id));
-         });
+            startActivity(new Intent(getApplicationContext(),
+                    LikeSentActivity.class)
+                    .putExtra("id", User_id));
+        });
         binding.ivBack.setOnClickListener(v -> {
             onBackPressed();
         });
         binding.btnAddLike.setOnClickListener(v ->
                 {
-                    addOtherProfileLike(User_id,"Like");
+                    addOtherProfileLike(User_id, "Like");
                 }
         );
         binding.llGroup.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getApplicationContext(),
-                            ViewAllGroupsAct.class).putExtra("from","other")
-                            .putExtra("id",User_id));
+                            ViewAllGroupsAct.class).putExtra("from", "other")
+                            .putExtra("id", User_id));
                 }
         );
         binding.llViewEvents.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getApplicationContext(),
-                            ViewAllEventAct.class).putExtra("from","other")
-                            .putExtra("id",User_id)
+                            ViewAllEventAct.class).putExtra("from", "other")
+                            .putExtra("id", User_id)
                     );
                 }
-        );  binding.sendMsg.setOnClickListener(v ->
+        );
+        binding.sendMsg.setOnClickListener(v ->
                 {
                     Intent intent = new Intent(FriendProfileActivity.this,
                             ChatInnerMessagesActivity.class);
                     intent.putExtra("friend_id", userDetail.getId());
                     intent.putExtra("friendimage", userDetail.getImage());
-                    intent.putExtra("friend_name", userDetail.getFirstName()+
-                            " "+userDetail.getLastName());
+                    intent.putExtra("friend_name", userDetail.getFirstName() +
+                            " " + userDetail.getLastName());
                     intent.putExtra("last_message", "hii");
                     intent.putExtra("messagetime", "1");
                     intent.putExtra("status_check", userDetail.getId());
@@ -116,13 +126,14 @@ public class FriendProfileActivity extends AppCompatActivity {
                     intent.putExtra("onlinestatus", userDetail.getImage());
                     intent.putExtra("unique_id", userDetail.getId());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                   startActivity(intent);
+                    startActivity(intent);
                 }
         );
 
         setUpUi();
     }
-    private void addOtherProfileLike(String otherUserId,String type) {
+
+    private void addOtherProfileLike(String otherUserId, String type) {
         String userId = SharedPreferenceUtility.getInstance(FriendProfileActivity.this)
                 .getString(USER_ID);
         DataManager.getInstance().showProgressMessage(FriendProfileActivity.this,
@@ -139,18 +150,19 @@ public class FriendProfileActivity extends AppCompatActivity {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResAddOtherProfileLike data = response.body();
-                    Log.e("data",data.status+"");
-                    if (data.status==1) {
+                    Log.e("data", data.status + "");
+                    if (data.status == 1) {
                         showToast(FriendProfileActivity.this, data.result);
                         binding.btnIlike.setVisibility(View.VISIBLE);
                         binding.btnAddLike.setVisibility(View.GONE);
-                    } else if (data.status==0) {
+                    } else if (data.status == 0) {
                         showToast(FriendProfileActivity.this, data.result);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResAddOtherProfileLike> call, Throwable t) {
                 call.cancel();
@@ -182,10 +194,10 @@ public class FriendProfileActivity extends AppCompatActivity {
                     FriendPostsFragment recents = new FriendPostsFragment();
                     recents.setArguments(bundle);
                     return recents;
-                    case 1:
+                case 1:
                     //  fm.
 
-                    FriendPostsFragment recentsq = new FriendPostsFragment();
+                    FriendAllPhotosFragment recentsq = new FriendAllPhotosFragment();
                     recentsq.setArguments(bundle);
                     return recentsq;
                 case 2:
@@ -247,6 +259,7 @@ public class FriendProfileActivity extends AppCompatActivity {
             }
         });
     }
+
     private void getFollowers(String userId) {
         DataManager.getInstance().showProgressMessage(FriendProfileActivity.this
                 , getString(R.string.please_wait));
@@ -277,11 +290,11 @@ public class FriendProfileActivity extends AppCompatActivity {
 
     private void setProfileDetails() {
 
-        binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
+        binding.tvName.setText(StringEscapeUtils.unescapeJava(userDetail.getFirstName() + " " + userDetail.getLastName()));
 
         if (!userDetail.getBio().equalsIgnoreCase("")) {
             binding.tvBio.setVisibility(View.VISIBLE);
-            binding.tvBio.setText(userDetail.getBio());
+            binding.tvBio.setText(StringEscapeUtils.unescapeJava(userDetail.getBio()));
         } else {
             binding.tvBio.setVisibility(View.GONE);
         }
@@ -298,31 +311,69 @@ public class FriendProfileActivity extends AppCompatActivity {
 
         binding.tvLikeGiven.setText(userDetail.getGivenLikes() + "");
         binding.tvLikeReceived.setText(userDetail.getReceviedLikes() + "");
-        if(userDetail.getMatch_status().equalsIgnoreCase("0"))
-        {
+        if (userDetail.getMatch_status().equalsIgnoreCase("0")) {
             binding.eventGroup.setVisibility(View.VISIBLE);
-        }else {
+        }
+        else {
             binding.eventGroup.setVisibility(View.VISIBLE);
 
         }
-        if(userDetail.getLike_status().equalsIgnoreCase("0"))
-        {
+        if (userDetail.getLike_status().equalsIgnoreCase("0")) {
             binding.btnIlike.setVisibility(View.GONE);
             binding.btnAddLike.setVisibility(View.VISIBLE);
         }
-        else
-        {
+        else {
 
             binding.sendMsg.setVisibility(View.VISIBLE);
             binding.btnIlike.setVisibility(View.VISIBLE);
             binding.btnAddLike.setVisibility(View.GONE);
         }
+
+        if (userDetail.getLat() != null) {
+            if (!userDetail.getLat().equalsIgnoreCase("")) {
+                binding.tvCity.setText(
+                        CurrentCity(Double.parseDouble(userDetail.getLat())
+                                , Double.parseDouble(userDetail.getLon())));
+            } else {
+
+                binding.tvCity.setVisibility(View.GONE);
+
+
+            }
+        }
+
+    }
+
+    public String CurrentCity(double latitude, double longitude) {
+        if (latitude >= 0.0) {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            //List<Address> addresses =geocoder.getFromLocation(latitude, longitude, 1);
+
+            try {
+                List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                String address = addresses.get(0).getSubLocality();
+                String cityName = addresses.get(0).getLocality();
+                String stateName = addresses.get(0).getAdminArea();
+                // txt_paddress.setText(address);
+                return cityName + " , " + stateName;
+                //   txt_state.setText(stateName);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e(TAG, "CurrentCity: " + e.getLocalizedMessage());
+                Log.e(TAG, "CurrentCity: " + e.getMessage());
+                Log.e(TAG, "CurrentCity: " + e.getCause());
+            }
+        }
+
+        return "  ";
+
     }
 
     private void setUpUi() {
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.posts));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.all_photos));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.videos));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         adapter = new Qr_DetailsAdapter(getApplicationContext(), getSupportFragmentManager(), binding.tabLayout.getTabCount(), binding.tabLayout.getSelectedTabPosition());
         binding.viewPager.setAdapter(adapter);

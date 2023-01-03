@@ -186,9 +186,7 @@ public class PostRestaurentFragment extends Fragment {
 
         binding.rlAdd.setOnClickListener(v ->
                 {
-
-                    if(status.equalsIgnoreCase("Deactive"))
-                    {
+                    if(status.equalsIgnoreCase("Deactive")) {
                         eventCategory = binding.spinnerCategory.getSelectedItem().toString();
                         restrantName = binding.etRestaurantName.getText().toString().trim();
                         strDetails = binding.etDetails.getText().toString().trim();
@@ -201,7 +199,6 @@ public class PostRestaurentFragment extends Fragment {
                         }
                     } else
                     {
-
                         restrantName = binding.etRestaurantName.getText().toString().trim();
                         strDetails = binding.etDetails.getText().toString().trim();
                         strLocation = binding.etLocation.getText().toString().trim();
@@ -230,8 +227,6 @@ public class PostRestaurentFragment extends Fragment {
         getProfile();
         return binding.getRoot();
     }
-
-
     void launchPurchaseFlow(ProductDetails productDetails) {
         ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList =
                 ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
@@ -437,7 +432,9 @@ public class PostRestaurentFragment extends Fragment {
             showToast(getActivity(),"Please select Event Images.");
         }else
         {
-            addRestaurant();
+         //   addRestaurant();
+            purchasePlan();
+
         }
     }
 
@@ -805,7 +802,6 @@ public class PostRestaurentFragment extends Fragment {
         AppCompatButton cancelBtn = dialog.findViewById(R.id.btnCancel);
 
         purchaseBtn.setOnClickListener(v ->
-
                     {
                         dialog.dismiss();
                         dialog6 = new Dialog(getActivity());

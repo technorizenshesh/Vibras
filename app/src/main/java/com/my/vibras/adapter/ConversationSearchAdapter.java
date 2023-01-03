@@ -14,6 +14,7 @@ import com.my.vibras.R;
 import com.my.vibras.databinding.SearchItemBinding;
 import com.my.vibras.model.SuccessResGetConversation;
 
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,7 +54,8 @@ public class ConversationSearchAdapter extends RecyclerView.Adapter<Conversation
 
         tvUserName = holder.itemView.findViewById(R.id.tvUserName);
 
-        tvUserName.setText(usersList.get(position).getFirstName()+" "+usersList.get(position).getLastName());
+        tvUserName.setText((usersList.get(position).getFirstName())+" "+
+                (usersList.get(position).getLastName()));
 
         Glide
                 .with(context)

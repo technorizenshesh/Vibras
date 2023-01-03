@@ -1,13 +1,14 @@
 package com.my.vibras.act;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.emoji.text.EmojiCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -66,21 +67,19 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 
     private ArrayList<SuccessResGetEventComment.Result> commentList = new ArrayList<>();
 
-    String strLat = "",strLng = "";
+    String strLat = "", strLng = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_events_details_screen);
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_events_details_screen);
 
 
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         Intent in = getIntent();
-        if (in!=null)
-        {
+        if (in != null) {
             String result = in.getStringExtra("data");
-            requestModel = new Gson().fromJson(result,SuccessResGetEvents.Result.class);
+            requestModel = new Gson().fromJson(result, SuccessResGetEvents.Result.class);
         }
 
         binding.imgBack.setOnClickListener(v -> {
@@ -88,13 +87,13 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         });
 
         binding.txtViewAllComents.setOnClickListener(v -> {
-            startActivity(new Intent(EventsDetailsScreen.this,AllCommentsAct.class)
-                    .putExtra("from","events").putExtra("id",requestModel.getId()));
+            startActivity(new Intent(EventsDetailsScreen.this, AllCommentsAct.class)
+                    .putExtra("from", "events").putExtra("id", requestModel.getId()));
         });
 
         binding.llPostComent.setOnClickListener(v -> {
-            startActivity(new Intent(EventsDetailsScreen.this,PostCommentAct.class)
-                    .putExtra("from","events").putExtra("id",requestModel.getId()));
+            startActivity(new Intent(EventsDetailsScreen.this, PostCommentAct.class)
+                    .putExtra("from", "events").putExtra("id", requestModel.getId()));
         });
 
         Glide.with(EventsDetailsScreen.this)
@@ -103,13 +102,13 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
 
         binding.tvEventName.setText(requestModel.getEventName());
         try {
-            Log.e(TAG, "onCreate: "+requestModel.getDateTimeEvent() );
-            Log.e(TAG, "onCreate: "+parseDateToddMMyyyy(requestModel.getDateTimeEvent()) );
-        binding.tvEventDate.setText(parseDateToddMMyyyy(requestModel.getDateTimeEvent()));
-        }catch (Exception e){
+            Log.e(TAG, "onCreate: " + requestModel.getDateTimeEvent());
+            Log.e(TAG, "onCreate: " + parseDateToddMMyyyy(requestModel.getDateTimeEvent()));
+            binding.tvEventDate.setText(parseDateToddMMyyyy(requestModel.getDateTimeEvent()));
+        } catch (Exception e) {
             e.printStackTrace();
             binding.tvEventDate.setText(requestModel.getDateTimeEvent());
-            Log.e("TAG", "onCreate: "+e.getLocalizedMessage() );
+            Log.e("TAG", "onCreate: " + e.getLocalizedMessage());
         }
         binding.tvEventTime.setText(requestModel.getEventStartTime());
 
@@ -118,11 +117,9 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         binding.tvDetails.setText(requestModel.getDescription());
         binding.phone.setText(requestModel.getEvent_user_mobile());
 
-        if(requestModel.getLikeStatus()!=null&&requestModel.getLikeStatus().equalsIgnoreCase("false"))
-        {
+        if (requestModel.getLikeStatus() != null && requestModel.getLikeStatus().equalsIgnoreCase("false")) {
             binding.ivLikes.setImageResource(R.drawable.likedd);
-        }else
-        {
+        } else {
             binding.ivLikes.setImageResource(R.drawable.liked_yes);
         }
 
@@ -130,26 +127,20 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
         strLng = requestModel.getLon();
 
 
-
-
-
-
-
-        binding.tvLikesCount.setText(requestModel.getTotalLike()+"");
-        binding.tvCommentCount.setText(requestModel.getTotalComments()+"");
+        binding.tvLikesCount.setText(requestModel.getTotalLike() + "");
+        binding.tvCommentCount.setText(requestModel.getTotalComments() + "");
 
         imagesList.clear();
-                for(SuccessResGetEvents.EventGallery eventGallery:requestModel.getEventGallery())
-                {
-                    imagesList.add(eventGallery.getImageFile());
-                }
+        for (SuccessResGetEvents.EventGallery eventGallery : requestModel.getEventGallery()) {
+            imagesList.add(eventGallery.getImageFile());
+        }
 
         multipleImagesAdapter = new EventsImagesAdapter(EventsDetailsScreen.this, imagesList);
         binding.rvImages.setHasFixedSize(true);
-        binding.rvImages.setLayoutManager(new LinearLayoutManager(EventsDetailsScreen.this, LinearLayoutManager.HORIZONTAL,false));
+        binding.rvImages.setLayoutManager(new LinearLayoutManager(EventsDetailsScreen.this, LinearLayoutManager.HORIZONTAL, false));
         binding.rvImages.setAdapter(multipleImagesAdapter);
 
-        commentAdapter = new EventCommentAdapter(EventsDetailsScreen.this,commentList);
+        commentAdapter = new EventCommentAdapter(EventsDetailsScreen.this, commentList);
         binding.rvComments.setHasFixedSize(true);
         binding.rvComments.setLayoutManager(new LinearLayoutManager(EventsDetailsScreen.this));
         binding.rvComments.setAdapter(commentAdapter);
@@ -160,48 +151,46 @@ public class EventsDetailsScreen extends AppCompatActivity implements OnMapReady
                 {
                     addLike(requestModel.getId());
                 }
-                );
+        );
 
         binding.cvSignup.setOnClickListener(v ->
                 {
                     joinEvent();
                 }
-                );
+        );
         binding.RLogin.setOnClickListener(v ->
                 {
                     joinEvent();
                 }
-                );
+        );
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(EventsDetailsScreen.this);
-if (requestModel.getIammember()!=null) {
-    if (requestModel.getIammember().equalsIgnoreCase("No")) {
-        binding.cvSignup.setVisibility(View.VISIBLE);
-        binding.RLogin.setVisibility(View.VISIBLE);
+        if (requestModel.getIammember() != null) {
+            if (requestModel.getIammember().equalsIgnoreCase("No")) {
+                binding.cvSignup.setVisibility(View.VISIBLE);
+                binding.RLogin.setVisibility(View.VISIBLE);
 
-    } else {
-        binding.cvSignup.setVisibility(View.GONE);
-        binding.RLogin.setVisibility(View.GONE);
+            } else {
+                binding.cvSignup.setVisibility(View.GONE);
+                binding.RLogin.setVisibility(View.GONE);
+            }
+        } else {
+            binding.cvSignup.setVisibility(View.VISIBLE);
+
+        }
+
     }
-}else {
-    binding.cvSignup.setVisibility(View.VISIBLE);
 
-}
-
-    }
-
-    public void joinEvent()
-    {
+    public void joinEvent() {
 
         String userId = SharedPreferenceUtility.getInstance(EventsDetailsScreen.this).getString(USER_ID);
 
         DataManager.getInstance().showProgressMessage(EventsDetailsScreen.this, getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("event_id",requestModel.getId());
-        map.put("member_id",userId);
-
+        Map<String, String> map = new HashMap<>();
+        map.put("event_id", requestModel.getId());
+        map.put("member_id", userId);
         Call<ResponseBody> call = apiInterface.joinEvent(map);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -227,10 +216,10 @@ if (requestModel.getIammember()!=null) {
                         binding.cvSignup.setVisibility(View.GONE);
 
                     } else if (data.equalsIgnoreCase("0")) {
-                        showToast(EventsDetailsScreen.this,message);
+                        showToast(EventsDetailsScreen.this, message);
                     }
                 } catch (Exception e) {
-                    Log.d("TAG", "onResponse: "+e);
+                    Log.d("TAG", "onResponse: " + e);
                     e.printStackTrace();
                 }
             }
@@ -248,9 +237,9 @@ if (requestModel.getIammember()!=null) {
 
         String userId = SharedPreferenceUtility.getInstance(EventsDetailsScreen.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(EventsDetailsScreen.this, getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("event_id",postId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("event_id", postId);
         Call<SuccessResAddLike> call = apiInterface.addEventLike(map);
         call.enqueue(new Callback<SuccessResAddLike>() {
             @Override
@@ -258,13 +247,11 @@ if (requestModel.getIammember()!=null) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResAddLike data = response.body();
-                    Log.e("data",data.status+" : likeUnlike");
+                    Log.e("data", data.status + " : likeUnlike");
 
-                    if(data.status==0)
-                    {
+                    if (data.status == 0) {
                         binding.ivLikes.setImageResource(R.drawable.ic_rest_unlike);
-                    }else
-                    {
+                    } else {
                         binding.ivLikes.setImageResource(R.drawable.ic_rest_like);
                     }
 
@@ -274,6 +261,7 @@ if (requestModel.getIammember()!=null) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<SuccessResAddLike> call, Throwable t) {
                 call.cancel();
@@ -285,8 +273,8 @@ if (requestModel.getIammember()!=null) {
     private void getComment() {
 
         DataManager.getInstance().showProgressMessage(EventsDetailsScreen.this, getString(R.string.please_wait));
-        Map<String,String> map = new HashMap<>();
-        map.put("event_id",requestModel.getId());
+        Map<String, String> map = new HashMap<>();
+        map.put("event_id", requestModel.getId());
 
         Call<SuccessResGetEventComment> call = apiInterface.getEventComments(map);
 
@@ -296,7 +284,7 @@ if (requestModel.getIammember()!=null) {
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResGetEventComment data = response.body();
-                    Log.e("data",data.status);
+                    Log.e("data", data.status);
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
@@ -305,7 +293,7 @@ if (requestModel.getIammember()!=null) {
                         commentAdapter.notifyDataSetChanged();
                     } else if (data.status.equals("0")) {
                         commentList.clear();
-                        showToast(EventsDetailsScreen.this,data.message);
+                        showToast(EventsDetailsScreen.this, data.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -329,9 +317,10 @@ if (requestModel.getIammember()!=null) {
         String str = null;
 
         try {
-             if (!time.equalsIgnoreCase("")){
-            date = inputFormat.parse(time);
-            str = outputFormat.format(date);}
+            if (!time.equalsIgnoreCase("")) {
+                date = inputFormat.parse(time);
+                str = outputFormat.format(date);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -344,7 +333,7 @@ if (requestModel.getIammember()!=null) {
             gMap = googleMap;
             strLat = requestModel.getLat();
             strLng = requestModel.getLon();
-            if (strLat!=null&&strLng!=null) {
+            if (strLat != null && strLng != null) {
                 double lat = Double.parseDouble(strLat);
                 double lng = Double.parseDouble(strLng);
                 LatLng sydney = new LatLng(lat, lng);
@@ -362,9 +351,8 @@ if (requestModel.getIammember()!=null) {
 
                 gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
-        }catch (Exception e)
-        {
-            Log.d("TAG", "onMapReady: "+e);
+        } catch (Exception e) {
+            Log.d("TAG", "onMapReady: " + e);
         }
 
 

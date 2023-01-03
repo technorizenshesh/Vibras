@@ -18,6 +18,7 @@ import com.my.vibras.R;
 import com.my.vibras.act.GetEventsByCategoryIdAct;
 import com.my.vibras.model.SuccessResGetCategory;
 
+
 import java.util.ArrayList;
 
 public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -62,7 +63,7 @@ public class BruseEventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .load(model.getIcon())
                     .into(ivCategory);
 
-            tvCategory.setText(model.getName());
+            tvCategory.setText(  (model.getName()));
 
             llParent.setOnClickListener(v ->
                     {

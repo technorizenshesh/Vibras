@@ -14,6 +14,9 @@ import com.my.vibras.R;
 import com.my.vibras.databinding.CommentItemBinding;
 import com.my.vibras.model.SuccessResGetRestaurantComment;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -58,8 +61,8 @@ public class CommentRestaurantAdapter extends RecyclerView.Adapter<CommentRestau
                 .load(commentList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(imageView);
-        tvName.setText(commentList.get(position).getFirstName());
-        tvComment.setText(commentList.get(position).getComment());
+        tvName.setText(  StringEscapeUtils.unescapeJava(commentList.get(position).getFirstName()));
+        tvComment.setText( StringEscapeUtils.unescapeJava (commentList.get(position).getComment()));
     }
 
     @Override

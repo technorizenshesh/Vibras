@@ -1,7 +1,5 @@
 package com.my.vibras.act;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -19,12 +17,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bolaware.viewstimerstory.Momentz;
 import com.bolaware.viewstimerstory.MomentzCallback;
 import com.bolaware.viewstimerstory.MomentzView;
 import com.bumptech.glide.Glide;
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.google.gson.Gson;
 import com.my.vibras.R;
+import com.my.vibras.VideoCalling.AppController;
 import com.my.vibras.act.ui.home.HomeFragment;
 import com.my.vibras.model.SuccessResGetStories;
 import com.my.vibras.retrofit.ApiClient;
@@ -33,6 +35,7 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.OnKeyboardVisibilityListener;
 import com.my.vibras.utility.SharedPreferenceUtility;
 import com.my.vibras.utility.SoftKeyboardLsnedRelativeLayout;
+import com.my.vibras.utility.TimeAgo2;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -49,10 +52,10 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
 
-public class StoryDetailAct extends AppCompatActivity implements MomentzCallback , OnKeyboardVisibilityListener {
+public class StoryDetailAct extends AppCompatActivity implements MomentzCallback, OnKeyboardVisibilityListener {
 
     ArrayList<MomentzView> storyView = new ArrayList<>();
-    private ArrayList<SuccessResGetStories.UserStory> stories= new ArrayList<>();
+    private ArrayList<SuccessResGetStories.UserStory> stories = new ArrayList<>();
     private String userName = "";
     private String userImage = "";
     private Momentz momentz;
@@ -82,26 +85,21 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
         userName = extras.getString("UserName");
         stories.addAll(storyObject.getUserStory());
 
-        if(stories!=null)
-        {
-            for (SuccessResGetStories.UserStory story:stories)
-            {
-                if(story.getStoryType().equalsIgnoreCase("image") ||
-                        story.getStoryType().equalsIgnoreCase("Image"))
-                {
+        if (stories != null) {
+            for (SuccessResGetStories.UserStory story : stories) {
+                if (story.getStoryType().equalsIgnoreCase("image") ||
+                        story.getStoryType().equalsIgnoreCase("Image")) {
                     ImageView internetLoadedImageView = new ImageView(this);
-                    storyView.add(new MomentzView(internetLoadedImageView,10));
-                }
-                else
-                {
+                    storyView.add(new MomentzView(internetLoadedImageView, 10));
+                } else {
                     VideoView videoView = new VideoView(this);
-            //        videoView.setBackground(getResources().getDrawable(R.color.black));
-                    storyView.add(new MomentzView(videoView,60));
+                    //        videoView.setBackground(getResources().getDrawable(R.color.black));
+                    storyView.add(new MomentzView(videoView, 60));
                 }
             }
         }
-        momentz = new Momentz(this,storyView,container,
-                this,R.drawable.green_lightgrey_drawable);
+        momentz = new Momentz(this, storyView, container,
+                this, R.drawable.green_lightgrey_drawable);
         momentz.start();
         SoftKeyboardLsnedRelativeLayout layout = (SoftKeyboardLsnedRelativeLayout) findViewById(R.id.myLayout);
         layout.addSoftKeyboardLsner(new SoftKeyboardLsnedRelativeLayout.SoftKeyboardLsner() {
@@ -109,6 +107,7 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
             public void onSoftKeyboardShow() {
                 Log.d("SoftKeyboard", "Soft keyboard shown");
             }
+
             @Override
             public void onSoftKeyboardHide() {
                 Log.d("SoftKeyboard", "Soft keyboard hidden");
@@ -129,60 +128,58 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
 
     @Override
     public void onNextCalled(@NotNull View view, @NotNull Momentz momentz, int i) {
-        Log.d("TAG", "onNextCalled: "+i);
-        tvDateTime.setText(stories.get(i).getDateTime());
+        Log.d("TAG", "onNextCalled: " + i);
+        try {
+            String time = stories.get(i).getDateTime();
+            TimeAgo2 timeAgo2 = new TimeAgo2();
+            String MyFinalValue = timeAgo2.covertTimeToText(time);
+            tvDateTime.setText(MyFinalValue);
+        } catch (Exception e) {
 
+        }
         llContainer.removeAllViews();
         ImageView imgView = new ImageView(StoryDetailAct.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         imgView.setLayoutParams(lp);
         llContainer.addView(imgView);
 
-        if(stories.get(i).getIliked().equalsIgnoreCase("Yes"))
-        {
+        if (stories.get(i).getIliked().equalsIgnoreCase("Yes")) {
             imgView.setBackground(getResources().getDrawable(R.drawable.red_heart_filled));
-        } else
-        {
+        } else {
             imgView.setBackground(getResources().getDrawable(R.drawable.ic_stroke_black));
         }
 
         imgView.setOnClickListener(v ->
                 {
-                    if(stories.get(i).getIliked().equalsIgnoreCase("Yes"))
-                    {
+                    if (stories.get(i).getIliked().equalsIgnoreCase("Yes")) {
                         imgView.setBackground(getResources().getDrawable(R.drawable.ic_stroke_black));
                         stories.get(i).setIliked("No");
-                    } else
-                    {
+                    } else {
                         imgView.setBackground(getResources().getDrawable(R.drawable.red_heart_filled));
                         stories.get(i).setIliked("Yes");
                     }
-                   addLike(stories.get(i).getStoryId(),stories.get(i).getId());
+                    addLike(stories.get(i).getStoryId(), stories.get(i).getId());
                 }
-                );
+        );
 
-        if(view instanceof VideoView)
-        {
+        if (view instanceof VideoView) {
             momentz.pause(true);
-            playVideo((VideoView) view,i,momentz);
-        }
-        else
-        {
+            playVideo((VideoView) view, i, momentz);
+        } else {
             momentz.pause(true);
-            if(!isFinishing()){
-                Glide.with(this).load(stories.get(i).getStoryData()).into((ImageView) view);
+            if (!isFinishing()) {
+                Glide.with(this).load(stories.get(i).getStoryData()).centerCrop().into((ImageView) view);
                 momentz.resume();
             }
         }
     }
 
-    private void addLike(String storyID,String storySubId)
-    {
+    private void addLike(String storyID, String storySubId) {
         String userId = SharedPreferenceUtility.getInstance(StoryDetailAct.this).getString(USER_ID);
-        Map<String,String> map = new HashMap<>();
-        map.put("user_id",userId);
-        map.put("story_id",storyID);
-        map.put("story_sub_id",storySubId);
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", userId);
+        map.put("story_id", storyID);
+        map.put("story_sub_id", storySubId);
 
         Call<ResponseBody> call = apiInterface.addStoryLike(map);
         call.enqueue(new Callback<ResponseBody>() {
@@ -206,10 +203,10 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
 
                     } else if (data.equalsIgnoreCase("0")) {
-                        showToast(StoryDetailAct.this,message);
+                        showToast(StoryDetailAct.this, message);
                     }
                 } catch (Exception e) {
-                    Log.d("TAG", "onResponse: "+e);
+                    Log.d("TAG", "onResponse: " + e);
                     e.printStackTrace();
                 }
             }
@@ -222,8 +219,7 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
         });
     }
 
-    public void playVideo(VideoView videoView,int index,Momentz momentz)
-    {
+    public void playVideo(VideoView videoView, int index, Momentz momentz) {
        /* DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         android.widget.LinearLayout.LayoutParams params = (android.widget.LinearLayout.LayoutParams) videoView.getLayoutParams();
@@ -231,15 +227,16 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
         params.height = metrics.heightPixels;
         params.leftMargin = 0;
         videoView.setLayoutParams(params);*/
-
+        HttpProxyCacheServer proxy;
         String str = stories.get(index).getStoryData();
         Uri uri = Uri.parse(str);
-        videoView.setVideoURI(uri);
+        proxy = AppController.getProxy(StoryDetailAct.this);
+        String proxyUrl = proxy.getProxyUrl(str);
+        videoView.setVideoURI(Uri.parse(proxyUrl));
         videoView.requestFocus();
         videoView.start();
         videoView.setOnInfoListener((mp, what, extra) -> {
-            if(what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START)
-            {
+            if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                 momentz.editDurationAndResume(index, (videoView.getDuration()) / 1000);
                 return true;
             }
@@ -277,11 +274,9 @@ public class StoryDetailAct extends AppCompatActivity implements MomentzCallback
     @Override
     public void onVisibilityChanged(boolean visible) {
 
-        if(visible)
-        {
+        if (visible) {
             momentz.pause(false);
-        } else
-        {
+        } else {
             momentz.resume();
         }
     }

@@ -2,9 +2,11 @@ package com.my.vibras.chat.GroupChat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -26,9 +28,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.chat.ChatListAdapter;
 import com.my.vibras.chat.ChatMessage;
 import com.my.vibras.utility.Session;
 
+   
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -73,8 +77,9 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
         Log.e("adapterID", "onBindViewHolder: " + chat.getImage());
         Log.e("adapterID", "onBindViewHolder: " + chat.getVideo());
         Log.e("adapterID", "onBindViewHolder: " + chat.getTime());
+        Log.e("adapterID", "onBindViewHolder: " + chat.getLongitude());
 
-        if (chat.getSenderID().equalsIgnoreCase(userid)) {
+/*        if (chat.getSenderID().equalsIgnoreCase(userid)) {
             if (chat.getMessage().equalsIgnoreCase("")) {
                 holder.usercard.setVisibility(View.VISIBLE);
                 holder.friendcard.setVisibility(View.GONE);
@@ -84,23 +89,40 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
                 holder.userTextSHow.setVisibility(View.GONE);
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 holder.usermessagelayout.setVisibility(View.GONE);
-
-
             } else {
-                holder.usercard.setVisibility(View.GONE);
-                holder.friendcard.setVisibility(View.GONE);
-                holder.usersendimage.setVisibility(View.GONE);
-                holder.recievesendimage.setVisibility(View.GONE);
-                holder.userTextSHow.setText(chat.getMessage());
-                holder.friendmessagelayout.setVisibility(View.GONE);
-                System.out.println("userid" + chat.getSenderID());
 
-                Glide.with(mContext)
-                        .load(chat.getUserImage())
-                        .into(holder.userimage);
-                holder.friendtime.setVisibility(View.GONE);
-                holder.usertime.setVisibility(View.VISIBLE);
-                holder.usertime.setText(chat.getTime());
+                if (chat.getImage().equalsIgnoreCase("")){
+                    holder.mycard_locat.setVisibility(View.VISIBLE);
+                    holder.recievesendimage.setVisibility(View.GONE);
+                    holder.usermessagelayout.setVisibility(View.GONE);
+                    holder.friendmessagelayout.setVisibility(View.GONE);
+                    holder.usercard.setVisibility(View.GONE);
+                    holder.friendcard.setVisibility(View.GONE);
+                    holder.usersendimage.setVisibility(View.GONE);
+                    holder.recievesendimage.setVisibility(View.GONE);
+                    holder.friendmessagelayout.setVisibility(View.GONE);
+                    holder.friendtime.setVisibility(View.GONE);
+                    holder.usercard.setVisibility(View.GONE);
+                    holder.friendcard.setVisibility(View.GONE);
+                    holder.usersendimage.setVisibility(View.GONE);
+                    holder.recievesendimage.setVisibility(View.GONE);
+                    holder.friendmessagelayout.setVisibility(View.GONE);
+                    holder.friendtime.setVisibility(View.GONE);
+                    holder.usertime.setVisibility(View.GONE);
+                    holder.usertime.setText(chat.getTime());
+                }else {
+                    holder.usercard.setVisibility(View.GONE);
+                    holder.friendcard.setVisibility(View.GONE);
+                    holder.usersendimage.setVisibility(View.GONE);
+                    holder.recievesendimage.setVisibility(View.GONE);
+                    holder.userTextSHow.setText(  (chat.getMessage()));
+                    holder.friendmessagelayout.setVisibility(View.GONE);
+                    System.out.println("userid" + chat.getSenderID());
+                    Glide.with(mContext).load(chat.getUserImage()).into(holder.userimage);
+                    holder.friendtime.setVisibility(View.GONE);
+                    holder.usertime.setVisibility(View.VISIBLE);
+                    holder.usertime.setText(chat.getTime());
+                }
             }
 
         } else {
@@ -114,17 +136,139 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
                 holder.friendTextShow.setVisibility(View.GONE);
                 holder.friendmessagelayout.setVisibility(View.GONE);
                 holder.usermessagelayout.setVisibility(View.GONE);
-            } else {
+            }
+            else {
+
+                  if (chat.getImage().equalsIgnoreCase("")){
+                      holder.mycard_locat.setVisibility(View.GONE);
+                      holder.friendcard_locat.setVisibility(View.VISIBLE);
+                      holder.usercard.setVisibility(View.GONE);
+                      holder.friendcard.setVisibility(View.GONE);
+                      holder.usersendimage.setVisibility(View.GONE);
+                      holder.recievesendimage.setVisibility(View.GONE);
+                      holder.usermessagelayout.setVisibility(View.GONE);
+                      holder.friendmessagelayout.setVisibility(View.GONE);
+
+                  }else {
+                      holder.usercard.setVisibility(View.GONE);
+                      holder.friendcard.setVisibility(View.GONE);
+                      holder.usersendimage.setVisibility(View.GONE);
+                      holder.recievesendimage.setVisibility(View.GONE);
+                      holder.friendTextShow.setText((chat.getMessage()));
+                      holder.usermessagelayout.setVisibility(View.GONE);
+                      holder.friendtime.setVisibility(View.VISIBLE);
+                      holder.usertime.setVisibility(View.GONE);
+                      holder.friendtime.setText(chat.getTime());
+                  }}*/
+
+
+        if(chat.getSenderID().equalsIgnoreCase(userid)) {
+
+
+            if (!chat.getLattitude().equalsIgnoreCase("0.0")){
+                holder.mycard_locat.setVisibility(View.VISIBLE);
+                holder.friendsenderimage.setVisibility(View.GONE);
+                holder.friendsenderimage_liner.setVisibility(View.GONE);
+                holder.friendTextShow.setVisibility(View.GONE);
+                holder.friendcard_locat.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.recievesendimage.setVisibility(View.GONE);
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+
+            }else
+            if (chat.getMessage().equalsIgnoreCase("")){
+                holder.usercard.setVisibility(View.VISIBLE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.VISIBLE);
+                holder.recievesendimage.setVisibility(View.GONE);
+                holder.usersendimage.setImageBitmap(base64ToBitmap(chat.getImage()));
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder.friendsenderimage_liner.setVisibility(View.GONE);
+
+            }else {
                 holder.usercard.setVisibility(View.GONE);
                 holder.friendcard.setVisibility(View.GONE);
-                holder.usersendimage.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
                 holder.recievesendimage.setVisibility(View.GONE);
-                holder.friendTextShow.setText(chat.getMessage());
-                holder.usermessagelayout.setVisibility(View.GONE);
-                holder.friendtime.setVisibility(View.VISIBLE);
-                holder.usertime.setVisibility(View.GONE);
-                holder.friendtime.setText(chat.getTime());
+                holder.userTextSHow.setText(  (chat.getMessage()));
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                System.out.println("userid" + chat.getSenderID());
+                holder.friendsenderimage_liner.setVisibility(View.GONE);
+                Glide.with(mContext)
+                        .load(  chat.getUserImage())
+                        .into(holder.userimage);
+                holder. friendtime.setVisibility(View.GONE);
+                holder. usertime.setVisibility(View.VISIBLE);
+                holder. usertime.setText(chat.getTime());
             }
+
+        }
+        else {
+
+            if (!chat.getLattitude().equalsIgnoreCase("0.0")){
+                holder.friendcard_locat.setVisibility(View.VISIBLE);
+                holder.mycard_locat.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder.usercard.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.recievesendimage.setVisibility(View.GONE);
+            }else
+            if (chat.getMessage().equalsIgnoreCase("")){
+                holder.  recievesendimage.setVisibility(View.VISIBLE);
+                holder.usercard.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.VISIBLE);
+                holder.recievesendimage.setImageBitmap(base64ToBitmap(chat.getImage()));
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.userTextSHow.setVisibility(View.GONE);
+                holder.friendTextShow.setVisibility(View.GONE);
+                holder.friendmessagelayout.setVisibility(View.GONE);
+                holder.usermessagelayout.setVisibility(View.GONE);
+               /* if (chat.getImage().equalsIgnoreCase("")){
+                    holder.friendcard_locat.setVisibility(View.VISIBLE);
+                }*/
+            }else {
+                holder.usercard.setVisibility(View.GONE);
+                holder.friendcard.setVisibility(View.GONE);
+                holder.  usersendimage.setVisibility(View.GONE);
+                holder.recievesendimage.setVisibility(View.GONE);
+                holder.friendTextShow.setText(  (chat.getMessage()));
+                holder.usermessagelayout.setVisibility(View.GONE);
+                holder. friendtime.setVisibility(View.VISIBLE);
+                holder. usertime.setVisibility(View.GONE);
+                holder. friendtime.setText(chat.getTime());
+                Log.e("TAG", "GlideGlideGlideGlideGlide: " + chat.getFriendImage());
+                Glide.with(mContext)
+                        .load(   chat.getFriendImage())
+                        .into(holder.friendsenderimage);
+                System.out.println("elseuserid" + chat.getReceiveerID());
+
+            }
+            // ChatListAdapter222.notifyDataSetChanged();
+            try {
+              //  ChatListAdapter.this.notify();
+
+            } catch (Exception e) {
+                System.out.println("====" + e.fillInStackTrace());
+
+            }
+
+        }
+
+
+
+
+
+
+
             Log.e("TAG", "GlideGlideGlideGlideGlide: " + chat.getFriendImage());
             Glide.with(mContext)
                     .load(chat.getFriendImage())
@@ -143,8 +287,12 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
 
             }
 
-        }
 
+        holder.mycard_locat.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:"+ chat.getLattitude()+","+ chat.getLongitude()+"?q="+ chat.getLattitude()+","+ chat.getLongitude()));
+            mContext. startActivity(intent);
+        });
         holder.usercard.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -222,15 +370,16 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView userss_name, userTextSHow, friendTextShow, usertime, friendtime;
-        CardView usercard, friendcard;
-
-        LinearLayout usermessagelayout, friendmessagelayout;
+        CardView    friendcard_locat, mycard_locat, usercard, friendcard;
+        LinearLayout     usermessagelayout, friendmessagelayout;
         ImageView usersendimage, recievesendimage;
         CircleImageView friendsenderimage, userimage;
-
+RelativeLayout friendsenderimage_liner;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            friendcard_locat = itemView.findViewById(R.id.friendcard_locat);
             usercard = itemView.findViewById(R.id.usercard);
+            mycard_locat = itemView.findViewById(R.id.mycard_locat);
             friendcard = itemView.findViewById(R.id.friendcard);
             userTextSHow = itemView.findViewById(R.id.userTextSHow);
             friendTextShow = itemView.findViewById(R.id.friendTextShow);
@@ -243,6 +392,7 @@ class GroupChatAdaapter extends RecyclerView.Adapter<GroupChatAdaapter.ViewHolde
             friendsenderimage = itemView.findViewById(R.id.friendsenderimage);
             userimage = itemView.findViewById(R.id.userimage);
             userss_name = itemView.findViewById(R.id.userss_name);
+            friendsenderimage_liner = itemView.findViewById(R.id.friendsenderimage_liner);
 
         }
     }

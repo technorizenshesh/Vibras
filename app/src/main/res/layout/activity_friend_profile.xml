@@ -133,7 +133,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="testtc"
+                    android:text=""
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     />
@@ -145,7 +145,7 @@
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Boston, MA"
+                    android:text=""
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/gray"
                     />
@@ -187,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="6,281k "
+                            android:text=""
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
@@ -198,7 +198,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Likes Received"
+                            android:text="@string/likes_received"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_8sdp" />
 
@@ -220,7 +220,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="6,281k "
+                            android:text=" "
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
@@ -230,7 +230,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Likes Given"
+                            android:text="@string/likes_given"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_8sdp" />
 
@@ -248,7 +248,7 @@
                             android:id="@+id/btnIlike"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:text="I Like"
+                            android:text="@string/i_like"
                             android:background="@drawable/border_btn"
                             android:layout_width="match_parent"
                             android:textAllCaps="false"
@@ -345,8 +345,6 @@
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:background="@drawable/border_black_cir"
-
-
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         >
@@ -355,7 +353,7 @@
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Events"
+                            android:text="@string/events"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
                             />
@@ -377,7 +375,7 @@
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Groups"
+                            android:text="@string/groups"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp"
                             />

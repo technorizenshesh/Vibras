@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Skip"
+                android:text="@string/skip"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Likes, Interests"
+                android:text="@string/likes_interests"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20sdp"
                 android:textStyle="bold" />
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Share your likes &amp; passion with others"
+                android:text="@string/share_your_likes_amp_passion_with_others"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_14sdp"
                 />
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="20sp"
-                android:text="Continue"
+                android:text="@string/continu"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />

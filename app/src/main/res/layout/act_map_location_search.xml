@@ -73,7 +73,7 @@
                         android:drawablePadding="@dimen/_10sdp"
                         android:drawableTint="@color/white"
                         android:padding="@dimen/_7sdp"
-                        android:text="  Send  "
+                        android:text="@string/send"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp"

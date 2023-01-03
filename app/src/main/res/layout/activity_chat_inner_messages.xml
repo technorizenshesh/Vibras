@@ -65,10 +65,10 @@
 
         <TextView
             android:id="@+id/username"
-            android:padding="@dimen/_5sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:padding="@dimen/_5sdp"
             android:text="Jessica Thompson"
             android:textColor="@color/black"
             android:textSize="@dimen/_10sdp"
@@ -147,7 +147,7 @@
                 android:layout_toLeftOf="@id/llRight"
                 android:background="@android:color/transparent"
                 android:gravity="center_vertical"
-                android:hint="Enter Message..."
+                android:hint="@string/enter_message"
                 android:padding="@dimen/_10sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"

@@ -18,10 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.my.vibras.R;
+import com.my.vibras.VideoCalling.AppController;
 import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetNotification;
 import com.my.vibras.utility.DeletePost;
+
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
 
@@ -61,19 +65,20 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 TextView tvtimeAgo = holder.itemView.findViewById(R.id.tvTimeAgo);
                 CircleImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
                 ImageView ivPost = holder.itemView.findViewById(R.id.ivPost);
-                tvMessage.setText(modelList.get(position).getMessage());
+                tvMessage.setText( StringEscapeUtils.unescapeJava(modelList.get(position).getMessage()));
                 //  tvtimeAgo.setText(modelList.get(position).getDateTime());
                 // 'Like', 'Comment', 'Fire','JoinGroup', 'Love
                 //
                 tvReject.setOnClickListener(v -> {
                     new AlertDialog.Builder(mContext)
-                            .setTitle("Reject Request")
-                            .setMessage("Are you sure you want to reject this request?")
+                            .setTitle(R.string.reject_request)
+                            .setMessage(R.string.are_you_sure)
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    deletePost.bottomSheet(v, "Rejected", false, position);
+                                    deletePost.bottomSheet(v, mContext.getString(
+                                            R.string.rejected), false, position);
                                     // Continue with delete operation
                                 }
                             })
@@ -85,14 +90,14 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 });
                 tvAccept.setOnClickListener(v -> {
                     new AlertDialog.Builder(mContext)
-                            .setTitle("Accept Request")
-                            .setMessage("Are you sure you want to accept this request?")
+                            .setTitle(R.string.accept_request)
+                            .setMessage(R.string.are_you_sure_accept)
 
                             // Specifying a listener allows you to take an action before dismissing the dialog.
                             // The dialog is automatically dismissed when a dialog button is clicked.
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    deletePost.bottomSheet(v, "Accepted", false, position);
+                                    deletePost.bottomSheet(v, mContext.getString(R.string.accepted), false, position);
                                     // Continue with delete operation
                                 }
                             })

@@ -63,7 +63,7 @@ public class DataManager {
                 lp.dimAmount = 0.8f;
 
                 mDialog.getWindow().setAttributes(lp);
-                mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+                mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 mDialog.setCancelable(false);
                 mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();

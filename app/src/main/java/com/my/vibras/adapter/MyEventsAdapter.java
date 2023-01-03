@@ -16,6 +16,9 @@ import com.my.vibras.databinding.MyeventItemBinding;
 import com.my.vibras.model.SuccessResMyEventRes;
 import com.my.vibras.utility.PostClickListener;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -73,9 +76,9 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.Storie
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
 
-        tvDescription.setText(postList.get(position).getDateTime());
+        tvDescription.setText(StringEscapeUtils.unescapeJava(postList.get(position).getDateTime()));
 
-        tvUserName.setText(postList.get(position).getEventName());
+        tvUserName.setText(  StringEscapeUtils.unescapeJava(postList.get(position).getEventName()));
 
         if(postList.get(position).getLikeStatus().equalsIgnoreCase("false"))
         {

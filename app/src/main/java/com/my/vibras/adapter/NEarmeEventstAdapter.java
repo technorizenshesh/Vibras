@@ -62,7 +62,7 @@ public class NEarmeEventstAdapter extends RecyclerView.Adapter<RecyclerView.View
             tvLocation.setText(model.getAddress());
             tvDate.setText(model.getDateTimeEvent());
 
-            ivEvent.setOnClickListener(v ->
+            holder.itemView.setOnClickListener(v ->
                     {
                         mContext.startActivity(new Intent(mContext, EventsDetailsScreen.class).putExtra("data",new Gson().toJson(modelList.get(position))));
                     }

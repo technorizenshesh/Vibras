@@ -26,9 +26,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 
-/**
- * Created by Ravindra Birla on 06,July,2021
- */
+import org.apache.commons.lang3.StringEscapeUtils;
+
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.StoriesViewHolder> {
 
@@ -89,7 +88,8 @@ exoPlayerView.setVisibility(View.GONE);
 
         ivComment.setOnClickListener(v ->
                 {
-                    context.startActivity(new Intent(context, AddCommentAct.class).putExtra("postId", postList.get(position).getId()));
+                    context.startActivity(new Intent(context, AddCommentAct.class).
+                            putExtra("postId", postList.get(position).getId()));
                 }
         );
         ivLike.setOnClickListener(v ->
@@ -110,10 +110,10 @@ exoPlayerView.setVisibility(View.GONE);
                 .load(postList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
-        tvDescription.setText(postList.get(position).getDescription());
+        tvDescription.setText( StringEscapeUtils.unescapeJava(postList.get(position).getDescription()));
         //    tvDistance.setText(postList.get(position).get());
-        tvUserName.setText(postList.get(position).getFirstName() + " "
-                + postList.get(position).getLastName());
+        tvUserName.setText(    StringEscapeUtils.unescapeJava(postList.get(position).getFirstName()) + " "
+                +  StringEscapeUtils.unescapeJava ( postList.get(position).getLastName()));
 
     }
 

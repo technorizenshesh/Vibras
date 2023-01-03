@@ -3,7 +3,6 @@ package com.my.vibras.adapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,7 +14,8 @@ import com.bumptech.glide.Glide;
 import com.my.vibras.R;
 import com.my.vibras.databinding.SearchItemBinding;
 import com.my.vibras.model.SuccessFollowersRes;
-import com.my.vibras.model.SuccessFollowersRes;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.List;
 
@@ -32,48 +32,46 @@ public class LikeRecivedAdapter extends RecyclerView.Adapter<LikeRecivedAdapter.
     SearchItemBinding binding;
 
     private List<SuccessFollowersRes.Result> usersList;
-    public LikeRecivedAdapter(Context context, List<SuccessFollowersRes.Result> usersList)
-    {
-      this.context = context;
-      this.usersList = usersList;
+
+    public LikeRecivedAdapter(Context context, List<SuccessFollowersRes.Result> usersList) {
+        this.context = context;
+        this.usersList = usersList;
 
     }
-    
+
     @NonNull
     @Override
     public StoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding= SearchItemBinding.inflate(LayoutInflater.from(context));
+        binding = SearchItemBinding.inflate(LayoutInflater.from(context));
         return new StoriesViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoriesViewHolder holder, int position) {
-if ( usersList.get(position).getUserDetails().getFirstName()!=null) {
-    CircleImageView circleImageView = holder.itemView.findViewById(R.id.ivProfile);
-    TextView tvUserName;
-    RelativeLayout rlParent = holder.itemView.findViewById(R.id.rlParent);
+        CircleImageView circleImageView = holder.itemView.findViewById(R.id.ivProfile);
+        TextView tvUserName;
+        RelativeLayout rlParent = holder.itemView.findViewById(R.id.rlParent);
 
-    tvUserName = holder.itemView.findViewById(R.id.tvUserName);
+        tvUserName = holder.itemView.findViewById(R.id.tvUserName);
 
-    tvUserName.setText(
-            usersList.get(position).getUserDetails().getFirstName() + " " + usersList.get(position).getUserDetails().getLastName());
-    Log.e("TAG", "onBindViewHolder: " + usersList.get(position).getImage());
-    Glide
-            .with(context)
-            .load(usersList.get(position).getUserDetails().getImage())
-            .centerCrop()
-            .into(circleImageView);
+        tvUserName.setText(StringEscapeUtils.unescapeJava(
+                usersList.get(position).getUserDetails().getFirstName()
+                + " " + (usersList.get(position).getUserDetails().getLastName())));
+        Log.e("TAG", "onBindViewHolder: " + usersList.get(position).getImage());
+        Glide
+                .with(context)
+                .load(usersList.get(position).getUserDetails().getImage())
+                .centerCrop()
+                .into(circleImageView);
 
-    circleImageView.setOnClickListener(v ->
-            {
+        circleImageView.setOnClickListener(v ->
+                {
 
-            }
-    );
+                }
+        );
 
-}else {
-    holder.itemView.setVisibility(View.GONE);
-}
     }
+
 
     @Override
     public int getItemCount() {

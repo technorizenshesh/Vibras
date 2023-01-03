@@ -1,11 +1,5 @@
 package com.my.vibras.act;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,14 +14,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.braintreepayments.cardform.OnCardFormSubmitListener;
 import com.braintreepayments.cardform.view.CardForm;
 import com.google.gson.Gson;
-
 import com.my.vibras.Company.HomeComapnyAct;
 import com.my.vibras.R;
 import com.my.vibras.adapter.PaymentAdapter;
 import com.my.vibras.databinding.ActivityPaymentsBinding;
+import com.my.vibras.model.AddAccomadSuccess;
 import com.my.vibras.model.SuccessResAddCard;
 import com.my.vibras.model.SuccessResAddEvent;
 import com.my.vibras.model.SuccessResAddRestaurant;
@@ -132,6 +132,18 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
             planId = "0";
             getGroupPayPrice();
         } else if (from.equalsIgnoreCase("rest")) {
+            restrantName = getIntent().getExtras().getString("restrantName");
+            str_image_path = getIntent().getExtras().getString("str_image_path");
+            strLocation = getIntent().getExtras().getString("strLocation");
+            strDetails = getIntent().getExtras().getString("strDetails");
+            myLatitude = getIntent().getExtras().getString("lat");
+            myLongitude = getIntent().getExtras().getString("lon");
+            eventCategory = getIntent().getExtras().getString("eventCategory");
+            imagesList = (ArrayList<String>) getIntent().getSerializableExtra("imagesList");
+            planId = "0";
+            getGroupPayPrice();
+        }
+        if (from.equalsIgnoreCase("acc")) {
             restrantName = getIntent().getExtras().getString("restrantName");
             str_image_path = getIntent().getExtras().getString("str_image_path");
             strLocation = getIntent().getExtras().getString("strLocation");
@@ -299,6 +311,10 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
                             strAmount = data.getResult().getRestaurantAmount();
                             binding.tvPay.setText(data.getResult().getRestaurantAmount() + " € " + getString(R.string.pay));
                         }
+                        if (from.equalsIgnoreCase("acc")) {
+                            strAmount = data.getResult().getRestaurantAmount();
+                            binding.tvPay.setText(data.getResult().getRestaurantAmount() + " € " + getString(R.string.pay));
+                        }
 
                     } else {
                         showToast(PaymentsAct.this, data.message);
@@ -350,6 +366,8 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
                         } else if (from.equalsIgnoreCase("event")) {
                             makePayment(token, "Event");
                         } else if (from.equalsIgnoreCase("rest")) {
+                            makePayment(token, "Restaurant");
+                        }if (from.equalsIgnoreCase("acc")) {
                             makePayment(token, "Restaurant");
                         }
 
@@ -403,6 +421,9 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
                         } else if (from.equalsIgnoreCase("rest")) {
                             addRestaurant();
                         }
+                       else if (from.equalsIgnoreCase("acc")) {
+                            addAcc();
+                        }
 
                     } else if (data.status.equals("0")) {
                         showToast(PaymentsAct.this, data.message);
@@ -421,6 +442,73 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
         });
 
     }
+
+    private void addAcc() {
+
+        String strUserId = SharedPreferenceUtility.getInstance(PaymentsAct.this).getString(USER_ID);
+
+        DataManager.getInstance().showProgressMessage(PaymentsAct.this, getString(R.string.please_wait));
+
+        List<MultipartBody.Part> filePartList = new LinkedList<>();
+
+        for (int i = 0; i < imagesList.size(); i++) {
+
+            String image = imagesList.get(i);
+
+            if (!imagesList.get(i).contains("https://nobu.es/tasknobu/uploads")) {
+                File file = DataManager.getInstance().saveBitmapToFile(new File(imagesList.get(i)));
+                filePartList.add(MultipartBody.Part.createFormData("image_file[]", file.getName(), RequestBody.create(MediaType.parse("image_file[]/*"), file)));
+            }
+        }
+
+        MultipartBody.Part filePart;
+        if (!str_image_path.equalsIgnoreCase("")) {
+            File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
+            if (file != null) {
+                filePart = MultipartBody.Part.createFormData("image", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+            } else {
+                filePart = null;
+            }
+
+        } else {
+            RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
+            filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
+        }
+
+        RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+        RequestBody eventName = RequestBody.create(MediaType.parse("text/plain"), restrantName);
+        RequestBody address = RequestBody.create(MediaType.parse("text/plain"), strLocation);
+        RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), myLatitude);
+        RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), myLongitude);
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
+        RequestBody eventCat = RequestBody.create(MediaType.parse("text/plain"), "2");
+
+        Call<AddAccomadSuccess> loginCall = apiInterface.addAccomadation(userId, eventName, address, lat, lon,
+                description, eventCat, filePart, filePartList);
+        loginCall.enqueue(new Callback<AddAccomadSuccess>() {
+            @Override
+            public void onResponse(Call<AddAccomadSuccess> call, Response<AddAccomadSuccess> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+
+                    AddAccomadSuccess data = response.body();
+                    String responseString = new Gson().toJson(response.body());
+                    Log.e(TAG, "Test Response :" + responseString);
+                    startActivity(new Intent(PaymentsAct.this, HomeComapnyAct.class));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Test Response :" + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddAccomadSuccess> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
 
     private void createGroupApi() {
         String userId = SharedPreferenceUtility.getInstance(PaymentsAct.this).getString(USER_ID);
@@ -778,7 +866,7 @@ public class PaymentsAct extends AppCompatActivity implements PaymentAdapter.OnI
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), strDetails);
         RequestBody eventCat = RequestBody.create(MediaType.parse("text/plain"), eventCategory);
 
-        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId, eventName, address, lat, lon, description,eventCat, filePart, filePartList);
+        Call<SuccessResAddRestaurant> loginCall = apiInterface.addRestaurants(userId, eventName, address, lat, lon, description, eventCat, filePart, filePartList);
         loginCall.enqueue(new Callback<SuccessResAddRestaurant>() {
             @Override
             public void onResponse(Call<SuccessResAddRestaurant> call, Response<SuccessResAddRestaurant> response) {

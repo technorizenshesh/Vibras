@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:text="Search History"
+                android:text="@string/search_history"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp"

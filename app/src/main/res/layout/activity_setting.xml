@@ -44,6 +44,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RRtoolbar">
 
@@ -91,18 +92,22 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/_2sdp"
                     android:layout_marginLeft="@dimen/_10sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/likee"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/poppinsregular"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/like_count"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp" />
+                       />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/SitchBtn"
@@ -118,6 +123,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:padding="@dimen/_2sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp">
@@ -127,11 +133,14 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:text="@string/followers_count"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp" />
+                        android:drawableLeft="@drawable/ic_baseline_rss_feed"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:layout_width="wrap_content"
@@ -146,6 +155,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:padding="@dimen/_2sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp">
@@ -155,11 +165,14 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
+                        android:drawableLeft="@drawable/ic_baseline_privacy_tip"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
                         android:text="@string/private_account"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp" />
+                       />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:layout_width="wrap_content"
@@ -205,6 +218,7 @@
 
                 <RelativeLayout
                     android:id="@+id/RRtrasaction"
+                    android:padding="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
@@ -219,20 +233,21 @@
 
                     </ImageView>
 
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textColor="@color/gray"
-
+                        android:drawableLeft="@drawable/transactions"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
                         android:text="@string/transactions"
-                        android:textSize="@dimen/_10sdp" />
-
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
                 <RelativeLayout
+                    android:padding="@dimen/_5sdp"
                     android:id="@+id/tvNotification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -249,15 +264,16 @@
                     </ImageView>
 
                     <TextView
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textColor="@color/gray"
+                        android:drawableLeft="@drawable/not"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
                         android:text="@string/notifications"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
 
                 </RelativeLayout>
 
@@ -367,6 +383,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:padding="@dimen/_5sdp"
                     android:id="@+id/RRHelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -382,21 +399,25 @@
 
                     </ImageView>
 
+
                     <TextView
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Help"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textColor="@color/gray"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_baseline_help"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="@string/help"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
 
-                        android:textSize="@dimen/_10sdp"
-                      />
+
 
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:padding="@dimen/_5sdp"
                     android:id="@+id/RRprivacyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -411,20 +432,23 @@
                         android:src="@drawable/ic_baseline_arrow_forward_ios"></ImageView>
 
                     <TextView
+                        android:padding="@dimen/_2sdp"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
-                        android:text="Privacy Policy"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/poppins_bold"
-                        android:textColor="@color/gray"
-
+                        android:text="@string/privacy_policy"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableLeft="@drawable/ic_baseline_privacy_tip"
+                        android:drawablePadding="@dimen/_10sdp"
                         />
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:padding="@dimen/_2sdp"
                     android:id="@+id/RRterms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -439,17 +463,49 @@
                         android:src="@drawable/ic_baseline_arrow_forward_ios"></ImageView>
 
                     <TextView
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/poppinsregular"
                         android:gravity="center"
                         android:text="@string/terms_condition"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableLeft="@drawable/ic_baseline_receipt"
+                        android:drawablePadding="@dimen/_10sdp"
 
                         />
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:padding="@dimen/_5sdp"
+                    android:id="@+id/RRlanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios"></ImageView>
+
+                    <TextView
+                        android:padding="@dimen/_2sdp"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_baseline_language"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="Select Language"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
 
                 </RelativeLayout>
 
@@ -499,12 +555,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_2sdp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Security Options"
+                    android:text="@string/security_options"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
                 <RelativeLayout
+                    android:padding="@dimen/_5sdp"
                     android:id="@+id/RRchangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -521,15 +579,17 @@
                     </ImageView>
 
                     <TextView
+                        android:padding="@dimen/_2sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="Change password"
-                        android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp" />
+                        android:drawableLeft="@drawable/password"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:text="@string/change_password"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp" />
+
 
                 </RelativeLayout>
 
@@ -547,6 +607,7 @@
                     android:textStyle="bold"
                     android:visibility="gone" />
                 <TextView
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -555,10 +616,13 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/poppins_bold"
                     android:padding="@dimen/_5sdp"
-                    android:text="Apply For Verified Profile"
+                    android:text="@string/apply_for_verified_profile"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:visibility="visible" />
+                    android:visibility="visible"
+                    android:drawableLeft="@drawable/ic_baseline_verified"
+                    android:drawablePadding="@dimen/_10sdp"
+                    />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -593,10 +657,10 @@
                         android:fontFamily="@font/poppins_bold"
                         android:drawablePadding="@dimen/_10sdp"
                         android:padding="@dimen/_5sdp"
-                        android:text="Get Verified"
+                        android:text="@string/get_verified"
                         android:textAllCaps="true"
                         android:textColor="@color/gray"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:visibility="visible" />
                 </RelativeLayout>
 
@@ -612,6 +676,9 @@
                     android:fontFamily="@font/poppins_bold"
                     android:padding="@dimen/_10sdp"
                     android:text="@string/logout"
+                    android:drawableTint="@color/red"
+                    android:drawableLeft="@drawable/logout"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -627,6 +694,9 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/poppins_bold"
                     android:padding="@dimen/_10sdp"
+                    android:drawableTint="@color/red"
+                    android:drawableLeft="@drawable/ic_delete"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:text="@string/delete_account"
                     android:textColor="@color/red"
                     android:textSize="@dimen/_12sdp"

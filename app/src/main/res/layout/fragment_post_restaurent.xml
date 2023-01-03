@@ -51,7 +51,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post Cover Image"
+                android:text="@string/post_cover_image"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/black"
                 />
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Restaurant Details"
+                android:text="@string/restaurant_details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
@@ -71,7 +71,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name of Restaurant"
+                android:text="@string/name_of_restaurant"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -104,7 +104,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Location of restaurant"
+                android:text="@string/location_of_restaurant"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -203,7 +203,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
+                android:text="@string/details"
                 android:textSize="@dimen/_10sdp"
                 android:textColor="@color/gray"
                 />
@@ -234,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Add Photos"
+                android:text="@string/add_photos"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"

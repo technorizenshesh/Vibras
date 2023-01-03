@@ -23,6 +23,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.my.vibras.R;
 import com.my.vibras.utility.Session;
+
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -96,8 +100,8 @@ public class AllChatuserAdapter extends RecyclerView.Adapter<AllChatuserAdapter.
         user_id = session.getUserId();
         final AllChatUserModel model = alluserchatlist.get(position);
         mReference = FirebaseDatabase.getInstance().getReference();
-        holder.username.setText(model.getName());
-        holder.lastmessage.setText(model.getMessage());
+        holder.username.setText( StringEscapeUtils.unescapeJava  (model.getName()));
+        holder.lastmessage.setText( StringEscapeUtils.unescapeJava  (model.getMessage()));
         Glide.with(context)
                 .load(model.getImage())
                 .into(holder.user_Image);

@@ -21,18 +21,21 @@ import com.my.vibras.CreateGroupAct;
 import com.my.vibras.MainActivity;
 import com.my.vibras.R;
 import com.my.vibras.SearchEventAct;
+import com.my.vibras.act.AccAct;
 import com.my.vibras.act.RestaurantAct;
 import com.my.vibras.act.ViewAllCategoryAct;
 import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.adapter.AllGroupChatAdapter;
 import com.my.vibras.adapter.BruseEventAdapter;
+import com.my.vibras.adapter.NEarmeAccAdapter;
 import com.my.vibras.adapter.NEarmeEventstAdapter;
 import com.my.vibras.adapter.NEarmeRestaurentAdapter;
 import com.my.vibras.adapter.SliderAdapter;
 import com.my.vibras.chat.ChatInnerMessagesActivity;
 import com.my.vibras.databinding.FragmentEventsBinding;
 import com.my.vibras.model.HomModel;
+import com.my.vibras.model.SuccessAccList;
 import com.my.vibras.model.SuccessResGetBanner;
 import com.my.vibras.model.SuccessResGetCategory;
 import com.my.vibras.model.SuccessResGetEvents;
@@ -50,6 +53,9 @@ import com.my.vibras.utility.SharedPreferenceUtility;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,6 +77,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<HomModel> modelListbrouse = new ArrayList<>();
     private ArrayList<SuccessResGetEvents.Result> modelListNearME = new ArrayList<>();
     private ArrayList<SuccessResGetRestaurants.Result> modelListNearMERest = new ArrayList<>();
+    private ArrayList<SuccessAccList.Result> resultArrayList = new ArrayList<>();
 
     private boolean addGroup = false;
     private VibrasInterface apiInterface;
@@ -79,6 +86,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<SuccessResGetCategory.Result> categoryResult = new ArrayList<>();
     NEarmeEventstAdapter mAdapterNEarMe;
     NEarmeRestaurentAdapter mAdapterNEarMeRest;
+    NEarmeAccAdapter nEarmeAccAdapter;
     private SliderAdapter sliderAdapter;
     GPSTracker gpsTracker;
     private boolean isUserLoggedIn;
@@ -90,11 +98,9 @@ public class EventsFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_events, container, false);
         gpsTracker = new GPSTracker(getActivity());
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         session = new Session(getContext());
         isUserLoggedIn = SharedPreferenceUtility.getInstance(getActivity()).getBoolean(Constant.IS_USER_LOGGED_IN);
-
         Bundle bundle1 = this.getArguments();
         if (bundle1 != null) {
             Gson gson = new Gson();
@@ -104,7 +110,6 @@ public class EventsFragment extends Fragment {
             getActivity().onBackPressed();
         });
         String type = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_TYPE);
-
          if (type.equalsIgnoreCase("user")){
              binding.btnCreateGroup.setVisibility(View.VISIBLE);
          }else {
@@ -115,12 +120,9 @@ public class EventsFragment extends Fragment {
                     startActivity(new Intent(getActivity(), CreateGroupAct.class));
                 }
         );
-
        getProfile();
        getGroup();
-
        getAllGroups();
-
         binding.ivSearch.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getActivity(), SearchEventAct.class));
@@ -139,8 +141,11 @@ public class EventsFragment extends Fragment {
         binding.imageSlider.setScrollTimeInSec(3);
         binding.imageSlider.setAutoCycle(true);
         binding.imageSlider.startAutoCycle();
-
-        binding.tvViewAllRest.setOnClickListener(v ->
+        binding.tvViewAllAcc.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), AccAct.class));
+                }
+        ); binding.tvViewAllRest.setOnClickListener(v ->
                 {
                     startActivity(new Intent(getActivity(), RestaurantAct.class));
                 }
@@ -154,7 +159,8 @@ public class EventsFragment extends Fragment {
 
         binding.tvViewAllEvent.setOnClickListener(v ->
                 {
-                    startActivity(new Intent(getActivity(), ViewAllEventAct.class).putExtra("from", "events"));
+                    startActivity(new Intent(getActivity(), ViewAllEventAct.class)
+                            .putExtra("from", "events"));
                 }
         );
 
@@ -163,6 +169,7 @@ public class EventsFragment extends Fragment {
                     startActivity(new Intent(getActivity(), ViewAllGroupsAct.class).putExtra("from", "all"));
                 }
         );
+
 
         if (ActivityCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -186,9 +193,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<SuccessResGetGroup.Result> groupList = new ArrayList<>();
 
     private void getAllGroups() {
-
         Map<String, String> map = new HashMap<>();
-
         Call<SuccessResGetGroup> call = apiInterface.getAllGroupApi(map);
         call.enqueue(new Callback<SuccessResGetGroup>() {
             @Override
@@ -242,7 +247,8 @@ public class EventsFragment extends Fragment {
                     if (data.status.equals("1")) {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
-                        binding.txtName.setText("Good Vibes, " + data.getResult().getFirstName());
+                        binding.txtName.setText(getString(R.string.good_vibes) +   (
+                                StringEscapeUtils.unescapeJava( data.getResult().getFirstName())));
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
@@ -266,7 +272,48 @@ public class EventsFragment extends Fragment {
        getEventCategory();
        getEvents();
         getRestaurants();
+        getAcc();
     }
+    private void getAcc()
+        {
+            DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+            String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+            Map<String, String> map = new HashMap<>();
+            map.put("user_id", userId);
+            map.put("lat", session.getHOME_LAT());
+            map.put("lon", session.getHOME_LONG());
+            Log.e(TAG, "getRestaurants:   getRestaurnatgetRestaurnatgetRestaurnatgetRestaurnat"+map );
+            Call<SuccessAccList> call = apiInterface.getAccomadtion(map);
+            call.enqueue(new Callback<SuccessAccList>() {
+                @Override
+                public void onResponse(Call<SuccessAccList> call, Response<SuccessAccList> response) {
+                    DataManager.getInstance().hideProgressMessage();
+                    try {
+                        SuccessAccList data = response.body();
+                        Log.e("data", data.getStatus());
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "getRestaurnatgetRestaurnatgetRestaurnatgetRestaurnat"+ dataResponse);
+
+                        if (data.getStatus().equals("1")) {
+                            resultArrayList.clear();
+                            resultArrayList.addAll(data.getResult());
+                            nEarmeAccAdapter.notifyDataSetChanged();
+                        } else if (data.getStatus().equals("0")) {
+                            showToast(getActivity(), data.getMessage());
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SuccessAccList> call, Throwable t) {
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
+                }
+            });
+
+        }
 
     private void getEventCategory() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -457,8 +504,17 @@ public class EventsFragment extends Fragment {
     }
 
     private void setAdapRestoaurent() {
+        nEarmeAccAdapter = new NEarmeAccAdapter(getActivity(), resultArrayList);
+        binding.recycleAcc.setHasFixedSize(true);
+        binding.recycleAcc.setLayoutManager(new LinearLayoutManager(getActivity()
+                , LinearLayoutManager.HORIZONTAL, false));
+        binding.recycleAcc.setAdapter(nEarmeAccAdapter);
+
         mAdapterNEarMeRest = new NEarmeRestaurentAdapter(getActivity(), modelListNearMERest);
         binding.recycleRestoaurent.setHasFixedSize(true);
+        binding.recycleRestoaurent.setLayoutManager(new LinearLayoutManager(getActivity()
+                , LinearLayoutManager.HORIZONTAL, false));
+
         // use a linear layout manager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         binding.recycleRestoaurent.setLayoutManager(new LinearLayoutManager(getActivity()

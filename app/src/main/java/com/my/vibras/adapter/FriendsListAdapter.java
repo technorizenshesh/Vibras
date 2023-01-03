@@ -19,6 +19,9 @@ import com.my.vibras.act.FriendProfileActivity;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetUsers;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 
 public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -51,7 +54,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .load(usersList.get(position).getImage())
                     .into(ivUserProfile);
 
-            tvUsername.setText(usersList.get(position).getFirstName() + " " + usersList.get(position).getLastName());
+            tvUsername.setText( StringEscapeUtils.unescapeJava (usersList.get(position).getFirstName())
+                    + " " +  StringEscapeUtils.unescapeJava (usersList.get(position).getLastName()));
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, FriendProfileActivity.class);
                 intent.putExtra("id", usersList.get(position).getId());

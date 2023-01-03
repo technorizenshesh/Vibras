@@ -25,8 +25,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 
 import com.bumptech.glide.Glide;
-import com.faltenreich.skeletonlayout.Skeleton;
-import com.faltenreich.skeletonlayout.SkeletonLayoutUtils;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.my.vibras.R;
@@ -54,6 +52,9 @@ import com.my.vibras.utility.HomeItemClickListener;
 import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -68,7 +69,7 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.REGISTER_ID;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
-
+ 
 public class HomeFragment extends Fragment implements HomeItemClickListener
 {
     private static final String TAG = "HomeFragmentHomeFragment";
@@ -82,9 +83,7 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
     private VibrasInterface apiInterface;
     private SuccessResGetUsers.Result selectedUser;
     private Dialog dialog;
-
     private String strLat = "", strLng = "";
-
     private GPSTracker gpsTracker;
     Session session;
    // private Skeleton skeleton;
@@ -95,10 +94,6 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         gpsTracker = new GPSTracker(getActivity());
         session = new Session(getActivity());
-       // skeleton = binding.getRoot().findViewById(R.id.skeletonLayout);
-       // skeleton = SkeletonLayoutUtils.createSkeleton(binding.rvhome);
-       // skeleton = SkeletonLayoutUtils.applySkeleton(binding.rvhome, R.layout.user_item);
-      //  skeleton.showSkeleton();
         String firebasetoken = SharedPreferenceUtility.getInstance(getActivity()).getString(REGISTER_ID);
         Log.e(TAG, "TOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKENTOKEN: "+firebasetoken );
         session.setUserId(SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID));
@@ -117,6 +112,20 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
             getAllUsers();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+        boolean val =  SharedPreferenceUtility.getInstance(getActivity()).getBoolean(Constant.SELECTED_LANGUAGE);
+
+        String lang = "";
+
+        if(!val)
+        {
+            lang = "en";
+        } else
+        {
+            lang = "sp";
         }
         return binding.getRoot();
     }
@@ -210,11 +219,10 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
                             Session session = new Session(getActivity());
                             session.setUserId(userId);
                             session.setChatImage(data.getResult().getImage());
-                            session.setChatName(data.getResult().getFirstName());
-                            binding.txtName.setText("Good Vibes, " + data.getResult().getFirstName());
-                        } else if (data.status.equals("0")) {
-                            showToast(getActivity(), data.message);
-                        }
+                            session.setChatName(StringEscapeUtils.unescapeJava(data.getResult().getFirstName()));
+                            binding.txtName.setText(getString(R.string.good_vibes) +   (
+                                    StringEscapeUtils.unescapeJava(data.getResult().getFirstName())));} else if (data.status.equals("0")) {
+                            showToast(getActivity(), data.message);}
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -246,18 +254,18 @@ public class HomeFragment extends Fragment implements HomeItemClickListener
                         String dataResponse = new Gson().toJson(response.body());
                         usersList.clear();
                         usersList.addAll(data.getResult());
-                        usersAdapters = new HomeUsersRecyclerViewAdapter(getActivity(), usersList, HomeFragment.this);
+                        usersAdapters = new HomeUsersRecyclerViewAdapter(getActivity(),
+                                usersList, HomeFragment.this);
                         CenterZoomLayoutManager layoutManager =
-                                new CenterZoomLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                                new CenterZoomLayoutManager(getActivity(),
+                                        LinearLayoutManager.HORIZONTAL, false);
                         binding.rvhome.setLayoutManager(layoutManager);
                         binding.rvhome.setAdapter(usersAdapters);
+                       // binding.rvhome.hideShimmerAdapter();
                         binding.rvhome.setHasFixedSize(true);
-                     //   skeleton.showOriginal();
-                        // Scroll to the position we want to snap to
-                        // Wait until the RecyclerView is laid out.
+
+
                         binding.rvhome.post(() -> {
-                            // Shift the view to snap  near the center of the screen.
-//                                 This does not have to be precise.
                              try{
                             int dx = (binding.rvhome.getWidth()
                                     - binding.rvhome.getChildAt(0).getWidth()) / 2;

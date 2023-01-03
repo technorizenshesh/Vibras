@@ -23,7 +23,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:maxLength="25"
+                android:maxLength="35"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -70,17 +70,15 @@
             android:layout_height="wrap_content"
            />
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvhome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 >
 
             </androidx.recyclerview.widget.RecyclerView>
-
 
     </LinearLayout>
 

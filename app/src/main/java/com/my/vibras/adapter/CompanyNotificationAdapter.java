@@ -16,6 +16,7 @@ import com.my.vibras.R;
 import com.my.vibras.model.HomModel;
 import com.my.vibras.model.SuccessResGetNotification;
 
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,7 +50,7 @@ public class CompanyNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
                 CircleImageView ivProfile =   holder.itemView.findViewById(R.id.ivProfile);
                 ImageView ivPost =   holder.itemView.findViewById(R.id.ivPost);
 
-                tvMessage.setText(modelList.get(position).getMessage());
+                tvMessage.setText(  (modelList.get(position).getMessage()));
 
                 Glide.with(mContext)
                         .load(modelList.get(position).getUserImage())

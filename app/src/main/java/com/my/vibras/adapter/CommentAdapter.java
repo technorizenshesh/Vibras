@@ -14,6 +14,9 @@ import com.my.vibras.R;
 import com.my.vibras.databinding.CommentItemBinding;
 import com.my.vibras.model.SuccessResGetComment;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
@@ -65,8 +68,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.StoriesV
                 .placeholder(R.drawable.ic_user)
                 .into(imageView);
 
-        tvName.setText(commentList.get(position).getUserDetial().getFirstName());
-        tvComment.setText(decodeEmoji(commentList.get(position).getComment()));
+        tvName.setText(  StringEscapeUtils.unescapeJava(commentList.get(position).getUserDetial().getFirstName()));
+        tvComment.setText(StringEscapeUtils.unescapeJava(commentList.get(position).getComment()));
         tvTimeAgo.setText(commentList.get(position).getTimeAgo());
 
     }

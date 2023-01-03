@@ -33,7 +33,6 @@
                     android:layout_height="@dimen/_60sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="10dp"
-
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="@dimen/_15sdp"
                     app:cardElevation="@dimen/_5sdp"
@@ -121,7 +120,7 @@
                         android:paddingRight="@dimen/_5sdp"
                         android:text="Hi  "
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </LinearLayout>
@@ -196,7 +195,7 @@
                     android:text="Hi, What's up? Can you dcome today by 09:00 AM"
                     android:textColor="@color/black"
 
-                    android:textSize="@dimen/_10sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
 
             </LinearLayout>

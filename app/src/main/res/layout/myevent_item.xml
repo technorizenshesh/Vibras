@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Kat Williams"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
@@ -120,7 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="8,998"
+                    android:text=""
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
@@ -136,13 +136,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="8,998"
+                    android:text=""
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     />
 
                 <TextView
+                    android:visibility="gone"
                     android:textStyle="bold"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawablePadding="@dimen/_10sdp"
@@ -159,6 +160,7 @@
             </LinearLayout>
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivSaved"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"

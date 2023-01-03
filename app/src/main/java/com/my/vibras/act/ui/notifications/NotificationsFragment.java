@@ -118,12 +118,10 @@ public class NotificationsFragment extends Fragment implements DeletePost {
         Map<String,String> map = new HashMap<>();
         map.put("request_id",requestId);
         map.put("status",status);
-
         Call<ResponseBody> call = apiInterface.acceptRejectGroup(map);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
                 DataManager.getInstance().hideProgressMessage();
 
                 try {

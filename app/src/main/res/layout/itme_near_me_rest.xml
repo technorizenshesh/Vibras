@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_100sdp"
-    android:layout_height="@dimen/_100sdp"
+    android:layout_width="@dimen/_130sdp"
+    android:layout_height="@dimen/_130sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_10sdp"
     app:cardUseCompatPadding="true"
@@ -16,12 +16,12 @@
         >
 
         <ImageView
-            android:layout_marginRight="-10dp"
-            android:layout_marginTop="-5dp"
-            android:layout_marginLeft="-10dp"
+            android:layout_marginRight="-5dp"
+            android:layout_marginTop="-2dp"
+            android:layout_marginLeft="-5dp"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_55sdp"
+            android:layout_height="@dimen/_65sdp"
             android:id="@+id/ivRestaurant"
             android:layout_gravity="center"
             android:src="@drawable/resturant_img"
@@ -37,13 +37,14 @@
             android:text="Vegan Resto"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp"
           />
 
         <TextView
             android:id="@+id/tvDistance"
             android:layout_gravity="center"
             android:padding="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginRight="@dimen/_2sdp"
             android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
 android:drawablePadding="@dimen/_10sdp"
             android:maxLength="24"
             android:textColor="@color/black"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/_10sdp"
           />
 
     </LinearLayout>

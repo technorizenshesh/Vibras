@@ -1,7 +1,10 @@
 package com.my.vibras.retrofit;
 
+import com.my.vibras.model.AccomadListResSuccess;
+import com.my.vibras.model.AddAccomadSuccess;
 import com.my.vibras.model.NotificationCount;
 import com.my.vibras.model.SocilaLoginResponse;
+import com.my.vibras.model.SuccessAccList;
 import com.my.vibras.model.SuccessAddSearchHistory;
 import com.my.vibras.model.SuccessFollowersRes;
 import com.my.vibras.model.SuccessResAddCard;
@@ -74,7 +77,6 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("signup")
     Call<SuccessResSignup> signup(@FieldMap Map<String, String> paramHashMap);
-
     @FormUrlEncoded
     @POST("check_otp")
     Call<SuccessResSignup> verifyOtp(@FieldMap Map<String, String> paramHashMap);
@@ -107,11 +109,14 @@ public interface VibrasInterface {
     @POST("addSelfy")
     Call<SuccessResUploadSelfie> uploadSelfie(
             @Part("user_id") RequestBody userId,
+            @Part("first_login") RequestBody first_login,
             @Part MultipartBody.Part file);
+
     @Multipart
     @POST("self_identify")
     Call<SuccessResUploadSelfie> self_identify(
             @Part("user_id") RequestBody userId,
+            @Part("first_login") RequestBody first_login,
             @Part MultipartBody.Part file);
 
     @GET("getPassion")
@@ -145,7 +150,6 @@ public interface VibrasInterface {
     Call<SuccessResSignup> updateProfile(@Part("user_id") RequestBody userId,
                                          @Part("first_name") RequestBody cc,
                                          @Part("last_name") RequestBody mobile,
-                                         @Part("email") RequestBody fullname,
                                          @Part("bio") RequestBody lat,
                                          @Part MultipartBody.Part file);
 
@@ -174,15 +178,19 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("search")
     Call<SuccessResGetUsers> searchUser(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("add_search_history")
     Call<SuccessAddSearchHistory> add_search_history(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_search_history")
     Call<SuccessSearchHistoryRes> search_history(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("delete_search_history")
     Call<ResponseBody> delete_search_history(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("clear_search_history")
     Call<ResponseBody> clear_search_history(@FieldMap Map<String, String> paramHashMap);
@@ -273,6 +281,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_category")
     Call<SuccessResGetCategory> getEventsCategory(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_restra_category")
     Call<SuccessResGetCategory> get_restra_category(@FieldMap Map<String, String> paramHashMap);
@@ -301,10 +310,24 @@ public interface VibrasInterface {
                                                  @Part("address") RequestBody address,
                                                  @Part("lat") RequestBody lat,
                                                  @Part("lon") RequestBody lon,
-                                                 @Part("category_id") RequestBody  category_id,
+                                                 @Part("category_id") RequestBody category_id,
                                                  @Part("description") RequestBody description,
                                                  @Part MultipartBody.Part fileEvent,
                                                  @Part List<MultipartBody.Part> file);
+
+    @Multipart
+    @POST("add_accommodation")
+    Call<AddAccomadSuccess> addAccomadation(@Part("user_id") RequestBody userId,
+                                            @Part("accommodation_name") RequestBody eName,
+                                            @Part("address") RequestBody address,
+                                            @Part("lat") RequestBody lat,
+                                            @Part("lon") RequestBody lon,
+                                            @Part("accommodation_category") RequestBody category_id,
+                                            @Part("description") RequestBody description,
+                                            @Part MultipartBody.Part fileEvent,
+                                            @Part List<MultipartBody.Part> file);
+    //user_id=1&accommodation_name=ritesh%20ssdsdsd&
+    // address=tests&accommodation_category=1&description=this%20is%20est&lat=2.454&lon=121321
 
     @FormUrlEncoded
     @POST("get_banner")
@@ -317,6 +340,10 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_neareast_restaurent")
     Call<SuccessResGetRestaurants> getRestaurnat(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("get_neareast_accommodation")
+    Call<SuccessAccList> getAccomadtion(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_neareast_restaurent")
@@ -345,6 +372,9 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("addRestaurentlike")
     Call<SuccessResAddLike> addRestaurantLike(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("addaccommodationlike")
+    Call<SuccessResAddLike> addaccommodationlike(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("delete_event")
@@ -361,10 +391,16 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("addRestaurentcomment")
     Call<ResponseBody> addRestaurantComment(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("addaccommodation_comment")
+    Call<ResponseBody> addaccommodation_comment(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("get_restaurent_comment")
     Call<SuccessResGetRestaurantComment> getRestaurantComments(@FieldMap Map<String, String> paramHashMap);
+    @FormUrlEncoded
+    @POST("get_accommodation_comment")
+    Call<AccomadListResSuccess> get_accommodation_comment(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("ge_saved_restaurent")
@@ -500,6 +536,7 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("get_privacy_policy")
     Call<SuccessResGetPP> getPrivacyPolicy(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("get_term_conditions")
     Call<SuccessResGetPP> get_term_conditions(@FieldMap Map<String, String> paramHashMap);
@@ -527,18 +564,26 @@ public interface VibrasInterface {
     @FormUrlEncoded
     @POST("video_call_invitation")
     Call<SuccessResMakeCall> addNotification(@FieldMap Map<String, String> paramHashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("get_followers")
     Call<SuccessFollowersRes> get_followers(@FieldMap Map<String, String> paramHashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("get_following")
     Call<SuccessFollowersRes> get_following(@FieldMap Map<String, String> paramHashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("get_total_useen_notification")
     Call<NotificationCount> get_total_useen_notification(@FieldMap Map<String, String> paramHashMap);
- @FormUrlEncoded
+
+    @FormUrlEncoded
     @POST("resend_otp")
     Call<SuccessResSignup> resend_otp(@FieldMap Map<String, String> paramHashMap);
 
- //https://myasp-app.com/vibras/webservice/resend_otp?email=tessdfgfgsy@gmail.com
+    @FormUrlEncoded
+    @POST("logout")
+    Call<ResponseBody> logout(@FieldMap Map<String, String> paramHashMap);
+   // https://myasp-app.com/vibras/webservice/logout?user_id=15
+    //https://myasp-app.com/vibras/webservice/resend_otp?email=tessdfgfgsy@gmail.com
 }

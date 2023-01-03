@@ -27,13 +27,11 @@ import retrofit2.Response;
 import static com.my.vibras.retrofit.Constant.showToast;
 
 public class PrivacyPolicyAct extends AppCompatActivity {
-
     ActivityPrivacyPolicyBinding binding;
     private VibrasInterface apiInterface;
     private String description="";
     private String from="";
     private String is="";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

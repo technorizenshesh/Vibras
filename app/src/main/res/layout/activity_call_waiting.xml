@@ -109,7 +109,7 @@
                         android:fontFamily="@font/poppinsregular"
                         android:gravity="center_vertical"
                         android:maxLines="2"
-                        android:text="In Coming Call"
+                        android:text="@string/in_coming_call"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp"
                         android:textStyle="normal" />

@@ -32,6 +32,7 @@ import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +61,10 @@ public class RestaurantDetailAct extends AppCompatActivity implements OnMapReady
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_restaurant_detail);
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(RestaurantDetailAct.this);
         Intent in = getIntent();
         if (in!=null)
         {
@@ -94,9 +99,9 @@ binding.contactNo.setText(requestModel.getUser_contact());
         Glide.with(RestaurantDetailAct.this)
                 .load(requestModel.getImage())
                 .into(binding.ivRestaurant);
-        binding.tvRestaurantName.setText(requestModel.getRestaurantName());
+        binding.tvRestaurantName.setText((requestModel.getRestaurantName()));
         binding.tvRestaurantLocation.setText(requestModel.getAddress());
-        binding.tvDetails.setText(requestModel.getDescription());
+        binding.tvDetails.setText((requestModel.getDescription()));
         imagesList.clear();
         strLat = requestModel.getLat();
         strLng = requestModel.getLon();
@@ -121,14 +126,11 @@ binding.contactNo.setText(requestModel.getUser_contact());
                     addLike(requestModel.getId());
                 }
                 );
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(RestaurantDetailAct.this);
+
 
     }
 
     private void addLike(String postId) {
-
         String userId = SharedPreferenceUtility.getInstance(RestaurantDetailAct.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(RestaurantDetailAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
@@ -199,7 +201,6 @@ binding.contactNo.setText(requestModel.getUser_contact());
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         try {
             gMap = googleMap;
             double  lat = Double.parseDouble(strLat);

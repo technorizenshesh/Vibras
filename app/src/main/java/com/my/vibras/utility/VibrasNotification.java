@@ -22,6 +22,7 @@ import com.my.vibras.R;
 import com.my.vibras.VideoCalling.HeadsUpNotificationService;
 import com.my.vibras.act.HomeUserAct;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -288,8 +289,8 @@ Patel, userimage=https://myasp-app.com/vibras/uploads/images/User_image202210170
             NotificationCompat.Builder notificationBuilder =
                     new NotificationCompat.Builder(this, channelId)
                             .setSmallIcon(R.drawable.bolt_only_logo)
-                            .setContentTitle(title)
-                            .setContentText(key1)
+                            .setContentTitle( StringEscapeUtils.unescapeJava(title))
+                            .setContentText( StringEscapeUtils.unescapeJava(key1))
                             .setAutoCancel(true)
                             .setSound(defaultSoundUri)
                             .setContentIntent(pendingIntent);

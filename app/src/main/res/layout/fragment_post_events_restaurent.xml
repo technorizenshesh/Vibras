@@ -44,17 +44,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:text="Event"
+                android:text="@string/event"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txtAccomadtion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_5sdp"
-                android:text="Accommodation"
                 android:layout_centerInParent="true"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/accommodation"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -65,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/_5sdp"
-                android:text="Restaurant"
+                android:text="@string/restaurant"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />

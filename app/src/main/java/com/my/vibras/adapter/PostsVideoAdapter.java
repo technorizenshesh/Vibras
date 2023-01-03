@@ -32,6 +32,8 @@ import com.my.vibras.databinding.PostItemBinding;
 import com.my.vibras.model.SuccessResGetPosts;
 import com.my.vibras.utility.PostClickListener;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -159,10 +161,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
                 .load(postList.get(position).getImageuser())
                 .placeholder(R.drawable.ic_user)
                 .into(circleImageView);
-        tvDescription.setText(postList.get(position).getDescription());
+        tvDescription.setText(StringEscapeUtils.unescapeJava(postList.get(position).getDescription()));
         //    tvDistance.setText(postList.get(position).get());
-        tvUserName.setText(postList.get(position).getFirstName() + " "
-                + postList.get(position).getLastName());
+        tvUserName.setText(StringEscapeUtils.unescapeJava(postList.get(position).getFirstName() + " "
+                + postList.get(position).getLastName()));
 
     }
 public void StopPlayer(){

@@ -49,6 +49,7 @@ import com.my.vibras.act.ViewAllEventAct;
 import com.my.vibras.act.ViewAllGroupsAct;
 import com.my.vibras.adapter.PostsAdapter;
 import com.my.vibras.databinding.FragmentMyProfileBinding;
+import com.my.vibras.fragment.AllPhotosFragment;
 import com.my.vibras.fragment.AppointmentFragment;
 import com.my.vibras.fragment.PostsFragment;
 import com.my.vibras.fragment.PostsVideoFragment;
@@ -65,6 +66,9 @@ import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.PostClickListener;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
+
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -87,6 +91,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
+ import static com.my.vibras.utility.RandomString.IncodeIntoBase64;
 
 public class MyProfileFragment extends Fragment implements PostClickListener {
 
@@ -129,7 +134,7 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                     return recents;
 
                case 1:
-                    PostsFragment recents1 = new PostsFragment();
+                   AllPhotosFragment recents1 = new AllPhotosFragment();
                     return recents1;
 
                 case 2:
@@ -162,15 +167,14 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         View view = binding.getRoot();
          gpsTracker =new GPSTracker(getActivity());
 
-
         apiInterface = ApiClient.getClient().create(VibrasInterface.class);
         binding.imgSetting.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), SettingAct.class));
         });
 
-         binding.top.setOnClickListener(v->{
+        /* binding.top.setOnClickListener(v->{
              Toast.makeText(getActivity(), "Pay", Toast.LENGTH_SHORT).show();
-           });
+           });*/
 
         binding.ivAddPost.setOnClickListener(v ->
                 {
@@ -192,13 +196,14 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
                 }
         );
         binding.likeRecived.setOnClickListener(v -> {
-            String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+            String userId = SharedPreferenceUtility
+                    .getInstance(getContext()).getString(USER_ID);
             startActivity(new Intent(getActivity(),
                     LikeReceivedActivity.class)
-                    .putExtra("id",userId));
-        });
+                    .putExtra("id",userId));});
         binding.followers.setOnClickListener(v -> {
-            String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+            String userId = SharedPreferenceUtility
+                    .getInstance(getContext()).getString(USER_ID);
             startActivity(new Intent(getActivity(),
                     LikeSentActivity.class)
                     .putExtra("id",userId));
@@ -350,13 +355,13 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
         binding.tvName.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
 
-        binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
+        binding.tvName.setText( StringEscapeUtils.unescapeJava (userDetail.getFirstName()) + " " +  StringEscapeUtils.unescapeJava (userDetail.getLastName()));
        //                     binding.tvName.setCompoundDrawables(null,null, requireActivity().getResources().getDrawable(R.drawable.ic_baseline_verified),null);
        // .. // binding.tvName.setText(userDetail.getFirstName() + " " + userDetail.getLastName());
 
         if (!userDetail.getBio().equalsIgnoreCase("")) {
             binding.tvBio.setVisibility(View.VISIBLE);
-            binding.tvBio.setText(userDetail.getBio());
+            binding.tvBio.setText( StringEscapeUtils.unescapeJava (userDetail.getBio()));
         } else {
             binding.tvBio.setVisibility(View.GONE);
         }
@@ -416,9 +421,9 @@ public class MyProfileFragment extends Fragment implements PostClickListener {
     }
 
     private void setUpUi() {
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Posts"));
-  binding.tabLayout.addTab(binding.tabLayout.newTab().setText("All Photos"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Videos"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.posts));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.all_photos));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.videos));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
          binding.tabLayout.setSelected(true);
         adapter = new MyProfileFragment.Qr_DetailsAdapter(getActivity(),

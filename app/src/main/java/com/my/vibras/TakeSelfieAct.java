@@ -98,6 +98,7 @@ public class TakeSelfieAct extends AppCompatActivity {
     private void ApplyForVerify() {
        // enum('Not Applied', 'Pending', 'Approved', 'Rejected
             String strUserId = SharedPreferenceUtility.getInstance(TakeSelfieAct.this).getString(USER_ID);
+            String first_loginr ="1";
             DataManager.getInstance().showProgressMessage(TakeSelfieAct.this,getString(R.string.please_wait));
             MultipartBody.Part filePart;
             if (!str_image_path.equalsIgnoreCase("")) {
@@ -112,7 +113,8 @@ public class TakeSelfieAct extends AppCompatActivity {
                 filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
             }
             RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
-            Call<SuccessResUploadSelfie> loginCall = apiInterface.self_identify(userId,filePart);
+            RequestBody first_login = RequestBody.create(MediaType.parse("text/plain"), "1");
+            Call<SuccessResUploadSelfie> loginCall = apiInterface.self_identify(userId,first_login,filePart);
             loginCall.enqueue(new Callback<SuccessResUploadSelfie>() {
                 @Override
                 public void onResponse(Call<SuccessResUploadSelfie> call,
@@ -389,8 +391,9 @@ public class TakeSelfieAct extends AppCompatActivity {
             filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
         }
         RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
+        RequestBody first_login = RequestBody.create(MediaType.parse("text/plain"), "1");
 
-        Call<SuccessResUploadSelfie> loginCall = apiInterface.uploadSelfie(userId,filePart);
+        Call<SuccessResUploadSelfie> loginCall = apiInterface.uploadSelfie(userId,first_login,filePart);
         loginCall.enqueue(new Callback<SuccessResUploadSelfie>() {
             @Override
             public void onResponse(Call<SuccessResUploadSelfie> call, Response<SuccessResUploadSelfie> response) {

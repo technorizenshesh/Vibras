@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/ivSend"
         android:background="@android:color/transparent"
-        android:hint="Write him something original :)"
+        android:hint="@string/write_him_something_original"
         android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_10sdp"
         android:textColor="@color/black" />

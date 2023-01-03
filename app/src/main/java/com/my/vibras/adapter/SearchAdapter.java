@@ -25,6 +25,8 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.SharedPreferenceUtility;
 import com.my.vibras.utility.Util;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +80,7 @@ String title;
         tvUserName = holder.itemView.findViewById(R.id.tvUserName);
 
 
-        tvUserName.setText(usersList.get(position).getFirstName() + " " + usersList.get(position).getLastName());
+        tvUserName.setText(StringEscapeUtils.unescapeJava(usersList.get(position).getFirstName() + " " + usersList.get(position).getLastName()));
 
         Glide
                 .with(context)

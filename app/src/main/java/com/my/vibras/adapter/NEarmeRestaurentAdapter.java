@@ -18,6 +18,9 @@ import com.my.vibras.R;
 import com.my.vibras.RestaurantDetailAct;
 import com.my.vibras.model.SuccessResGetRestaurants;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,7 +62,7 @@ public class NEarmeRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.V
             TextView tvDistance = holder.itemView.findViewById(R.id.tvDistance);
 
 
-            ivRestaurants.setOnClickListener(v ->
+            holder.itemView.setOnClickListener(v ->
                     {
                         mContext.startActivity(new Intent(mContext, RestaurantDetailAct.class)
                                 .putExtra("data",new Gson().toJson(modelList.get(position))));
@@ -69,7 +72,7 @@ public class NEarmeRestaurentAdapter extends RecyclerView.Adapter<RecyclerView.V
             Glide.with(mContext)
                     .load(model.getImage())
                     .into(ivRestaurants);
-            tvName.setText(model.getRestaurantName());
+            tvName.setText( StringEscapeUtils.unescapeJava(model.getRestaurantName()));
 //            if (model.getEstimateTime()>60) {
 //
 //                SimpleDateFormat sdf = new SimpleDateFormat("mm");

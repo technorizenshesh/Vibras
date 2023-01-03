@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.gson.Gson;
+import com.my.vibras.ChooseLanguage;
 import com.my.vibras.R;
 import com.my.vibras.SelectViberLoginAct;
 import com.my.vibras.TakeSelfieAct;
@@ -56,7 +57,10 @@ public class SettingAct extends AppCompatActivity {
                     .putExtra("loginType", "home"));
         });
 
-        binding.RRAbout.setOnClickListener(v -> {
+        binding.RRlanguage.setOnClickListener(v -> {
+            startActivity(new Intent(SettingAct.this, ChooseLanguage.class));
+          //  finish();
+        }); binding.RRAbout.setOnClickListener(v -> {
             startActivity(new Intent(SettingAct.this, TermsCondition.class));
         });
 
@@ -103,13 +107,10 @@ public class SettingAct extends AppCompatActivity {
 
         binding.tvLogout.setOnClickListener(v ->
                 {
-                    SharedPreferenceUtility.getInstance(getApplicationContext()).putBoolean(Constant.IS_USER_LOGGED_IN, false);
-                    Intent intent = new Intent(SettingAct.this,
-                            SelectViberLoginAct.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+
+
+                    logoutApi();
+
                 }
         );
 
@@ -133,6 +134,49 @@ public class SettingAct extends AppCompatActivity {
             onBackPressed();
         });
     }
+
+    private void logoutApi() {
+            String userId = SharedPreferenceUtility.getInstance(SettingAct.this).getString(USER_ID);
+            Map<String,String> map = new HashMap<>();
+            map.put("user_id",userId);
+            Call<ResponseBody> call = apiInterface.logout(map);
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    DataManager.getInstance().hideProgressMessage();
+                    try {
+//                    SuccessResAddComment data = response.body();
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        String data = jsonObject.getString("status");
+                        String message = jsonObject.getString("message");
+                        if (data.equalsIgnoreCase("1")) {
+                            SharedPreferenceUtility.getInstance(getApplicationContext())
+                                    .putBoolean(Constant.IS_USER_LOGGED_IN, false);
+                            Intent intent = new Intent(SettingAct.this,
+                                    SelectViberLoginAct.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else if (data.equalsIgnoreCase("0")) {
+                            showToast(SettingAct.this,message);
+                        }
+                    } catch (Exception e) {
+                        Log.d("TAG", "onResponse: "+e);
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    call.cancel();
+                    DataManager.getInstance().hideProgressMessage();
+                }
+            });
+        }
+
+
+
 
     @Override
     protected void onResume() {

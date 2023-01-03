@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Please enter the 4-digit code sent to your number/ mail ID."
+                android:text="@string/please_enter_the_4_digit_code_sent_to_your_number_mail_id"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 />
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Verification"
+                android:text="@string/verification"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:gravity="center"
-                android:text="Enter the Code"
+                android:text="@string/enter_the_code"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_14sdp"
                 />

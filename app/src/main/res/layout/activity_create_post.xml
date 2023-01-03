@@ -23,7 +23,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Discard"
+                    android:text="@string/discard"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/_13sdp" />
 
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Create"
+                    android:text="@string/create"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_13sdp" />
 
@@ -46,7 +46,7 @@
                     android:gravity="center"
                     android:paddingHorizontal="@dimen/_8sdp"
                     android:paddingVertical="@dimen/_3sdp"
-                    android:text="Publish"
+                    android:text="@string/publish"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
             </RelativeLayout>
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_toRightOf="@id/ivCircle"
-                    android:hint="What's on your mind?"
+                    android:hint="@string/what_s_on_your_mind"
                     android:padding="@dimen/_10sdp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -134,7 +134,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/_15sdp"
                 android:paddingVertical="@dimen/_3sdp"
-                android:text="Post"
+                android:text="@string/post"
                 android:textColor="@color/white"
                 android:textAllCaps="true"
                 android:textSize="@dimen/_12sdp" />
@@ -150,7 +150,7 @@
                 android:layout_marginLeft="@dimen/_3sdp"
                 android:paddingHorizontal="@dimen/_15sdp"
                 android:paddingVertical="@dimen/_3sdp"
-                android:text="Story"
+                android:text="@string/story"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />

@@ -50,6 +50,9 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -127,9 +130,9 @@ public class ComapnyProfileFragment extends Fragment{
 
     private void setUpUi() {
 
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Events"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Restaurant"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Accommodation"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.event)));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.restaurant)));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText(getString(R.string.accommodation)));
     //    binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Tagged"));
         binding.tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -220,7 +223,7 @@ public class ComapnyProfileFragment extends Fragment{
     private void setProfileDetails()
     {
 
-        binding.tvName.setText(userDetail.getFirstName()+" "+userDetail.getLastName());
+        binding.tvName.setText( StringEscapeUtils.unescapeJava(userDetail.getFirstName()+" "+userDetail.getLastName()));
 
         Glide
                 .with(getActivity())

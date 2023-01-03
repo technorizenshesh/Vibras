@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Add New Card"
+                    android:text="@string/add_new_card"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="20sp"
-                    android:text="ADD NEW CARD"
+                    android:text="@string/add_new_card"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />

@@ -279,7 +279,7 @@ public void scheduleVideoConvert(String path, String dest) {
             case COMPRESS_QUALITY_LOW:
                 resultWidth = originalWidth / 2;
                 resultHeight = originalHeight / 2;
-                bitrate = (resultWidth/2) * (resultHeight/2) * 10;
+                bitrate = (resultWidth/2) * (resultHeight/2) * 15;
                 break;
         }
 
@@ -287,7 +287,8 @@ public void scheduleVideoConvert(String path, String dest) {
 
         File cacheFile = new File(destinationPath);
 
-        if (Build.VERSION.SDK_INT < 18 && resultHeight > resultWidth && resultWidth != originalWidth && resultHeight != originalHeight) {
+        if (Build.VERSION.SDK_INT < 18 && resultHeight > resultWidth && resultWidth != originalWidth
+                && resultHeight != originalHeight) {
             int temp = resultHeight;
             resultHeight = resultWidth;
             resultWidth = temp;

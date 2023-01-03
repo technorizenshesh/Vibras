@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="256"
+                        android:text=""
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="256"
+                        android:text=""
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
@@ -155,36 +155,48 @@
 
 
             </LinearLayout>
+
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:layout_margin="@dimen/_5sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
                 <TextView
-                    android:padding="@dimen/_3sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contact No :-"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:padding="@dimen/_3sdp"
                     android:id="@+id/contact_no"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:drawableLeft="@drawable/ic_baseline_call"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="Vijay Nagar"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_14sdp"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:text="Scheme Number 71, Vijay Nagar, Indore (MP)"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    />
 
             </LinearLayout>
 
-            <fragment
+
+            <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
@@ -215,7 +227,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
+                android:text="@string/details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -241,7 +253,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Photos"
+                android:text="@string/photos"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
@@ -316,7 +328,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Comments"
+                        android:text="@string/comments"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
@@ -326,7 +338,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="(Post Comment)"
+                        android:text="@string/post_comment"
                         android:textColor="@color/dark_blues"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />

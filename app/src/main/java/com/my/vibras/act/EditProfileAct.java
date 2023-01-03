@@ -39,6 +39,9 @@ import com.my.vibras.utility.DataManager;
 import com.my.vibras.utility.RealPathUtil;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -55,6 +58,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
+ import static com.my.vibras.utility.RandomString.IncodeIntoBase64;
 
 public class EditProfileAct extends AppCompatActivity {
 
@@ -83,10 +87,10 @@ public class EditProfileAct extends AppCompatActivity {
 
         binding.RLogin.setOnClickListener(v ->
                 {
-                    fName = binding.edtFirstName.getText().toString().trim();
-                    lName = binding.edtLastName.getText().toString().trim();
-                    email = binding.edtEmail.getText().toString().trim();
-                    bio = binding.edtBio.getText().toString().trim();
+                    fName = binding.edtFirstName.getText().toString();
+                    lName = binding.edtLastName.getText().toString();
+                    email = binding.edtEmail.getText().toString();
+                    bio = binding.edtBio.getText().toString();
                     if (isValid()) {
                         if (NetworkAvailablity.checkNetworkStatus(EditProfileAct.this)) {
                             updateProfile();
@@ -195,11 +199,11 @@ public class EditProfileAct extends AppCompatActivity {
     private void setProfileDetails()
     {
 
-        binding.edtFirstName.setText(userDetail.getFirstName());
-        binding.edtLastName.setText(userDetail.getLastName());
-        binding.edtEmail.setText(userDetail.getEmail());
+        binding.edtFirstName.setText(StringEscapeUtils.unescapeJava(userDetail.getFirstName()));
+        binding.edtLastName.setText(StringEscapeUtils.unescapeJava(userDetail.getLastName()));
+        binding.edtEmail.setText((userDetail.getEmail()));
         binding.etPhone.setText(userDetail.getMobile());
-        binding.edtBio.setText(userDetail.getBio());
+        binding.edtBio.setText(  StringEscapeUtils.unescapeJava(userDetail.getBio()));
 
         Glide
                 .with(EditProfileAct.this)
@@ -232,13 +236,10 @@ public class EditProfileAct extends AppCompatActivity {
                 openCamera();
             }
         });
-        layoutGallary.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-                dialog.cancel();
-                getPhotoFromGallary();
-            }
+        layoutGallary.setOnClickListener(view -> {
+            dialog.dismiss();
+            dialog.cancel();
+            getPhotoFromGallary();
         });
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
@@ -458,12 +459,12 @@ public class EditProfileAct extends AppCompatActivity {
             RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
             filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
         }
-        RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
-        RequestBody fname = RequestBody.create(MediaType.parse("text/plain"), fName);
-        RequestBody lname = RequestBody.create(MediaType.parse("text/plain"), lName);
-        RequestBody myemail = RequestBody.create(MediaType.parse("text/plain"), email);
-        RequestBody mybio = RequestBody.create(MediaType.parse("text/plain"), bio);
-         Call<SuccessResSignup> loginCall = apiInterface.updateProfile(userId,fname,lname,myemail,mybio,filePart);
+        RequestBody userId  = RequestBody.create(MediaType.parse("text/plain"),   strUserId);
+        RequestBody fname   = RequestBody.create(MediaType.parse("text/plain"),   IncodeIntoBase64( fName));
+        RequestBody lname   = RequestBody.create(MediaType.parse("text/plain"),    IncodeIntoBase64(lName));
+     //   RequestBody myemail = RequestBody.create(MediaType.parse("text/plain"),   email);
+        RequestBody mybio   = RequestBody.create(MediaType.parse("text/plain"),    IncodeIntoBase64((bio)));
+         Call<SuccessResSignup> loginCall = apiInterface.updateProfile(userId,fname,lname,mybio,filePart);
         loginCall.enqueue(new Callback<SuccessResSignup>() {
             @Override
             public void onResponse(Call<SuccessResSignup> call, Response<SuccessResSignup> response) {
@@ -473,6 +474,9 @@ public class EditProfileAct extends AppCompatActivity {
                     String responseString = new Gson().toJson(response.body());
                     Log.e(TAG,"Test Response :"+responseString);
                     EditProfileAct.this.getWindow().getDecorView().clearFocus();
+                    getProfile();
+                    getProfileImage();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e(TAG,"Test Response :"+response.body());

@@ -17,6 +17,8 @@ import com.my.vibras.retrofit.NetworkAvailablity;
 import com.my.vibras.retrofit.VibrasInterface;
 import com.my.vibras.utility.DataManager;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
@@ -101,8 +103,8 @@ public class CompleteSignUpAct extends AppCompatActivity {
 
         DataManager.getInstance().showProgressMessage(CompleteSignUpAct.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
-        map.put("first_name",strFname);
-        map.put("last_name",strLname);
+        map.put("first_name", StringEscapeUtils.escapeJava(strFname));
+        map.put("last_name",StringEscapeUtils.escapeJava(strLname));
         map.put("email",strEmail);
         map.put("mobile",strMobile);
         map.put("password",strPass);

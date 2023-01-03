@@ -263,7 +263,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Edit Profile"
+                        android:text="@string/edit_profile"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp"

@@ -33,7 +33,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Hey there,"
+                        android:text="@string/hey_there"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
                         android:textStyle="bold" />
@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:gravity="center"
-                        android:text="Create an Account"
+                        android:text="@string/create_an_account"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_14sdp"
                         android:layout_marginBottom="@dimen/_15sdp"
@@ -80,7 +80,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:gravity="center"
-                            android:text="Create Account"
+                            android:text="@string/create_account"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12sdp" />
 
@@ -121,7 +121,7 @@
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:gravity="center"
-                            android:text="Complete Profile"
+                            android:text="@string/complete_profile"
                             android:textColor="@color/gray"
                             android:textSize="@dimen/_12sdp" />
 
@@ -225,7 +225,7 @@
                     android:padding="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="By continuing you accept our Privacy Policy and Term of Use"
+                    android:text="@string/by_continuing_you_accept_our_privacy_policy_and_term_of_use"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/_12sdp"
                     />
@@ -269,7 +269,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Or"
+                        android:text="@string/or"
                         android:textColor="@color/gray"
                         android:textSize="@dimen/_14sdp"
                         />
@@ -319,35 +319,32 @@
 
             <LinearLayout
                 android:id="@+id/llLogin"
-                android:padding="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="28dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:orientation="horizontal"
-                >
+                android:padding="@dimen/_5sdp">
 
                 <TextView
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Already have an account?"
+                    android:text="@string/already_have_an_account"
                     android:textColor="@color/gray"
-                    android:textSize="@dimen/_12sdp"
-                    />
+                    android:textSize="@dimen/_12sdp" />
 
                 <TextView
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

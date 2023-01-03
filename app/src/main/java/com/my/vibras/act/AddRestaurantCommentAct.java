@@ -32,6 +32,7 @@ import retrofit2.Response;
 
 import static com.my.vibras.retrofit.Constant.USER_ID;
 import static com.my.vibras.retrofit.Constant.showToast;
+import static com.my.vibras.utility.RandomString.IncodeIntoBase64;
 
 public class AddRestaurantCommentAct extends AppCompatActivity {
 
@@ -92,7 +93,7 @@ public class AddRestaurantCommentAct extends AppCompatActivity {
         Map<String,String> map = new HashMap<>();
         map.put("user_id",userId);
         map.put("restaurant_id",postId);
-        map.put("comment",text);
+        map.put("comment", IncodeIntoBase64(text));
         map.put("rating","5");
 
         Call<ResponseBody> call = apiInterface.addRestaurantComment(map);

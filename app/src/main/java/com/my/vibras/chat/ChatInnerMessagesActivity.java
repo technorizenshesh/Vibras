@@ -56,6 +56,9 @@ import com.my.vibras.utility.GPSTracker;
 import com.my.vibras.utility.Session;
 import com.my.vibras.utility.SharedPreferenceUtility;
 
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -184,7 +187,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
             id = getIntent().getStringExtra("id");
             Log.e("->>", "onCreate: friend_idlastfriend_idlastfriend_idlastfriend_idlast  " + friend_idlast + status_check);
             Log.e("->>", "onCreate: friend_idlastfriend_idlastfriend_idlastfriend_idlast    idd " + id + "----" + status_check);
-            username.setText(friendnamelast);
+            username.setText(  (friendnamelast));
             session.setLastChatId(friend_idlast);
         }
 
@@ -390,7 +393,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                     SimpleDateFormat dateFormat = new SimpleDateFormat(" hh:mm");
                     Log.e("TAG", "onClick: " + dateFormat.format(new Date()));
                     String time = dateFormat.format(new Date());
-                    String messagesend = chatmessage_edit.getText().toString();
+                    String messagesend =  (chatmessage_edit.getText().toString());
                     if (!messagesend.equalsIgnoreCase("")) {
                         Log.e("sendmessage", "onClick: ");
                         FirebaseDatabase.getInstance()
@@ -422,7 +425,6 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
                                     Manifest.permission.ACCESS_COARSE_LOCATION},
                             Constant.LOCATION_REQUEST);
                 } else {
-
 
                     final CharSequence[] options = {"Share Current Location", "Pick on Map", "Cancel"};
                     AlertDialog.Builder builder = new AlertDialog.Builder(ChatInnerMessagesActivity.this);
@@ -458,6 +460,7 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
 
                                 startActivity(new Intent(ChatInnerMessagesActivity.this,
                                         SearchLocationMapAct.class)
+                                        .putExtra("from", "121")
                                         .putExtra("useriddeivce", useriddeivce)
                                         .putExtra("friend_idlast", friend_idlast)
                                         .putExtra("friendnamelast", friendnamelast)
@@ -631,7 +634,8 @@ public class ChatInnerMessagesActivity extends AppCompatActivity {
         //  DataManager.getInstance().showProgressMessage(ChatInnerMessagesActivity.this,getString(R.string.please_wait));
         RequestBody senderId = RequestBody.create(MediaType.parse("text/plain"), UserId);
         RequestBody receiverId = RequestBody.create(MediaType.parse("text/plain"), FriednId);
-        RequestBody messageText = RequestBody.create(MediaType.parse("text/plain"), message);
+        RequestBody messageText = RequestBody.create(MediaType.parse("text/plain"), StringEscapeUtils.escapeJava(
+                message));
         RequestBody type = RequestBody.create(MediaType.parse("text/plain"), "Text");
         RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), "");
         Call<SuccessResInsertChat> loginCall = apiInterface.insertImageVideoChat(senderId, receiverId, messageText, type);
